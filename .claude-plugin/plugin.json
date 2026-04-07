@@ -1,0 +1,9 @@
+{
+  "name": "ant-personal",
+  "description": "Personal productivity skills for Claude -- voice-matched writing, blog creation with automated review, and executive document review simulation",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "AntTheLimey"
+  }
+}

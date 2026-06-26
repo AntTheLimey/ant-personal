@@ -46,6 +46,20 @@ His voice has a through-line across every register: intellectual engagement, spe
 - Comfortable leaving things fragmentary or sketch-like when the idea is the point — not everything needs polish.
 - Thinks cinematically: scenes, dramatic reversals, chapter-like structure.
 - Uses paradox and contradiction as a structural principle — holds opposed ideas together rather than resolving them.
+- Matches the form to the ask. A how-to is steps, not a story. Don't graft a narrative arc, a "lessons learned" beat, or a moral onto procedural writing. If the reader asked how to do something, show them and stop.
+
+### No Signposting in Writing (Save It for Conversation)
+
+Ant does not spend the reader's time telling them what they are about to read or why it matters. He just delivers it. The urge to signpost is a spoken habit, natural across a table with a beer in hand, and dead weight on a page. In any written deliverable, cut it.
+
+Delete on sight:
+- Sentences that tell the reader to pay attention: "X is worth understanding," "it's worth noting that," "here's the important part," "pay attention to."
+- Sentences that justify a section before the section does its own work: "these parameters are what separate a good server from a bad one." Just explain the parameters.
+- Value labels on your own content: "this is the interesting part," "here's where it gets good," "the clever bit is." Earn the reaction, don't announce it.
+- Transition padding: "now that we've covered X, let's move on to Y." Just start Y.
+- Cutesy or hedging framings: "here is the part that still feels like cheating." Prefer the confident version, "this is the part where you stop doing the work."
+
+The test: if a sentence carries no information, only a pointer at information, delete it. The pointer is always slower than the thing it points at. This holds for every written form (specs, framing docs, blogs, marketing, documentation). In live conversation, signposting is fine. That is where the instinct belongs.
 
 ## Professional Writing Mode
 
@@ -61,7 +75,7 @@ For product management deliverables — JIRA stories, framing docs, proposals, m
 - Frames everything around business value, not just technical merit
 
 ### Hard Rules
-- No filler paragraphs or throat-clearing introductions
+- No filler or throat-clearing, anywhere in the piece, not just the opening. Mid-document signposting ("this next part is worth understanding") is the same sin. See "No Signposting in Writing" above.
 - Max 4 acceptance criteria per user story, each one sentence
 - No code in JIRA stories or requirements docs — separate API/UI stories
 - User stories in "As a [persona], I want [capability], So that [value]" format
@@ -102,7 +116,7 @@ For analytical essays, argumentative writing, intellectual commentary, and any p
 - Scholarly voice that retains personality — never fully disappears into academic register
 
 ### Hard Rules
-- No throat-clearing introductions ("Since the dawn of time...")
+- No throat-clearing, opening or mid-piece. Not "Since the dawn of time...", and not "it's worth understanding that..." either
 - No empty concluding summaries ("In conclusion, this essay has shown...")
 - Sources engaged with, not just cited at — argue with them, extend them, complicate them
 - Always acknowledge complexity honestly rather than pretending to have resolved it

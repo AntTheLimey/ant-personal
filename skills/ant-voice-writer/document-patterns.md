@@ -75,6 +75,10 @@ Direct, scannable, example-driven. Assumes reader is technical. Example: "The Sp
 - Prerequisites listed upfront
 - Expected outputs shown for verification
 - Troubleshooting section for common failures
+- A how-to is procedure, not narrative. No moral, no "what I learned," no story arc grafted on. If a sample or personal dataset is used to demonstrate, keep it as flavour at the edges (intro, payoff) and out of the steps.
+- Keep the reader's use-case central. Don't thread your own schema, table names, or row counts through every command. The reader came for the procedure with their own data, not for yours.
+- Genericise the reader-facing parts. Use placeholders (`<your-db>`, `<your-table>`) over hardcoded personal names, profiles, or account IDs.
+- Prose is not wrapped to a fixed column. Only code blocks wrap. Don't hard-break paragraphs at 79/80 characters in something meant to be read as a document. That is a code-file habit, not a writing one.
 
 ## Competitive Analysis
 

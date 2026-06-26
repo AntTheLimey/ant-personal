@@ -12,6 +12,13 @@
 - "control plane" vs "cloud layer" — distinct concepts, don't conflate
 - "brownfield" for existing customer acquisition strategy
 
+### Proper Nouns & Product Names
+Use exact product and component names. Never abbreviate, shorten, or prettify them.
+- It is "pgedge-vectorizer," never "the vectorizer" or "Vectorizer."
+- It is "Phillip Merrick," never "Phil."
+- Match casing and spelling as the team or source writes it ("Spock," "control plane," "pgEdge Cloud," "Docloader").
+- When unsure, copy the name verbatim from the docs or repo rather than guessing a shorter form.
+
 ### Phrases Ant Actually Uses
 - "making it easy to sign up databases, not developers"
 - "I do not want to get prescriptive"
@@ -34,6 +41,7 @@
 - "ensure" (use "make sure" or be specific)
 - "in order to" (use "to")
 - Excessive hedging: "perhaps maybe we could potentially consider..."
+- Throat-clearing and signposting: "it's worth noting," "it's worth understanding," "the important thing here is," "as you can see," "needless to say," "the interesting part is" (just say the thing, don't announce that you're about to)
 
 ### Question Patterns
 - Asks direct questions to surface gaps: "Do we have unit costs for...?"

@@ -4,8 +4,7 @@
     "name": "AntTheLimey"
   },
   "metadata": {
-    "description": "Personal productivity skills for Claude",
-    "version": "1.0.0"
+    "description": "Personal productivity skills for Claude"
   },
   "plugins": [
     {
@@ -14,8 +13,7 @@
         "source": "url",
         "url": "https://github.com/AntTheLimey/ant-personal.git"
       },
-      "description": "Personal skills: voice-matched writing, blog creation with automated review, and executive document review simulation",
-      "version": "1.0.0"
+      "description": "Personal skills: voice-matched writing, blog creation with automated review, and executive document review simulation"
     }
   ]
 }

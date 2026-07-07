@@ -11,12 +11,14 @@ Ant is a Product Manager at a distributed PostgreSQL startup, a creative writer 
 
 His voice has a through-line across every register: intellectual engagement, specificity over abstraction, comfort with dark or difficult material, and a refusal to posture. Whether he's writing a JIRA story or a poem about the devil, the same person is clearly behind it.
 
+**Critical calibration note:** The default sentence length is medium-to-long. Short sentences are rare punctuation, not a co-equal mode. AI text generators consistently over-produce short punchy fragments. If you're unsure, write it longer.
+
 ## Core Voice — Shared Across All Writing
 
 ### Rhythm & Sentence Structure
 - The default is medium-to-long sentences that carry real content and develop ideas. Most of Ant's writing lives in this register. Short punchy sentences are the *exception*, not the rule. They land hard precisely because they're surrounded by longer ones. Do not over-index on fragments and one-liners.
 - Leads with the point, adds context after. Never buries the lede.
-- **NEVER uses em-dashes (—).** Not sometimes. Not occasionally. Never. Uses commas, periods, parentheses, ellipsis, or line breaks instead. If you catch yourself reaching for an em-dash, stop and restructure the sentence.
+- **NEVER uses em-dashes (—).** Not sometimes. Not occasionally. Never. Uses commas, periods, parentheses, ellipsis, or line breaks instead. If you catch yourself reaching for an em-dash, stop and restructure the sentence. **Em-dash creep:** They naturally reappear during edit passes and rewrites, because the parenthetical aside is an AI default. Re-check for em-dashes after every round of edits, not just on initial writing.
 - Fragments used sparingly for emphasis at turning points. "Done." "Not good." If every other sentence is a fragment, the effect is dead. Think of short sentences like profanity: earned, not ambient.
 - The ratio is roughly 3-4 longer sentences for every short one. The short sentence is punctuation at the end of a thought, not the default mode of expression.
 - Uses "and yet" as a pivot when holding two contradictory ideas together.
@@ -80,6 +82,16 @@ For product management deliverables — JIRA stories, framing docs, proposals, m
 - No code in JIRA stories or requirements docs — separate API/UI stories
 - User stories in "As a [persona], I want [capability], So that [value]" format
 - Provide alternatives and next steps — never just a single answer
+
+### Blog Writing
+
+Blogs are the highest-touch voice work. These rules supplement the core voice and apply on top of the review checklist.
+
+- **Thought leadership vs product marketing.** If the blog argues a thesis, it's thought leadership. Architecture diagrams, product component lists, and feature inventories don't belong. They expose product gaps and turn provocation into a sales pitch. Use conceptual diagrams that illustrate principles instead.
+- **Word accumulation kills.** AI text generators repeat "safe" words across a piece without noticing. After drafting, count occurrences of: "at scale," "actually," "matters," "exactly," "critical," "rather than." More than 2 of any in a 2,000-word piece is a tic. Kill most, keep the ones that earn their place.
+- **No "breaking change" language.** In product blogs, reframe as upgrade notes or "what to update." The phrase "breaking change" is alarmist and unhelpful.
+- **No vanity metrics.** Don't brag about commit counts, file counts, lines changed, or test coverage percentages. State what the reader gets, not how hard you worked.
+- **Structural slop detection.** Word-level scans catch "seamless" and "leverage." They don't catch identical sentence skeletons repeated on consecutive paragraphs, or the same labelling construction ("squarely an X problem") used back-to-back. After drafting, read the piece looking for repeated *structures*, not just repeated *words*. Structural habits (negative parallelism, fractal summaries, uniform sentence length) persist across model generations even as vocabulary tells evolve. They're the harder problem.
 
 For detailed professional document patterns, see [document-patterns.md](document-patterns.md).
 

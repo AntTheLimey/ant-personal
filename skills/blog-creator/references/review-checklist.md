@@ -35,6 +35,17 @@ These phrases are almost never used by human writers in natural prose. If you fi
 - "Explore how" (as an opening)
 - "In this blog post, we will..."
 - "Hits different" (was fresh once, now overused across posts)
+- "As a bonus," / "To round out" (transition filler that signals you're padding)
+- "To understand why this matters, consider" (throat-clearing before an explanation)
+- "And that's the point" (empty emphasis, adds nothing)
+- "The most significant change" (let the reader decide what's significant)
+- "Moreover," / "Furthermore," / "Additionally," (AI default paragraph openers; restructure or use "and")
+- "Ultimately, ..." (AI transition filler; just start the sentence)
+- "Here's the thing" / "Here's the kicker" / "Here's where it gets interesting" (false-casual suspense)
+- "A testament to..." (AI attribution cliché)
+- "Paving the way for..." / "Setting the stage for..." (faux narrative setup)
+- "It's not X, it's Y" / "It's not just X, it's Y" (negative parallelism; state your position directly)
+- "The result? [dramatic answer]." (rhetorical question + micro-answer; state the result as a fact)
 
 ### Structural Slop Patterns
 
@@ -43,6 +54,21 @@ These phrases are almost never used by human writers in natural prose. If you fi
 - **The list-then-elaborate pattern:** Listing 3 things and then spending a paragraph on each with near-identical sentence structures. Vary the structure. Not every point needs the same treatment.
 - **The hedge sandwich:** Starting with "While X is...", then "However, Y...", then "Nevertheless, Z..." — multiple hedges stacked on each other. Pick a position and state it.
 - **The anaphoric fragment pattern:** "No installation. No configuration. Just code." / "No setup. No friction. Just results." This is a deeply ingrained AI writing tic. It sounds punchy on first read but is structurally lazy: it avoids writing a real sentence that develops the thought. If you find any "No X. No Y. Just Z." constructions, or similar parallel fragment triplets, rewrite them as a proper sentence. Example fix: "You don't need to install or configure anything. Click the link and you're writing code." The real sentence does more work and sounds like a human wrote it.
+- **Negative parallelism:** "It's not about speed, it's about reliability." / "It's not just a database. It's a platform." This is the single most commonly identified AI structural pattern. It shows up in thesis statements, transitions, and closings. State your position directly instead. "Reliability matters more than speed here" does the same work without the scaffolding.
+- **Rhetorical question + micro-answer:** "The result? Devastating." / "The fix? Surprisingly simple." A posed question followed by a dramatic one-word or one-phrase answer. Human writers ask real questions or state facts. This pattern is pure rhythm-generation. State the result as a sentence.
+- **Tailing participial clauses:** "...highlighting its importance," "...underscoring its role," "...paving the way for broader adoption." These dangling -ing phrases pad the end of otherwise complete sentences with empty attribution. The sentence was done before the comma. Cut them.
+- **Fractal summaries:** The intro previews all sections. Each section opens by restating its purpose. The conclusion re-summarizes. The reader gets the same information three times at different zoom levels. Hook in the intro, start sections with content, end with implication.
+- **Latinate bias:** AI defaults to formal synonyms: "commence" for "start," "demonstrate" for "show," "approximately" for "about," "facilitate" for "help," "numerous" for "many." If you wouldn't say the word to a colleague, use the simpler one.
+- **Uniform sentence length:** Human writing has high burstiness (a 25-word sentence, then a 6-word one, then 19). AI writing tends toward uniform 15-20 word sentences. Scan for stretches where 4+ consecutive sentences are roughly the same length. Break the pattern.
+
+### Repeated Sentence Skeletons
+
+Word-level scans catch individual slop words. They miss structural repetition, which is just as much of a tell. After each review pass, read the piece looking for:
+
+- **Identical sentence frames on consecutive paragraphs.** Example: "[X] is the pattern you see when..." / "[Y] is the pattern that emerges from..." / "[Z] is the pattern most teams hit..." Three paragraphs in a row opening with the same skeleton. Give each a different structure.
+- **Repeated labelling constructions.** Example: "and it's squarely an agent memory problem" / "and it's squarely an agent state problem" used on consecutive pattern descriptions. If you need to tag a concept, do it once where it earns its weight, not as a suffix on every item.
+- **Word accumulation.** AI generators repeat "safe" filler words without noticing. After drafting, count occurrences of: "at scale," "actually," "matters," "exactly," "critical," "rather than," "in practice." More than 2 of any single phrase in a 2,000-word piece is a tic. Kill most, keep the ones that earn their place.
+- **Passive voice clusters.** Two passive constructions in a row are fine. Three or more in sequence ("was identified," "was implemented," "was deployed") read like a changelog, not a blog. Rewrite at least one to put a subject in charge.
 
 ### Performative Writing
 
@@ -64,6 +90,8 @@ If any are found, the review fails on this item. Replace every instance:
 - If the em-dash connects two related clauses, use a comma or split into two sentences
 
 This is not a stylistic preference. It is an absolute rule. Zero em-dashes in the final output.
+
+**Em-dash creep:** Em-dashes naturally reappear during edit passes and rewrites. The parenthetical aside is an AI punctuation default, and every round of edits can reintroduce them. Re-run this check after every edit pass, not just on the initial draft.
 
 ## 3. Semicolon Check
 
@@ -96,6 +124,8 @@ This is critical because AI text generators default to short, punchy sentences f
 **Fragment patterns:** Watch for parallel fragments used as rhetorical flourish: "No X. No Y. Just Z." / "Fast. Simple. Done." / "One click. One command. One result." These almost always come from AI, not humans. Rewrite as complete sentences.
 
 Fix by combining, expanding, or restructuring. The goal is a rhythm where medium-length sentences carry the content and short sentences punctuate key moments, not the other way around.
+
+**Proven fix technique:** Don't just fix the section you're editing. When the ratio is over 20%, scan the whole piece for short sentences that can absorb into their neighbors using commas or colons. "The database is the recovery mechanism." becomes part of the preceding sentence: "...rather than restarting from scratch, because the database is the recovery mechanism." One merge like this drops the ratio by a full percentage point without losing any content.
 
 ### Long Sentence Monotony
 Flag any sequence of 5 or more consecutive sentences over 25 words with no short sentence break. The rhythm needs variation.

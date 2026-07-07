@@ -42,6 +42,27 @@ Use exact product and component names. Never abbreviate, shorten, or prettify th
 - "in order to" (use "to")
 - Excessive hedging: "perhaps maybe we could potentially consider..."
 - Throat-clearing and signposting: "it's worth noting," "it's worth understanding," "the important thing here is," "as you can see," "needless to say," "the interesting part is" (just say the thing, don't announce that you're about to)
+- "breaking change" in product context (reframe as upgrade notes or "what to update")
+- "the most significant change" (let the reader decide significance)
+- "as a bonus," / "to round out" (transition filler that signals padding)
+- "moreover" / "furthermore" / "additionally" (AI default transitions; use "and," "also," or restructure)
+- "pivotal" / "crucial" (AI emphasis inflation; say what's at stake instead)
+- "foster" (as in "fosters collaboration"; vague agency, say who does what)
+- "underscore" / "underscores" (as in "this underscores the importance"; filler attribution)
+- "comprehensive" (in marketing context; everything claims to be comprehensive, be specific)
+- "transformative" / "innovative" (empty praise; show the transformation instead)
+- "testament" (as in "a testament to"; AI attribution cliché)
+- "ultimately" (as a sentence opener; transition filler, just start the sentence)
+
+### Accumulation-Prone Words (Not Banned, But Watch Frequency)
+These words are fine individually. They become AI tells when they accumulate. More than 2 of any single one per 2,000 words is a tic.
+- "at scale" — the most common AI filler. Keep it in closing beats where scale is the actual point.
+- "actually" — empty emphasis. If the fact is surprising, let the fact be surprising.
+- "matters" — vague value label. Say what matters and why, or cut it.
+- "exactly" — filler precision. If something is exact, the reader can tell.
+- "critical" — overused intensifier. If everything is critical, nothing is.
+- "rather than" — comparison crutch. Fine once, invisible twice, a tic at three.
+- "in practice" — hedging transition. Usually redundant with the concrete example that follows.
 
 ### Question Patterns
 - Asks direct questions to surface gaps: "Do we have unit costs for...?"

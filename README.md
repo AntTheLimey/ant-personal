@@ -19,6 +19,22 @@ simulation.
 /plugin install ant-personal
 ```
 
+## Releases
+
+Versioning is automatic. The `version` field in
+`.claude-plugin/plugin.json` is the single source of truth (SemVer).
+
+To cut a release:
+
+1. Bump `version` in `.claude-plugin/plugin.json`
+2. Add a matching entry to [`CHANGELOG.md`](CHANGELOG.md)
+3. Merge to `main`
+
+On merge, `.github/workflows/release.yml` reads the version, and if the
+tag `v<version>` does not already exist, builds per-skill zips and
+publishes a GitHub Release with generated notes. Merges that don't bump
+the version produce no release.
+
 ## License
 
 [MIT](LICENSE)

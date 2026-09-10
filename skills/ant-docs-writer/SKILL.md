@@ -99,6 +99,12 @@ first step begins on. A console page that drops the reader into step
 one with no route to that screen fails this item exactly as a
 command-line page with no profile section does.
 
+**1b. What will the reader do instead of the step you wrote?** Name
+the shortcut that works right now and say what it costs. A step that
+prevents an unrecoverable loss fails this item unless the page refuses
+the instinctive alternative by name. "Connect over TLS" fails it too,
+for a smaller reason: it names no command, so the reader invents one.
+
 **2. Does the page say where every value it asks for comes from?**
 Every placeholder gets a sentence naming the command or the screen that
 produces it. A page that asks for a database ID and never says how to
@@ -217,6 +223,40 @@ step is allowed to be more than one line.
 - A step that needs a table gets the table in its own section, and the
   step links to it. A table nested inside a list item is fragile to
   render and hard to read.
+
+## Marking a step the reader will otherwise skip
+
+Calm prose does not stop anybody. A step that prevents an unrecoverable
+outcome needs three things, and it needs all three:
+
+1. **The consequence, in the step**, stated as what the reader loses
+   and when they find out. Not "this keeps control of your roles", but
+   "at the next reconcile every role you created becomes permanently
+   unalterable, with no recovery".
+2. **The instinctive alternative, named and refused.** A reader who is
+   already connected as an administrator will do the thing that works
+   right now. Write the shortcut down and say what it costs: "creating
+   the role as `admin` works and is the mistake this step prevents".
+3. **An admonition, not a paragraph.** Where the repository renders
+   them, a warning admonition. Where it does not, a short line of its
+   own opening with the loss. A hazard that reads like the sentences
+   around it is a hazard the reader skims.
+
+**Ask what the reader will do instead of this step, and answer that.**
+The instinct beats the instruction every time it is not named. The
+three instincts a cold read found on one page were to rotate the
+supplied credentials as hygiene, to use the SQL statement rather than
+the command, and to create the test objects as the role already
+connected. All three succeed, none errors, and every one breaks
+something silently.
+
+**A warning goes where the instinct fires, not where the topic lives.**
+The rule that changing a password in SQL desynchronises the platform's
+stored copy belongs beside the first mention of a password, not in the
+section about passwords at the foot of the page. A reader meets the
+temptation long before they meet the section that owns it. Where the
+warning belongs in two places, write it in both: this is the one case
+that outranks "state a caveat once per section".
 
 ## Descriptive prose
 
@@ -475,6 +515,13 @@ Two orderings are wrong however good the prose:
 Where the source's order is already the reader's order, keep it. Say
 in the pull request that you checked, so a reviewer knows the shape
 was a decision rather than an inheritance.
+
+**Placing a step first does not stop a reader skipping it.** A cold
+reader given a page whose first procedure existed solely to prevent an
+unrecoverable loss said they would have skipped it, because it read as
+an optional convenience layer and nothing on the page was formatted as
+a stop sign. Order is necessary and it is not sufficient. See "Marking
+a step the reader will otherwise skip".
 
 **One ordering defect is worth fixing even in a fix or an edit**: a
 destructive action printed before the step that makes it survivable.

@@ -233,36 +233,70 @@ step is allowed to be more than one line.
 
 ## Marking a step the reader will otherwise skip
 
-Calm prose does not stop anybody. A step that prevents an unrecoverable
-outcome needs three things, and it needs all three:
+A hazard is written in the same voice as the rest of the page. The
+register does not harden because the stakes rose, and a page that
+starts issuing orders reads as though it does not trust the reader,
+who is a professional doing their job. **What makes a warning land is
+the fact it carries, not the force of the telling.**
+
+The strongest sentence a hazard can carry is what silently goes wrong:
+"`ALTER ROLE app PASSWORD` runs without error, so nothing warns you"
+does the whole job. A cold reader singled that out as the one warning
+that changed their behaviour, and it commands nothing.
+
+**State the consequence, then stop.** Do not follow it with an
+imperative that repeats it. "Rotating a built-in password before the
+role manager exists costs you control of every role `admin` created"
+is finished. Appending "Do not rotate a built-in password until the
+role manager exists" adds no fact, and turns an explanation into an
+order. One or the other, and the consequence is the one that teaches.
+
+**Ration this.** The treatment below is expensive, in the reader's
+attention and in the length of the page, and it works because it is
+rare. A page with six marked hazards has none: the reader learns that
+the marking means nothing and skims all six. **One or two per page, for
+outcomes that are genuinely unrecoverable.** Everything else is a
+clause inside the step, or is left out.
+
+The test is not "could this go wrong". It is "can they undo it". A
+mistake the reader can repeat, reverse or retry needs no marking at
+all, however annoying. A permanent loss of data, access or control
+gets the full treatment, and almost nothing else does.
+
+A step that prevents an unrecoverable outcome needs three things, and
+it needs all three:
 
 1. **The consequence, in the step**, stated as what the reader loses
    and when they find out. Not "this keeps control of your roles", but
    "at the next reconcile every role you created becomes permanently
    unalterable, with no recovery".
-2. **The instinctive alternative, named and refused.** A reader who is
-   already connected as an administrator will do the thing that works
-   right now. Write the shortcut down and say what it costs.
-   **Name the action and its object in full.** A refusal reading
-   "creating the role as `admin` is the mistake this step prevents",
-   printed under a step that legitimately creates a role as `admin`,
-   reads as the page forbidding what it just instructed. A cold reader
-   hit exactly that and could not tell which role was meant. Write
-   "creating any other role as `admin`", and name the step where the
-   permitted case ends.
-3. **An admonition, not a paragraph.** Where the repository renders
-   them, a warning admonition. Where it does not, a short line of its
-   own opening with the loss. A hazard that reads like the sentences
-   around it is a hazard the reader skims.
+2. **The shortcut the reader would otherwise take, and its cost.** A
+   reader already connected as an administrator will do the thing that
+   works right now. Describe that path and what it costs them, in the
+   third person: "a role created as `admin` is the one a reconcile
+   orphans". Not "this is the mistake this step prevents", which
+   scolds a reader who has not made it yet.
+   **Name the action and its object in full.** A sentence about
+   "creating the role as `admin`", printed under a step that
+   legitimately creates a role as `admin`, reads as the page
+   contradicting what it just instructed. A cold reader hit exactly
+   that and could not tell which role was meant.
+3. **Its own line, so the eye catches it.** A hazard buried mid
+   paragraph is skimmed. Where the repository renders admonitions, use
+   one. Otherwise give it a short line of its own, opening with what is
+   lost. Separation is what earns the attention, not capitals, not
+   bold, and not a raised voice.
 
 **Every irreversible action the reader can reach before its guard
 belongs in Before You Start, by name.** Listing one is worse than
-listing none, because a reader who finds a prohibition against
-rotating a password reads the absence of one against creating a role
-as permission. Ask which actions a reader could take in the minutes
-before they reach the protective step, and prohibit each of them
-there. A cold reader created a role as `admin` within five minutes,
-against a page whose Before You Start prohibited only the rotation.
+listing none, because a reader who finds one hazard named reads the
+silence about the others as permission. Write these as conditions
+rather than commands: "two things cost you control of a role, and both
+are easy to do before you reach step 2". Ask which actions a reader
+could take in the minutes before they reach the protective step, and
+name each of them there. A cold reader created a role as `admin`
+within five minutes, against a page whose Before You Start named only
+the rotation.
 
 **Ask what the reader will do instead of this step, and answer that.**
 The instinct beats the instruction every time it is not named. The
@@ -498,6 +532,21 @@ and guessing edit on a page someone wanted rebuilt returns the same
 badly organised page with better sentences.
 
 The rest of this section is for an overhaul.
+
+### The reader wants the least that works
+
+A customer opens this page to do one thing and leave. They are not
+reading the product, they are getting past it. **An overhaul that
+returns a longer page has usually failed**, whatever else it fixed,
+because the reader now hunts for the same instruction through more
+text.
+
+Measure it. Where the rewrite is longer than the source, name what the
+extra words bought: a missing step, a hazard, a definition the reader
+could not do without. Length that bought nothing comes out. The
+commonest sources of it are a warning restated as a command, a
+mechanism explained where a consequence would do, and a caveat written
+three times because it felt important each time.
 
 ### Deciding the order
 

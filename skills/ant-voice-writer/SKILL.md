@@ -5,6 +5,25 @@ description: "Write in Ant's voice and style across professional and creative co
 
 # Writing in Ant's Voice
 
+## Technical documentation belongs to another skill
+
+**Stop here if the task is pgEdge product documentation.** Use
+`ant-docs-writer` instead, and do not apply this skill's rules to the
+page. That covers docs pages, README files, in-app copy, tooltips, the
+CLI's embedded reference and the shipped agent skills, in any pgEdge
+repository.
+
+They are different jobs. This skill writes in Ant's voice, which is
+right for a blog and wrong for a procedure: documentation is written
+for a customer who opened the page to do one thing and leave, in a
+semi-formal register that is nobody's voice in particular.
+`ant-docs-writer` carries its own content checklist, prose rules,
+product vocabulary and review process, and is self-contained.
+
+This skill keeps blogs, framing docs, JIRA stories, marketing copy,
+strategic proposals, competitive analyses and every kind of creative
+writing.
+
 ## Voice Profile Summary
 
 Ant is a Product Manager at a distributed PostgreSQL startup, a creative writer of fiction and poetry, a TTRPG worldbuilder and game designer, and an intellectually restless essayist. Across all his writing — professional, creative, analytical — his voice is defined by: directness, physicality, earned profanity, short punchy sentences that burst between longer explanatory ones, an absolute allergy to filler, and a willingness to sit with contradiction rather than resolve it cheaply.
@@ -48,7 +67,7 @@ His voice has a through-line across every register: intellectual engagement, spe
 - Comfortable leaving things fragmentary or sketch-like when the idea is the point — not everything needs polish.
 - Thinks cinematically: scenes, dramatic reversals, chapter-like structure.
 - Uses paradox and contradiction as a structural principle — holds opposed ideas together rather than resolving them.
-- Matches the form to the ask. A how-to is steps, not a story. Don't graft a narrative arc, a "lessons learned" beat, or a moral onto procedural writing. If the reader asked how to do something, show them and stop. Product documentation goes further than this: it is not written in Ant's voice at all. Use the `ant-docs-writer` skill for docs pages, README files, in-app copy and the CLI reference. This skill keeps blogs, framing docs, JIRA stories, marketing and creative work.
+- Matches the form to the ask. A how-to is steps, not a story. Don't graft a narrative arc, a "lessons learned" beat, or a moral onto procedural writing. If the reader asked how to do something, show them and stop. Product documentation goes further than this: it is not written in Ant's voice at all, and belongs to `ant-docs-writer`.
 
 ### No Signposting in Writing (Save It for Conversation)
 

@@ -74,6 +74,10 @@ Move it and repeat the test.
 - Put a condition first, then a comma, then the command. "When the
   status is available, read the password back."
 - Write in the active voice, in the present tense.
+- A passive verb that leaves out who performs the action is a defect
+  whenever more than one candidate is nearby. "A message saying the
+  resource is busy and should be retried" reads as though the resource
+  is retried. The operation is retried. Name it.
 - Write in the singular. "The database", not "databases". The singular
   usually turns a passive sentence active on its own.
 - Do not use "it" unless the referent is in the same sentence. Name the
@@ -132,6 +136,29 @@ grudgingly and doing it deliberately. A writer who knows only the first
 reason repeats the noun, finds the result choppy, and reaches for
 "However," to fix a problem they did not have.
 
+## Register
+
+The voice is semi-formal technical documentation. The reader is at
+work, may not be a native English speaker, and may be reading under
+pressure. Every rule below follows from that.
+
+- **Name a technical thing by its full name.** "exit status 1", not
+  "exit 1". "the connection string", not "the string". Shorthand is
+  something the writer knows and the reader has to guess.
+- **No idiom.** "Carry weight", "a way back", "the shape of it", "lands
+  wrong", "bites", "worth knowing" are invisible to a native speaker
+  and opaque to everybody else. There is always a plain word: "matter",
+  "a way to undo it", "the structure".
+- **No conversational hedges or intensifiers.** "Pretty much", "just",
+  "simply", "of course", "actually". "Simply" is the worst of them,
+  because it tells a reader who is stuck that they should not be.
+- **Prefer the plain formal word where two words mean the same thing
+  and differ only in register.** "Needs", not "wants". "Shows", not
+  "surfaces". "Before", not "ahead of".
+- **Formal does not mean longer.** It means precise and unmarked. A
+  sentence that has to be read twice for its tone is as broken as one
+  that has to be read twice for its grammar.
+
 ## Words
 
 - One noun for one concept, for the whole page. Write the page's
@@ -143,6 +170,14 @@ reason repeats the noun, finds the result choppy, and reaches for
   quantity of oil to the threads", step 6 does not say "lubricate".
   Different wording for the same action reads as a different action.
 - "Command", never "verb". "Verb" is the CLI team's word.
+- One verb per kind of object, and the standard verb is the plain one.
+  You **run** a command. You **open** a page or a dialog. You **select**
+  a control. You **read** a value, a field or a status. You **pass** a
+  flag to a command, and a flag **sets** a value. Not "query a command",
+  not "hit an endpoint", not "fire a request", not "grab a value". This
+  is the one-wording rule applied to the verb rather than the phrase,
+  and it is the rule that catches "Read `database get`", which sounds
+  right and is not: you run it.
 - "Postgres", not "PostgreSQL".
 - Product names are proper nouns and take no article: pgEdge Cloud,
   Spock, pgEdge Postgres MCP Server. The exception is "the Control
@@ -191,8 +226,10 @@ No forward-looking text. Not "yet", "coming", "planned", "soon", or
 ## How a page opens
 
 Every page opens with a sentence. A gerund or a noun phrase standing in
-for one is a fragment however long it runs, and twenty-six guides
-opened that way before anyone noticed.
+for one is a fragment however long it runs, and twenty-six guides opened
+that way before anyone noticed. This applies to the first sentence of
+the body, never to the heading above it, which is a different rule
+entirely and is given below.
 
 The opening gets a new reader ready before it teaches anything:
 
@@ -207,14 +244,24 @@ Say what the reader can do before what the product cannot. A page that
 opens with five things the product does not do has told the reader
 nothing they can act on.
 
-Headings are plain labels of what the section contains, in words a
-customer would search for. Never a sentence, never a question with no
-answer, never a judgement.
+Headings are gerund phrases in title case: "Backing up and Restoring a
+Managed Database", "Understanding a Backup", "Rotating a Credential".
+This is the house form, it is what the existing pages use, and an
+imperative heading is the common way to break it. Name what the section
+contains, in words a customer would search for. Never a sentence, never
+a question with no answer, never a judgement, and never a dash carrying
+a second clause.
+
+A run of steps is a numbered list, not a run of headings. Promoting each
+step to its own heading fills the navigation pane with fragments and
+loses the sequence. Indent anything belonging to a step by four
+spaces.
 
 ## Format
 
-- Markdown, wrapped at 79 characters. Never split a link or a table
-  row, whatever the line length.
+- Markdown, greedy-wrapped at 79 characters: fill each line as far as it
+  will go before breaking, rather than breaking early at a comma or a
+  phrase. Never split a link or a table row, whatever the line length.
 - One `#` heading per file. Every heading is followed by at least one
   sentence before any list, table or code block.
 - Blank line before the first item of every list. The lead-in ends in a
@@ -225,9 +272,11 @@ answer, never a judgement.
   promote either into the navigation pane.
 - Introduce every code block with a sentence, ending in a colon, that
   names the command and says what it does.
-- Describe output in prose. Paste a block only where prose cannot teach
-  the shape, and then only text captured from a real call, never
-  composed by hand and never tidied up afterwards.
+- Describe command output in prose. Paste a block only where prose
+  cannot teach the shape, and then only text captured from a real call,
+  never composed by hand and never tidied up afterwards. This rule is
+  about output blocks. It says nothing about screenshots, which are a
+  product decision and not a style one.
 
 ## Editing text that already exists
 

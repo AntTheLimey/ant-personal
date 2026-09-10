@@ -220,6 +220,13 @@ step is allowed to be more than one line.
   following the page at a terminal should have to type the flag that
   removes their confirmation prompt. The scripted form belongs on the
   automation page, not here.
+- **A step that tells the reader to become someone else gives them the
+  means, in that step.** "Connect as the role manager" is unusable
+  until the reader has a host, a port and a database name, and a step
+  that withholds those sends them back to the session they already
+  have, which is the one the step exists to get them out of. A
+  prerequisite of a step is part of that step, not of the step after
+  it.
 - A step that needs a table gets the table in its own section, and the
   step links to it. A table nested inside a list item is fragile to
   render and hard to read.
@@ -235,12 +242,27 @@ outcome needs three things, and it needs all three:
    unalterable, with no recovery".
 2. **The instinctive alternative, named and refused.** A reader who is
    already connected as an administrator will do the thing that works
-   right now. Write the shortcut down and say what it costs: "creating
-   the role as `admin` works and is the mistake this step prevents".
+   right now. Write the shortcut down and say what it costs.
+   **Name the action and its object in full.** A refusal reading
+   "creating the role as `admin` is the mistake this step prevents",
+   printed under a step that legitimately creates a role as `admin`,
+   reads as the page forbidding what it just instructed. A cold reader
+   hit exactly that and could not tell which role was meant. Write
+   "creating any other role as `admin`", and name the step where the
+   permitted case ends.
 3. **An admonition, not a paragraph.** Where the repository renders
    them, a warning admonition. Where it does not, a short line of its
    own opening with the loss. A hazard that reads like the sentences
    around it is a hazard the reader skims.
+
+**Every irreversible action the reader can reach before its guard
+belongs in Before You Start, by name.** Listing one is worse than
+listing none, because a reader who finds a prohibition against
+rotating a password reads the absence of one against creating a role
+as permission. Ask which actions a reader could take in the minutes
+before they reach the protective step, and prohibit each of them
+there. A cold reader created a role as `admin` within five minutes,
+against a page whose Before You Start prohibited only the rotation.
 
 **Ask what the reader will do instead of this step, and answer that.**
 The instinct beats the instruction every time it is not named. The

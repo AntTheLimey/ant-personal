@@ -249,9 +249,15 @@ pressure. Every rule below follows from that.
   and it is the rule that catches "Read `database get`", which sounds
   right and is not: you run it.
 - "Postgres", not "PostgreSQL".
-- Product names are proper nouns and take no article: pgEdge Cloud,
+- Product names are proper nouns and take no article: pgEdge Starfleet,
   Spock, pgEdge Postgres MCP Server. The exception is "the Control
   Plane", which always takes one.
+- **The product is pgEdge Starfleet, and "Starfleet" never appears
+  without "pgEdge" in front of it.** Its editions are pgEdge Starfleet
+  Managed and pgEdge Starfleet BYOC, shortened to Managed and BYOC after
+  first use inside the pgEdge Starfleet documentation. "pgEdge Cloud" is
+  the retired name and does not appear. `product-vocabulary.md` carries
+  the whole ruling, including why a command is not a name.
 - Nothing "carries" a value. A screen, field or badge "shows" or
   "displays" one; a record or a response "holds" or "has" one.
 - When the product's own word for a thing differs from the word the

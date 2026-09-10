@@ -32,7 +32,11 @@ rule wins, and the sentence is then written the best way that obeys
 it.
 
 1. **Reader safety.** Never print a copyable command that destroys
-   data. Checklist item 1 asks for every flag a **safe**
+   data, and never walk a reader into an irreversible or billable
+   action without saying so first. On a console page that means a step
+   committing the account to a charge, deleting data, or discarding
+   entered values says what it costs in the step itself, before the
+   control is named. Checklist item 1 asks for every flag a **safe**
    non-interactive run needs, so a command is complete even when the
    flag it lacks is the one that skips a confirmation prompt. The
    destructive-flag rule under Steps and procedures says how to show
@@ -45,7 +49,21 @@ it.
    claim. It also outranks "keep the consequence, drop the mechanism",
    which applies only where the mechanism is not itself the only
    statement of a behaviour.
-4. **House style.** Every other rule in this file.
+4. **House style.** Every other rule in this file. Two house-style
+   rules can still collide, so three tie-breaks settle the pairs that
+   keep recurring:
+   - **The product name beats a heading example and beats link text.**
+     A heading counts as an appearance, so a heading carrying the
+     edition name carries the full one. Where link text and the product
+     name disagree, the name wins and the link text differs from the
+     target's title.
+   - **A word cap beats the rule against stripping a semicolon.** A
+     semicolon joining two independent clauses over the cap is split.
+     The no-stripping rule protects a sentence you are not otherwise
+     touching.
+   - **Anything else: the rule naming the more specific case wins.**
+     Where neither is more specific, keep the reader's ability to act
+     and note the collision in the pull request.
 
 ## The content checklist
 
@@ -279,7 +297,9 @@ pressure. Every rule below follows from that.
 - One verb per kind of object, and the standard verb is the plain one.
   You **run** a command. You **open** a page or a dialog. You **select**
   a control. You **read** a value, a field or a status. You **pass** a
-  flag to a command, and a flag **sets** a value. Not "query a command",
+  flag to a command, and a flag **sets** a value. For repeated reading,
+  write "run X until Y" rather than "poll". Every asynchronous
+  procedure needs this and "poll" is jargon. Not "query a command",
   not "hit an endpoint", not "fire a request", not "grab a value". This
   is the one-wording rule applied to the verb rather than the phrase,
   and it is the rule that catches "Read `database get`", which sounds
@@ -315,12 +335,15 @@ pressure. Every rule below follows from that.
   which reads as a bug fix. "Fixed" is not the word for immutable.
 - "Unknown", never "unmeasured" or "not recorded here". The reader does
   not care what the author got around to.
-- **The present tense describes behaviour. A single event that has
-  already happened keeps its past tense.** "The payment step could not
-  open a checkout session" reports one attempt. Rewriting it to "cannot
-  open" turns it into a claim that it never works, which is a different
-  statement and probably a false one. The tense rule governs how the
-  product behaves, not what happened once.
+- **The present tense describes behaviour. The past tense is for one
+  event the reader has already lived through.** The test is who the
+  sentence is about. A troubleshooting entry saying what a message
+  means whenever it appears is behaviour, so "the payment step cannot
+  open a checkout session" is right there. A recovery step pointing at
+  something the reader's own earlier run produced is one event, so "the
+  backup created when the restore started" keeps its past tense. When
+  in doubt the sentence is behaviour, because a page describes a
+  product and not a session.
 - Banned outright: leverage, utilize, ensure, seamless, best-in-class,
   synergy, paradigm shift, stakeholder alignment.
 
@@ -384,7 +407,9 @@ opens with five things the product does not do has told the reader
 nothing they can act on.
 
 Headings are gerund phrases in title case: "Backing up and Restoring a
-Managed Database", "Understanding a Backup", "Rotating a Credential".
+pgEdge Starfleet Managed Database", "Understanding a Backup",
+"Rotating a Credential". The first of those carries the full edition
+name because a heading counts as the name's first appearance.
 The exception is a conventional navigational heading, which is a fixed
 label the reader scans for rather than a description: "Next Steps",
 "Troubleshooting", "Before You Start", "Prerequisites". Those keep
@@ -410,8 +435,14 @@ spaces.
 That four-space rule is for a numbered step. A bullet is different: an
 indented block under a bullet reads as a note, and the checklist counts
 it as one. So a bullet that needs a second sentence keeps it in the
-same paragraph, and a bullet that needs an indented block is a step in
-the wrong clothes. Make it one.
+same paragraph.
+
+A bullet that needs more than prose is usually a step wearing the wrong
+clothes, and the answer is to make it one. The exception is a lookup:
+a list of symptoms, error messages or states the reader scans to find
+their own case. Those are not a sequence and must not be numbered. Give
+each entry its own `###` heading instead, so the block belongs to a
+heading rather than to a bullet.
 
 ## Format
 
@@ -521,12 +552,16 @@ A page carries no trace of how it was made or who made it.
   not. Link to the one page that owns a number rather than restating it
   where it will go stale.
 - **Where those two pull apart, ask where the reader acts.** A number
-  they act on while reading this page stays on this page, attributed to
-  what shows it. A number they act on somewhere else is a link. A price
-  in a size table is the first kind, because the reader is choosing a
-  size from that table, so the table keeps its prices and says the
-  console is where they come from. The same price quoted in a sentence
-  about billing is the second kind, and links out.
+  they act on while reading this page stays on this page. A number they
+  act on somewhere else is a link. A price in a size table is the first
+  kind, because the reader is choosing a size from that table, so the
+  table keeps its prices. The same price quoted in a sentence about
+  billing is the second kind, and links out.
+- **Attribute a runtime number only to a surface you checked.** "The
+  console shows these prices" is a claim like any other and needs a
+  source. Where you cannot source where the number is displayed, print
+  the number without the attribution sentence rather than writing one
+  you cannot support. Never attribute a number to a screenshot.
 - **When a kept image contradicts the verified prose, the prose is
   right.** Write what the source says, flag the image for recapture in
   the pull request, and say nothing on the page about the discrepancy.

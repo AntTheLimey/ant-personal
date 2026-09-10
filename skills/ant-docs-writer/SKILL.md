@@ -189,10 +189,23 @@ step is allowed to be more than one line.
   note has turned that note into a step, so make it one.
 - A limit, a tolerance or the expected result of a step goes in the
   step, immediately after the action, never in a note beside it.
+- **A step whose point is not obvious carries its reason, in the step.**
+  A reader skips what looks like ceremony. "Record the current time"
+  reads as ceremony, and the sentence that makes it essential, that
+  nothing else identifies the backup taken before a restore, is worth
+  nothing to a reader who has already skipped the step. Where skipping
+  a step is unrecoverable, the reason goes in the step and nowhere
+  else. A cold reader who skips a step you thought was obvious has
+  found a defect in the step, not in the reader.
 - Numbered lists are for sequences only. If the steps work in any
   order, they are bullets. Number the steps in sequence, `1.` then `2.`
   then `3.`, rather than repeating `1.` and letting the renderer count.
   Indent everything belonging to a step by four spaces.
+- **Every precondition goes in Before You Start, all of them.** A
+  condition that makes the task fail is a precondition wherever you
+  discovered it, so a reader who meets the list has met the whole list.
+  A condition left in a later section is one the reader reaches after
+  the failure it predicts.
 - **Do not print a destructive flag in a copyable command.** Show the
   command as it runs interactively, with the prompt intact, and describe
   the flag that skips the prompt in the step beside it. A reader
@@ -340,6 +353,11 @@ pressure. Every rule below follows from that.
   cannot find the row has lost the page.
 - A setting "sets" or "determines" a value. It does not "fix" one,
   which reads as a bug fix. "Fixed" is not the word for immutable.
+- **A time bound says whether it is a wait or a window.** "Up to about
+  a minute" reads as both: appears within a minute, or is visible for
+  only a minute. Those are opposite instructions. Write "appears within
+  about a minute" or "stays for about a minute", never the form that
+  carries both.
 - "Unknown", never "unmeasured" or "not recorded here". The reader does
   not care what the author got around to.
 - **The present tense describes behaviour. The past tense is for one
@@ -473,7 +491,12 @@ entirely and is given below.
 The opening gets a new reader ready before it teaches anything:
 
 - What the page does, or what has gone wrong.
-- A linked index of the sections, when there are more than three.
+- A linked index of the sections, when there are more than three. It
+  lists **every** heading on the page, navigational ones included. A
+  cold reader who counts eight headings under a sentence promising five
+  starts wondering what else was dropped. Navigational headings do not
+  count toward the threshold that triggers the index, and they do
+  appear in it once it exists.
 - The three or four terms the page leans on, one sentence each.
 - Which commands change something.
 - What to collect before starting, and the command or screen that
@@ -491,7 +514,9 @@ The exception is a conventional navigational heading, which is a fixed
 label the reader scans for rather than a description: "Next Steps",
 "Troubleshooting", "Before You Start", "Prerequisites". Those keep
 their standard wording, and they do not count toward the number of
-sections that triggers a linked index in the opening.
+sections that triggers a linked index in the opening. They are listed
+in that index once it exists, because an index that does not match the
+page reads as an out-of-date page.
 
 **The noun a customer would search for goes inside the gerund phrase.**
 "Comparing the Database Sizes" contains "database sizes" and is
@@ -736,6 +761,17 @@ web for instead.
 
 The two find different defects and neither finds the other's. Run both,
 even on a small change.
+
+**The cold read is the only gate that catches an ordering defect**, and
+that is why it is not optional. Every rule in this file is applied by
+someone who already knows what the page is for, so a step whose reason
+sits sixty lines below it, or a precondition parked after the failure
+it predicts, passes the checklist and passes the prose rules. Only a
+reader with no context skips the step and tells you they skipped it.
+
+Ask the cold reader for what they had to guess and what they would have
+done wrong, not for whether the page reads well. A page can read well
+and still be executed in the wrong order.
 
 ## Further reading
 

@@ -394,10 +394,36 @@ No forward-looking text. Not "yet", "coming", "planned", "soon", or
 
 ## The shape of the page
 
+### Ask which job this is before you start
+
+Three jobs wear the same words, and they produce different pull
+requests. Decide which one you are doing, and where the request does
+not say, **ask the person who asked you** before writing anything.
+
+- A **fix** changes a fact and touches nothing else. No restructuring,
+  no style edits, no vocabulary sweep. A reviewer must be able to see
+  the factual change on its own.
+- An **edit** improves the prose inside the structure the page has.
+  Sentences, words, headings and formatting are in scope. The order of
+  the sections is not.
+- An **overhaul** rewrites the page, its shape included.
+
+The request usually names the job: "correct the timing claim" is a fix,
+"bring this page into style" is an edit, "rewrite this page" is an
+overhaul. Where it does not, ask. Guessing overhaul on a page someone
+wanted corrected buries a one-line change in a diff nobody can review,
+and guessing edit on a page someone wanted rebuilt returns the same
+badly organised page with better sentences.
+
+The rest of this section is for an overhaul.
+
+### Deciding the order
+
 **Fixing the sentences of a badly organised page produces a badly
-organised page with better sentences.** The order of the sections is
-part of the rewrite, not the part you inherit. Decide the shape before
-you write a word, and expect to move, merge, split or drop a section.
+organised page with better sentences.** In an overhaul the order of the
+sections is part of the work, not the part you inherit. Decide the
+shape before you write a word, and expect to move, merge, split or drop
+a section.
 
 Order a page by what the reader is doing, in the order they do it:
 
@@ -429,6 +455,12 @@ Two orderings are wrong however good the prose:
 Where the source's order is already the reader's order, keep it. Say
 in the pull request that you checked, so a reviewer knows the shape
 was a decision rather than an inheritance.
+
+**One ordering defect is worth fixing even in a fix or an edit**: a
+destructive action printed before the step that makes it survivable.
+That is reader safety, rank 1, and it outranks the scope of the job.
+Move it, and say in the pull request why the diff is larger than the
+request.
 
 ## How a page opens
 
@@ -550,7 +582,9 @@ heading rather than to a bullet.
 - In a pull request that changes facts, do not touch a sentence for
   style alone. Voice and punctuation changes to existing text go in
   their own pull request, so a reviewer can tell a technical change
-  from a preference.
+  from a preference. This is the fix job under "The shape of the
+  page", and it is why the three jobs are worth separating before you
+  start rather than after.
 
 ## No internal history, and no internal names
 

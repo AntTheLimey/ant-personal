@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] — 2026-09-09
+
+### Added
+
+- **New `ant-docs-writer` skill.** One documentation style for every page a
+  customer or an agent reads, across pgedge-cli and product-ui. It carries a
+  seven-item content checklist that runs before any prose rule, a prose half
+  derived from ASD-STE100 Issue 9, and the two-review posture. Two reference
+  files sit beside it: `ste-adoption.md` records which STE rules were taken,
+  adapted or dropped and why, and `agent-pages.md` carries the divergences for
+  pages read by agents rather than people.
+
+### Changed
+
+- **`ant-voice-writer` no longer covers product documentation.** "documentation"
+  is removed from its trigger list and the description now routes docs pages,
+  README files, in-app copy and the CLI reference to `ant-docs-writer`. The
+  skill had no technical-documentation mode, so a docs writer landed on its
+  calibration note, which says the default is medium-to-long sentences and "if
+  you're unsure, write it longer". Blogs, framing docs, JIRA stories, marketing
+  and creative work are unaffected.
+
+---
+
 ## [1.1.0] — 2026-07-07
 
 ### Added

@@ -46,9 +46,13 @@ it.
 3. **Product truth.** Never delete a technical claim unless the same
    claim already stands elsewhere on the page. This outranks the rule
    that sends a number to the page owning it, so link out and keep the
-   claim. It also outranks "keep the consequence, drop the mechanism",
-   which applies only where the mechanism is not itself the only
-   statement of a behaviour.
+   claim. The one exception is a count of things the reader cannot act
+   on from this page, such as "one of five operations that need this
+   status": the condition is the claim and it stays, the tally is not
+   and it goes. A count nobody acts on is a maintenance liability that
+   is wrong the day the sixth case ships. It also outranks "keep the
+   consequence, drop the mechanism", which applies only where the
+   mechanism is not itself the only statement of a behaviour.
 4. **House style.** Every other rule in this file. Two house-style
    rules can still collide, so three tie-breaks settle the pairs that
    keep recurring:
@@ -166,11 +170,14 @@ step is allowed to be more than one line.
   contraction. A sentence missing its subject, verb or article is
   shorter and harder.
 - **A quoted product string is reproduced exactly and is exempt from
-  every rule in this file.** Button labels, error messages, field names
-  and status values are quoted so the reader can match them against
-  the screen, so a contraction, an em-dash or a capital inside one
-  stays. Quote it or paraphrase it outside quotation marks. Never
-  correct it.
+  every rule in this skill**, this file and every file beside it,
+  including the banned words in `product-vocabulary.md`. Button labels,
+  error messages, field names and status values are quoted so the
+  reader can match them against the screen, so a contraction, an
+  em-dash, a capital or a banned word inside one stays. A dialog really
+  named `Taking Pre-Restore Snapshot` is quoted with its snapshot
+  intact, and your own prose around it still uses the settled word.
+  Quote it or paraphrase it outside quotation marks. Never correct it.
 
 ## Steps and procedures
 
@@ -384,6 +391,44 @@ feel about what follows, or restates the heading it sits under.
 
 No forward-looking text. Not "yet", "coming", "planned", "soon", or
 "today" used as a temporal hedge. Describe what is.
+
+## The shape of the page
+
+**Fixing the sentences of a badly organised page produces a badly
+organised page with better sentences.** The order of the sections is
+part of the rewrite, not the part you inherit. Decide the shape before
+you write a word, and expect to move, merge, split or drop a section.
+
+Order a page by what the reader is doing, in the order they do it:
+
+1. What this page gets them, in one sentence.
+2. What they need before starting.
+3. The task itself, in the order it happens.
+4. The things that go wrong, after the thing that goes right.
+5. Where to go next.
+
+Reference material the task leans on goes into its own section, placed
+after the first step that needs it. A conceptual model the reader must
+hold before step one goes into the opening as terms, one sentence each,
+never as a section of its own at the top of the page.
+
+**The commonest defect is a page ordered by the product's internals.**
+It opens with a taxonomy of what exists, explains the model, and
+reaches the reader's task somewhere in the middle. Read the source
+page and ask what the reader came to do. If the answer appears below
+the halfway mark, the page is upside down and reordering it is the
+main work.
+
+Two orderings are wrong however good the prose:
+
+- A destructive action printed before the step that makes it
+  survivable. Reader safety, rank 1.
+- A definition placed after the sentence that leans on it. Checklist
+  item 4.
+
+Where the source's order is already the reader's order, keep it. Say
+in the pull request that you checked, so a reviewer knows the shape
+was a decision rather than an inheritance.
 
 ## How a page opens
 

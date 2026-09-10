@@ -118,6 +118,15 @@ thing for the whole page.
   **button** is selected, per the standard verb list in `SKILL.md`.
 - A **tooltip** appears on hover or focus and holds no instruction the
   reader must have.
+- A **badge** is a small marker on a row or a card reporting one
+  attribute, such as a backup's kind or a "Coming soon" label. Not tag,
+  not chip, not pill.
+- A **row** is one entry in a pane that lists things. Not entry, not
+  item. A **card** is the bordered form of the same thing.
+- A **progress bar** shows how far a running operation has gone. A
+  **step list** is the list of stages beside it, and one of those is a
+  **stage**, never a step, so it cannot be confused with a step in your
+  own procedure.
 
 Two of these overturn current usage on purpose: pane wins over panel
 even though both are in the corpus, and popup is retired in favour of

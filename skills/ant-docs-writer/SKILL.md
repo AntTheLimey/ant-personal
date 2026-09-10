@@ -68,6 +68,13 @@ Repeating it on every block is noise that goes stale. A page with no
 such section fails this item even when every command is otherwise
 complete.
 
+A console page needs the same section for a different reason. It has
+no connection flag, so instead it names what the reader must have
+before starting, the screen each value comes from, and the screen the
+first step begins on. A console page that drops the reader into step
+one with no route to that screen fails this item exactly as a
+command-line page with no profile section does.
+
 **2. Does the page say where every value it asks for comes from?**
 Every placeholder gets a sentence naming the command or the screen that
 produces it. A page that asks for a database ID and never says how to
@@ -249,7 +256,11 @@ pressure. Every rule below follows from that.
 - The one-noun rule applies within the change you are already making. A
   page-wide vocabulary sweep is its own pull request, never something
   folded into a factual fix, because a reviewer cannot then tell the two
-  apart.
+  apart. This scopes a **fix**, not a rewrite. A page commissioned for
+  rewriting is one change, and its vocabulary is part of that change.
+- The one-noun rule is house style, so product truth outranks it. Where
+  the only way to use one noun is to drop a claim, keep the claim and
+  use two nouns. See "When two rules conflict".
 - One wording for one repeated action. If step 2 says "apply a small
   quantity of oil to the threads", step 6 does not say "lubricate".
   Different wording for the same action reads as a different action.
@@ -293,10 +304,23 @@ pressure. Every rule below follows from that.
   the interface uses an abbreviation or a casual one. A size chip
   reading "2 GB RAM" is described as memory, and the reader still finds
   the chip because the chip's own words are quoted where they matter.
+  **A table is the hard case, because a header or a cell can be
+  either.** A column of values the reader matches against the screen is
+  quoted from the screen and left alone, abbreviations included. A
+  column the writer wrote to organise the page takes the formal term.
+  When you cannot tell which one you are looking at, quote it. A reader
+  who has to expand an abbreviation has lost a second, and one who
+  cannot find the row has lost the page.
 - A setting "sets" or "determines" a value. It does not "fix" one,
   which reads as a bug fix. "Fixed" is not the word for immutable.
 - "Unknown", never "unmeasured" or "not recorded here". The reader does
   not care what the author got around to.
+- **The present tense describes behaviour. A single event that has
+  already happened keeps its past tense.** "The payment step could not
+  open a checkout session" reports one attempt. Rewriting it to "cannot
+  open" turns it into a claim that it never works, which is a different
+  statement and probably a false one. The tense rule governs how the
+  product behaves, not what happened once.
 - Banned outright: leverage, utilize, ensure, seamless, best-in-class,
   synergy, paradigm shift, stakeholder alignment.
 
@@ -382,6 +406,12 @@ A run of steps is a numbered list, not a run of headings. Promoting each
 step to its own heading fills the navigation pane with fragments and
 loses the sequence. Indent anything belonging to a step by four
 spaces.
+
+That four-space rule is for a numbered step. A bullet is different: an
+indented block under a bullet reads as a note, and the checklist counts
+it as one. So a bullet that needs a second sentence keeps it in the
+same paragraph, and a bullet that needs an indented block is a step in
+the wrong clothes. Make it one.
 
 ## Format
 
@@ -490,6 +520,13 @@ A page carries no trace of how it was made or who made it.
   ten seconds" earns its place. "Twenty-one of twenty-one attempts" does
   not. Link to the one page that owns a number rather than restating it
   where it will go stale.
+- **Where those two pull apart, ask where the reader acts.** A number
+  they act on while reading this page stays on this page, attributed to
+  what shows it. A number they act on somewhere else is a link. A price
+  in a size table is the first kind, because the reader is choosing a
+  size from that table, so the table keeps its prices and says the
+  console is where they come from. The same price quoted in a sentence
+  about billing is the second kind, and links out.
 - **When a kept image contradicts the verified prose, the prose is
   right.** Write what the source says, flag the image for recapture in
   the pull request, and say nothing on the page about the discrepancy.
@@ -513,9 +550,12 @@ A page carries no trace of how it was made or who made it.
 - **State an absence in the form "no X does Y", scoped to what you
   checked.** "No command in the reference reads whether the tier is
   enabled" is a claim you can support. "There is no way to check"
-  is not, because you searched rather than proved. Follow it with what
-  the reader should do instead, and record the search in the pull
-  request. A search that found nothing is evidence, not proof.
+  is not, because you searched rather than proved. On a console page
+  the scope is a screen rather than a reference: "the wizard offers no
+  control for this" is supportable, "the console cannot do it" is not.
+  Follow it with what the reader should do instead, and record the
+  search in the pull request. A search that found nothing is evidence,
+  not proof.
 - Scope every claim to the command and the module actually checked. The
   same sentence written generally is often false for the sibling.
 - A caveat is written for the reader, not as a lab note. "Recorded from

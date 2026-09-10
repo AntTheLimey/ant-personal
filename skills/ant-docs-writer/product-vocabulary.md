@@ -83,6 +83,37 @@ Server, pgEdge Anonymizer, pgEdge Docloader, Spock. The one exception is
 Write "Postgres", not "PostgreSQL". Write "Managed", not "PAYG", unless
 the badge on screen already reads PAYG, in which case quote the badge.
 
+## Console vocabulary
+
+The console has no settled vocabulary, and the shipped pages show it.
+`creating_managed.md` calls one object a dialog in its opening and a
+wizard in its troubleshooting section. Across the documentation, pane
+outnumbers panel 99 to 13, and popup outnumbers dialog 22 to 15 for
+the same kind of object. Pick from this list and use one word for one
+thing for the whole page.
+
+- A **pane** is a region of a page that stays on the page. Not panel.
+- A **dialog** is an overlay that takes focus and must be completed or
+  dismissed. Not popup, not modal, both of which name the same object
+  and one of which is too informal for this register.
+- A **wizard** is a dialog with numbered steps. Use it only where the
+  steps exist, and use dialog for the single-screen case. A page that
+  needs both words is describing two objects, so say which is which.
+- A **tab** switches the content of a pane without leaving the page.
+- A **card** is a bordered block holding one resource or one summary.
+- A **banner** spans the top of a page or a pane and reports state. A
+  **notification** appears, is transient, and can be dismissed.
+- A **drop-down** is hyphenated, always. Never dropdown.
+- A **field** takes typed input. A **toggle** has two states. A
+  **button** is selected, per the standard verb list in `SKILL.md`.
+- A **tooltip** appears on hover or focus and holds no instruction the
+  reader must have.
+
+Two of these overturn current usage on purpose: pane wins over panel
+even though both are in the corpus, and popup is retired in favour of
+dialog even though it is the more common of the two, because the
+register is semi-formal and popup is not.
+
 ## Replication and diagnostics
 
 Replication lag has its own analyses, and they are read in pairs

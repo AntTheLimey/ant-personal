@@ -28,10 +28,13 @@ Run all seven before writing a sentence, and again before opening a
 pull request. Each is a question with a failing answer, not a
 preference.
 
-**1. Can the reader type every command exactly as printed?** A command
-needs its full prefix, a placeholder for every value, and every flag a
-non-interactive run needs. A command that silently assumes a default the
-reader does not have is unrunnable for everyone else.
+**1. Can the reader do every action exactly as described?** On a
+command-line page, a command needs its full prefix, a placeholder for
+every value, and every flag a non-interactive run needs; one that
+silently assumes a default the reader does not have is unrunnable for
+everyone else. On a console page, every control is quoted exactly as it
+renders, and the page says where the screen is and what puts the reader
+on it.
 
 The connection flag (`--base-url` or `--profile`) is the exception, and
 it is stated **once** per page, in a "Before You Start" section near
@@ -69,11 +72,17 @@ step that saves it first, before the destructive one.
 no longer finish it, the information in that note belongs in a step.
 Move it and repeat the test.
 
-A note is any block that informs rather than instructs and sits outside
-the flow of steps. That includes an indented paragraph under a list
-item, an admonition, and a parenthetical aside, whether or not the word
+A note is any block that could be lifted out without changing a single
+thing the reader does. That includes an indented paragraph under a list
+item, an admonition and a parenthetical aside, whether or not the word
 "note" appears. Reading only the blocks labelled NOTE is how this item
 gets passed by mistake.
+
+**The test is whether removing it changes an action, not whether it is
+indented.** An indented paragraph that explains the step it sits under,
+names the flag that changes what the reader types, or gives the limit
+the result must fall inside, is part of that step and stays there. A
+step is allowed to be more than one line.
 
 ## Sentences
 
@@ -84,9 +93,11 @@ gets passed by mistake.
   can ever fit: backticked or quoted text counts as one word however
   long it runs, a number counts as one, a number with its unit counts as
   one, an abbreviation counts as one, a hyphenated word counts as one,
-  and text in parentheses counts as one. The caps apply to sentences in
-  prose and in steps. They do not apply inside a table cell, which is
-  not prose, though a cell still earns its length.
+  and text in parentheses counts as one. The caps apply **per sentence**,
+  not per step or per paragraph, and they apply to every sentence a
+  reader reads: a bullet, an indented paragraph under a step and a
+  lead-in are all prose. Two things are exempt: a table cell, which is
+  not a sentence, and image alt text.
 - One instruction per sentence, unless two actions happen at the same
   time. "Remove and discard the old spec" is one action in two verbs.
   "Save the spec and run the restore" is two steps.
@@ -122,8 +133,9 @@ gets passed by mistake.
 - A limit, a tolerance or the expected result of a step goes in the
   step, immediately after the action, never in a note beside it.
 - Numbered lists are for sequences only. If the steps work in any
-  order, they are bullets. Use `1.` markers and indent everything
-  belonging to a step by four spaces.
+  order, they are bullets. Number the steps in sequence, `1.` then `2.`
+  then `3.`, rather than repeating `1.` and letting the renderer count.
+  Indent everything belonging to a step by four spaces.
 - **Do not print a destructive flag in a copyable command.** Show the
   command as it runs interactively, with the prompt intact, and describe
   the flag that skips the prompt in the step beside it. A reader
@@ -205,7 +217,14 @@ pressure. Every rule below follows from that.
   vocabulary down before writing the page: pick "node" or "instance",
   "task" or "operation", "rule" or "monitor", and never alternate. A
   single page once used rule, script, sweep, monitor and poll for the
-  same thing.
+  same thing. The rule governs your own words: **a quoted
+  product string using a different noun is not a violation**, because
+  those are the product's words. Quote the error exactly and use your
+  own noun in the prose around it.
+- The one-noun rule applies within the change you are already making. A
+  page-wide vocabulary sweep is its own pull request, never something
+  folded into a factual fix, because a reviewer cannot then tell the two
+  apart.
 - One wording for one repeated action. If step 2 says "apply a small
   quantity of oil to the threads", step 6 does not say "lubricate".
   Different wording for the same action reads as a different action.
@@ -279,6 +298,13 @@ bites". State the fact and stop.
 A lead-in sentence carries a fact. It never restates the heading above
 it.
 
+**A structural lead-in is not signposting.** The sentence introducing a
+list, a table or the opening's section index is required by the format
+rules and is exempt from this section. Keep it to one clause that names
+what the list holds, ending in a colon: "This page has four sections:"
+is fine. What stays banned is the sentence that tells the reader how to
+feel about what follows, or restates the heading it sits under.
+
 No forward-looking text. Not "yet", "coming", "planned", "soon", or
 "today" used as a temporal hedge. Describe what is.
 
@@ -310,6 +336,12 @@ label the reader scans for rather than a description: "Next Steps",
 "Troubleshooting", "Before You Start", "Prerequisites". Those keep
 their standard wording, and they do not count toward the number of
 sections that triggers a linked index in the opening.
+
+**The noun a customer would search for goes inside the gerund phrase.**
+"Comparing the Database Sizes" contains "database sizes" and is
+findable. "Making Your Choice" contains nothing and is not. If the
+gerund is hiding the searchable noun, the heading is wrong, not the
+rule.
 This is the house form, it is what the existing pages use, and an
 imperative heading is the common way to break it. Name what the section
 contains, in words a customer would search for. Never a sentence, never
@@ -334,14 +366,24 @@ spaces.
   reasoning. More than four items is a list, not a sentence.
 - No bold used as a heading and no standalone bold label. MkDocs can
   promote either into the navigation pane.
+- Alt text describes what the image shows, as a noun phrase. It is
+  exempt from the sentence rules and the word caps, because it is not a
+  sentence. It never carries a fact found nowhere else on the page: a
+  reader who cannot see the image must still be able to finish.
+- A placeholder is lowercase and hyphenated inside angle brackets,
+  `<db-id>` and `<backup-id>`. Never use the underscored form of a real
+  field name, which build gates read as a claim that the field exists.
 - An image sits inside the step or under the heading it illustrates,
   indented to match. An image does not satisfy the rule that a heading
   is followed by a sentence: write the sentence, then place the image.
 - Link text is the target page's own title. A link whose text has
   drifted from the heading it points at is the same defect as a stale
   cross-reference.
-- A page's `mkdocs.yml` nav label matches its `#` heading. Two names for
-  one page is how a reader loses it.
+- A page's navigation label matches its `#` heading, or is a shortened
+  form of it that keeps the gerund. Two names for one page is how a
+  reader loses it. A navigation entry that disagrees with a converted
+  page is unconverted work, not a reason to leave the heading alone:
+  change the navigation file in the same pull request.
 - Introduce every code block with a sentence, ending in a colon, that
   names the command and says what it does.
 - Describe command output in prose. Paste a block only where prose
@@ -418,6 +460,10 @@ A page carries no trace of how it was made or who made it.
   ten seconds" earns its place. "Twenty-one of twenty-one attempts" does
   not. Link to the one page that owns a number rather than restating it
   where it will go stale.
+- **When a kept image contradicts the verified prose, the prose is
+  right.** Write what the source says, flag the image for recapture in
+  the pull request, and say nothing on the page about the discrepancy.
+  Never write prose backwards to match a stale screenshot.
 - **A screenshot is not a source.** It is evidence that something
   appeared on screen once, and it goes stale silently. A value that
   exists only at runtime, such as a price the console fetches from a
@@ -429,6 +475,17 @@ A page carries no trace of how it was made or who made it.
   go and find them rather than to leave the item failing. Source every
   addition and say where it came from in the pull request. What a
   rewrite may never do is add a fact it did not verify.
+- **A rewrite may add a step**, when the checklist requires one and the
+  step follows from a fact that is sourced. A procedure that identifies
+  something by when it happened needs a step telling the reader to
+  record that, or the identification is unusable. Say in the pull
+  request which fact the step follows from.
+- **State an absence in the form "no X does Y", scoped to what you
+  checked.** "No command in the reference reads whether the tier is
+  enabled" is a claim you can support. "There is no way to check"
+  is not, because you searched rather than proved. Follow it with what
+  the reader should do instead, and record the search in the pull
+  request. A search that found nothing is evidence, not proof.
 - Scope every claim to the command and the module actually checked. The
   same sentence written generally is often false for the sibling.
 - A caveat is written for the reader, not as a lab note. "Recorded from
@@ -478,7 +535,11 @@ too, written to a tighter budget.
 
 ## Reviews
 
-Every documentation change gets two reviews and one fix round.
+Every documentation change gets two reviews and one fix round. Both are
+performed by someone other than the writer, after the draft exists. A
+writer cannot be their own cold reader, so a single drafting pass is
+never expected to satisfy this section: what the writer owes it is the
+claim-to-source list.
 
 The correctness reviewer checks every claim against its source. The
 writer supplies a claim-to-source list so the reviewer verifies claims

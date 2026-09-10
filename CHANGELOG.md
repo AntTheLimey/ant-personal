@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] — 2026-09-10
+
+### Added
+
+- **New `ant-docs-writer` skill.** One documentation style for every page a
+  customer or an agent reads, across pgedge-cli, product-ui and the Starfleet
+  docs. Four files, self-contained, referencing nothing outside the skill
+  directory.
+
+  - A seven-item **content checklist** that runs before any prose rule,
+    because a page can pass every prose rule and still be unusable.
+  - A **precedence order** for when two rules collide: reader safety, the
+    content checklist, product truth, then house style, with tie-breaks
+    inside house style for the pairs that recur.
+  - A **page-shape** section. The three jobs a documentation request can be
+    (a fix, an edit, an overhaul) are named, and the skill asks which one it
+    is rather than guessing, since a factual correction that arrives as a
+    restructured page buries the line a reviewer needed to see.
+  - **Marking a step the reader will otherwise skip**, rationed to one or two
+    genuinely unrecoverable outcomes a page, written as consequences rather
+    than orders.
+  - A **cold read** the skill runs itself before calling a page done, with the
+    dispatch prompt carried in the file.
+  - A prose half derived from **ASD-STE100 Issue 9**, and a settled product
+    vocabulary including console nouns.
+
+  Two reference files sit beside it: `ste-adoption.md` records which STE rules
+  were taken, adapted or dropped and why, and `agent-pages.md` carries the
+  divergences for pages read by agents rather than people.
+
+### Changed
+
+- **`ant-voice-writer` no longer covers product documentation.** "documentation"
+  is removed from its trigger list, the description routes docs pages, README
+  files, in-app copy and the CLI reference to `ant-docs-writer`, and the skill
+  now opens with a section saying so before its voice profile. The skill had no
+  technical-documentation mode, so a docs writer landed on its calibration
+  note, which says the default is medium-to-long sentences and "if you're
+  unsure, write it longer". Blogs, framing docs, JIRA stories, marketing and
+  creative work are unaffected.
+
 ## [1.1.0] — 2026-07-07
 
 ### Added

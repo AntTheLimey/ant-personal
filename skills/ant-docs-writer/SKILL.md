@@ -15,12 +15,37 @@ The content checklist runs first, because a page can pass every prose
 rule in this file and still be unusable. That has happened. A page
 rewritten against an explicit list of prose targets hit every one of
 them, and a reader with no context judged it unusable anyway, on four
-faults that no prose rule addresses.
+faults that no prose rule addresses. Where two rules contradict each
+other on one sentence, the order under "When two rules conflict"
+decides which wins.
 
 This skill is self-contained. It carries the prose rules, the content
 checklist, the settled product vocabulary and the repository mechanics
 a writer needs, so there is no second rules file to open and no way for
 two documents to drift apart into contradicting each other.
+
+## When two rules conflict
+
+Every rule here is an absolute, and two absolutes can still point
+opposite ways on one sentence. Apply them in this order. The higher
+rule wins, and the sentence is then written the best way that obeys
+it.
+
+1. **Reader safety.** Never print a copyable command that destroys
+   data. Checklist item 1 asks for every flag a **safe**
+   non-interactive run needs, so a command is complete even when the
+   flag it lacks is the one that skips a confirmation prompt. The
+   destructive-flag rule under Steps and procedures says how to show
+   it instead.
+2. **The content checklist.** A page that fails an item is wrong
+   however well it reads.
+3. **Product truth.** Never delete a technical claim unless the same
+   claim already stands elsewhere on the page. This outranks the rule
+   that sends a number to the page owning it, so link out and keep the
+   claim. It also outranks "keep the consequence, drop the mechanism",
+   which applies only where the mechanism is not itself the only
+   statement of a behaviour.
+4. **House style.** Every other rule in this file.
 
 ## The content checklist
 
@@ -281,13 +306,12 @@ pressure. Every rule below follows from that.
 - No semicolons in new text. Write two sentences. Never strip a
   semicolon out of text that already exists, because a punctuation-only
   edit hides the technical change underneath it in review.
-- Do not start a sentence with And, So, Or or Yet. "And" is almost
+- Do not start a sentence with And, But, So, Or or Yet. "And" is almost
   always deletable, because a following sentence adding to the previous
   one is the default reading anyway. "So" becomes "Thus" or "As a
-  result".
-- "But" at the start of a sentence is allowed where that sentence
-  qualifies the one before it. Nothing short replaces it, and the
-  alternative, "However,", is stiffer than anything else in this file.
+  result". "But" becomes "However,", which reads as stiff beside a blog
+  and correct beside the semi-formal register these pages are written
+  in.
 - Use a hyphen for a compound modifier before a noun: read-only role,
   copy-on-write branch, single-node database.
 

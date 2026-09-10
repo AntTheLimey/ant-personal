@@ -57,9 +57,13 @@ new text and never strips one from existing text, because a
 punctuation-only edit hides the technical change underneath it in
 review.
 
-**Rules 8.4 to 8.7, word count.** STE's counting method is what makes
-the 20 and 25 word caps checkable, and it is generous in the way this
-work needs. A number counts as one word. An abbreviation counts as one
+**Rules 8.4 to 8.7, word count.** The operative version of this now
+lives in `SKILL.md`, because a writer should not have to open a second
+file to know how to count. What follows is why it is generous.
+
+STE's counting method is what makes the 20 and 25 word caps checkable,
+and it is generous in the way this work needs. A number counts as one
+word. An abbreviation counts as one
 word. Quoted text counts as one word, so a backticked command counts as
 one however long it runs. Parenthetical text counts as one word. A
 hyphenated word counts as one. Without this, no sentence containing

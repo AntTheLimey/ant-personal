@@ -29,10 +29,16 @@ pull request. Each is a question with a failing answer, not a
 preference.
 
 **1. Can the reader type every command exactly as printed?** A command
-needs its full prefix, the connection flag the reader's setup requires
-(`--base-url` or `--profile`), a placeholder for every value, and every
-flag a non-interactive run needs. A command that silently assumes a
-default the reader does not have is unrunnable for everyone else.
+needs its full prefix, a placeholder for every value, and every flag a
+non-interactive run needs. A command that silently assumes a default the
+reader does not have is unrunnable for everyone else.
+
+The connection flag (`--base-url` or `--profile`) is the exception, and
+it is stated **once** per page, in a "Before You Start" section near
+the top that names the flag and the command that sets it in a profile.
+Repeating it on every block is noise that goes stale. A page with no
+such section fails this item even when every command is otherwise
+complete.
 
 **2. Does the page say where every value it asks for comes from?**
 Every placeholder gets a sentence naming the command or the screen that
@@ -63,11 +69,24 @@ step that saves it first, before the destructive one.
 no longer finish it, the information in that note belongs in a step.
 Move it and repeat the test.
 
+A note is any block that informs rather than instructs and sits outside
+the flow of steps. That includes an indented paragraph under a list
+item, an admonition, and a parenthetical aside, whether or not the word
+"note" appears. Reading only the blocks labelled NOTE is how this item
+gets passed by mistake.
+
 ## Sentences
 
 - A step is 20 words at most. Descriptive prose is 25 words at most.
   The extra five words in prose exist to pay for a "because", and
   spending them on one is the point of the split.
+- Count words the way STE counts them, or no step holding a real command
+  can ever fit: backticked or quoted text counts as one word however
+  long it runs, a number counts as one, a number with its unit counts as
+  one, an abbreviation counts as one, a hyphenated word counts as one,
+  and text in parentheses counts as one. The caps apply to sentences in
+  prose and in steps. They do not apply inside a table cell, which is
+  not prose, though a cell still earns its length.
 - One instruction per sentence, unless two actions happen at the same
   time. "Remove and discard the old spec" is one action in two verbs.
   "Save the spec and run the restore" is two steps.
@@ -85,6 +104,12 @@ Move it and repeat the test.
 - Never omit a word to make a sentence shorter, and never use a
   contraction. A sentence missing its subject, verb or article is
   shorter and harder.
+- **A quoted product string is reproduced exactly and is exempt from
+  every rule in this file.** Button labels, error messages, field names
+  and status values are quoted so the reader can match them against
+  the screen, so a contraction, an em-dash or a capital inside one
+  stays. Quote it or paraphrase it outside quotation marks. Never
+  correct it.
 
 ## Steps and procedures
 
@@ -97,7 +122,17 @@ Move it and repeat the test.
 - A limit, a tolerance or the expected result of a step goes in the
   step, immediately after the action, never in a note beside it.
 - Numbered lists are for sequences only. If the steps work in any
-  order, they are bullets.
+  order, they are bullets. Use `1.` markers and indent everything
+  belonging to a step by four spaces.
+- **Do not print a destructive flag in a copyable command.** Show the
+  command as it runs interactively, with the prompt intact, and describe
+  the flag that skips the prompt in the step beside it. A reader
+  following the page at a terminal should have to type the flag that
+  removes their confirmation prompt. The scripted form belongs on the
+  automation page, not here.
+- A step that needs a table gets the table in its own section, and the
+  step links to it. A table nested inside a list item is fragile to
+  render and hard to read.
 
 ## Descriptive prose
 
@@ -158,6 +193,11 @@ pressure. Every rule below follows from that.
 - **Formal does not mean longer.** It means precise and unmarked. A
   sentence that has to be read twice for its tone is as broken as one
   that has to be read twice for its grammar.
+- **"You" is allowed and is usually the right answer.** Removing it
+  tends to produce the agentless passive this file bans two rules
+  higher up. "After you authenticate" beats "after authentication is
+  complete". Do not write "we", and do not write "the user" about the
+  person reading the page.
 
 ## Words
 
@@ -182,8 +222,12 @@ pressure. Every rule below follows from that.
 - Product names are proper nouns and take no article: pgEdge Cloud,
   Spock, pgEdge Postgres MCP Server. The exception is "the Control
   Plane", which always takes one.
-- A screen, field or badge "shows" or "displays" a value. It does not
-  "carry" one.
+- Nothing "carries" a value. A screen, field or badge "shows" or
+  "displays" one; a record or a response "holds" or "has" one.
+- When the product's own word for a thing differs from the word the
+  rest of the docs set uses, **the word on screen wins**, because the
+  reader is looking at the screen while they read. Change the sibling
+  pages rather than the page describing the screen.
 - A setting "sets" or "determines" a value. It does not "fix" one,
   which reads as a bug fix. "Fixed" is not the word for immutable.
 - "Unknown", never "unmeasured" or "not recorded here". The reader does
@@ -246,6 +290,11 @@ nothing they can act on.
 
 Headings are gerund phrases in title case: "Backing up and Restoring a
 Managed Database", "Understanding a Backup", "Rotating a Credential".
+The exception is a conventional navigational heading, which is a fixed
+label the reader scans for rather than a description: "Next Steps",
+"Troubleshooting", "Before You Start", "Prerequisites". Those keep
+their standard wording, and they do not count toward the number of
+sections that triggers a linked index in the opening.
 This is the house form, it is what the existing pages use, and an
 imperative heading is the common way to break it. Name what the section
 contains, in words a customer would search for. Never a sentence, never
@@ -270,6 +319,14 @@ spaces.
   reasoning. More than four items is a list, not a sentence.
 - No bold used as a heading and no standalone bold label. MkDocs can
   promote either into the navigation pane.
+- An image sits inside the step or under the heading it illustrates,
+  indented to match. An image does not satisfy the rule that a heading
+  is followed by a sentence: write the sentence, then place the image.
+- Link text is the target page's own title. A link whose text has
+  drifted from the heading it points at is the same defect as a stale
+  cross-reference.
+- A page's `mkdocs.yml` nav label matches its `#` heading. Two names for
+  one page is how a reader loses it.
 - Introduce every code block with a sentence, ending in a colon, that
   names the command and says what it does.
 - Describe command output in prose. Paste a block only where prose
@@ -305,9 +362,20 @@ spaces.
 ## Never invent
 
 - Every command and flag exists in the generated reference. Every
-  behavioural claim traces to a live capture, a spec field or an
-  existing gated page. A claim with no source stays out, and what is
-  true goes in its place.
+  behavioural claim traces to a live capture, a spec field, the
+  product's own source, or an existing gated page. A claim with no
+  source stays out, and what is true goes in its place.
+- **A screenshot is not a source.** It is evidence that something
+  appeared on screen once, and it goes stale silently. A value that
+  exists only at runtime, such as a price the console fetches from a
+  billing service, may still be stated: attribute it to what the console
+  shows, never present it as a contract, and re-check it whenever the
+  page is touched.
+- **A rewrite may add facts, and often must.** The content checklist
+  asks for things a page frequently does not have, and the answer is to
+  go and find them rather than to leave the item failing. Source every
+  addition and say where it came from in the pull request. What a
+  rewrite may never do is add a fact it did not verify.
 - Scope every claim to the command and the module actually checked. The
   same sentence written generally is often false for the sibling.
 - A caveat is written for the reader, not as a lab note. "Recorded from

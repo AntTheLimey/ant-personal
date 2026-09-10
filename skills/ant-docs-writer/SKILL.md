@@ -17,10 +17,10 @@ rewritten against an explicit list of prose targets hit every one of
 them, and a reader with no context judged it unusable anyway, on four
 faults that no prose rule addresses.
 
-What this skill does not carry: product decisions and repo mechanics.
-Those stay in each repository's own `CONSUMER-DOCS-RULES.md`, which
-names the backup vocabulary, the settled product rulings, the build
-gates and the navigation files. Read this skill first, then that file.
+This skill is self-contained. It carries the prose rules, the content
+checklist, the settled product vocabulary and the repository mechanics
+a writer needs, so there is no second rules file to open and no way for
+two documents to drift apart into contradicting each other.
 
 ## The content checklist
 
@@ -210,6 +210,17 @@ pressure. Every rule below follows from that.
   quantity of oil to the threads", step 6 does not say "lubricate".
   Different wording for the same action reads as a different action.
 - "Command", never "verb". "Verb" is the CLI team's word.
+- **Choose a verb by its literal sense, not its idiomatic one.** A free
+  trial does not "cover" the smallest size, because covering is
+  obscuring; it provides it. A page does not "cover" a topic; it
+  describes one. A verb whose plain meaning contradicts the action makes
+  a reader stop, and it translates badly.
+- **Prefer the precise verb to the general one.** The wizard "retains"
+  an entry rather than "keeps" it, the reader "navigates" between steps
+  rather than "moves" between them, and `Back` "does not discard any
+  entered value" rather than "loses nothing".
+- **A control named in prose takes its verb.** Write "selecting Back",
+  or "the Back button", never a bare label standing in for the action.
 - One verb per kind of object, and the standard verb is the plain one.
   You **run** a command. You **open** a page or a dialog. You **select**
   a control. You **read** a value, a field or a status. You **pass** a
@@ -225,9 +236,13 @@ pressure. Every rule below follows from that.
 - Nothing "carries" a value. A screen, field or badge "shows" or
   "displays" one; a record or a response "holds" or "has" one.
 - When the product's own word for a thing differs from the word the
-  rest of the docs set uses, **the word on screen wins**, because the
-  reader is looking at the screen while they read. Change the sibling
-  pages rather than the page describing the screen.
+  documentation uses, the answer depends on what the word is doing.
+  **Anything the reader must find, match or click is quoted from the
+  screen exactly**: a button label, a field name, a status value, an
+  error message. **Descriptive prose uses the formal term**, even when
+  the interface uses an abbreviation or a casual one. A size chip
+  reading "2 GB RAM" is described as memory, and the reader still finds
+  the chip because the chip's own words are quoted where they matter.
 - A setting "sets" or "determines" a value. It does not "fix" one,
   which reads as a bug fix. "Fixed" is not the word for immutable.
 - "Unknown", never "unmeasured" or "not recorded here". The reader does
@@ -359,12 +374,50 @@ spaces.
   their own pull request, so a reviewer can tell a technical change
   from a preference.
 
+## No internal history, and no internal names
+
+A page carries no trace of how it was made or who made it.
+
+- No issue or pull-request numbers, no ticket ids, no commit hashes, no
+  dates, no "measured on", no attempt counts, no tenant, profile,
+  fixture or colleague names, no internal service names, no source-code
+  symbols, and no build or test names offered as proof of a claim.
+  Write "the platform" or "the API".
+- No archaeology. "Previously", "used to", "an earlier version", "we
+  decided", "shipped in", "since version N", "as of". State current
+  behaviour in the present tense with no citation.
+- A statement of current state is not history. "The repository is
+  internal" stays true until it is not, and stays in the text.
+- **Evidence lives outside the page**, in the pull request. Never leave
+  an HTML comment carrying a source in a page a customer reads.
+- **Never name a competitor or another vendor's database service.**
+  Third-party tools the reader actually uses, such as psql, pgAdmin, an
+  ORM or an IDE, are fine. A page describing a migration may name the
+  service it migrates from, on that page only.
+- A changelog entry describes the product, never the work. What the
+  reader gets, never what was swept, counted or removed.
+
 ## Never invent
 
 - Every command and flag exists in the generated reference. Every
   behavioural claim traces to a live capture, a spec field, the
   product's own source, or an existing gated page. A claim with no
   source stays out, and what is true goes in its place.
+- **Keep the consequence, drop the mechanism.** The reader is told what
+  they can do and see, never how the platform does it. "Rotating the
+  credential for the app role restarts AI services" is the right weight.
+  Not the container, not the startup sequence, not which process read
+  what.
+- **No list of cases that will age.** "A restore, resize, service change
+  or credential rotation" becomes "a modification". A list like that is
+  wrong the day the fifth case ships.
+- **No scope creep.** A field, a badge or a section explains itself and
+  not a neighbouring feature. Sizing rules belong in the resize flow,
+  not on a storage panel.
+- **A number stays in prose only when the reader acts on it.** "About
+  ten seconds" earns its place. "Twenty-one of twenty-one attempts" does
+  not. Link to the one page that owns a number rather than restating it
+  where it will go stale.
 - **A screenshot is not a source.** It is evidence that something
   appeared on screen once, and it goes stale silently. A value that
   exists only at runtime, such as a price the console fetches from a
@@ -386,6 +439,42 @@ spaces.
   sentence. Dates, sample counts, fixture names and the words
   "measured", "polled" and "probe" live in the pull request, not on the
   page.
+
+## In-app copy
+
+Tooltips, help icons, confirm dialogs and empty states are documentation
+too, written to a tighter budget.
+
+- **Define the thing the copy sits on, in plain words, and stop.** One
+  sentence is the norm and two is the ceiling. "Active database
+  connections out of maximum allotted" is the model answer.
+- **If the label already says it, write nothing.** A badge reading
+  "Running" needs no tooltip explaining that it is running. "None" is a
+  valid answer. The test: does the text say something the label and the
+  value do not.
+- **No timing or transition claims.** Not "about ten seconds", not "the
+  old password may still work". The status change is the signal. A docs
+  page may give a duration where the reader needs one to act. In-app
+  copy never does.
+- **A failed state names the one action available.** Nothing about
+  bookkeeping.
+- **A confirm dialog states the action and the one consequence the user
+  must know.** Not the timing, not what reads what at startup.
+- **When one sentence is not enough, keep the one sentence and link.**
+  The link goes to the page that owns the detail.
+- Buttons carry no hover tooltip. The explanation sits in a help icon
+  beside the control. An icon-only button keeps its short hover label,
+  which is its accessible name and not an explanation.
+
+## Repository mechanics
+
+- **Never edit inside a generated block.** Change the command or the
+  source the block is generated from, then regenerate. Text typed
+  between generated markers is overwritten.
+- A new page gets its navigation entry and its changelog entry in the
+  same change that adds it.
+- Run the documentation gates before opening a pull request: the test
+  suite, the prose linter, and the reference drift check.
 
 ## Reviews
 
@@ -411,3 +500,7 @@ even on a small change.
 - [agent-pages.md](agent-pages.md) carries the divergences for pages
   read by agents rather than people: the CLI's embedded `llms` pages
   and the shipped skills.
+- [product-vocabulary.md](product-vocabulary.md) carries the settled
+  product wording: how backups are described, what Managed does and
+  does not offer, and the boundary between the Cloud and Enterprise
+  stories.

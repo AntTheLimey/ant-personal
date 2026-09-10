@@ -84,9 +84,9 @@ word, without checking the field is real.
 failure. Redirect to a file, check the status, then process the file.
 Gates enforce this across every reference page and every skill.
 
-## Where the rest lives
+## Generated blocks
 
-The generated command blocks in these pages are produced from the cobra
-tree and are not editable by hand. The build gates, the marker syntax
-and the regeneration command are repository mechanics, and they live in
-the repository's own `CLAUDE.md` and `CONSUMER-DOCS-RULES.md`.
+The command blocks in these pages are generated from the command tree
+and are not editable by hand. Change the command, then regenerate.
+Anything typed between the generated markers is overwritten on the next
+build.

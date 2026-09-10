@@ -73,7 +73,9 @@ it.
 
 Run all seven before writing a sentence, and again before opening a
 pull request. Each is a question with a failing answer, not a
-preference.
+preference. Passing all seven is not done: a page passes this list and
+still fails a reader who does not already know it, so the cold read
+under "Reviews" is the last gate and you run it yourself.
 
 **1. Can the reader do every action exactly as described?** On a
 command-line page, a command needs its full prefix, a placeholder for
@@ -746,9 +748,13 @@ too, written to a tighter budget.
 
 Every documentation change gets two reviews and one fix round. Both are
 performed by someone other than the writer, after the draft exists. A
-writer cannot be their own cold reader, so a single drafting pass is
-never expected to satisfy this section: what the writer owes it is the
-claim-to-source list.
+writer cannot be their own cold reader, because you cannot un-know the
+page you just wrote.
+
+**Run the cold read yourself before calling the page done.** Do not
+hand it back as a recommendation and do not wait to be asked. Dispatch
+a fresh agent that has none of your context and give it the page and
+nothing else.
 
 The correctness reviewer checks every claim against its source. The
 writer supplies a claim-to-source list so the reviewer verifies claims
@@ -772,6 +778,30 @@ reader with no context skips the step and tells you they skipped it.
 Ask the cold reader for what they had to guess and what they would have
 done wrong, not for whether the page reads well. A page can read well
 and still be executed in the wrong order.
+
+### The cold-read dispatch
+
+Give the agent the page's path and nothing else. No repository access,
+no web search, no skill files, no explanation of the product. Tell it:
+
+> You are a cold reader. You have never seen this product. Read only
+> this file. Whatever it does not tell you, you do not know. You are a
+> competent engineer handed this page and told to do what it describes.
+> Report: could you complete the task, and if not, the first sentence
+> at which you were stuck. Every place you had to guess, quoting the
+> sentence and naming the readings. Every question the page raises and
+> does not answer. Anything you would have done wrong, and what the
+> consequence would have been. What the page does well. Judge only what
+> is on the page. If you find yourself reasoning "it presumably works
+> like X", record that as a guess instead.
+
+The fourth answer is the one that matters. "I would have skipped that
+step because it reads as ceremony" is a defect report, and no other
+review produces it.
+
+**Fix what it found, then say what it found.** A cold read reported and
+not acted on is worse than none, because the page now ships with the
+defect and a record that you knew.
 
 ## Further reading
 

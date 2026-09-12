@@ -474,6 +474,29 @@ pressure. Every rule below follows from that.
 - Banned outright: leverage, utilize, ensure, seamless, best-in-class,
   synergy, paradigm shift, stakeholder alignment.
 
+### Constructions that read as a machine
+
+Word lists catch "leverage" and "seamless". They do not catch a shape
+repeated until it has a rhythm, and shapes survive across model
+generations after the vocabulary tells have gone. Read a draft once
+looking only at structure.
+
+- **Negative parallelism.** "No adapter, no driver patch and no extra
+  package." Three negations in a row sound authoritative and assert
+  something nobody checked: that page's promise was false for JDBC,
+  and the page covered no JVM framework, so it never met the case
+  that disproved it. **Say what is true, not a list of what is
+  absent.**
+- **The same skeleton twice running.** Two consecutive sentences or
+  paragraphs built on one frame, most often "not X, but Y" or a
+  labelling construction reused.
+- **Uniform sentence length.** A page where every sentence is the same
+  size reads as generated even when each is good. Vary it.
+- **Accumulation.** Words that are fine once and a tic at three. Count
+  them after drafting: "actually", "critical", "matters", "exactly",
+  "rather than", "at scale". More than two of any one on a page is too
+  many.
+
 ## Punctuation
 
 - No em-dashes. Use a comma, a period or parentheses.

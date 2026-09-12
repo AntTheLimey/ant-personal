@@ -512,6 +512,55 @@ feel about what follows, or restates the heading it sits under.
 No forward-looking text. Not "yet", "coming", "planned", "soon", or
 "today" used as a temporal hedge. Describe what is.
 
+## Ask what your sources are, before you gather anything
+
+Your reader is a constant: a competent developer who does not know
+this product. They need no account of SQL, HTTP, cron or their own
+framework, and they need every term that belongs to us.
+
+What varies from page to page is **where the truth lives**, and that
+decides both what you can write and what shape the page takes. Ask
+before you gather, because a source you were never given is a fact you
+will never have, and nothing downstream recovers it.
+
+Four things to settle, and they are the only questions worth spending
+the requester's attention on:
+
+- **Which codebases may I read?** Ours is rarely all of them. A page
+  about using this product from someone else's framework is mostly
+  facts about that framework, and reading our source produces none of
+  them.
+- **What should I compare this against?** Name it if a structure was
+  borrowed from somewhere. A shape we took and never wrote down is one
+  a fresh writer can neither reproduce nor question.
+- **May I create, run and tear down real resources to verify
+  behaviour?** Where the answer is no, say so on the artifact, so that
+  an unmeasured claim is visible rather than silently absorbed.
+- **Where are the measurements?** A measurement recorded outside the
+  probe-log directory is a measurement lost. If probe logs exist, get
+  their path; if a measurement was taken and never written down, say
+  so rather than treating it as known.
+
+Everything else, look up. **A skill that asks what it could have
+discovered spends the one thing the requester has least of.**
+
+### Where to look
+
+- **The generated command reference.** Produced from the command tree,
+  so it cannot drift from the binary. Truth for verbs, flags,
+  defaults and help text. In pgedge-cli that is `docs/reference/`.
+- **`pgedge llms`** for the agent reference: the index first, then the
+  module.
+- **The product's own code.** Read it for the order of operations,
+  what is validated locally, and which exit status each failure takes.
+- **The vendored specs**, remembering they are what the platform says
+  about itself.
+- **The probe logs**, which are what someone watched it do.
+
+When two disagree, the stronger one is the source of truth: a
+measurement beats a spec, a generated reference cannot be wrong
+about a flag, and a sibling page settles nothing.
+
 ## The shape of the page
 
 ### Ask which job this is before you start

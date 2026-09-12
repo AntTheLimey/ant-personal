@@ -191,6 +191,12 @@ step is allowed to be more than one line.
   intact, and your own prose around it still uses the settled word.
   Quote it or paraphrase it outside quotation marks. Never correct it.
 
+**Checking the caps.** Do not read for them. Run `./signals.py`, which
+reports how many sentences exceed 25 words, and fix those. A page with
+none over 25 has almost certainly cleared the caps; a page with more
+than a handful has a structural problem rather than a sentence
+problem.
+
 ## Reading signals
 
 Run `./signals.py <page>` before finishing and report what it says. It
@@ -682,6 +688,11 @@ Order a page by what the reader is doing, in the order they do it:
 4. The things that go wrong, after the thing that goes right.
 5. Where to go next.
 
+**A troubleshooting entry is three things in one order**: what the
+reader sees, what causes it, what to do. Name the entry for what they
+saw, not for the cause, because the symptom is all they have when they
+arrive. One `###` per entry so each is linkable.
+
 Reference material the task leans on goes into its own section, placed
 after the first step that needs it. A conceptual model the reader must
 hold before step one goes into the opening as terms, one sentence each,
@@ -835,6 +846,12 @@ heading rather than to a bullet.
   never composed by hand and never tidied up afterwards. This rule is
   about output blocks. It says nothing about screenshots, which are a
   product decision and not a style one.
+
+**A README is a page.** The sentence rules, the word rules and the
+79-character wrap all apply. What does not apply is the page-opening
+shape: a README opens with what the thing is and how to install it,
+not with what the reader will be able to do. It carries no linked
+section index unless it runs past a screen.
 
 ## Editing text that already exists
 
@@ -1046,6 +1063,19 @@ too, written to a tighter budget.
 - Run the documentation gates before opening a pull request: the test
   suite, the prose linter, and the reference drift check.
 
+Guides live under `docs/` in a directory per edition, and a page whose
+commands name one edition belongs in that edition's directory rather
+than at the root. Root-level markdown is UPPERCASE; everything under
+`docs/` is lowercase. Add the nav entry in the same change as the
+page, never after.
+
+**Every link is checked before the page ships.** A cross-reference to
+a page that moved is a defect of the same rank as a wrong fact,
+because the reader ends up somewhere that no longer answers them. Link
+by relative path, use the target's own title as the link text, and
+open the target to confirm it says what you are sending the reader
+there for.
+
 ## Two artifacts, and the old page is not one of them
 
 A **fact set** is discovered from source: the generated reference, the
@@ -1151,9 +1181,13 @@ hand it back as a recommendation and do not wait to be asked. Dispatch
 a fresh agent that has none of your context and give it the page and
 nothing else.
 
-The correctness reviewer checks every claim against its source. The
-writer supplies a claim-to-source list so the reviewer verifies claims
-rather than rediscovering them.
+The correctness reviewer checks every claim against its source.
+
+**The claim-to-source list** is a flat list, one line per factual
+claim on the page, each naming the file and line that settles it.
+Send it with the draft so the reviewer verifies rather than
+rediscovers. A claim you cannot put a source beside does not go on the
+page.
 
 The cold-read reviewer gets no repository context at all, only the page
 and the pages it links to. They read as the customer and report where

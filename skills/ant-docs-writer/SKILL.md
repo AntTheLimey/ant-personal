@@ -565,7 +565,7 @@ about a flag, and a sibling page settles nothing.
 
 ### Ask which job this is before you start
 
-Three jobs wear the same words, and they produce different pull
+Four jobs wear the same words, and they produce different pull
 requests. Decide which one you are doing, and where the request does
 not say, **ask the person who asked you** before writing anything.
 
@@ -576,6 +576,11 @@ not say, **ask the person who asked you** before writing anything.
   Sentences, words, headings and formatting are in scope. The order of
   the sections is not.
 - An **overhaul** rewrites the page, its shape included.
+- A **new page** has nothing to inherit. There is no page to improve
+  and no ledger of one, so the facts come from source and the shape
+  comes from them. This is the commonest request the skill gets and
+  the easiest to under-scope: "write a page about X" is a new page,
+  not an overhaul of a page that does not exist.
 
 The request usually names the job: "correct the timing claim" is a fix,
 "bring this page into style" is an edit, "rewrite this page" is an
@@ -584,7 +589,10 @@ wanted corrected buries a one-line change in a diff nobody can review,
 and guessing edit on a page someone wanted rebuilt returns the same
 badly organised page with better sentences.
 
-The rest of this section is for an overhaul.
+The rest of this section is for an overhaul or a new page. The
+difference between those two is only where the facts come from: an
+overhaul has a ledger of the old page's coverage as well as a fact
+set, and a new page has the fact set alone.
 
 ### The reader wants the least that works
 
@@ -652,6 +660,19 @@ destructive action printed before the step that makes it survivable.
 That is reader safety, rank 1, and it outranks the scope of the job.
 Move it, and say in the pull request why the diff is larger than the
 request.
+
+**On a new page the shape is the whole risk.** There is no prior
+structure to inherit and no reviewer comparing against one, so a
+badly indexed page ships looking finished. Two things guard it: the
+source-of-truth question above, because a page can only be indexed on
+facts you were able to gather; and showing the heading tree before
+writing a word of prose, so the shape is arguable while it is still
+cheap to change.
+
+**Write the heading tree down first**, one line per heading saying
+what that heading establishes for the reader. Where the finished page
+ends up differently shaped, say so rather than quietly revising the
+tree to match.
 
 ## How a page opens
 

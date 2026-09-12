@@ -919,6 +919,99 @@ too, written to a tighter budget.
 - Run the documentation gates before opening a pull request: the test
   suite, the prose linter, and the reference drift check.
 
+## Two artifacts, and the old page is not one of them
+
+A **fact set** is discovered from source: the generated reference, the
+product's own code, the vendored specs, the probe logs. It feeds
+shaping and writing, and it exists on every job including one with no
+old page at all.
+
+A **ledger** is extracted from the page you are replacing. It is a
+record of what that page covered. It is never a record of what is
+true.
+
+Different provenance, different trust. Keep them apart, and never let
+an entry cross from one to the other without being settled against
+source first.
+
+### The writer never reads the old page
+
+Not once, not for reference, not to check a heading. Read the ledger
+instead. A writer that has read the page reproduces its phrasing from
+memory without meaning to, and its ordering along with it.
+
+Name the excluded file as a path to filter out of every glob, not
+only as a file not to open. `docs/managed/*.md` contains it and so
+does any recursive grep. A prohibition on opening a file does not
+survive a wildcard: two writers in one run were exposed exactly that
+way.
+
+### Entry form
+
+Three lines, fragments, nothing liftable as prose:
+
+    F<n>. <note, under about 15 words>
+          src: <file:line that verifies it>
+          st: V|U|C|S
+
+`V` verified against source. `U` unsourced, asserted by the page
+alone. `C` contradicted by source. `S` stale.
+
+**`V` means verified against something that is not a hand-written
+page.** The generated reference is exempt, because it is produced from
+the command tree and cannot drift from the binary. A sibling docs page
+is the weakest authority there is: a false sentence in one reached a
+ledger, a writer and a finished page, and the same claim was still
+live two review rounds later.
+
+**A spec description that a measurement contradicts is `C`, not `V`.**
+A measurement outranks upstream documentation. A vendored spec is what
+the platform says about itself, and it has been wrong.
+
+**Write every entry as the situation, never as the missing thing.** An
+entry framed as an absence reaches the page as an absence, and no gate
+can see it: `F119. No delete verb exists` became "No command deletes a
+backup" on a finished page, and the two share no words. Write what the
+reader does instead.
+
+### Sort it, and say so
+
+Group by topic, then sort alphabetically — headings, and entries
+within each heading. Number from F1 in the sorted order. Ordering
+leaks separately from phrasing, so a ledger in page order hands the
+writer the page's structure back.
+
+Tell the writer in as many words that the order carries no editorial
+judgement and must not be followed.
+
+### The gates, and when each runs
+
+Run all three before calling a page done, and report the numbers.
+
+    ./check-sources.py <ledger>
+
+After the ledger is built, before the writer sees it. Fails a `V`
+entry that cites only a hand-written page.
+
+    ./check-ledger.py <old page> <new page>
+    ./check-ledger.py <ledger> <new page>
+
+After the draft exists, at `--n 5` and again at `--n 4`. The first
+catches phrasing that reached the page through the ledger. The second
+catches phrasing invented in the brief, which is a channel nobody was
+measuring until a finished page shared eleven sequences with its own
+brief.
+
+A shared sequence is re-expressed, never padded around. A phrase that
+is vocabulary already shipped in a sibling page stays: consistency
+beats novelty there.
+
+    ./signals.py <new page>
+
+See "Reading signals".
+
+**Counts are signals, not scores.**
+
 ## Reviews
 
 Every documentation change gets two reviews and one fix round. Both are

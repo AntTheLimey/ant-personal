@@ -50,9 +50,13 @@ it.
    on from this page, such as "one of five operations that need this
    status": the condition is the claim and it stays, the tally is not
    and it goes. A count nobody acts on is a maintenance liability that
-   is wrong the day the sixth case ships. It also outranks "keep the
-   consequence, drop the mechanism", which applies only where the
-   mechanism is not itself the only statement of a behaviour.
+   is wrong the day the sixth case ships. The second exception is the
+   same principle widened: a claim the reader cannot act on at all,
+   which "Say less, or say nothing" sorts and deletes. Product truth
+   protects a fact the reader acts on, not every true sentence. It also
+   outranks "keep the consequence, drop the mechanism", which applies
+   only where the mechanism is not itself the only statement of a
+   behaviour.
 4. **House style.** Every other rule in this file. Two house-style
    rules can still collide, so three tie-breaks settle the pairs that
    keep recurring:
@@ -826,6 +830,59 @@ A page carries no trace of how it was made or who made it.
   "measured", "polled" and "probe" live in the pull request, not on the
   page.
 
+## Say less, or say nothing
+
+Every sentence sorts into one of two outcomes, and the sort happens
+before any rewording.
+
+**Would the reader act wrong without this fact?**
+
+- **No. Delete the sentence.** Not shorten it. It is true and it is
+  gone.
+- **Yes. Keep the fact and cut everything propping it up.** One
+  sentence, naming what the product does and what the reader sees.
+
+### Sorting to delete
+
+- **They would have assumed it.** People assume an API validates its
+  own values, that a command they cannot find does not exist, that a
+  resource is not usable before it is ready. Confirming an assumption
+  spends attention and returns nothing.
+- **It is a reason for behaviour the page already states.**
+- **The page already carries it.**
+
+### Sorting to rewrite
+
+The fact stays. Everything holding it up goes.
+
+- **The product is the subject, never the documentation.** "byoc
+  publishes no version enum, so `--pg-version 99` is the API's to
+  refuse" becomes "The API refuses unavailable pg versions."
+- **State what the reader sees, not what causes it.** "A database still
+  being created has no host yet, and the command exits 1" becomes "The
+  CLI exits 1 until the database finishes creating."
+- **Cut the "so" clause.** A sentence that explains itself is two
+  sentences, and the second is usually the one to drop.
+- One sentence. Then stop.
+
+### An absence
+
+"The API publishes no list of values for status". "This CLI has no
+command that deletes a backup". "backup create has no --wait, and
+neither has backup get". "There is no cluster to build, no nodes to
+place and no cloud account to attach".
+
+These sort to delete: nobody was looking for the thing. They also
+cannot be checked by anything, so they rot one feature at a time while
+every gate stays green.
+
+Where a reader would genuinely reach for the missing thing, the
+replacement says what to do instead, never what is missing more
+briefly.
+
+A section built entirely of negatives, "what this does not offer", is
+the same failure at section scale.
+
 ## In-app copy
 
 Tooltips, help icons, confirm dialogs and empty states are documentation
@@ -882,6 +939,29 @@ The cold-read reviewer gets no repository context at all, only the page
 and the pages it links to. They read as the customer and report where
 they got lost, what they could not type, and what they would search the
 web for instead.
+
+### A reviewer owns facts, the writer owns the page
+
+**A wrong fact is the only thing a review can compel.** Where a claim
+does not match its source, it is corrected, no argument. Even then the
+reviewer does not get to write the correction: the writer decides how
+the right fact reaches the reader, and may find the whole sentence was
+not worth keeping.
+
+**Everything else a review says is a suggestion.** What goes in, what
+stays out, what order it runs in, how it is worded, whether a caveat
+earns its line. The writer takes what improves the page and refuses the
+rest, naming the reason in the report.
+
+Refusing is normal and often right. A review reads a page closely, one
+finding at a time, which is the reading that makes every omission look
+like a gap. Taking all of them is how a page fills back up with the
+fluff the last pass removed. "The reader cannot act differently on
+this" and "this belongs to the page I link to" are complete reasons.
+
+A second review round happens only when the first found a wrong fact or
+a defect in the work itself. A round spent on suggestions is a round
+spent making the page longer.
 
 The two find different defects and neither finds the other's. Run both,
 even on a small change.

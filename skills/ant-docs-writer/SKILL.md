@@ -191,6 +191,40 @@ step is allowed to be more than one line.
   intact, and your own prose around it still uses the settled word.
   Quote it or paraphrase it outside quotation marks. Never correct it.
 
+## Reading signals
+
+Run `./signals.py <page>` before finishing and report what it says. It
+measures prose only: fenced code, indented blocks, tables and headings
+are stripped first, because a docs page is mostly not prose and
+counting the commands makes the number meaningless.
+
+**Reading ease has a floor of 58.** Everything overhauled through this
+skill sits at 61 to 62 without anyone aiming for it; everything
+nobody has touched sits below the band. The floor catches the page
+that is drifting, not the page that is trying.
+
+**Flesch-Kincaid grade has a ceiling of 8.0.** On pages like these the
+vocabulary is fixed by the product and syllable density barely moves,
+so the grade is close to a restatement of mean sentence length: 8.0
+means a mean sentence of about 13 to 15 words.
+
+**The ceiling is a target for the prose and never a licence to drop a
+clause.** The cheap way to a short sentence is to cut the clause
+carrying the condition, and that makes a worse page than missing the
+ceiling by a grade. Where a fact needs a long sentence, split the
+sentence, not the fact.
+
+**And watch the connectives.** Measured cost of reaching the ceiling,
+on the one page where it was tested: two places where "because" had
+been cut and the reader had to reconstruct why one sentence followed
+from the other. A sentence pair that leans on an unstated causal link
+is a sentence pair that should have kept its connective and paid the
+grade.
+
+The pipeline reaches about grade 8 on its own. Treat the ceiling as a
+tripwire that catches the page that did not, rather than as the thing
+that makes a page readable.
+
 ## Steps and procedures
 
 - Write a step in the imperative. Not "the test can be continued", but

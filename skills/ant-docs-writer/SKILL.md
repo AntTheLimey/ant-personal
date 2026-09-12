@@ -24,6 +24,13 @@ checklist, the settled product vocabulary and the repository mechanics
 a writer needs, so there is no second rules file to open and no way for
 two documents to drift apart into contradicting each other.
 
+**Three gate scripts ship beside this file**: `signals.py`,
+`check-ledger.py` and `check-sources.py`. Your working directory is the
+documentation repository, not the skill directory, so invoke each by
+its path. Below, `<skill>/` stands for the directory this file is in.
+The scripts are executable and carry a shebang, so the path alone runs
+one.
+
 ## When two rules conflict
 
 Every rule here is an absolute, and two absolutes can still point
@@ -191,21 +198,21 @@ step is allowed to be more than one line.
   intact, and your own prose around it still uses the settled word.
   Quote it or paraphrase it outside quotation marks. Never correct it.
 
-**Checking the caps.** Do not read for them. Run `./signals.py`, which
-reports how many sentences exceed 25 words, and fix those. A page with
-none over 25 has almost certainly cleared the caps; a page with more
-than a handful has a structural problem rather than a sentence
+**Checking the caps.** Do not read for them. Run `<skill>/signals.py`,
+which reports how many sentences exceed 25 words, and fix those. A page
+with none over 25 has almost certainly cleared the caps. A page with
+more than a handful has a structural problem rather than a sentence
 problem.
 
 ## Reading signals
 
-Run `./signals.py <page>` before finishing and report what it says. It
-measures prose only: fenced code, indented blocks, tables and headings
-are stripped first, because a docs page is mostly not prose and
-counting the commands makes the number meaningless.
+Run `<skill>/signals.py <page>` before finishing and report what it
+says. It measures prose only: fenced code, indented blocks, tables and
+headings are stripped first, because a docs page is mostly not prose
+and counting the commands makes the number meaningless.
 
 **Reading ease has a floor of 58.** Everything overhauled through this
-skill sits at 61 to 62 without anyone aiming for it; everything
+skill sits at 61 to 62 without anyone aiming for it. Everything
 nobody has touched sits below the band. The floor catches the page
 that is drifting, not the page that is trying.
 
@@ -220,7 +227,7 @@ carrying the condition, and that makes a worse page than missing the
 ceiling by a grade. Where a fact needs a long sentence, split the
 sentence, not the fact.
 
-**And watch the connectives.** Measured cost of reaching the ceiling,
+**Watch the connectives.** Measured cost of reaching the ceiling,
 on the one page where it was tested: two places where "because" had
 been cut and the reader had to reconstruct why one sentence followed
 from the other. A sentence pair that leans on an unstated causal link
@@ -601,7 +608,7 @@ the requester's attention on:
   an unmeasured claim is visible rather than silently absorbed.
 - **Where are the measurements?** A measurement recorded outside the
   probe-log directory is a measurement lost. If probe logs exist, get
-  their path; if a measurement was taken and never written down, say
+  their path. If a measurement was taken and never written down, say
   so rather than treating it as known.
 
 Everything else, look up. **A skill that asks what it could have
@@ -640,10 +647,12 @@ not say, **ask the person who asked you** before writing anything.
   the sections is not.
 - An **overhaul** rewrites the page, its shape included.
 - A **new page** has nothing to inherit. There is no page to improve
-  and no ledger of one, so the facts come from source and the shape
-  comes from them. This is the commonest request the skill gets and
-  the easiest to under-scope: "write a page about X" is a new page,
-  not an overhaul of a page that does not exist.
+  and no ledger of one (the ledger and the fact set are defined under
+  "Two artifacts, and the old page is not one of them"), so the facts
+  come from source and the shape comes from them. This is the commonest
+  request the skill gets and the easiest to under-scope: "write a page
+  about X" is a new page, not an overhaul of a page that does not
+  exist.
 
 The request usually names the job: "correct the timing claim" is a fix,
 "bring this page into style" is an edit, "rewrite this page" is an
@@ -655,7 +664,10 @@ badly organised page with better sentences.
 The rest of this section is for an overhaul or a new page. The
 difference between those two is only where the facts come from: an
 overhaul has a ledger of the old page's coverage as well as a fact
-set, and a new page has the fact set alone.
+set, and a new page has the fact set alone. The writer never reads the
+old page, a rule with its own heading below, so the ledger is the only
+account of it you get. Where the rest of this section says ledger, a
+new page has none.
 
 ### The reader wants the least that works
 
@@ -665,9 +677,9 @@ returns a longer page has usually failed**, whatever else it fixed,
 because the reader now hunts for the same instruction through more
 text.
 
-Measure it. Where the rewrite is longer than the source, name what the
-extra words bought: a missing step, a hazard, a definition the reader
-could not do without. Length that bought nothing comes out. The
+Measure it. Where the rewrite runs past what the ledger covers, name
+what the extra words bought: a missing step, a hazard, a definition the
+reader could not do without. Length that bought nothing comes out. The
 commonest sources of it are a warning restated as a command, a
 mechanism explained where a consequence would do, and a caveat written
 three times because it felt important each time.
@@ -700,10 +712,10 @@ never as a section of its own at the top of the page.
 
 **The commonest defect is a page ordered by the product's internals.**
 It opens with a taxonomy of what exists, explains the model, and
-reaches the reader's task somewhere in the middle. Read the source
-page and ask what the reader came to do. If the answer appears below
-the halfway mark, the page is upside down and reordering it is the
-main work.
+reaches the reader's task somewhere in the middle. Ask what the reader
+came to do, and find it in the shape you are planning. Where it sits
+below the halfway mark, the page is upside down and reordering it is
+the main work.
 
 Two orderings are wrong however good the prose:
 
@@ -712,9 +724,9 @@ Two orderings are wrong however good the prose:
 - A definition placed after the sentence that leans on it. Checklist
   item 4.
 
-Where the source's order is already the reader's order, keep it. Say
-in the pull request that you checked, so a reviewer knows the shape
-was a decision rather than an inheritance.
+The ledger carries no order, so the shape is always yours to decide.
+Say in the pull request how you decided it, so a reviewer knows the
+shape was a decision rather than an inheritance.
 
 **Placing a step first does not stop a reader skipping it.** A cold
 reader given a page whose first procedure existed solely to prevent an
@@ -1065,7 +1077,7 @@ too, written to a tighter budget.
 
 Guides live under `docs/` in a directory per edition, and a page whose
 commands name one edition belongs in that edition's directory rather
-than at the root. Root-level markdown is UPPERCASE; everything under
+than at the root. Root-level markdown is UPPERCASE. Everything under
 `docs/` is lowercase. Add the nav entry in the same change as the
 page, never after.
 
@@ -1133,7 +1145,7 @@ reader does instead.
 
 ### Sort it, and say so
 
-Group by topic, then sort alphabetically — headings, and entries
+Group by topic. Sort the headings alphabetically, and the entries
 within each heading. Number from F1 in the sorted order. Ordering
 leaks separately from phrasing, so a ledger in page order hands the
 writer the page's structure back.
@@ -1145,25 +1157,26 @@ judgement and must not be followed.
 
 Run all three before calling a page done, and report the numbers.
 
-    ./check-sources.py <ledger>
+    <skill>/check-sources.py <ledger>
 
 After the ledger is built, before the writer sees it. Fails a `V`
 entry that cites only a hand-written page.
 
-    ./check-ledger.py <old page> <new page>
-    ./check-ledger.py <ledger> <new page>
+    <skill>/check-ledger.py <old page> <new page>
+    <skill>/check-ledger.py <ledger> <new page>
 
-After the draft exists, at `--n 5` and again at `--n 4`. The first
-catches phrasing that reached the page through the ledger. The second
-catches phrasing invented in the brief, which is a channel nobody was
-measuring until a finished page shared eleven sequences with its own
-brief.
+This is the phrase gate, which is the name `check-sources.py` uses for
+it. It runs after the draft exists, at `--n 5` and again at `--n 4`.
+The first catches phrasing that reached the page through the ledger.
+The second catches phrasing invented in the brief, which is a channel
+nobody was measuring until a finished page shared eleven sequences with
+its own brief.
 
 A shared sequence is re-expressed, never padded around. A phrase that
 is vocabulary already shipped in a sibling page stays: consistency
 beats novelty there.
 
-    ./signals.py <new page>
+    <skill>/signals.py <new page>
 
 See "Reading signals".
 
@@ -1264,6 +1277,5 @@ defect and a record that you knew.
   read by agents rather than people: the CLI's embedded `llms` pages
   and the shipped skills.
 - [product-vocabulary.md](product-vocabulary.md) carries the settled
-  product wording: how backups are described, what Managed does and
-  does not offer, and the boundary between the Cloud and Enterprise
-  stories.
+  product wording: how backups are described, the limits of Managed,
+  and the boundary between the Cloud and Enterprise stories.

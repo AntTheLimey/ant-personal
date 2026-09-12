@@ -28,9 +28,10 @@ The two are separate stories and never appear in one page.
 
 The Control Plane does not appear in Managed copy at all.
 
-## What Managed does not offer
+## The limits of Managed
 
-Say so plainly rather than inventing a workaround.
+Where a reader reaches for one of these, say plainly what to do
+instead, and never invent a workaround.
 
 - The platform publishes no certificate authority through the CLI or
   the API. Connections are encrypted at `sslmode=require`, which does

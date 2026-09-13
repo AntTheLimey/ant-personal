@@ -8,8 +8,12 @@ scoring. A docs page is mostly not prose, and counting the commands
 makes the number meaningless.
 
 Reports Flesch reading ease, Flesch-Kincaid grade, mean sentence
-length, and syllable density. The ease floor in use is 58; the grade
-ceiling under test is 8.0.
+length, and syllable density, then a verdict line per bound. The ease
+floor in use is 58 and the grade ceiling is 8.0.
+
+Exit 0 when every page meets both bounds, 1 otherwise. The verdict is
+taken on the value as printed, to one decimal, so the number a reader
+sees and the verdict beside it can never disagree.
 """
 
 import pathlib
@@ -17,6 +21,8 @@ import re
 import sys
 
 VOWELS = "aeiouy"
+EASE_FLOOR = 58.0
+GRADE_CEILING = 8.0
 
 
 def prose(text):
@@ -69,22 +75,61 @@ def measure(text):
     }
 
 
+def verdicts(m):
+    ease, grade = round(m["ease"], 1), round(m["grade"], 1)
+    return [
+        (ease >= EASE_FLOOR,
+         f"reading ease {ease:.1f}, floor {EASE_FLOOR:.0f}"),
+        (grade <= GRADE_CEILING,
+         f"grade {grade:.1f}, ceiling {GRADE_CEILING:.1f}"),
+    ]
+
+
 def main(argv):
     if not argv:
         print(__doc__)
         return 2
     print(f"{'page':<44} {'words':>6} {'sent':>5} {'w/s':>6} "
           f"{'syl/w':>6} {'ease':>6} {'grade':>6} {'>25w':>5}")
+    measured = []
     for arg in argv:
         p = pathlib.Path(arg)
         m = measure(p.read_text())
+        measured.append((p, m))
         if m is None:
             print(f"{p.name:<44} {'no prose':>6}")
             continue
         print(f"{p.name:<44} {m['words']:>6} {m['sentences']:>5} "
               f"{m['wps']:>6.1f} {m['spw']:>6.3f} {m['ease']:>6.1f} "
               f"{m['grade']:>6.1f} {m['over25']:>5}")
-    return 0
+
+    print()
+    crossed, grade_crossed = 0, False
+    for p, m in measured:
+        if m is None:
+            crossed += 1
+            print(f"{p.name:<44} FAIL  no prose, so neither bound "
+                  f"was checked")
+            continue
+        for i, (met, text) in enumerate(verdicts(m)):
+            print(f"{p.name:<44} {'PASS' if met else 'FAIL'}  {text}")
+            if not met:
+                crossed += 1
+                grade_crossed = grade_crossed or i == 1
+
+    print()
+    if not crossed:
+        print(f"PASS — every bound met on {len(measured)} "
+              f"page{'' if len(measured) == 1 else 's'}.")
+        return 0
+
+    print(f"FAIL — {crossed} bound{'' if crossed == 1 else 's'} "
+          f"crossed. Fix the prose and run it again.")
+    if grade_crossed:
+        print("Split the long sentence to come under the grade. Never "
+              "drop the clause\ncarrying the condition: that makes a "
+              "worse page than missing the ceiling.")
+    return 1
 
 
 if __name__ == "__main__":

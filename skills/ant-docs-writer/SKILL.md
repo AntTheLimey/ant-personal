@@ -220,14 +220,17 @@ step cap, so read the steps for that one. Where the number is not zero,
 find the sentences by reading. The script strips code, tables and
 headings before it counts, so read that same prose and nothing else. A
 page with more than a handful over the cap has a structural problem
-rather than a sentence problem.
+rather than a sentence problem. That count is a signal rather than a
+bound, and sets no exit status. Only the two bounds below do.
 
 ## Reading signals
 
 Run `<skill>/signals.py <page>` before finishing and report what it
 says. It measures prose only: fenced code, indented blocks, tables and
 headings are stripped first, because a docs page is mostly not prose
-and counting the commands makes the number meaningless.
+and counting the commands makes the number meaningless. After the
+numbers it prints a verdict line per bound, naming the bound and the
+value it measured, and exits non-zero where one is crossed.
 
 **Reading ease has a floor of 58.** Everything overhauled through this
 skill sits at 61 to 62 without anyone aiming for it. Everything
@@ -1253,8 +1256,9 @@ Run `signals.py` on the draft, on every job:
 
 See "Reading signals".
 
-**A `signals.py` number is a signal, not a score.** The script reports
-and never fails, so no exit status tells you the page is done.
+**A crossed bound fails the run.** The script exits non-zero and marks
+the line `FAIL`, so the rule above applies to it as it does to the
+other two gates.
 
 ## What ships with the draft
 

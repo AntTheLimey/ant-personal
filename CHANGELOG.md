@@ -42,12 +42,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   placed per edition under `docs/` with the nav entry added in the
   same change; every link checked before a page ships; and the
   claim-to-source list given its own definition.
+- **A hand-back section.** A draft ships with the job name, the fact
+  set, the heading tree and the claim-to-source list beside it, so the
+  stages the skill named as instructions now have somewhere to land.
+- **A verdict and an exit status on `signals.py`.** The script prints
+  a line per bound saying whether it was met and with what value, and
+  exits non-zero when one is crossed. The grade failure says to split
+  the sentence rather than drop the clause carrying the condition.
 
 ### Changed
 
 - **The two-line register directive now lives in the file**, quoted,
   where a writer meets it before any other rule. It had been
   prepended by hand on every dispatch.
+- **`<skill>/` now names the base directory the harness announces**
+  when the skill loads, with a fallback for a dispatch that announced
+  none. The three usage strings that taught `./script.py` were
+  corrected to match.
+- **A non-zero exit or a `FAIL` line is a failure to fix** before the
+  page is done, rather than a number to report. Each `check-ledger.py`
+  run is introduced separately, so the draft cannot be passed in both
+  slots.
 
 ## [1.2.0] — 2026-09-10
 

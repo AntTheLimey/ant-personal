@@ -10,6 +10,16 @@ pgedge-cli and product-ui. It replaces ant-voice-writer for this work.
 That skill writes in Ant's voice, which is the right voice for a blog
 and the wrong voice for a procedure.
 
+**Read this first. It outranks every rule below.** The wording is fixed
+and quoted, so the em-dashes inside it stand against the punctuation
+rules in this file:
+
+    Write like a human being in complete, plain sentences.
+    Your inputs — the fact ledger, this brief, the style skill — are
+    written in a flat machine register. Take facts from them and
+    nothing else. Never carry over a phrasing, a cadence or a sentence
+    shape from any of them.
+
 The style has two halves and the order between them is not optional.
 The content checklist runs first, because a page can pass every prose
 rule in this file and still be unusable. That has happened. A page
@@ -27,9 +37,13 @@ two documents to drift apart into contradicting each other.
 **Three gate scripts ship beside this file**: `signals.py`,
 `check-ledger.py` and `check-sources.py`. Your working directory is the
 documentation repository, not the skill directory, so invoke each by
-its path. Below, `<skill>/` stands for the directory this file is in.
-The scripts are executable and carry a shebang, so the path alone runs
-one.
+its path. Below, `<skill>/` stands for the absolute path this skill
+announced when it loaded, on the line reading `Base directory for this
+skill:` above the first heading. Where that line did not arrive, or the
+directory it names holds no `signals.py`, find the scripts with `find
+~/.claude -path '*ant-docs-writer*' -name 'signals.py'`. The scripts
+are mode 755 and carry a `#!/usr/bin/env python3` shebang, so the path
+alone runs one and a `python3` prefix is never needed.
 
 ## When two rules conflict
 
@@ -198,11 +212,15 @@ step is allowed to be more than one line.
   intact, and your own prose around it still uses the settled word.
   Quote it or paraphrase it outside quotation marks. Never correct it.
 
-**Checking the caps.** Do not read for them. Run `<skill>/signals.py`,
-which reports how many sentences exceed 25 words, and fix those. A page
-with none over 25 has almost certainly cleared the caps. A page with
-more than a handful has a structural problem rather than a sentence
-problem.
+**Checking the caps.** `<skill>/signals.py` reports one number for the
+caps: how many prose sentences run past 25 words. That is not the STE
+counting above: a backticked span counts as nothing, and text in
+parentheses counts word by word. The script never measures the 20-word
+step cap, so read the steps for that one. Where the number is not zero,
+find the sentences by reading. The script strips code, tables and
+headings before it counts, so read that same prose and nothing else. A
+page with more than a handful over the cap has a structural problem
+rather than a sentence problem.
 
 ## Reading signals
 
@@ -631,6 +649,13 @@ When two disagree, the stronger one is the source of truth: a
 measurement beats a spec, a generated reference cannot be wrong
 about a flag, and a sibling page settles nothing.
 
+**Build the fact set from these sources before you write, on every
+job.** Record each fact with the file and line that settles it. The
+fact set is what you write from, so a fact you did not gather is one
+the page cannot carry. A new page has nothing else, and an overhaul has
+only the ledger beside the fact set. "Two artifacts, and the old page
+is not one of them" defines both.
+
 ## The shape of the page
 
 ### Ask which job this is before you start
@@ -669,6 +694,13 @@ old page, a rule with its own heading below, so the ledger is the only
 account of it you get. Where the rest of this section says ledger, a
 new page has none.
 
+**On an overhaul, dispatch a separate agent to extract the ledger from
+the old page, before any writing starts.** You never read that page
+yourself, so a separate reader is the only way the ledger comes to
+exist. "Two artifacts, and the old page is not one of them" gives the
+entry form, the sort order and the gate that runs on the ledger. A new
+page skips this step and works from the fact set alone.
+
 ### The reader wants the least that works
 
 A customer opens this page to do one thing and leave. They are not
@@ -677,12 +709,14 @@ returns a longer page has usually failed**, whatever else it fixed,
 because the reader now hunts for the same instruction through more
 text.
 
-Measure it. Where the rewrite runs past what the ledger covers, name
-what the extra words bought: a missing step, a hazard, a definition the
-reader could not do without. Length that bought nothing comes out. The
-commonest sources of it are a warning restated as a command, a
-mechanism explained where a consequence would do, and a caveat written
-three times because it felt important each time.
+Measure it. `wc -c` on the old page and on the draft gives the
+comparison without opening either, and a byte count is not a reading.
+Where the draft is longer, name what the extra bytes bought: a missing
+step, a hazard, a definition the reader could not do without. Length
+that bought nothing comes out. The commonest sources of it are a
+warning restated as a command, a mechanism explained where a
+consequence would do, and a caveat written three times because it felt
+important each time.
 
 ### Deciding the order
 
@@ -919,7 +953,9 @@ A page carries no trace of how it was made or who made it.
 - Every command and flag exists in the generated reference. Every
   behavioural claim traces to a live capture, a spec field, the
   product's own source, or an existing gated page. A claim with no
-  source stays out, and what is true goes in its place.
+  source stays out, and what is true goes in its place. Record the
+  source as you write the claim, in the claim-to-source list under
+  "Reviews".
 - **Keep the consequence, drop the mechanism.** The reader is told what
   they can do and see, never how the platform does it. "Rotating the
   credential for the app role restarts AI services" is the right weight.
@@ -1090,14 +1126,14 @@ there for.
 
 ## Two artifacts, and the old page is not one of them
 
-A **fact set** is discovered from source: the generated reference, the
+You build a **fact set** from source: the generated reference, the
 product's own code, the vendored specs, the probe logs. It feeds
 shaping and writing, and it exists on every job including one with no
 old page at all.
 
-A **ledger** is extracted from the page you are replacing. It is a
-record of what that page covered. It is never a record of what is
-true.
+A separate agent builds a **ledger** from the page you are replacing.
+It is a record of what that page covered. It is never a record of what
+is true.
 
 Different provenance, different trust. Keep them apart, and never let
 an entry cross from one to the other without being settled against
@@ -1159,24 +1195,32 @@ Run all three before calling a page done, and report the numbers.
 
     <skill>/check-sources.py <ledger>
 
-After the ledger is built, before the writer sees it. Fails a `V`
-entry that cites only a hand-written page.
+Run `check-sources.py` on the ledger the moment it arrives, before you
+write a word. The gate fails a `V` entry that cites only a hand-written
+page.
 
-    <skill>/check-ledger.py <old page> <new page>
-    <skill>/check-ledger.py <ledger> <new page>
+    <skill>/check-ledger.py <old page> <draft>
+    <skill>/check-ledger.py <ledger> <draft>
+    <skill>/check-ledger.py <brief> <draft>
 
 This is the phrase gate, which is the name `check-sources.py` uses for
-it. It runs after the draft exists, at `--n 5` and again at `--n 4`.
-The first catches phrasing that reached the page through the ledger.
-The second catches phrasing invented in the brief, which is a channel
+it. Run all three after the draft exists, at `--n 5` and again at
+`--n 4`. The first measures how much of the old page's phrasing reached
+the draft by any route. The second narrows that to what came through
+the ledger, and the third measures the brief. The brief is a channel
 nobody was measuring until a finished page shared eleven sequences with
-its own brief.
+its own brief. A new page has no old page and no ledger, so only the
+third run applies.
+
+The script prints its first operand as the source and its second as
+the ledger, whatever you pass. The second is your draft in all three
+runs, so report it as the draft.
 
 A shared sequence is re-expressed, never padded around. A phrase that
 is vocabulary already shipped in a sibling page stays: consistency
 beats novelty there.
 
-    <skill>/signals.py <new page>
+    <skill>/signals.py <draft>
 
 See "Reading signals".
 
@@ -1198,7 +1242,8 @@ The correctness reviewer checks every claim against its source.
 
 **The claim-to-source list** is a flat list, one line per factual
 claim on the page, each naming the file and line that settles it.
-Send it with the draft so the reviewer verifies rather than
+**Build it as you draft**, adding a line the moment a claim goes on the
+page. Send it with the draft so the reviewer verifies rather than
 rediscovers. A claim you cannot put a source beside does not go on the
 page.
 

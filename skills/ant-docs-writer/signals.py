@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Reading signals for a docs page, measured over prose only.
 
-    ./signals.py <page.md> [<page.md> ...]
+    <skill>/signals.py <page.md> [<page.md> ...]
 
 Fenced code, indented blocks, tables and headings are stripped before
 scoring. A docs page is mostly not prose, and counting the commands

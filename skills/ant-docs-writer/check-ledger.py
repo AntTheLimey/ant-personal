@@ -10,7 +10,7 @@ obey: nothing told them which phrases were inherited.
 
 This is the gate that would have caught it.
 
-    ./check-ledger.py <source.md> <ledger.md> [--n 5]
+    <skill>/check-ledger.py <source.md> <ledger.md> [--n 5]
 
 Exit 0 when no shared sequence survives, 1 otherwise, listing what did.
 

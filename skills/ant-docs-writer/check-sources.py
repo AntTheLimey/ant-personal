@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail a fact ledger that marks a page's claim as verified.
 
-    ./check-sources.py <ledger.md>
+    <skill>/check-sources.py <ledger.md>
 
 An entry marked `st: V` asserts the claim was verified against
 source. A documentation page is not a source. It is evidence that a

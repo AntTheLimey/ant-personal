@@ -650,11 +650,11 @@ measurement beats a spec, a generated reference cannot be wrong
 about a flag, and a sibling page settles nothing.
 
 **Build the fact set from these sources before you write, on every
-job.** Record each fact with the file and line that settles it. The
-fact set is what you write from, so a fact you did not gather is one
-the page cannot carry. A new page has nothing else, and an overhaul has
-only the ledger beside the fact set. "Two artifacts, and the old page
-is not one of them" defines both.
+job.** Record each fact with the file and line that settles it, in a
+file beside the draft. The fact set is what you write from, so a fact
+you did not gather is one the page cannot carry. A new page has nothing
+else, and an overhaul has only the ledger beside the fact set. "Two
+artifacts, and the old page is not one of them" defines both.
 
 ## The shape of the page
 
@@ -779,14 +779,16 @@ request.
 structure to inherit and no reviewer comparing against one, so a
 badly indexed page ships looking finished. Two things guard it: the
 source-of-truth question above, because a page can only be indexed on
-facts you were able to gather; and showing the heading tree before
-writing a word of prose, so the shape is arguable while it is still
+facts you were able to gather; and the heading tree written down
+before a word of prose, so the shape is arguable while it is still
 cheap to change.
 
-**Write the heading tree down first**, one line per heading saying
-what that heading establishes for the reader. Where the finished page
-ends up differently shaped, say so rather than quietly revising the
-tree to match.
+**Write the heading tree to a file beside the draft, before a word of
+prose**, one line per heading saying what that heading establishes for
+the reader. The file is handed over with the draft. An unwritten tree
+is not arguable, so the file is the point. Where the finished page ends
+up differently shaped, say so rather than quietly revising the tree to
+match.
 
 ## How a page opens
 
@@ -1131,6 +1133,10 @@ product's own code, the vendored specs, the probe logs. It feeds
 shaping and writing, and it exists on every job including one with no
 old page at all.
 
+**The fact set is a file, written before any prose and handed over
+with the draft.** It sits beside the draft, and each fact takes the
+entry form below. Reporting that you built one is not building one.
+
 A separate agent builds a **ledger** from the page you are replacing.
 It is a record of what that page covered. It is never a record of what
 is true.
@@ -1191,40 +1197,77 @@ judgement and must not be followed.
 
 ### The gates, and when each runs
 
-Run all three before calling a page done, and report the numbers.
+Three scripts run here, and which of them apply depends on the job.
+Run every gate that applies before calling a page done, and report its
+numbers.
 
-    <skill>/check-sources.py <ledger>
+**A gate that exits non-zero has not been passed, and neither has one
+whose output reads `FAIL`.** That is a failure to fix before the page
+is done, rather than a number to report. Fix what the gate names, run
+it again, and report the numbers from the run that passed.
 
 Run `check-sources.py` on the ledger the moment it arrives, before you
 write a word. The gate fails a `V` entry that cites only a hand-written
-page.
+page:
 
-    <skill>/check-ledger.py <old page> <draft>
+    <skill>/check-sources.py <ledger>
+
+A new page has no ledger, so this gate does not run on one.
+
+The phrase gate is `check-ledger.py`, which is the name
+`check-sources.py` uses for it. It takes two files. The first is the
+text the draft may have copied from, and the second is always the
+draft. **The two are never the same file.** The draft passed in both
+slots reports every sequence in it as shared, which measures the
+invocation rather than the draft. Run each of the three below that
+applies, after the draft exists, at `--n 5` and again at `--n 4`.
+
+On an overhaul, measure the old page against the draft. This run
+reports how much of that page's phrasing reached the draft by any
+route:
+
+    <skill>/check-ledger.py <old-page> <draft>
+
+On an overhaul, measure the ledger against the draft. This run narrows
+the one above to what came through the ledger:
+
     <skill>/check-ledger.py <ledger> <draft>
+
+On every job, including a new page, measure the brief against the
+draft. The brief is a channel nobody was measuring until a finished
+page shared eleven sequences with its own brief:
+
     <skill>/check-ledger.py <brief> <draft>
 
-This is the phrase gate, which is the name `check-sources.py` uses for
-it. Run all three after the draft exists, at `--n 5` and again at
-`--n 4`. The first measures how much of the old page's phrasing reached
-the draft by any route. The second narrows that to what came through
-the ledger, and the third measures the brief. The brief is a channel
-nobody was measuring until a finished page shared eleven sequences with
-its own brief. A new page has no old page and no ledger, so only the
-third run applies.
-
 The script prints its first operand as the source and its second as
-the ledger, whatever you pass. The second is your draft in all three
-runs, so report it as the draft.
+the ledger, whatever you pass. The second is your draft in every run,
+so report it as the draft.
 
 A shared sequence is re-expressed, never padded around. A phrase that
 is vocabulary already shipped in a sibling page stays: consistency
 beats novelty there.
 
+Run `signals.py` on the draft, on every job:
+
     <skill>/signals.py <draft>
 
 See "Reading signals".
 
-**Counts are signals, not scores.**
+**A `signals.py` number is a signal, not a score.** The script reports
+and never fails, so no exit status tells you the page is done.
+
+## What ships with the draft
+
+Hand the draft over with four things beside it, each a file or a named
+answer rather than a report that the work happened:
+
+- **The job you did**, one of fix, edit, overhaul or new page. "Ask
+  which job this is before you start" defines the four.
+- **The fact set**, the file written before the prose.
+- **The heading tree**, on an overhaul or a new page.
+- **The claim-to-source list**, defined under "Reviews".
+
+Report the gate numbers with them.
 
 ## Reviews
 

@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.0] — 2026-09-12
+
+### Added
+
+- **The three gate scripts now ship with the skill.**
+  `check-ledger.py`, `check-sources.py` and `signals.py` sit beside
+  `SKILL.md` and are invoked from there, rather than being referenced
+  without being vendored.
+- **The writing pipeline the skill never carried.** A fact set is
+  discovered from source; a ledger is extracted from the page being
+  replaced and the writer never reads that page directly. Ledger
+  entries are three-line fragments marked `V` (verified), `U`
+  (unsourced), `C` (contradicted) or `S` (stale), sorted by topic and
+  alphabetically within it, numbered from `F1`. The three gates run
+  at named points: `check-sources.py` once the ledger is built,
+  `check-ledger.py` at `--n 5` and again at `--n 4` once a draft
+  exists, `signals.py` before the page is called done.
+- **Four source-of-truth questions**, settled before gathering: which
+  codebases may be read, what to compare the shape against, whether
+  real resources may be created to verify behavior, and where
+  measurements are recorded.
+- **A fourth job, "new page"**, alongside fix, edit and overhaul, with
+  its own rule to write the heading tree down before a word of prose.
+- **A section naming constructions that read as a machine** — negative
+  parallelism, a repeated sentence skeleton, uniform sentence length,
+  and word accumulation — none of which a banned-word list catches.
+- **A reading-ease floor of 58 and a Flesch-Kincaid grade ceiling of
+  8.0**, both measured by `signals.py` against prose only, with the
+  ceiling treated as a tripwire rather than a target to write for.
+- **Six gaps closed by an audit**: checking the 25-word cap by running
+  `signals.py` instead of reading for it; a three-part order for a
+  troubleshooting entry; a README treated explicitly as a page; guides
+  placed per edition under `docs/` with the nav entry added in the
+  same change; every link checked before a page ships; and the
+  claim-to-source list given its own definition.
+
+### Changed
+
+- **The two-line register directive now lives in the file**, quoted,
+  where a writer meets it before any other rule. It had been
+  prepended by hand on every dispatch.
+
 ## [1.2.0] — 2026-09-10
 
 ### Added

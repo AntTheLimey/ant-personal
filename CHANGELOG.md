@@ -7,6 +7,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.0] — 2026-09-12
+
+### Added
+
+- **The three gate scripts now ship with the skill.**
+  `check-ledger.py`, `check-sources.py` and `signals.py` sit beside
+  `SKILL.md` and are invoked from there, rather than being referenced
+  without being vendored.
+- **The writing pipeline the skill never carried.** A fact set is
+  discovered from source; a ledger is extracted from the page being
+  replaced and the writer never reads that page directly. Ledger
+  entries are three-line fragments marked `V` (verified), `U`
+  (unsourced), `C` (contradicted) or `S` (stale), sorted by topic and
+  alphabetically within it, numbered from `F1`. The three gates run
+  at named points: `check-sources.py` once the ledger is built,
+  `check-ledger.py` at `--n 5` and again at `--n 4` once a draft
+  exists, `signals.py` before the page is called done.
+- **Four source-of-truth questions**, settled before gathering: which
+  codebases may be read, what to compare the shape against, whether
+  real resources may be created to verify behavior, and where
+  measurements are recorded.
+- **A fourth job, "new page"**, alongside fix, edit and overhaul, with
+  its own rule to write the heading tree down before a word of prose.
+- **A section naming constructions that read as a machine** — negative
+  parallelism, a repeated sentence skeleton, uniform sentence length,
+  and word accumulation — none of which a banned-word list catches.
+- **A reading-ease floor of 58 and a Flesch-Kincaid grade ceiling of
+  8.0**, both measured by `signals.py` against prose only, with the
+  ceiling treated as a tripwire rather than a target to write for.
+- **Six gaps closed by an audit**: checking the 25-word cap by running
+  `signals.py` instead of reading for it; a three-part order for a
+  troubleshooting entry; a README treated explicitly as a page; guides
+  placed per edition under `docs/` with the nav entry added in the
+  same change; every link checked before a page ships; and the
+  claim-to-source list given its own definition.
+- **A hand-back section.** A draft ships with the job name, the fact
+  set, the heading tree and the claim-to-source list beside it, so the
+  stages the skill named as instructions now have somewhere to land.
+- **A verdict and an exit status on `signals.py`.** The script prints
+  a line per bound saying whether it was met and with what value, and
+  exits non-zero when one is crossed. The grade failure says to split
+  the sentence rather than drop the clause carrying the condition.
+
+### Changed
+
+- **The two-line register directive now lives in the file**, quoted,
+  where a writer meets it before any other rule. It had been
+  prepended by hand on every dispatch.
+- **`<skill>/` now names the base directory the harness announces**
+  when the skill loads, with a fallback for a dispatch that announced
+  none. The three usage strings that taught `./script.py` were
+  corrected to match.
+- **A non-zero exit or a `FAIL` line is a failure to fix** before the
+  page is done, rather than a number to report. Each `check-ledger.py`
+  run is introduced separately, so the draft cannot be passed in both
+  slots.
+
 ## [1.2.0] — 2026-09-10
 
 ### Added

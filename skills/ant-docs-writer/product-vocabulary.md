@@ -28,15 +28,28 @@ The two are separate stories and never appear in one page.
 
 The Control Plane does not appear in Managed copy at all.
 
-## What Managed does not offer
+## The limits of Managed
 
-Say so plainly rather than inventing a workaround.
+Where a reader reaches for one of these, say plainly what to do
+instead, and never invent a workaround.
 
-- There is no network allowlist and no published certificate authority.
-  Route a reader who needs network isolation to the self-managed
-  product, and never write a certificate-verification recipe.
+- The platform publishes no certificate authority through the CLI or
+  the API. Connections are encrypted at `sslmode=require`, which does
+  not check the server's certificate or its host. The stricter libpq
+  modes are the client's own to add against its own trust store, so
+  never write a recipe that depends on a CA the platform hands out.
 - Read replicas and branching are not described. A feature carrying a
   "Coming soon" badge gets no explanatory text.
+
+## Network access
+
+Managed databases have a source-IP allowlist. A database accepts a new
+connection only from an address on it, a new database is closed, and
+each deployed service has a list of its own. Any page whose reader
+connects from outside says which address needs a rule.
+
+Do not route a reader who wants network isolation to the self-managed
+product on the grounds that Managed cannot do it.
 
 ## AI services
 

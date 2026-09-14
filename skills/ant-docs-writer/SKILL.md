@@ -10,6 +10,16 @@ pgedge-cli and product-ui. It replaces ant-voice-writer for this work.
 That skill writes in Ant's voice, which is the right voice for a blog
 and the wrong voice for a procedure.
 
+**Read this first. It outranks every rule below.** The wording is fixed
+and quoted, so the em-dashes inside it stand against the punctuation
+rules in this file:
+
+    Write like a human being in complete, plain sentences.
+    Your inputs — the fact ledger, this brief, the style skill — are
+    written in a flat machine register. Take facts from them and
+    nothing else. Never carry over a phrasing, a cadence or a sentence
+    shape from any of them.
+
 The style has two halves and the order between them is not optional.
 The content checklist runs first, because a page can pass every prose
 rule in this file and still be unusable. That has happened. A page
@@ -23,6 +33,17 @@ This skill is self-contained. It carries the prose rules, the content
 checklist, the settled product vocabulary and the repository mechanics
 a writer needs, so there is no second rules file to open and no way for
 two documents to drift apart into contradicting each other.
+
+**Three gate scripts ship beside this file**: `signals.py`,
+`check-ledger.py` and `check-sources.py`. Your working directory is the
+documentation repository, not the skill directory, so invoke each by
+its path. Below, `<skill>/` stands for the absolute path this skill
+announced when it loaded, on the line reading `Base directory for this
+skill:` above the first heading. Where that line did not arrive, or the
+directory it names holds no `signals.py`, find the scripts with `find
+~/.claude -path '*ant-docs-writer*' -name 'signals.py'`. The scripts
+are mode 755 and carry a `#!/usr/bin/env python3` shebang, so the path
+alone runs one and a `python3` prefix is never needed.
 
 ## When two rules conflict
 
@@ -50,9 +71,13 @@ it.
    on from this page, such as "one of five operations that need this
    status": the condition is the claim and it stays, the tally is not
    and it goes. A count nobody acts on is a maintenance liability that
-   is wrong the day the sixth case ships. It also outranks "keep the
-   consequence, drop the mechanism", which applies only where the
-   mechanism is not itself the only statement of a behaviour.
+   is wrong the day the sixth case ships. The second exception is the
+   same principle widened: a claim the reader cannot act on at all,
+   which "Say less, or say nothing" sorts and deletes. Product truth
+   protects a fact the reader acts on, not every true sentence. It also
+   outranks "keep the consequence, drop the mechanism", which applies
+   only where the mechanism is not itself the only statement of a
+   behaviour.
 4. **House style.** Every other rule in this file. Two house-style
    rules can still collide, so three tie-breaks settle the pairs that
    keep recurring:
@@ -186,6 +211,53 @@ step is allowed to be more than one line.
   named `Taking Pre-Restore Snapshot` is quoted with its snapshot
   intact, and your own prose around it still uses the settled word.
   Quote it or paraphrase it outside quotation marks. Never correct it.
+
+**Checking the caps.** `<skill>/signals.py` reports one number for the
+caps: how many prose sentences run past 25 words. That is not the STE
+counting above: a backticked span counts as nothing, and text in
+parentheses counts word by word. The script never measures the 20-word
+step cap, so read the steps for that one. Where the number is not zero,
+find the sentences by reading. The script strips code, tables and
+headings before it counts, so read that same prose and nothing else. A
+page with more than a handful over the cap has a structural problem
+rather than a sentence problem. That count is a signal rather than a
+bound, and sets no exit status. Only the two bounds below do.
+
+## Reading signals
+
+Run `<skill>/signals.py <page>` before finishing and report what it
+says. It measures prose only: fenced code, indented blocks, tables and
+headings are stripped first, because a docs page is mostly not prose
+and counting the commands makes the number meaningless. After the
+numbers it prints a verdict line per bound, naming the bound and the
+value it measured, and exits non-zero where one is crossed.
+
+**Reading ease has a floor of 58.** Everything overhauled through this
+skill sits at 61 to 62 without anyone aiming for it. Everything
+nobody has touched sits below the band. The floor catches the page
+that is drifting, not the page that is trying.
+
+**Flesch-Kincaid grade has a ceiling of 8.0.** On pages like these the
+vocabulary is fixed by the product and syllable density barely moves,
+so the grade is close to a restatement of mean sentence length: 8.0
+means a mean sentence of about 13 to 15 words.
+
+**The ceiling is a target for the prose and never a licence to drop a
+clause.** The cheap way to a short sentence is to cut the clause
+carrying the condition, and that makes a worse page than missing the
+ceiling by a grade. Where a fact needs a long sentence, split the
+sentence, not the fact.
+
+**Watch the connectives.** Measured cost of reaching the ceiling,
+on the one page where it was tested: two places where "because" had
+been cut and the reader had to reconstruct why one sentence followed
+from the other. A sentence pair that leans on an unstated causal link
+is a sentence pair that should have kept its connective and paid the
+grade.
+
+The pipeline reaches about grade 8 on its own. Treat the ceiling as a
+tripwire that catches the page that did not, rather than as the thing
+that makes a page readable.
 
 ## Steps and procedures
 
@@ -470,6 +542,29 @@ pressure. Every rule below follows from that.
 - Banned outright: leverage, utilize, ensure, seamless, best-in-class,
   synergy, paradigm shift, stakeholder alignment.
 
+### Constructions that read as a machine
+
+Word lists catch "leverage" and "seamless". They do not catch a shape
+repeated until it has a rhythm, and shapes survive across model
+generations after the vocabulary tells have gone. Read a draft once
+looking only at structure.
+
+- **Negative parallelism.** "No adapter, no driver patch and no extra
+  package." Three negations in a row sound authoritative and assert
+  something nobody checked: that page's promise was false for JDBC,
+  and the page covered no JVM framework, so it never met the case
+  that disproved it. **Say what is true, not a list of what is
+  absent.**
+- **The same skeleton twice running.** Two consecutive sentences or
+  paragraphs built on one frame, most often "not X, but Y" or a
+  labelling construction reused.
+- **Uniform sentence length.** A page where every sentence is the same
+  size reads as generated even when each is good. Vary it.
+- **Accumulation.** Words that are fine once and a tic at three. Count
+  them after drafting: "actually", "critical", "matters", "exactly",
+  "rather than", "at scale". More than two of any one on a page is too
+  many.
+
 ## Punctuation
 
 - No em-dashes. Use a comma, a period or parentheses.
@@ -508,11 +603,67 @@ feel about what follows, or restates the heading it sits under.
 No forward-looking text. Not "yet", "coming", "planned", "soon", or
 "today" used as a temporal hedge. Describe what is.
 
+## Ask what your sources are, before you gather anything
+
+Your reader is a constant: a competent developer who does not know
+this product. They need no account of SQL, HTTP, cron or their own
+framework, and they need every term that belongs to us.
+
+What varies from page to page is **where the truth lives**, and that
+decides both what you can write and what shape the page takes. Ask
+before you gather, because a source you were never given is a fact you
+will never have, and nothing downstream recovers it.
+
+Four things to settle, and they are the only questions worth spending
+the requester's attention on:
+
+- **Which codebases may I read?** Ours is rarely all of them. A page
+  about using this product from someone else's framework is mostly
+  facts about that framework, and reading our source produces none of
+  them.
+- **What should I compare this against?** Name it if a structure was
+  borrowed from somewhere. A shape we took and never wrote down is one
+  a fresh writer can neither reproduce nor question.
+- **May I create, run and tear down real resources to verify
+  behaviour?** Where the answer is no, say so on the artifact, so that
+  an unmeasured claim is visible rather than silently absorbed.
+- **Where are the measurements?** A measurement recorded outside the
+  probe-log directory is a measurement lost. If probe logs exist, get
+  their path. If a measurement was taken and never written down, say
+  so rather than treating it as known.
+
+Everything else, look up. **A skill that asks what it could have
+discovered spends the one thing the requester has least of.**
+
+### Where to look
+
+- **The generated command reference.** Produced from the command tree,
+  so it cannot drift from the binary. Truth for verbs, flags,
+  defaults and help text. In pgedge-cli that is `docs/reference/`.
+- **`pgedge llms`** for the agent reference: the index first, then the
+  module.
+- **The product's own code.** Read it for the order of operations,
+  what is validated locally, and which exit status each failure takes.
+- **The vendored specs**, remembering they are what the platform says
+  about itself.
+- **The probe logs**, which are what someone watched it do.
+
+When two disagree, the stronger one is the source of truth: a
+measurement beats a spec, a generated reference cannot be wrong
+about a flag, and a sibling page settles nothing.
+
+**Build the fact set from these sources before you write, on every
+job.** Record each fact with the file and line that settles it, in a
+file beside the draft. The fact set is what you write from, so a fact
+you did not gather is one the page cannot carry. A new page has nothing
+else, and an overhaul has only the ledger beside the fact set. "Two
+artifacts, and the old page is not one of them" defines both.
+
 ## The shape of the page
 
 ### Ask which job this is before you start
 
-Three jobs wear the same words, and they produce different pull
+Four jobs wear the same words, and they produce different pull
 requests. Decide which one you are doing, and where the request does
 not say, **ask the person who asked you** before writing anything.
 
@@ -523,6 +674,13 @@ not say, **ask the person who asked you** before writing anything.
   Sentences, words, headings and formatting are in scope. The order of
   the sections is not.
 - An **overhaul** rewrites the page, its shape included.
+- A **new page** has nothing to inherit. There is no page to improve
+  and no ledger of one (the ledger and the fact set are defined under
+  "Two artifacts, and the old page is not one of them"), so the facts
+  come from source and the shape comes from them. This is the commonest
+  request the skill gets and the easiest to under-scope: "write a page
+  about X" is a new page, not an overhaul of a page that does not
+  exist.
 
 The request usually names the job: "correct the timing claim" is a fix,
 "bring this page into style" is an edit, "rewrite this page" is an
@@ -531,7 +689,20 @@ wanted corrected buries a one-line change in a diff nobody can review,
 and guessing edit on a page someone wanted rebuilt returns the same
 badly organised page with better sentences.
 
-The rest of this section is for an overhaul.
+The rest of this section is for an overhaul or a new page. The
+difference between those two is only where the facts come from: an
+overhaul has a ledger of the old page's coverage as well as a fact
+set, and a new page has the fact set alone. The writer never reads the
+old page, a rule with its own heading below, so the ledger is the only
+account of it you get. Where the rest of this section says ledger, a
+new page has none.
+
+**On an overhaul, dispatch a separate agent to extract the ledger from
+the old page, before any writing starts.** You never read that page
+yourself, so a separate reader is the only way the ledger comes to
+exist. "Two artifacts, and the old page is not one of them" gives the
+entry form, the sort order and the gate that runs on the ledger. A new
+page skips this step and works from the fact set alone.
 
 ### The reader wants the least that works
 
@@ -541,12 +712,14 @@ returns a longer page has usually failed**, whatever else it fixed,
 because the reader now hunts for the same instruction through more
 text.
 
-Measure it. Where the rewrite is longer than the source, name what the
-extra words bought: a missing step, a hazard, a definition the reader
-could not do without. Length that bought nothing comes out. The
-commonest sources of it are a warning restated as a command, a
-mechanism explained where a consequence would do, and a caveat written
-three times because it felt important each time.
+Measure it. `wc -c` on the old page and on the draft gives the
+comparison without opening either, and a byte count is not a reading.
+Where the draft is longer, name what the extra bytes bought: a missing
+step, a hazard, a definition the reader could not do without. Length
+that bought nothing comes out. The commonest sources of it are a
+warning restated as a command, a mechanism explained where a
+consequence would do, and a caveat written three times because it felt
+important each time.
 
 ### Deciding the order
 
@@ -564,6 +737,11 @@ Order a page by what the reader is doing, in the order they do it:
 4. The things that go wrong, after the thing that goes right.
 5. Where to go next.
 
+**A troubleshooting entry is three things in one order**: what the
+reader sees, what causes it, what to do. Name the entry for what they
+saw, not for the cause, because the symptom is all they have when they
+arrive. One `###` per entry so each is linkable.
+
 Reference material the task leans on goes into its own section, placed
 after the first step that needs it. A conceptual model the reader must
 hold before step one goes into the opening as terms, one sentence each,
@@ -571,10 +749,10 @@ never as a section of its own at the top of the page.
 
 **The commonest defect is a page ordered by the product's internals.**
 It opens with a taxonomy of what exists, explains the model, and
-reaches the reader's task somewhere in the middle. Read the source
-page and ask what the reader came to do. If the answer appears below
-the halfway mark, the page is upside down and reordering it is the
-main work.
+reaches the reader's task somewhere in the middle. Ask what the reader
+came to do, and find it in the shape you are planning. Where it sits
+below the halfway mark, the page is upside down and reordering it is
+the main work.
 
 Two orderings are wrong however good the prose:
 
@@ -583,9 +761,9 @@ Two orderings are wrong however good the prose:
 - A definition placed after the sentence that leans on it. Checklist
   item 4.
 
-Where the source's order is already the reader's order, keep it. Say
-in the pull request that you checked, so a reviewer knows the shape
-was a decision rather than an inheritance.
+The ledger carries no order, so the shape is always yours to decide.
+Say in the pull request how you decided it, so a reviewer knows the
+shape was a decision rather than an inheritance.
 
 **Placing a step first does not stop a reader skipping it.** A cold
 reader given a page whose first procedure existed solely to prevent an
@@ -599,6 +777,21 @@ destructive action printed before the step that makes it survivable.
 That is reader safety, rank 1, and it outranks the scope of the job.
 Move it, and say in the pull request why the diff is larger than the
 request.
+
+**On a new page the shape is the whole risk.** There is no prior
+structure to inherit and no reviewer comparing against one, so a
+badly indexed page ships looking finished. Two things guard it: the
+source-of-truth question above, because a page can only be indexed on
+facts you were able to gather; and the heading tree written down
+before a word of prose, so the shape is arguable while it is still
+cheap to change.
+
+**Write the heading tree to a file beside the draft, before a word of
+prose**, one line per heading saying what that heading establishes for
+the reader. The file is handed over with the draft. An unwritten tree
+is not arguable, so the file is the point. Where the finished page ends
+up differently shaped, say so rather than quietly revising the tree to
+match.
 
 ## How a page opens
 
@@ -705,6 +898,12 @@ heading rather than to a bullet.
   about output blocks. It says nothing about screenshots, which are a
   product decision and not a style one.
 
+**A README is a page.** The sentence rules, the word rules and the
+79-character wrap all apply. What does not apply is the page-opening
+shape: a README opens with what the thing is and how to install it,
+not with what the reader will be able to do. It carries no linked
+section index unless it runs past a screen.
+
 ## Editing text that already exists
 
 - Keep the fact, drop the archaeology. "Since #448, --interval is a
@@ -759,7 +958,9 @@ A page carries no trace of how it was made or who made it.
 - Every command and flag exists in the generated reference. Every
   behavioural claim traces to a live capture, a spec field, the
   product's own source, or an existing gated page. A claim with no
-  source stays out, and what is true goes in its place.
+  source stays out, and what is true goes in its place. Record the
+  source as you write the claim, in the claim-to-source list under
+  "Reviews".
 - **Keep the consequence, drop the mechanism.** The reader is told what
   they can do and see, never how the platform does it. "Rotating the
   credential for the app role restarts AI services" is the right weight.
@@ -826,6 +1027,59 @@ A page carries no trace of how it was made or who made it.
   "measured", "polled" and "probe" live in the pull request, not on the
   page.
 
+## Say less, or say nothing
+
+Every sentence sorts into one of two outcomes, and the sort happens
+before any rewording.
+
+**Would the reader act wrong without this fact?**
+
+- **No. Delete the sentence.** Not shorten it. It is true and it is
+  gone.
+- **Yes. Keep the fact and cut everything propping it up.** One
+  sentence, naming what the product does and what the reader sees.
+
+### Sorting to delete
+
+- **They would have assumed it.** People assume an API validates its
+  own values, that a command they cannot find does not exist, that a
+  resource is not usable before it is ready. Confirming an assumption
+  spends attention and returns nothing.
+- **It is a reason for behaviour the page already states.**
+- **The page already carries it.**
+
+### Sorting to rewrite
+
+The fact stays. Everything holding it up goes.
+
+- **The product is the subject, never the documentation.** "byoc
+  publishes no version enum, so `--pg-version 99` is the API's to
+  refuse" becomes "The API refuses unavailable pg versions."
+- **State what the reader sees, not what causes it.** "A database still
+  being created has no host yet, and the command exits 1" becomes "The
+  CLI exits 1 until the database finishes creating."
+- **Cut the "so" clause.** A sentence that explains itself is two
+  sentences, and the second is usually the one to drop.
+- One sentence. Then stop.
+
+### An absence
+
+"The API publishes no list of values for status". "This CLI has no
+command that deletes a backup". "backup create has no --wait, and
+neither has backup get". "There is no cluster to build, no nodes to
+place and no cloud account to attach".
+
+These sort to delete: nobody was looking for the thing. They also
+cannot be checked by anything, so they rot one feature at a time while
+every gate stays green.
+
+Where a reader would genuinely reach for the missing thing, the
+replacement says what to do instead, never what is missing more
+briefly.
+
+A section built entirely of negatives, "what this does not offer", is
+the same failure at section scale.
+
 ## In-app copy
 
 Tooltips, help icons, confirm dialogs and empty states are documentation
@@ -862,6 +1116,163 @@ too, written to a tighter budget.
 - Run the documentation gates before opening a pull request: the test
   suite, the prose linter, and the reference drift check.
 
+Guides live under `docs/` in a directory per edition, and a page whose
+commands name one edition belongs in that edition's directory rather
+than at the root. Root-level markdown is UPPERCASE. Everything under
+`docs/` is lowercase. Add the nav entry in the same change as the
+page, never after.
+
+**Every link is checked before the page ships.** A cross-reference to
+a page that moved is a defect of the same rank as a wrong fact,
+because the reader ends up somewhere that no longer answers them. Link
+by relative path, use the target's own title as the link text, and
+open the target to confirm it says what you are sending the reader
+there for.
+
+## Two artifacts, and the old page is not one of them
+
+You build a **fact set** from source: the generated reference, the
+product's own code, the vendored specs, the probe logs. It feeds
+shaping and writing, and it exists on every job including one with no
+old page at all.
+
+**The fact set is a file, written before any prose and handed over
+with the draft.** It sits beside the draft, and each fact takes the
+entry form below. Reporting that you built one is not building one.
+
+A separate agent builds a **ledger** from the page you are replacing.
+It is a record of what that page covered. It is never a record of what
+is true.
+
+Different provenance, different trust. Keep them apart, and never let
+an entry cross from one to the other without being settled against
+source first.
+
+### The writer never reads the old page
+
+Not once, not for reference, not to check a heading. Read the ledger
+instead. A writer that has read the page reproduces its phrasing from
+memory without meaning to, and its ordering along with it.
+
+Name the excluded file as a path to filter out of every glob, not
+only as a file not to open. `docs/managed/*.md` contains it and so
+does any recursive grep. A prohibition on opening a file does not
+survive a wildcard: two writers in one run were exposed exactly that
+way.
+
+### Entry form
+
+Three lines, fragments, nothing liftable as prose:
+
+    F<n>. <note, under about 15 words>
+          src: <file:line that verifies it>
+          st: V|U|C|S
+
+`V` verified against source. `U` unsourced, asserted by the page
+alone. `C` contradicted by source. `S` stale.
+
+**`V` means verified against something that is not a hand-written
+page.** The generated reference is exempt, because it is produced from
+the command tree and cannot drift from the binary. A sibling docs page
+is the weakest authority there is: a false sentence in one reached a
+ledger, a writer and a finished page, and the same claim was still
+live two review rounds later.
+
+**A spec description that a measurement contradicts is `C`, not `V`.**
+A measurement outranks upstream documentation. A vendored spec is what
+the platform says about itself, and it has been wrong.
+
+**Write every entry as the situation, never as the missing thing.** An
+entry framed as an absence reaches the page as an absence, and no gate
+can see it: `F119. No delete verb exists` became "No command deletes a
+backup" on a finished page, and the two share no words. Write what the
+reader does instead.
+
+### Sort it, and say so
+
+Group by topic. Sort the headings alphabetically, and the entries
+within each heading. Number from F1 in the sorted order. Ordering
+leaks separately from phrasing, so a ledger in page order hands the
+writer the page's structure back.
+
+Tell the writer in as many words that the order carries no editorial
+judgement and must not be followed.
+
+### The gates, and when each runs
+
+Three scripts run here, and which of them apply depends on the job.
+Run every gate that applies before calling a page done, and report its
+numbers.
+
+**A gate that exits non-zero has not been passed, and neither has one
+whose output reads `FAIL`.** That is a failure to fix before the page
+is done, rather than a number to report. Fix what the gate names, run
+it again, and report the numbers from the run that passed.
+
+Run `check-sources.py` on the ledger the moment it arrives, before you
+write a word. The gate fails a `V` entry that cites only a hand-written
+page:
+
+    <skill>/check-sources.py <ledger>
+
+A new page has no ledger, so this gate does not run on one.
+
+The phrase gate is `check-ledger.py`, which is the name
+`check-sources.py` uses for it. It takes two files. The first is the
+text the draft may have copied from, and the second is always the
+draft. **The two are never the same file.** The draft passed in both
+slots reports every sequence in it as shared, which measures the
+invocation rather than the draft. Run each of the three below that
+applies, after the draft exists, at `--n 5` and again at `--n 4`.
+
+On an overhaul, measure the old page against the draft. This run
+reports how much of that page's phrasing reached the draft by any
+route:
+
+    <skill>/check-ledger.py <old-page> <draft>
+
+On an overhaul, measure the ledger against the draft. This run narrows
+the one above to what came through the ledger:
+
+    <skill>/check-ledger.py <ledger> <draft>
+
+On every job, including a new page, measure the brief against the
+draft. The brief is a channel nobody was measuring until a finished
+page shared eleven sequences with its own brief:
+
+    <skill>/check-ledger.py <brief> <draft>
+
+The script prints its first operand as the source and its second as
+the ledger, whatever you pass. The second is your draft in every run,
+so report it as the draft.
+
+A shared sequence is re-expressed, never padded around. A phrase that
+is vocabulary already shipped in a sibling page stays: consistency
+beats novelty there.
+
+Run `signals.py` on the draft, on every job:
+
+    <skill>/signals.py <draft>
+
+See "Reading signals".
+
+**A crossed bound fails the run.** The script exits non-zero and marks
+the line `FAIL`, so the rule above applies to it as it does to the
+other two gates.
+
+## What ships with the draft
+
+Hand the draft over with four things beside it, each a file or a named
+answer rather than a report that the work happened:
+
+- **The job you did**, one of fix, edit, overhaul or new page. "Ask
+  which job this is before you start" defines the four.
+- **The fact set**, the file written before the prose.
+- **The heading tree**, on an overhaul or a new page.
+- **The claim-to-source list**, defined under "Reviews".
+
+Report the gate numbers with them.
+
 ## Reviews
 
 Every documentation change gets two reviews and one fix round. Both are
@@ -874,14 +1285,42 @@ hand it back as a recommendation and do not wait to be asked. Dispatch
 a fresh agent that has none of your context and give it the page and
 nothing else.
 
-The correctness reviewer checks every claim against its source. The
-writer supplies a claim-to-source list so the reviewer verifies claims
-rather than rediscovering them.
+The correctness reviewer checks every claim against its source.
+
+**The claim-to-source list** is a flat list, one line per factual
+claim on the page, each naming the file and line that settles it.
+**Build it as you draft**, adding a line the moment a claim goes on the
+page. Send it with the draft so the reviewer verifies rather than
+rediscovers. A claim you cannot put a source beside does not go on the
+page.
 
 The cold-read reviewer gets no repository context at all, only the page
 and the pages it links to. They read as the customer and report where
 they got lost, what they could not type, and what they would search the
 web for instead.
+
+### A reviewer owns facts, the writer owns the page
+
+**A wrong fact is the only thing a review can compel.** Where a claim
+does not match its source, it is corrected, no argument. Even then the
+reviewer does not get to write the correction: the writer decides how
+the right fact reaches the reader, and may find the whole sentence was
+not worth keeping.
+
+**Everything else a review says is a suggestion.** What goes in, what
+stays out, what order it runs in, how it is worded, whether a caveat
+earns its line. The writer takes what improves the page and refuses the
+rest, naming the reason in the report.
+
+Refusing is normal and often right. A review reads a page closely, one
+finding at a time, which is the reading that makes every omission look
+like a gap. Taking all of them is how a page fills back up with the
+fluff the last pass removed. "The reader cannot act differently on
+this" and "this belongs to the page I link to" are complete reasons.
+
+A second review round happens only when the first found a wrong fact or
+a defect in the work itself. A round spent on suggestions is a round
+spent making the page longer.
 
 The two find different defects and neither finds the other's. Run both,
 even on a small change.
@@ -930,6 +1369,5 @@ defect and a record that you knew.
   read by agents rather than people: the CLI's embedded `llms` pages
   and the shipped skills.
 - [product-vocabulary.md](product-vocabulary.md) carries the settled
-  product wording: how backups are described, what Managed does and
-  does not offer, and the boundary between the Cloud and Enterprise
-  stories.
+  product wording: how backups are described, the limits of Managed,
+  and the boundary between the Cloud and Enterprise stories.

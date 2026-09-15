@@ -7,6 +7,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.0] — 2026-09-15
+
+### Removed
+
+- **The linked section index at the top of a page.** MkDocs Material
+  renders the heading tree in the right-hand pane, so an inline copy
+  was a second navigation that went stale on the first rename. A
+  README keeps the option, because GitHub has no such pane. Raised
+  twice in review on pgEdge/pgedge-starfleet-docs#27: "we have a
+  navigation pane in the upper-right pane for content like this" and
+  "we don't use inline TOC's in documentation (except for the README
+  file)".
+
+### Changed
+
+- **Before You Start is scoped to the page.** It carried every
+  precondition, including the authenticated profile every reader
+  already had. It now holds four kinds of entry, all page-specific:
+  a value needed before step one with the command or screen producing
+  it, a condition specific to this task, an irreversible action
+  reachable before its guard, and a console page's starting screen.
+  **A page with nothing page-specific carries no such section.**
+- **The connection flag is assumed, not stated.** A reader with no
+  profile could not have reached a page about restoring their
+  database.
+- **The page is no longer the subject of its own sentences.** "This
+  page covers", "this page uses", "this page has" and "on this page"
+  join the delete-on-sight list. Term definitions stay; the
+  announcement introducing them goes. Same review: "referring to the
+  page is not generally a good practice for technical writing".
+
+### Added
+
+- **A ban on anthropomorphism**, under Register. Software does not
+  hold, know, want, see, care, remember, think or decide. The idiom
+  rule already covered the class and did not fire on "nothing your
+  application holds needs changing", so the case is now named: same
+  review, "applications don't have hands. What does that even mean?"
+- **The plain-formal-word rule now reaches whole constructions**, not
+  only single words. "A restore can report additional steps", not
+  "a restore can report more of them".
+- **The register rules bind phrasing inherited from the page being
+  replaced.** A phrase that arrives through a fact ledger is still
+  published under the writer's own name. Both new findings were
+  phrasing the rewrite carried over rather than invented.
+- **A step whose command changes something says so in that step.**
+  This is where the requirement dropped from the page opening now
+  lives. The reviewer objected to the claim sitting in the intro
+  paragraph, not to its existing, and a reader four minutes past the
+  intro is about to run the command.
+- **The connection flag is still printed on a destructive step.** It
+  answers a different question there: which tenant the command runs
+  against, not whether the reader is authenticated. A reader holding a
+  profile per environment can otherwise drop the wrong database from a
+  command that reads correctly.
+
+---
+
 ## [1.3.0] — 2026-09-12
 
 ### Added

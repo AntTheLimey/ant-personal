@@ -113,9 +113,16 @@ on it.
 The connection flag (`--base-url` or `--profile`) is the exception, and
 it is **assumed, not stated**. A reader who has no authenticated
 profile cannot have reached a page about restoring their database, so
-telling them to log in spends the section's attention on the one
-prerequisite every reader already met. The page that sets the profile
-up states it; every other page is silent about it.
+telling them to log in spends attention on the one prerequisite every
+reader already met. The page that sets the profile up states it; every
+other page is silent about it.
+
+**The exception is a command that destroys something.** There the flag
+answers a different question: not whether the reader is authenticated
+but **which tenant the command runs against**, and a reader holding a
+profile per environment can drop the wrong database from a command that
+reads correctly. A destructive step prints the flag in the step itself.
+This is reader safety, so it outranks the silence above.
 
 **1b. What will the reader do instead of the step you wrote?** Name
 the shortcut that works right now and say what it costs. A step that
@@ -274,8 +281,9 @@ that makes a page readable.
   order, they are bullets. Number the steps in sequence, `1.` then `2.`
   then `3.`, rather than repeating `1.` and letting the renderer count.
   Indent everything belonging to a step by four spaces.
-- **Before You Start holds what is specific to THIS page, and nothing
-  else.** Four kinds of entry earn a place: a value the reader must
+- **Before You Start, or Prerequisites under its other sanctioned
+  name, holds what is specific to THIS page and nothing else.** Only
+  four kinds of entry earn a place: a value the reader must
   have in hand before step one, with the command or screen that
   produces it; a condition specific to this task that makes it fail;
   an irreversible action reachable before its guard; and, on a console
@@ -289,9 +297,15 @@ that makes a page readable.
   attention it takes to read and teaches them the heading is skippable
   on the page where it matters.
 - **A page-specific precondition goes in that section wherever you
-  discovered it**, so a reader who meets the list has met the whole
-  list. A condition left in a later section is one the reader reaches
-  after the failure it predicts.
+  discovered it**, so a reader who meets the list has met every
+  condition this page can predict. A condition left in a later section
+  is one the reader reaches after the failure it predicts.
+- **A step whose command changes something says so in that step.** The
+  reader needs it where they are about to act, not in an opening
+  paragraph they read four minutes earlier. Say what changes, in the
+  same sentence that gives the command. Where the change cannot be
+  undone, "Marking a step the reader will otherwise skip" applies on
+  top of this.
 - **Do not print a destructive flag in a copyable command.** Show the
   command as it runs interactively, with the prompt intact, and describe
   the flag that skips the prompt in the step beside it. A reader
@@ -445,14 +459,20 @@ pressure. Every rule below follows from that.
 - **No conversational hedges or intensifiers.** "Pretty much", "just",
   "simply", "of course", "actually". "Simply" is the worst of them,
   because it tells a reader who is stuck that they should not be.
-- **Software does not hold, know, want, see, care, remember, think or
-  decide.** Name what actually happens instead. "Nothing your
-  application holds needs changing" fails, because an application holds
-  nothing and the sentence names no referent a reader can check;
-  "the connection string does not change, so the application needs no
-  edit" says the same thing about things that exist. This is the idiom
-  rule's hardest case, because an anthropomorphism reads as plain
-  English to whoever wrote it.
+- **No anthropomorphism. A thing does nothing that needs intent,
+  memory or a body.** That general test is the rule; know, want, see,
+  care, remember, think, decide, expect, believe, try and forget are
+  examples of it failing, and the ninth verb you reach for is bound by
+  the test even though it is not listed here. Name what actually
+  happens instead: "nothing your application holds needs changing"
+  fails, because it names no referent the reader can check, and "the
+  connection string does not change, so the application needs no edit"
+  says the same thing about things that exist. This is the idiom rule's
+  hardest case, because an anthropomorphism reads as plain English to
+  whoever wrote it. **"Holds" is not on this list**: a record, a
+  response or a field holds a value, which is the wording required
+  under "Words". What failed in the example was the application as
+  subject, not the verb.
 - **Prefer the plain formal word or phrase where two mean the same
   thing and differ only in register.** "Needs", not "wants". "Shows",
   not "surfaces". "Before", not "ahead of". This applies to whole
@@ -466,9 +486,11 @@ pressure. Every rule below follows from that.
   you through a fact ledger is still a phrase you are publishing under
   your own name. Inheriting an idiom is not a reason to keep it, and
   "it was already there" is not a defence a reader ever sees. This is
-  the one place the "do not touch a sentence for style alone" rule does
-  not reach: that rule governs a fix job, where the diff must stay
-  readable. In a rewrite every sentence is new.
+  the "do not touch a sentence for style alone" rule does not reach.
+  That rule governs a **fix** job, where the diff must stay readable
+  enough to review. **A rewrite and an edit are both bound by the
+  register rules**: in a rewrite every sentence is new, and an edit has
+  sentences, words and headings in scope by definition.
 - **"You" is allowed and is usually the right answer.** Removing it
   tends to produce the agentless passive this file bans two rules
   higher up. "After you authenticate" beats "after authentication is
@@ -610,10 +632,10 @@ A sentence that carries no information, and only points at
 information, is slower than the thing it points at. Delete it.
 
 Delete on sight: "this section covers", "this page covers", "this page
-uses", "this page has", "on this page", "now that we have", "it is
-worth noting", "importantly", "crucially", "pay special attention",
-"the catch is", "note that", "worth knowing", "and this is why it
-bites". State the fact and stop.
+uses", "this page has", "now that we have", "it is worth noting",
+"importantly", "crucially", "pay special attention", "the catch is",
+"note that", "worth knowing", "and this is why it bites". State the
+fact and stop.
 
 A lead-in sentence carries a fact. It never restates the heading above
 it.
@@ -834,15 +856,13 @@ The opening gets a new reader ready before it teaches anything:
   page. "A `hot` backup is the fastest to restore from" is the
   definition; "This page uses three terms" is a sentence about the
   page, and the page is not the subject.
-- Which commands change something.
-- What to collect before starting, and the command or screen that
-  produces each value.
 
 Say what the reader can do before what the product cannot. A page that
 opens with five things the product does not do has told the reader
 nothing they can act on.
 
-**No inline index of the page's own sections.** Not a bulleted list of
+**No inline index of the page's own sections, anywhere on the page.**
+Not a bulleted list of
 links to the headings below, not "This page has eight sections:", not a
 table of contents under any name. MkDocs Material renders the heading
 tree in the right-hand pane on every page, so an inline copy is a

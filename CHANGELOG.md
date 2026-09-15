@@ -52,6 +52,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   replaced.** A phrase that arrives through a fact ledger is still
   published under the writer's own name. Both new findings were
   phrasing the rewrite carried over rather than invented.
+- **A step whose command changes something says so in that step.**
+  This is where the requirement dropped from the page opening now
+  lives. The reviewer objected to the claim sitting in the intro
+  paragraph, not to its existing, and a reader four minutes past the
+  intro is about to run the command.
+- **The connection flag is still printed on a destructive step.** It
+  answers a different question there: which tenant the command runs
+  against, not whether the reader is authenticated. A reader holding a
+  profile per environment can otherwise drop the wrong database from a
+  command that reads correctly.
 
 ---
 

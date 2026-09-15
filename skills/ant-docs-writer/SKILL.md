@@ -111,18 +111,11 @@ renders, and the page says where the screen is and what puts the reader
 on it.
 
 The connection flag (`--base-url` or `--profile`) is the exception, and
-it is stated **once** per page, in a "Before You Start" section near
-the top that names the flag and the command that sets it in a profile.
-Repeating it on every block is noise that goes stale. A page with no
-such section fails this item even when every command is otherwise
-complete.
-
-A console page needs the same section for a different reason. It has
-no connection flag, so instead it names what the reader must have
-before starting, the screen each value comes from, and the screen the
-first step begins on. A console page that drops the reader into step
-one with no route to that screen fails this item exactly as a
-command-line page with no profile section does.
+it is **assumed, not stated**. A reader who has no authenticated
+profile cannot have reached a page about restoring their database, so
+telling them to log in spends the section's attention on the one
+prerequisite every reader already met. The page that sets the profile
+up states it; every other page is silent about it.
 
 **1b. What will the reader do instead of the step you wrote?** Name
 the shortcut that works right now and say what it costs. A step that
@@ -281,11 +274,24 @@ that makes a page readable.
   order, they are bullets. Number the steps in sequence, `1.` then `2.`
   then `3.`, rather than repeating `1.` and letting the renderer count.
   Indent everything belonging to a step by four spaces.
-- **Every precondition goes in Before You Start, all of them.** A
-  condition that makes the task fail is a precondition wherever you
-  discovered it, so a reader who meets the list has met the whole list.
-  A condition left in a later section is one the reader reaches after
-  the failure it predicts.
+- **Before You Start holds what is specific to THIS page, and nothing
+  else.** Four kinds of entry earn a place: a value the reader must
+  have in hand before step one, with the command or screen that
+  produces it; a condition specific to this task that makes it fail;
+  an irreversible action reachable before its guard; and, on a console
+  page, the screen step one begins on and the route to it. The database
+  ID being restored and the backup ID being restored from are entries.
+  An authenticated profile, a supported shell, a network connection and
+  an account are not, because they are true of every page and a reader
+  who lacked one would not be here. **If nothing page-specific
+  survives, the page carries no Before You Start section.** An empty
+  section that exists to match the other pages costs the reader the
+  attention it takes to read and teaches them the heading is skippable
+  on the page where it matters.
+- **A page-specific precondition goes in that section wherever you
+  discovered it**, so a reader who meets the list has met the whole
+  list. A condition left in a later section is one the reader reaches
+  after the failure it predicts.
 - **Do not print a destructive flag in a copyable command.** Show the
   command as it runs interactively, with the prompt intact, and describe
   the flag that skips the prompt in the step beside it. A reader
@@ -585,7 +591,8 @@ looking only at structure.
 A sentence that carries no information, and only points at
 information, is slower than the thing it points at. Delete it.
 
-Delete on sight: "this section covers", "now that we have", "it is
+Delete on sight: "this section covers", "this page covers", "this page
+uses", "this page has", "on this page", "now that we have", "it is
 worth noting", "importantly", "crucially", "pay special attention",
 "the catch is", "note that", "worth knowing", "and this is why it
 bites". State the fact and stop.
@@ -594,11 +601,11 @@ A lead-in sentence carries a fact. It never restates the heading above
 it.
 
 **A structural lead-in is not signposting.** The sentence introducing a
-list, a table or the opening's section index is required by the format
-rules and is exempt from this section. Keep it to one clause that names
-what the list holds, ending in a colon: "This page has four sections:"
-is fine. What stays banned is the sentence that tells the reader how to
-feel about what follows, or restates the heading it sits under.
+list or a table is required by the format rules and is exempt from this
+section. Keep it to one clause that names what the list holds, ending
+in a colon: "A restore needs three values:" is fine. What stays banned
+is the sentence that tells the reader how to feel about what follows,
+restates the heading it sits under, or makes the page its own subject.
 
 No forward-looking text. Not "yet", "coming", "planned", "soon", or
 "today" used as a temporal hedge. Describe what is.
@@ -804,13 +811,11 @@ entirely and is given below.
 The opening gets a new reader ready before it teaches anything:
 
 - What the page does, or what has gone wrong.
-- A linked index of the sections, when there are more than three. It
-  lists **every** heading on the page, navigational ones included. A
-  cold reader who counts eight headings under a sentence promising five
-  starts wondering what else was dropped. Navigational headings do not
-  count toward the threshold that triggers the index, and they do
-  appear in it once it exists.
-- The three or four terms the page leans on, one sentence each.
+- The three or four terms the page leans on, one sentence each. Define
+  them as facts about the product, not as an announcement about the
+  page. "A `hot` backup is the fastest to restore from" is the
+  definition; "This page uses three terms" is a sentence about the
+  page, and the page is not the subject.
 - Which commands change something.
 - What to collect before starting, and the command or screen that
   produces each value.
@@ -819,6 +824,22 @@ Say what the reader can do before what the product cannot. A page that
 opens with five things the product does not do has told the reader
 nothing they can act on.
 
+**No inline index of the page's own sections.** Not a bulleted list of
+links to the headings below, not "This page has eight sections:", not a
+table of contents under any name. MkDocs Material renders the heading
+tree in the right-hand pane on every page, so an inline copy is a
+second navigation the reader has to reconcile with the real one, and it
+goes stale the first time a heading is renamed. A README is the one
+exception, because it renders on GitHub, which has no such pane.
+
+**The page is not the subject of its own sentences.** "This page
+covers", "this page uses", "on this page", "below we will" are all the
+page talking about itself instead of about the product. Write the fact:
+"A restore replaces the current data with the data in the backup you
+select", never "This page explains what a restore does". A reader who
+wanted to know what the page contains has the heading and the
+navigation pane.
+
 Headings are gerund phrases in title case: "Backing up and Restoring a
 pgEdge Starfleet Managed Database", "Understanding a Backup",
 "Rotating a Credential". The first of those carries the full edition
@@ -826,10 +847,7 @@ name because a heading counts as the name's first appearance.
 The exception is a conventional navigational heading, which is a fixed
 label the reader scans for rather than a description: "Next Steps",
 "Troubleshooting", "Before You Start", "Prerequisites". Those keep
-their standard wording, and they do not count toward the number of
-sections that triggers a linked index in the opening. They are listed
-in that index once it exists, because an index that does not match the
-page reads as an out-of-date page.
+their standard wording.
 
 **The noun a customer would search for goes inside the gerund phrase.**
 "Comparing the Database Sizes" contains "database sizes" and is
@@ -901,8 +919,9 @@ heading rather than to a bullet.
 **A README is a page.** The sentence rules, the word rules and the
 79-character wrap all apply. What does not apply is the page-opening
 shape: a README opens with what the thing is and how to install it,
-not with what the reader will be able to do. It carries no linked
-section index unless it runs past a screen.
+not with what the reader will be able to do. It is also the one page
+that may carry a linked index of its own sections, and only when it
+runs past a screen, because GitHub renders it with no navigation pane.
 
 ## Editing text that already exists
 

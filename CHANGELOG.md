@@ -38,6 +38,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   announcement introducing them goes. Same review: "referring to the
   page is not generally a good practice for technical writing".
 
+### Added
+
+- **A ban on anthropomorphism**, under Register. Software does not
+  hold, know, want, see, care, remember, think or decide. The idiom
+  rule already covered the class and did not fire on "nothing your
+  application holds needs changing", so the case is now named: same
+  review, "applications don't have hands. What does that even mean?"
+- **The plain-formal-word rule now reaches whole constructions**, not
+  only single words. "A restore can report additional steps", not
+  "a restore can report more of them".
+- **The register rules bind phrasing inherited from the page being
+  replaced.** A phrase that arrives through a fact ledger is still
+  published under the writer's own name. Both new findings were
+  phrasing the rewrite carried over rather than invented.
+
 ---
 
 ## [1.3.0] — 2026-09-12

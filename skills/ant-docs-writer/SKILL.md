@@ -445,12 +445,30 @@ pressure. Every rule below follows from that.
 - **No conversational hedges or intensifiers.** "Pretty much", "just",
   "simply", "of course", "actually". "Simply" is the worst of them,
   because it tells a reader who is stuck that they should not be.
-- **Prefer the plain formal word where two words mean the same thing
-  and differ only in register.** "Needs", not "wants". "Shows", not
-  "surfaces". "Before", not "ahead of".
+- **Software does not hold, know, want, see, care, remember, think or
+  decide.** Name what actually happens instead. "Nothing your
+  application holds needs changing" fails, because an application holds
+  nothing and the sentence names no referent a reader can check;
+  "the connection string does not change, so the application needs no
+  edit" says the same thing about things that exist. This is the idiom
+  rule's hardest case, because an anthropomorphism reads as plain
+  English to whoever wrote it.
+- **Prefer the plain formal word or phrase where two mean the same
+  thing and differ only in register.** "Needs", not "wants". "Shows",
+  not "surfaces". "Before", not "ahead of". This applies to whole
+  constructions, not only to single words: "a restore can report
+  additional steps", not "a restore can report more of them".
 - **Formal does not mean longer.** It means precise and unmarked. A
   sentence that has to be read twice for its tone is as broken as one
   that has to be read twice for its grammar.
+- **These rules bind every sentence in a rewrite, including the ones
+  that came from the page you are replacing.** A phrase that reached
+  you through a fact ledger is still a phrase you are publishing under
+  your own name. Inheriting an idiom is not a reason to keep it, and
+  "it was already there" is not a defence a reader ever sees. This is
+  the one place the "do not touch a sentence for style alone" rule does
+  not reach: that rule governs a fix job, where the diff must stay
+  readable. In a rewrite every sentence is new.
 - **"You" is allowed and is usually the right answer.** Removing it
   tends to produce the agentless passive this file bans two rules
   higher up. "After you authenticate" beats "after authentication is

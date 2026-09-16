@@ -33,10 +33,9 @@ faults that no prose rule addresses. Where two rules contradict each
 other on one sentence, the order under "When two rules conflict"
 decides which wins.
 
-This skill is self-contained. It carries the prose rules, the content
-checklist, the settled product vocabulary and the repository mechanics
-a writer needs, so there is no second rules file to open and no way for
-two documents to drift apart into contradicting each other.
+This skill is self-contained: every rule a writer needs lives inside
+it, split across files loaded by job, with no separate rules document
+outside the skill to reconcile against.
 
 **Four gate scripts ship beside this file**: `signals.py`,
 `check-ledger.py`, `check-sources.py` and `check-mechanics.py`. Your
@@ -71,9 +70,11 @@ it.
    wrong however well it reads. **Job scope outranks this item on a
    restyle or a restructure**: the writer adds no fact and does not go
    looking for one, so a failing item that needs a new fact is not
-   fixed. It is reported in the hand-back instead, naming the item (the
-   item numbers are in shape.md, even where the job did not load it),
-   so the person who asked can request a fix or an overhaul.
+   fixed. It is reported in the hand-back instead, as a gap described
+   in words: the missing fact or step and why the reader needs it, with
+   no item number, so the person who asked can request a fix or an
+   overhaul. An overhaul and a new page work the checklist in shape.md
+   directly, by number.
 3. **Product truth.** Never delete a technical claim unless the same
    claim already stands elsewhere on the page. This outranks the rule
    that sends a number to the page owning it, so link out and keep the
@@ -87,10 +88,9 @@ it.
    a fix, an overhaul or a new page. A restyle or a restructure narrows
    that sort to a restatement only, under "Say less, or say nothing"
    itself. Product truth protects a fact the reader acts on, not every
-   true sentence. It also
-   outranks "keep the consequence, drop the mechanism" in facts.md,
-   which applies only where the mechanism is not itself the only
-   statement of a behavior.
+   true sentence. It also outranks "keep the consequence, drop the
+   mechanism" in writing.md, which applies only where the mechanism is
+   not itself the only statement of a behavior.
 4. **House style.** Every other rule in this skill. Two house-style
    rules can still collide, so three tie-breaks settle the pairs that
    keep recurring:
@@ -143,7 +143,7 @@ not say, **ask the person who asked you** before writing anything.
 
 | Job | Reads old page | Ledger | Fact list | Heading tree | Gates | Reviews |
 |---|---|---|---|---|---|---|
-| Fix | yes | no | no (the entry for the changed claim goes in the hand-back) | no | `check-mechanics.py` | correctness review of the changed claim only |
+| Fix | yes | no | no (hand-back entry, in facts.md's fact list entry form) | no | `check-mechanics.py` | correctness review of the changed claim only |
 | Restyle | yes | no | no | no | `check-mechanics.py`, `signals.py` | meaning check + cold read, in parallel |
 | Restructure | yes | no | no | short | `check-mechanics.py`, `signals.py` | meaning check + cold read, in parallel |
 | Overhaul | never | yes | yes | short | `check-sources.py`, `check-ledger.py` (`--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows and an image is available |
@@ -151,17 +151,13 @@ not say, **ask the person who asked you** before writing anything.
 
 ### Load these files before you start
 
-Every job loads `style-standard.md`, `writing.md`, `gates.md` and
-`product-vocabulary.md`. Add to that set by job:
+Every job loads `style-standard.md`, `writing.md`, `gates.md`,
+`product-vocabulary.md` and `reviews.md`. Add to that set by job:
 
-- **Fix** adds `reviews.md` (the correctness review section) and
-  `facts.md` (`## Never invent` only).
-- **Restyle** adds `reviews.md` (the meaning check and cold read
-  sections).
-- **Restructure** adds `shape.md` and `reviews.md` (the meaning check
-  and cold read sections).
-- **Overhaul** and **new page** add `shape.md`, `facts.md` and
-  `reviews.md`.
+- **Fix** adds `facts.md`.
+- **Restyle** adds nothing more.
+- **Restructure** adds `shape.md`.
+- **Overhaul** and **new page** add `shape.md` and `facts.md`.
 
 Two files are surface add-ons, loaded only when the page itself is
 that surface: `in-app-copy.md` for in-app copy, `agent-pages.md` for a
@@ -227,7 +223,7 @@ answer rather than a report that the work happened:
   reviewed.
 - **The fact list**, on an overhaul and on a new page. A fix carries no
   fact list file: the entry for the changed claim goes directly in the
-  hand-back.
+  hand-back, in facts.md's fact list entry form.
 - **The allow file**, on an overhaul and on a new page, from the moment
   a shared sequence needed one.
 - **The heading tree**, on a restructure, an overhaul and a new page:

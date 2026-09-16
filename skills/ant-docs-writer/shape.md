@@ -13,11 +13,12 @@ still fails a reader who does not already know it, so the checks under
 yourself.
 
 **On a restyle or a restructure, an item that fails for want of a fact
-is not fixed by adding one.** Report it in the hand-back instead, with
-its number, under the job-scope rule in "When two rules conflict" in
-SKILL.md. Item 6 is the case this comes up most: a restructure may
-build the missing save-first step only from a fact already on the
-page, never a new one.
+is not fixed by adding one.** Report it in the hand-back instead, as a
+gap described in words: the missing fact or step and why the reader
+needs it, with no item number, under the job-scope rule in "When two
+rules conflict" in SKILL.md. Item 6 is the case this comes up most: a
+restructure may build the missing save-first step only from a fact
+already on the page, never a new one.
 
 **1. Can the reader do every action exactly as described?** On a
 command-line page, a command needs its full prefix, a placeholder for
@@ -196,7 +197,7 @@ Every page opens with a sentence. A gerund or a noun phrase standing in
 for one is a fragment however long it runs, and twenty-six guides opened
 that way before anyone noticed. This applies to the first sentence of
 the body, never to the heading above it, which is a different rule
-entirely and is given below.
+entirely, given under "Format" in writing.md.
 
 The opening gets a new reader ready before it teaches anything:
 
@@ -228,25 +229,9 @@ select", never "This page explains what a restore does". A reader who
 wanted to know what the page contains has the heading and the
 navigation pane.
 
-Headings are gerund phrases in title case: "Backing up and Restoring a
-pgEdge Starfleet Managed Database", "Understanding a Backup",
-"Rotating a Credential". The first of those carries the full edition
-name because a heading counts as the name's first appearance.
-The exception is a conventional navigational heading, which is a fixed
-label the reader scans for rather than a description: "Next Steps",
-"Troubleshooting", "Before You Start", "Prerequisites". Those keep
-their standard wording.
-
-**The noun a customer would search for goes inside the gerund phrase.**
-"Comparing the Database Sizes" contains "database sizes" and is
-findable. "Making Your Choice" contains nothing and is not. If the
-gerund is hiding the searchable noun, the heading is wrong, not the
-rule.
-This is the house form, it is what the existing pages use, and an
-imperative heading is the common way to break it. Name what the section
-contains, in words a customer would search for. Never a sentence, never
-a question with no answer, never a judgment, and never a dash carrying
-a second clause.
+Heading wording and format, gerund phrases, title case, the searchable
+noun, and the standard navigation labels, are in writing.md, under
+"Format".
 
 A run of steps is a numbered list, not a run of headings. Promoting each
 step to its own heading fills the navigation pane with fragments and

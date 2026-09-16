@@ -1,9 +1,7 @@
 # Reviews
 
 The review each job runs, the cold-read and meaning-check dispatches,
-and who a finding binds. Every job loads at least one section here.
-
-## Reviews
+and who a finding binds. Every job loads this file.
 
 Review composition follows the job, set out in the table under "Ask
 which job this is before you start" in SKILL.md. A fix gets a

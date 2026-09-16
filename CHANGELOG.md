@@ -15,23 +15,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that need it**, in place of one 1,695-line, 88,848-byte file every
   job read in full:
 
-      SKILL.md           12,885 B  top rule, conflicts, jobs, ships, reading
-      style-standard.md  10,179 B  Register, Words
-      writing.md         26,102 B  sentences through repository mechanics
-      shape.md           12,895 B  checklist, shape, openings
-      facts.md           12,395 B  sources, never invent, two artifacts
-      gates.md            4,443 B  the gates
-      reviews.md          8,636 B  reviews
-      in-app-copy.md      1,313 B  in-app copy
+      SKILL.md           13,882 B  top rule, conflicts, jobs, ships, reading
+      style-standard.md  10,946 B  Register, Words
+      writing.md         28,565 B  sentences through repository mechanics
+      shape.md           12,350 B  checklist, shape, openings
+      facts.md           10,777 B  sources, never invent, two artifacts
+      gates.md            5,285 B  the gates
+      reviews.md           8,627 B  reviews
+      in-app-copy.md       1,452 B  in-app copy
 
   SKILL.md is now the router: a load list names the files each job
   reads, and "What ships with the draft" requires the files read as
   the first item in the hand-back. Every cross-reference that used to
   say "above", "below" or "this file" now names the file the rule
-  moved to. A 1.4.2 restyle measured 16.5 minutes, 6.6 of them before
-  the first draft, loading a 106 KB skill of which a restyle uses only
-  part. Nothing is re-measured yet: this release does not claim a
-  speed-up.
+  moved to. A restyle loads SKILL.md plus style-standard.md,
+  writing.md, gates.md, product-vocabulary.md and reviews.md: 74,884
+  bytes, against 105,938 bytes for the whole 1.4.2 skill. A 1.4.2
+  restyle measured 16.5 minutes, 6.6 of them before the first draft,
+  loading a 106 KB skill of which a restyle uses only part. Nothing is
+  re-measured yet: this release does not claim a speed-up.
 - **The cold reader and the correctness reviewer get style-standard.md
   handed over unchanged, never an extract.** Three places in
   reviews.md used to instruct an agent to copy out `## Register`
@@ -51,6 +53,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   reports the cold read's two findings and nine it missed: six
   "popup", two "a way back" and a third "rather than". On its output
   it reports the eight "popup" the writer kept.
+- **check-mechanics.py masks a quoted string or code span wrapped
+  across a line break, and joins a phrase match at a barrier no
+  paragraph gap crosses.** A quoted string or code span broken at 79
+  columns was masked line by line, so a banned word inside it was
+  flagged; a phrase could also match across a blank line, a skipped
+  fence or a skipped comment. "more of them" no longer flags "one or
+  more of them": the rule now needs the modal-verb construction it
+  names. "load-bearing" is gone, having no rule in the skill; the
+  panel advice now names "section" inside a dialog, as
+  product-vocabulary.md does; "carried weight", "carrying weight" and
+  "and this is why it bites" are added; "this section uses/has" is no
+  longer matched. All seven reproducing inputs from the review pass.
+  Corpus of 89 pages: 1,347 findings, down from 1,401 before 122eeb0's
+  "the user" removal; the restyle input page and the persona-test page
+  are unchanged at 14 each.
 
 ---
 

@@ -354,6 +354,26 @@ No forward-looking text. Not "yet", "coming", "planned", "soon", or
   about output blocks. It says nothing about screenshots, which are a
   product decision and not a style one.
 
+Headings are gerund phrases in title case: "Backing up and Restoring a
+pgEdge Starfleet Managed Database", "Understanding a Backup",
+"Rotating a Credential". The first of those carries the full edition
+name because a heading counts as the name's first appearance.
+The exception is a conventional navigational heading, which is a fixed
+label the reader scans for rather than a description: "Next Steps",
+"Troubleshooting", "Before You Start", "Prerequisites". Those keep
+their standard wording.
+
+**The noun a customer would search for goes inside the gerund phrase.**
+"Comparing the Database Sizes" contains "database sizes" and is
+findable. "Making Your Choice" contains nothing and is not. If the
+gerund is hiding the searchable noun, the heading is wrong, not the
+rule.
+This is the house form, it is what the existing pages use, and an
+imperative heading is the common way to break it. Name what the section
+contains, in words a customer would search for. Never a sentence, never
+a question with no answer, never a judgment, and never a dash carrying
+a second clause.
+
 **A README is a page.** The sentence rules, the word rules and the
 79-character wrap all apply. What does not apply is the page-opening
 shape: a README opens with what the thing is and how to install it,
@@ -384,8 +404,9 @@ runs past a screen, because GitHub renders it with no navigation pane.
   style alone. Voice and punctuation changes to existing text go in
   their own pull request, so a reviewer can tell a technical change
   from a preference. This is the difference between a fix and a
-  restyle under "The shape of the page" in shape.md, and it is why the
-  jobs are worth separating before you start rather than after.
+  restyle, defined under "Ask which job this is before you start" in
+  SKILL.md, and it is why the jobs are worth separating before you
+  start rather than after.
 
 ## No internal history, and no internal names
 
@@ -403,6 +424,35 @@ A page carries no trace of how it was made or who made it.
   internal" stays true until it is not, and stays in the text.
 - **Evidence lives outside the page**, in the pull request. Never leave
   an HTML comment carrying a source in a page a customer reads.
+- The measurement is the reason a sentence is true. It is never the
+  sentence. Dates, sample counts, fixture names and the words
+  "measured", "polled" and "probe" live in the pull request, not on the
+  page.
+- A caveat is written for the reader, not as a lab note. "Recorded from
+  observation" tells the reader the author guessed. "The API publishes
+  no list of values for this field, so treat anything other than X as a
+  fault" tells them what to do.
+- **Keep the consequence, drop the mechanism.** The reader is told what
+  they can do and see, never how the platform does it. "Rotating the
+  credential for the app role restarts AI services" is the right weight.
+  Not the container, not the startup sequence, not which process read
+  what.
+- **No list of cases that will age.** "A restore, resize, service change
+  or credential rotation" becomes "a modification". A list like that is
+  wrong the day the fifth case ships.
+- **No scope creep.** A field, a badge or a section explains itself and
+  not a neighboring feature. Sizing rules belong in the resize flow,
+  not on a storage panel.
+- **A number stays in prose only when the reader acts on it.** "About
+  ten seconds" earns its place. "Twenty-one of twenty-one attempts" does
+  not. Link to the one page that owns a number rather than restating it
+  where it will go stale.
+- **Where those two pull apart, ask where the reader acts.** A number
+  they act on while reading this page stays on this page. A number they
+  act on somewhere else is a link. A price in a size table is the first
+  kind, because the reader is choosing a size from that table, so the
+  table keeps its prices. The same price quoted in a sentence about
+  billing is the second kind, and links out.
 - **Never name a competitor or another vendor's database service.**
   Third-party tools the reader actually uses, such as psql, pgAdmin, an
   ORM or an IDE, are fine. A page describing a migration may name the

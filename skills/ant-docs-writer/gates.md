@@ -109,6 +109,12 @@ from style-standard.md or writing.md. That covers the banned words,
 the named idioms and hedges, the register swaps, the standard-verb
 rule, the product and interface nouns, and the signposting to delete
 on sight. More than two of the accumulation words on one page fails
-it too. A quoted product string is exempt, the same exemption as
-everywhere else in this skill.
+it too. A quoted product string is exempt, as style-standard.md
+defines under "Words".
+
+On a fix, a finding in a sentence the fix did not change is listed in
+the hand-back and not fixed; only a finding in a sentence the fix
+changed must be fixed before the page is done. A restyle, a
+restructure, an overhaul and a new page fix every finding, because
+wording is in their scope.
 

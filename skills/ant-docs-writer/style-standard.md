@@ -46,16 +46,16 @@ pressure. Every rule below follows from that.
   you through a fact ledger is still a phrase you are publishing under
   your own name. Inheriting an idiom is not a reason to keep it, and
   "it was already there" is not a defense a reader ever sees. This is
-  the "do not touch a sentence for style alone" rule does not reach.
-  That rule governs a **fix** job, where the diff must stay readable
-  enough to review. **An overhaul, a restructure and a restyle are all
-  bound by the register rules**: in an overhaul every sentence is new,
-  a restructure rewrites all wording, because it includes a restyle,
-  and a restyle has sentences, words and headings in scope by
-  definition.
+  where the "do not touch a sentence for style alone" rule in
+  writing.md does not reach. That rule governs a **fix** job, where the
+  diff must stay readable enough to review. **An overhaul, a
+  restructure and a restyle are all bound by the register rules**: in
+  an overhaul every sentence is new, a restructure rewrites all
+  wording, because it includes a restyle, and a restyle has sentences,
+  words and headings in scope by definition.
 - **"You" is allowed and is usually the right answer.** Removing it
-  tends to produce the agentless passive this file bans two rules
-  higher up. "After you authenticate" beats "after authentication is
+  tends to produce the agentless passive writing.md bans, under
+  "Sentences". "After you authenticate" beats "after authentication is
   complete". Do not write "we", and do not write "the user" about the
   person reading the page.
 
@@ -69,7 +69,7 @@ pressure. Every rule below follows from that.
   product string using a different noun is not a violation**, because
   those are the product's words. Quote the error exactly and use your
   own noun in the prose around it.
-- **A quoted product string is reproduced verbatim and is exempt from
+- **A quoted product string is reproduced exactly and is exempt from
   every rule in this skill**, this file and every file beside it,
   including the banned words in `product-vocabulary.md`. Button
   labels, error messages, field names and status values are quoted so

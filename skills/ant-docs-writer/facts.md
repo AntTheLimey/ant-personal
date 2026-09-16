@@ -1,7 +1,7 @@
 # Facts
 
-Sourcing, fact-checking and the ledger, loaded in full on an overhaul
-and a new page; a fix loads only "Never invent".
+Sourcing, fact-checking and the ledger, loaded in full on a fix, an
+overhaul and a new page.
 
 ## Ask what your sources are, before you gather anything
 
@@ -65,11 +65,11 @@ of them" defines the fact list and the ledger.
 
 ## Never invent
 
-A restyle or a restructure sources nothing here: both take the page's
-own claims as given and verify nothing against source. Where a rule
-below asks for a source or for new material, it binds a fix, an
-overhaul and a new page. "Say less, or say nothing" in writing.md
-governs what a restyle or a restructure may still cut.
+A restyle or a restructure verifies nothing against source, so nothing
+below binds them: every rule here is about sourcing or checking a
+claim, and binds a fix, an overhaul and a new page. "Say less, or say
+nothing" in writing.md governs what a restyle or a restructure may
+still cut.
 
 - On a fix, an overhaul and a new page: every command and flag exists
   in the generated reference, and every behavioral claim traces to a
@@ -77,27 +77,6 @@ governs what a restyle or a restructure may still cut.
   gated page. A claim with no source stays out, and what is true goes
   in its place. Record the source as you write the claim, in the fact
   list under "Reviews" in reviews.md.
-- **Keep the consequence, drop the mechanism.** The reader is told what
-  they can do and see, never how the platform does it. "Rotating the
-  credential for the app role restarts AI services" is the right weight.
-  Not the container, not the startup sequence, not which process read
-  what.
-- **No list of cases that will age.** "A restore, resize, service change
-  or credential rotation" becomes "a modification". A list like that is
-  wrong the day the fifth case ships.
-- **No scope creep.** A field, a badge or a section explains itself and
-  not a neighboring feature. Sizing rules belong in the resize flow,
-  not on a storage panel.
-- **A number stays in prose only when the reader acts on it.** "About
-  ten seconds" earns its place. "Twenty-one of twenty-one attempts" does
-  not. Link to the one page that owns a number rather than restating it
-  where it will go stale.
-- **Where those two pull apart, ask where the reader acts.** A number
-  they act on while reading this page stays on this page. A number they
-  act on somewhere else is a link. A price in a size table is the first
-  kind, because the reader is choosing a size from that table, so the
-  table keeps its prices. The same price quoted in a sentence about
-  billing is the second kind, and links out.
 - **Attribute a runtime number only to a surface you checked.** "The
   console shows these prices" is a claim like any other and needs a
   source. Where you cannot source where the number is displayed, print
@@ -143,14 +122,6 @@ governs what a restyle or a restructure may still cut.
   not proof.
 - Scope every claim to the command and the module actually checked. The
   same sentence written generally is often false for the sibling.
-- A caveat is written for the reader, not as a lab note. "Recorded from
-  observation" tells the reader the author guessed. "The API publishes
-  no list of values for this field, so treat anything other than X as a
-  fault" tells them what to do.
-- The measurement is the reason a sentence is true. It is never the
-  sentence. Dates, sample counts, fixture names and the words
-  "measured", "polled" and "probe" live in the pull request, not on the
-  page.
 
 ## Two artifacts, and the old page is not one of them
 

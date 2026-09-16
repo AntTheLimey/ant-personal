@@ -133,8 +133,9 @@ OPENER_RE = re.compile(
 
 # (pattern, replacement advice). Case-insensitive, whole words, and a
 # space in a pattern matches any run of whitespace, line breaks
-# included. Each entry is a rule stated in style-standard.md or
-# writing.md; a word only a careful reader could judge is not here.
+# included. Each entry is a rule stated in style-standard.md,
+# writing.md or product-vocabulary.md; a word only a careful reader
+# could judge is not here.
 NAMED = [
     (r"leverag(?:e|es|ed|ing)", "banned word"),
     (r"utiliz(?:e|es|ed|ing|ation)", "banned word, use \"use\""),
@@ -144,8 +145,7 @@ NAMED = [
     (r"synerg(?:y|ies)", "banned word"),
     (r"paradigm shifts?", "banned phrase"),
     (r"stakeholder alignment", "banned phrase"),
-    (r"load-bearing", "banned word, use \"critical\" or \"essential\""),
-    (r"carr(?:y|ies) weight", "idiom, use \"matter\""),
+    (r"carr(?:y|ies|ied|ying) weight", "idiom, use \"matter\""),
     (r"a way back", "idiom, use \"a way to undo it\""),
     (r"the shape of it", "idiom, use \"the structure\""),
     (r"lands wrong", "idiom"),
@@ -157,7 +157,8 @@ NAMED = [
     (r"surfaces (?:in|on|as|when|after|once|within|up)",
      "register, use \"appears\" or \"shows\""),
     (r"ahead of", "register, use \"before\""),
-    (r"more of them", "register, name what there is more of"),
+    (r"(?:can|could|will|may|might) \w+ more of them",
+     "register, name what there is more of"),
     (r"verbs?", "use \"command\""),
     (r"poll(?:s|ed|ing)?", "jargon, write \"run X until Y\""),
     (r"query an? command", "you run a command"),
@@ -166,13 +167,14 @@ NAMED = [
     (r"grab an? value", "you read a value"),
     (r"PostgreSQL", "use \"Postgres\""),
     (r"pgEdge Cloud", "retired name, use \"pgEdge Starfleet\""),
-    (r"(?<!pgEdge\s)Starfleet", "write \"pgEdge Starfleet\""),
+    (r"(?<!pgEdge\s)(?<!pgEdge\s\s)Starfleet",
+     "write \"pgEdge Starfleet\""),
     (r"unmeasured", "use \"unknown\""),
     (r"not recorded here", "use \"unknown\""),
     (r"pop-?ups?", "use \"dialog\""),
     (r"modals?", "use \"dialog\""),
-    (r"panels?", "use \"pane\""),
-    (r"this (?:section|page) (?:covers|uses|has)",
+    (r"panels?", "use \"pane\", or \"section\" inside a dialog"),
+    (r"this section covers|this page (?:covers|uses|has)",
      "signposting, delete it"),
     (r"now that we have", "signposting, delete it"),
     (r"it is worth noting", "signposting, delete it"),
@@ -181,6 +183,7 @@ NAMED = [
     (r"pay special attention", "signposting, delete it"),
     (r"the catch is", "signposting, delete it"),
     (r"note that", "signposting, delete it"),
+    (r"and this is why it bites", "signposting, delete it"),
     (r"coming soon", "forward-looking, describe what is"),
     (r"we", "do not write \"we\""),
 ]
@@ -240,19 +243,48 @@ def spelling(line):
     return sorted(found)
 
 
+PARAGRAPH_MASKS = [
+    r"``.*?``",
+    r"`[^`\n]*(?:\n[^`\n]*)?`",
+    r"\"[^\"\n]*(?:\n[^\"\n]*)?\"",
+    r"\u201c[^\u201d\n]*(?:\n[^\u201d\n]*)?\u201d",
+    r"\]\([^)]*\)",
+    r"\]\[[^\]]*\]",
+    r"^\s*\[[^\]]+\]:.*$",
+    r"<!--.*?-->",
+    r"https?://\S+",
+]
+
+
 def named(lines):
     """Named words and tics over the checked lines, across line breaks.
 
-    lines is a list of (line number, masked text). The text is joined
-    with newlines so a phrase wrapped at 79 columns still matches, and
-    each match is mapped back to the line it starts on.
+    lines is a list of (line number, raw text). Consecutive lines of one
+    paragraph are joined with a newline, so a phrase wrapped at 79
+    columns still matches, and a code span or a quoted string wrapped
+    across one line break is still masked. A blank line, or a gap where
+    a fence or a comment was skipped, joins with a barrier instead, so
+    no phrase matches across it. Masking keeps every offset, and each
+    match is mapped back to the line it starts on.
     """
-    starts, parts, pos = [], [], 0
+    barrier = "\n" + BLANK + "\n"
+    starts, parts, pos, prev = [], [], 0, None
     for n, text in lines:
+        if parts:
+            sep = "\n"
+            if prev is None or n != prev + 1 or not text.strip() \
+                    or not parts[-1].strip():
+                sep = barrier
+            parts.append(sep)
+            pos += len(sep)
         starts.append((pos, n))
         parts.append(text)
-        pos += len(text) + 1
-    joined = "\n".join(parts)
+        pos += len(text)
+        prev = n
+    joined = "".join(parts)
+    for pat in PARAGRAPH_MASKS:
+        joined = re.sub(pat, lambda m: re.sub(r"[^\n]", BLANK, m.group()),
+                        joined, flags=re.M)
 
     def where(offset):
         line_start, n = max(s for s in starts if s[0] <= offset)
@@ -301,7 +333,7 @@ def check(text):
         if re.search(r"<!--(?!.*-->)", raw):
             comment = True
             raw = raw[:raw.index("<!--")]
-        checked.append((n, mask(raw)))
+        checked.append((n, raw))
         for col, word, us in spelling(mask(raw)):
             findings.append((n, col + 1,
                              f"British spelling \"{word}\", "

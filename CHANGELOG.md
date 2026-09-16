@@ -68,6 +68,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Corpus of 89 pages: 1,347 findings, down from 1,401 before 122eeb0's
   "the user" removal; the restyle input page and the persona-test page
   are unchanged at 14 each.
+- **The cold-read report format is fixed, and the fix round starts on
+  the first review back.** Measured on the 1.4.2 restyle: the meaning
+  check took 1.5 minutes, and the cold read took 5.5 minutes, most of
+  it writing the report. The cold-read prompt in reviews.md now asks
+  for a first line on task completion, then one pipe-delimited line
+  per finding (the quoted sentence, heading or alt text, the kind, and
+  the matching detail), with no summary, no praise, and no cap on the
+  count. reviews.md also states that the writer applies a review's
+  findings as soon as it returns rather than waiting for the second,
+  resolves a finding both reviews name in favor of the fact-bearing
+  one, and runs the gates once after both are applied. This does not
+  claim a speed-up; nothing is re-measured yet.
 
 ---
 

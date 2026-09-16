@@ -100,6 +100,13 @@ not, and neither substitutes for it. Run both, even on a small change,
 and run the screenshot check too wherever it applies. A fix runs one
 review only, and that review stands alone.
 
+The writer starts applying a review's findings the moment that review
+returns, then applies the second review's findings when they arrive,
+all within the one fix round. Where both reviews name the same
+sentence, the fact-bearing finding, from the meaning check or the
+correctness review, is applied first. The gates run once, after both
+reviews' findings are applied.
+
 **Where a job gets a cold read, it is the only gate that catches an
 ordering defect, and that is why it is never skipped there.** Every
 rule in this skill is applied by someone who already knows what the
@@ -125,24 +132,25 @@ no other skill files, no explanation of the product. The file carries
 its own quoted-product-string exemption, so a contraction or a banned
 word inside a quoted UI label is not reported. Tell it:
 
-> You are a cold reader. You have never seen this product. Read only
-> this file, the pages it links to, and the attached style standard.
-> Whatever the page does not tell you, you do not know. A
-> cross-reference inside the standard points at text you do not have.
-> Ignore it. Report: could you complete the task, and if not, the
-> first sentence at which you were stuck. Every place you had to
-> guess, quoting the sentence and naming the readings. Every question
-> the page raises and does not answer. Anything you would have done
-> wrong, and what the consequence would have been. Where the page
-> breaks the attached standard, quoting the sentence and the rule.
-> Read alt text and headings as page vocabulary too. What the page
-> does well. Judge only what is on the page. If you find yourself
-> reasoning "it presumably works like X", record that as a guess
-> instead.
+> You are a cold reader. You have never seen this product. Read only this file,
+> the pages it links to, and the attached style standard. Whatever the page
+> does not tell you, you do not know. A cross-reference inside the standard
+> points at text you do not have. Ignore it. Read alt text and headings as page
+> vocabulary too. Judge only what is on the page. If you find yourself
+> reasoning "it presumably works like X", record that as a guess instead.
+>
+> Report in this form and nothing else. First line: could you complete the
+> task, and if not, the first sentence at which you were stuck. Then one line
+> per finding, giving the quoted sentence, heading or alt text, the kind
+> (guess, unanswered question, would do wrong, or breaks the standard), and the
+> matching detail: the readings for a guess, the consequence for a would do
+> wrong, the rule's name for a breaks-the-standard finding. Separate the fields
+> with "|". Report every finding, with no cap on the count. Write no summary,
+> no introduction, no restatement of the page, and no praise.
 
-The fourth answer is the one that matters. "I would have skipped that
-step because it reads as ceremony" is a defect report, and no other
-review produces it.
+A would-do-wrong finding is the one that matters. "I would have skipped
+that step because it reads as ceremony" is a defect report, and no
+other review produces it.
 
 **On an overhaul and a new page, a page that states what a screen
 shows gets a separate check against the image, run alongside the cold

@@ -896,7 +896,7 @@ rule.
 This is the house form, it is what the existing pages use, and an
 imperative heading is the common way to break it. Name what the section
 contains, in words a customer would search for. Never a sentence, never
-a question with no answer, never a judgement, and never a dash carrying
+a question with no answer, never a judgment, and never a dash carrying
 a second clause.
 
 A run of steps is a numbered list, not a run of headings. Promoting each
@@ -951,7 +951,7 @@ heading rather than to a bullet.
   names the command and says what it does.
 - Describe command output in prose. Paste a block only where prose
   cannot teach the shape, and then only text captured from a real call,
-  never composed by hand and never tidied up afterwards. This rule is
+  never composed by hand and never tidied up afterward. This rule is
   about output blocks. It says nothing about screenshots, which are a
   product decision and not a style one.
 
@@ -1052,7 +1052,7 @@ A page carries no trace of how it was made or who made it.
   the product agrees with the prose, the image is stale: write what
   the source says, flag the image for recapture in the pull request,
   and say nothing on the page about the discrepancy. Never write prose
-  backwards to match a stale screenshot.
+  backward to match a stale screenshot.
 - **A screenshot is not a source.** It is evidence that something
   appeared on screen once, and it goes stale silently. A value that
   exists only at runtime, such as a price the console fetches from a
@@ -1258,7 +1258,7 @@ leaks separately from phrasing, so a ledger in page order hands the
 writer the page's structure back.
 
 Tell the writer in as many words that the order carries no editorial
-judgement and must not be followed.
+judgment and must not be followed.
 
 ### The gates, and when each runs
 
@@ -1320,7 +1320,7 @@ See "Reading signals".
 
 **A crossed bound fails the run.** The script exits non-zero and marks
 the line `FAIL`, so the rule above applies to it as it does to the
-other two gates.
+other gates.
 
 Run `check-mechanics.py` on the draft, on every job:
 

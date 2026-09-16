@@ -16,7 +16,7 @@ repository.
 They are different jobs. This skill writes in Ant's voice, which is
 right for a blog and wrong for a procedure: documentation is written
 for a customer who opened the page to do one thing and leave, in a
-semi-formal register that is nobody's voice in particular.
+formal register that is nobody's voice in particular.
 `ant-docs-writer` carries its own content checklist, prose rules,
 product vocabulary and review process, and is self-contained.
 

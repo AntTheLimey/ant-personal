@@ -106,7 +106,7 @@ the same kind of object. Pick from this list and use one word for one
 thing for the whole page.
 
 - A **pane** is a region of a page that stays on the page. Not panel.
-- A **section** is a labelled region inside a dialog or a wizard. Pane
+- A **section** is a labeled region inside a dialog or a wizard. Pane
   is for a page, section is for what sits inside an overlay, and
   neither is panel.
 - A **screen** is what fills the window when the reader is not in a
@@ -121,7 +121,7 @@ thing for the whole page.
   One of its steps is a **wizard step**, named that way so it cannot be
   confused with a numbered step in your own procedure. Do not number
   your steps to match the wizard's: number the reader's actions, and
-  name a wizard step only where the reader must recognise it on screen.
+  name a wizard step only where the reader must recognize it on screen.
 - A **tab** switches the content of a pane without leaving the page.
 - A **card** is a bordered block holding one resource or one summary.
 - A **banner** spans the top of a page or a pane and reports state. A
@@ -142,9 +142,9 @@ thing for the whole page.
   own procedure.
 
 Two of these overturn current usage on purpose: pane wins over panel
-even though both are in the corpus, and popup is retired in favour of
+even though both are in the corpus, and popup is retired in favor of
 dialog even though it is the more common of the two, because the
-register is semi-formal and popup is not.
+register is formal and popup is not.
 
 **This list is inert on a command-line page.** A page with no console
 object on it takes none of these words and needs none of them.

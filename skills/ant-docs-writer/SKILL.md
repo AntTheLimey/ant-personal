@@ -77,7 +77,7 @@ it.
    protects a fact the reader acts on, not every true sentence. It also
    outranks "keep the consequence, drop the mechanism", which applies
    only where the mechanism is not itself the only statement of a
-   behaviour.
+   behavior.
 4. **House style.** Every other rule in this file. Two house-style
    rules can still collide, so three tie-breaks settle the pairs that
    keep recurring:
@@ -99,8 +99,8 @@ it.
 Run all seven before writing a sentence, and again before opening a
 pull request. Each is a question with a failing answer, not a
 preference. Passing all seven is not done: a page passes this list and
-still fails a reader who does not already know it, so the cold read
-under "Reviews" is the last gate and you run it yourself.
+still fails a reader who does not already know it, so the checks under
+"Reviews" are the last gate and you dispatch them yourself.
 
 **1. Can the reader do every action exactly as described?** On a
 command-line page, a command needs its full prefix, a placeholder for
@@ -162,7 +162,7 @@ Move it and repeat the test.
 A note is any block that could be lifted out without changing a single
 thing the reader does. That includes an indented paragraph under a list
 item, an admonition and a parenthetical aside, whether or not the word
-"note" appears. Reading only the blocks labelled NOTE is how this item
+"note" appears. Reading only the blocks labeled NOTE is how this item
 gets passed by mistake.
 
 **The test is whether removing it changes an action, not whether it is
@@ -242,7 +242,7 @@ vocabulary is fixed by the product and syllable density barely moves,
 so the grade is close to a restatement of mean sentence length: 8.0
 means a mean sentence of about 13 to 15 words.
 
-**The ceiling is a target for the prose and never a licence to drop a
+**The ceiling is a target for the prose and never a license to drop a
 clause.** The cheap way to a short sentence is to cut the clause
 carrying the condition, and that makes a worse page than missing the
 ceiling by a grade. Where a fact needs a long sentence, split the
@@ -334,7 +334,7 @@ the fact it carries, not the force of the telling.**
 The strongest sentence a hazard can carry is what silently goes wrong:
 "`ALTER ROLE app PASSWORD` runs without error, so nothing warns you"
 does the whole job. A cold reader singled that out as the one warning
-that changed their behaviour, and it commands nothing.
+that changed their behavior, and it commands nothing.
 
 **State the consequence, then stop.** Do not follow it with an
 imperative that repeats it. "Rotating a built-in password before the
@@ -399,7 +399,7 @@ connected. All three succeed, none errors, and every one breaks
 something silently.
 
 **A warning goes where the instinct fires, not where the topic lives.**
-The rule that changing a password in SQL desynchronises the platform's
+The rule that changing a password in SQL desynchronizes the platform's
 stored copy belongs beside the first mention of a password, not in the
 section about passwords at the foot of the page. A reader meets the
 temptation long before they meet the section that owns it. Where the
@@ -485,7 +485,7 @@ pressure. Every rule below follows from that.
   that came from the page you are replacing.** A phrase that reached
   you through a fact ledger is still a phrase you are publishing under
   your own name. Inheriting an idiom is not a reason to keep it, and
-  "it was already there" is not a defence a reader ever sees. This is
+  "it was already there" is not a defense a reader ever sees. This is
   the "do not touch a sentence for style alone" rule does not reach.
   That rule governs a **fix** job, where the diff must stay readable
   enough to review. **A rewrite and an edit are both bound by the
@@ -563,7 +563,7 @@ pressure. Every rule below follows from that.
   **A table is the hard case, because a header or a cell can be
   either.** A column of values the reader matches against the screen is
   quoted from the screen and left alone, abbreviations included. A
-  column the writer wrote to organise the page takes the formal term.
+  column the writer wrote to organize the page takes the formal term.
   When you cannot tell which one you are looking at, quote it. A reader
   who has to expand an abbreviation has lost a second, and one who
   cannot find the row has lost the page.
@@ -576,14 +576,14 @@ pressure. Every rule below follows from that.
   carries both.
 - "Unknown", never "unmeasured" or "not recorded here". The reader does
   not care what the author got around to.
-- **The present tense describes behaviour. The past tense is for one
+- **The present tense describes behavior. The past tense is for one
   event the reader has already lived through.** The test is who the
   sentence is about. A troubleshooting entry saying what a message
-  means whenever it appears is behaviour, so "the payment step cannot
+  means whenever it appears is behavior, so "the payment step cannot
   open a checkout session" is right there. A recovery step pointing at
   something the reader's own earlier run produced is one event, so "the
   backup created when the restore started" keeps its past tense. When
-  in doubt the sentence is behaviour, because a page describes a
+  in doubt the sentence is behavior, because a page describes a
   product and not a session.
 - Banned outright: leverage, utilize, ensure, seamless, best-in-class,
   synergy, paradigm shift, stakeholder alignment.
@@ -603,7 +603,7 @@ looking only at structure.
   absent.**
 - **The same skeleton twice running.** Two consecutive sentences or
   paragraphs built on one frame, most often "not X, but Y" or a
-  labelling construction reused.
+  labeling construction reused.
 - **Uniform sentence length.** A page where every sentence is the same
   size reads as generated even when each is good. Vary it.
 - **Accumulation.** Words that are fine once and a tic at three. Count
@@ -672,7 +672,7 @@ the requester's attention on:
   borrowed from somewhere. A shape we took and never wrote down is one
   a fresh writer can neither reproduce nor question.
 - **May I create, run and tear down real resources to verify
-  behaviour?** Where the answer is no, say so on the artifact, so that
+  behavior?** Where the answer is no, say so on the artifact, so that
   an unmeasured claim is visible rather than silently absorbed.
 - **Where are the measurements?** A measurement recorded outside the
   probe-log directory is a measurement lost. If probe logs exist, get
@@ -734,7 +734,7 @@ The request usually names the job: "correct the timing claim" is a fix,
 overhaul. Where it does not, ask. Guessing overhaul on a page someone
 wanted corrected buries a one-line change in a diff nobody can review,
 and guessing edit on a page someone wanted rebuilt returns the same
-badly organised page with better sentences.
+badly organized page with better sentences.
 
 The rest of this section is for an overhaul or a new page. The
 difference between those two is only where the facts come from: an
@@ -770,8 +770,8 @@ important each time.
 
 ### Deciding the order
 
-**Fixing the sentences of a badly organised page produces a badly
-organised page with better sentences.** In an overhaul the order of the
+**Fixing the sentences of a badly organized page produces a badly
+organized page with better sentences.** In an overhaul the order of the
 sections is part of the work, not the part you inherit. Decide the
 shape before you write a word, and expect to move, merge, split or drop
 a section.
@@ -967,7 +967,7 @@ runs past a screen, because GitHub renders it with no navigation pane.
   lookback" becomes "--interval is a lookback."
 - Never delete a technical claim unless the same claim already stands
   elsewhere on the page. A history sentence often carries the only
-  statement of a current behaviour.
+  statement of a current behavior.
 - An observation is not a bound. Two samples of 29 and 34 columns
   become "can return 29 or 34", never "as few as 29".
 - A caveat kept on one surface is kept on every parallel surface. The
@@ -998,7 +998,7 @@ A page carries no trace of how it was made or who made it.
   Write "the platform" or "the API".
 - No archaeology. "Previously", "used to", "an earlier version", "we
   decided", "shipped in", "since version N", "as of". State current
-  behaviour in the present tense with no citation.
+  behavior in the present tense with no citation.
 - A statement of current state is not history. "The repository is
   internal" stays true until it is not, and stays in the text.
 - **Evidence lives outside the page**, in the pull request. Never leave
@@ -1013,7 +1013,7 @@ A page carries no trace of how it was made or who made it.
 ## Never invent
 
 - Every command and flag exists in the generated reference. Every
-  behavioural claim traces to a live capture, a spec field, the
+  behavioral claim traces to a live capture, a spec field, the
   product's own source, or an existing gated page. A claim with no
   source stays out, and what is true goes in its place. Record the
   source as you write the claim, in the claim-to-source list under
@@ -1027,7 +1027,7 @@ A page carries no trace of how it was made or who made it.
   or credential rotation" becomes "a modification". A list like that is
   wrong the day the fifth case ships.
 - **No scope creep.** A field, a badge or a section explains itself and
-  not a neighbouring feature. Sizing rules belong in the resize flow,
+  not a neighboring feature. Sizing rules belong in the resize flow,
   not on a storage panel.
 - **A number stays in prose only when the reader acts on it.** "About
   ten seconds" earns its place. "Twenty-one of twenty-one attempts" does
@@ -1044,10 +1044,14 @@ A page carries no trace of how it was made or who made it.
   source. Where you cannot source where the number is displayed, print
   the number without the attribution sentence rather than writing one
   you cannot support. Never attribute a number to a screenshot.
-- **When a kept image contradicts the verified prose, the prose is
-  right.** Write what the source says, flag the image for recapture in
-  the pull request, and say nothing on the page about the discrepancy.
-  Never write prose backwards to match a stale screenshot.
+- **A mismatch between the prose and a kept image is settled by the
+  product, never by trusting either one.** Check the on-screen claim
+  against the live screen or the source that renders it. Where the
+  product agrees with the image, the prose is wrong: correct it. Where
+  the product agrees with the prose, the image is stale: write what
+  the source says, flag the image for recapture in the pull request,
+  and say nothing on the page about the discrepancy. Never write prose
+  backwards to match a stale screenshot.
 - **A screenshot is not a source.** It is evidence that something
   appeared on screen once, and it goes stale silently. A value that
   exists only at runtime, such as a price the console fetches from a
@@ -1102,7 +1106,7 @@ before any rewording.
   own values, that a command they cannot find does not exist, that a
   resource is not usable before it is ready. Confirming an assumption
   spends attention and returns nothing.
-- **It is a reason for behaviour the page already states.**
+- **It is a reason for behavior the page already states.**
 - **The page already carries it.**
 
 ### Sorting to rewrite
@@ -1318,10 +1322,12 @@ the line `FAIL`, so the rule above applies to it as it does to the
 other two gates.
 
 **A spelling and mechanics gate runs on every draft, separate from
-these three scripts and from the cold read.** Neither catches a
-British spelling in a US docset, or a sentence opening on a quoted
-string that ends in a period. The pipeline runs that gate before a
-page ships.
+these three scripts and from the cold read.** The writer runs it
+alongside the other gates and reports its count with them. This
+docset uses US spelling, so a British spelling is a defect. So is a
+sentence opening on a quoted string that ends in a period. No script
+checks either yet: run a US-English spell check over the draft by
+hand.
 
 ## What ships with the draft
 
@@ -1338,7 +1344,8 @@ Report the gate numbers with them.
 
 ## Reviews
 
-Every documentation change gets two reviews and one fix round. Both are
+Every documentation change gets two reviews and one fix round. A page
+with a screenshot gets a third check, in the same round. Each is
 performed by someone other than the writer, after the draft exists. A
 writer cannot be their own cold reader, because you cannot un-know the
 page you just wrote.
@@ -1346,7 +1353,8 @@ page you just wrote.
 **Run the cold read yourself before calling the page done.** Do not
 hand it back as a recommendation and do not wait to be asked. Dispatch
 a fresh agent that has none of your context and give it the page, the
-Register and Words sections of this skill, and nothing else.
+pages it links to, `## Register` through the end of `### Constructions
+that read as a machine`, and nothing else.
 
 The correctness reviewer checks every claim against its source.
 
@@ -1358,9 +1366,10 @@ rediscovers. A claim you cannot put a source beside does not go on the
 page.
 
 The cold-read reviewer gets no repository context at all, only the
-page, the pages it links to, and the Register and Words sections of
-this skill. They read as the customer and report where they got lost,
-what they could not type, and what they would search the web for
+page, the pages it links to, and `## Register` through the end of
+`### Constructions that read as a machine`. They read as the customer
+and report where they got lost, what they could not type, where the
+page breaks the standard, and what they would search the web for
 instead.
 
 ### A reviewer owns facts, the writer owns the page
@@ -1386,8 +1395,9 @@ A second review round happens only when the first found a wrong fact or
 a defect in the work itself. A round spent on suggestions is a round
 spent making the page longer.
 
-The two find different defects and neither finds the other's. Run both,
-even on a small change.
+The two find different defects and neither finds the other's. Run
+both, even on a small change, and run the screenshot check too on a
+page that has one.
 
 **The cold read is the only gate that catches an ordering defect**, and
 that is why it is not optional. Every rule in this file is applied by
@@ -1396,42 +1406,54 @@ sits sixty lines below it, or a precondition parked after the failure
 it predicts, passes the checklist and passes the prose rules. Only a
 reader with no context skips the step and tells you they skipped it.
 
-Ask the cold reader for what they had to guess and what they would have
-done wrong, not for whether the page reads well. A page can read well
-and still be executed in the wrong order.
+Ask the cold reader for what they had to guess, what they would have
+done wrong, and where the page breaks the attached standard. A page
+can read well and still be executed in the wrong order.
 
 ### The cold-read dispatch
 
 The cold reader is not a fact checker. The cold reader checks
-phrasing, style, legibility and comprehension. Following the
-instructions is the vehicle for that check, not the goal.
+phrasing, style, legibility and comprehension. Completing the task
+only shows whether the page achieves that.
 
-Give the agent the page's path, the Register and Words sections above,
-and nothing else. No repository access, no web search, no other skill
-files, no explanation of the product. Tell it:
+Give the agent the page's path, the pages it links to, `## Register`
+through the end of `### Constructions that read as a machine`, and
+the quoted-product-string exemption from `## Sentences`. Give it
+nothing else: no repository access, no web search, no other skill
+files, no explanation of the product. That exemption travels with the
+extract, so a contraction or a banned word inside a quoted UI label is
+not reported. Tell it:
 
 > You are a cold reader. You have never seen this product. Read only
-> this file and the attached style standard. Whatever the page does not
-> tell you, you do not know. Report: could you complete the task, and
-> if not, the first sentence at which you were stuck. Every place you
-> had to guess, quoting the sentence and naming the readings. Every
-> question the page raises and does not answer. Anything you would have
-> done wrong, and what the consequence would have been. Where the page
-> breaks the attached standard, quoting the sentence and the rule. Read
-> alt text and headings as page vocabulary too, not as decoration. What
-> the page does well. Judge only what is on the page. If you find
-> yourself reasoning "it presumably works like X", record that as a
-> guess instead.
+> this file, the pages it links to, and the attached style standard.
+> Whatever the page does not tell you, you do not know. A
+> cross-reference inside the standard points at text you do not have.
+> Ignore it. Report: could you complete the task, and if not, the
+> first sentence at which you were stuck. Every place you had to
+> guess, quoting the sentence and naming the readings. Every question
+> the page raises and does not answer. Anything you would have done
+> wrong, and what the consequence would have been. Where the page
+> breaks the attached standard, quoting the sentence and the rule.
+> Read alt text and headings as page vocabulary too. What the page
+> does well. Judge only what is on the page. If you find yourself
+> reasoning "it presumably works like X", record that as a guess
+> instead.
 
 The fourth answer is the one that matters. "I would have skipped that
 step because it reads as ceremony" is a defect report, and no other
 review produces it.
 
-**A page describing a console screen needs a separate check against
-the image.** The cold reader has no image access, so a claim naming
-something the screen does not show is invisible to a reader without
-one. Compare each on-screen claim in the draft against the actual
-screenshot before the page ships.
+**A page describing a console screen gets a separate check against the
+image, run alongside the cold read.** The writer dispatches it, and a
+separate agent, someone other than the writer, performs it with image
+access and the page. That agent compares each on-screen claim in the
+draft against the screenshot and reports every mismatch. Settle a
+mismatch against the product, under the rule in "Never invent". Where
+the product agrees with the image, the prose is wrong and is
+corrected. Where the product agrees with the prose, the image is
+stale and is flagged for recapture. Its findings go into the same fix
+round as the cold read's. A page with no screenshot skips this check,
+and its on-screen claims rest on the claim-to-source list instead.
 
 **Fix what it found, then say what it found.** A cold read reported and
 not acted on is worse than none, because the page now ships with the

@@ -1,17 +1,23 @@
+# Shape
+
+The content checklist and the rules for ordering and opening a page,
+loaded on a restructure, an overhaul and a new page.
+
 ## The content checklist
 
 Run all seven before writing a sentence, and again before opening a
 pull request. Each is a question with a failing answer, not a
 preference. Passing all seven is not done: a page passes this list and
 still fails a reader who does not already know it, so the checks under
-"Reviews" are the last gate and you dispatch them yourself.
+"Reviews" in reviews.md are the last gate and you dispatch them
+yourself.
 
 **On a restyle or a restructure, an item that fails for want of a fact
 is not fixed by adding one.** Report it in the hand-back instead, with
-its number, under the job-scope rule in "When two rules conflict".
-Item 6 is the case this comes up most: a restructure may build the
-missing save-first step only from a fact already on the page, never a
-new one.
+its number, under the job-scope rule in "When two rules conflict" in
+SKILL.md. Item 6 is the case this comes up most: a restructure may
+build the missing save-first step only from a fact already on the
+page, never a new one.
 
 **1. Can the reader do every action exactly as described?** On a
 command-line page, a command needs its full prefix, a placeholder for
@@ -105,7 +111,8 @@ important each time.
 
 This section governs a restructure, an overhaul and a new page. On a
 restyle the section order does not change, apart from the one ordering
-move named under restyle in "Ask which job this is before you start".
+move named under restyle in "Ask which job this is before you start"
+in SKILL.md.
 
 **Fixing the sentences of a badly organized page produces a badly
 organized page with better sentences.** In a restructure or an
@@ -141,7 +148,7 @@ the main work.
 Two orderings are wrong however good the prose:
 
 - A destructive action printed before the step that makes it
-  survivable. Reader safety, rank 1.
+  survivable. Reader safety, rank 1 in SKILL.md.
 - A definition placed after the sentence that leans on it. Checklist
   item 4.
 
@@ -154,17 +161,18 @@ reader given a page whose first procedure existed solely to prevent an
 unrecoverable loss said they would have skipped it, because it read as
 an optional convenience layer and nothing on the page was formatted as
 a stop sign. Order is necessary and it is not sufficient. See "Marking
-a step the reader will otherwise skip".
+a step the reader will otherwise skip" in writing.md.
 
 **The one ordering move a fix or a restyle may make is defined under
-those jobs in "Ask which job this is before you start", not here.**
-Where it applies, say in the pull request why the diff is larger than
-the request.
+those jobs in "Ask which job this is before you start" in SKILL.md,
+not here.** Where it applies, say in the pull request why the diff is
+larger than the request.
 
 **On a new page the shape is the whole risk.** There is no prior
 structure to inherit and no reviewer comparing against one, so a
 badly indexed page ships looking finished. Two things guard it: the
-source-of-truth question above, because a page can only be indexed on
+source-of-truth question in "Ask what your sources are, before you
+gather anything" in facts.md, because a page can only be indexed on
 facts you were able to gather; and the full heading tree written down
 before a word of prose, so the shape is arguable while it is still
 cheap to change.

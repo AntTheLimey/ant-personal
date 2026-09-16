@@ -1,3 +1,9 @@
+# Writing
+
+The prose rules every job loads: sentences, steps, hazards,
+descriptive prose, punctuation, signposting, format and repository
+mechanics.
+
 ## Sentences
 
 - A step is 20 words at most. Descriptive prose is 25 words at most.
@@ -29,15 +35,8 @@
 - Never omit a word to make a sentence shorter, and never use a
   contraction. A sentence missing its subject, verb or article is
   shorter and harder.
-- **A quoted product string is reproduced exactly and is exempt from
-  every rule in this skill**, this file and every file beside it,
-  including the banned words in `product-vocabulary.md`. Button labels,
-  error messages, field names and status values are quoted so the
-  reader can match them against the screen, so a contraction, an
-  em-dash, a capital or a banned word inside one stays. A dialog really
-  named `Taking Pre-Restore Snapshot` is quoted with its snapshot
-  intact, and your own prose around it still uses the settled word.
-  Quote it or paraphrase it outside quotation marks. Never correct it.
+- The quoted-product-string exemption is in style-standard.md, under
+  "Words".
 
 **Checking the caps.** `<skill>/signals.py` reports one number for the
 caps: how many prose sentences run past 25 words. That is not the STE
@@ -385,8 +384,8 @@ runs past a screen, because GitHub renders it with no navigation pane.
   style alone. Voice and punctuation changes to existing text go in
   their own pull request, so a reviewer can tell a technical change
   from a preference. This is the difference between a fix and a
-  restyle under "The shape of the page", and it is why the jobs are
-  worth separating before you start rather than after.
+  restyle under "The shape of the page" in shape.md, and it is why the
+  jobs are worth separating before you start rather than after.
 
 ## No internal history, and no internal names
 

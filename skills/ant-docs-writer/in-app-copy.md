@@ -1,3 +1,8 @@
+# In-app copy
+
+The tighter budget for tooltips, help icons, confirm dialogs and empty
+states. A surface add-on, loaded only when the page is in-app copy.
+
 ## In-app copy
 
 Tooltips, help icons, confirm dialogs and empty states are documentation

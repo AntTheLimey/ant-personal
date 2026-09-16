@@ -1,3 +1,8 @@
+# Facts
+
+Sourcing, fact-checking and the ledger, loaded in full on an overhaul
+and a new page; a fix loads only "Never invent".
+
 ## Ask what your sources are, before you gather anything
 
 Your reader is a constant: a competent developer who does not know
@@ -63,15 +68,15 @@ of them" defines the fact list and the ledger.
 A restyle or a restructure sources nothing here: both take the page's
 own claims as given and verify nothing against source. Where a rule
 below asks for a source or for new material, it binds a fix, an
-overhaul and a new page. "Say less, or say nothing" governs what a
-restyle or a restructure may still cut.
+overhaul and a new page. "Say less, or say nothing" in writing.md
+governs what a restyle or a restructure may still cut.
 
 - On a fix, an overhaul and a new page: every command and flag exists
   in the generated reference, and every behavioral claim traces to a
   live capture, a spec field, the product's own source, or an existing
   gated page. A claim with no source stays out, and what is true goes
   in its place. Record the source as you write the claim, in the fact
-  list under "Reviews".
+  list under "Reviews" in reviews.md.
 - **Keep the consequence, drop the mechanism.** The reader is told what
   they can do and see, never how the platform does it. "Rotating the
   credential for the app role restarts AI services" is the right weight.
@@ -113,13 +118,14 @@ restyle or a restructure may still cut.
   shows, never present it as a contract, and re-check it whenever the
   page is touched.
 - **On an overhaul or a new page, a rewrite may add facts, and often
-  must.** The content checklist asks for things a page frequently does
-  not have, and the answer is to go and find them rather than to leave
-  the item failing. Source every addition and say where it came from
-  in the pull request. What a rewrite may never do is add a fact it
-  did not verify. A fix changes the one fact it was asked to change and
-  adds no other. A restyle or a restructure adds none at all, under
-  the job-scope rule in "When two rules conflict".
+  must.** The content checklist in shape.md asks for things a page
+  frequently does not have, and the answer is to go and find them
+  rather than to leave the item failing. Source every addition and say
+  where it came from in the pull request. What a rewrite may never do
+  is add a fact it did not verify. A fix changes the one fact it was
+  asked to change and adds no other. A restyle or a restructure adds
+  none at all, under the job-scope rule in "When two rules conflict"
+  in SKILL.md.
 - **On an overhaul or a new page, a rewrite may add a step**, when the
   checklist requires one and the step follows from a fact that is
   sourced. A procedure that identifies something by when it happened

@@ -5,14 +5,17 @@ description: "Write, edit or review consumer-facing pgEdge documentation: docs p
 
 # Writing pgEdge consumer documentation
 
+The router for this skill: the job table, the load list, the rule
+order and the hand-back contract. Every job reads this file first.
+
 One style for every page a customer or an agent reads, across
 pgedge-cli and product-ui. It replaces ant-voice-writer for this work.
 That skill writes in Ant's voice, which is the right voice for a blog
 and the wrong voice for a procedure.
 
 **Read this first. It outranks every rule below.** The wording is fixed
-and quoted, so the em-dashes inside it stand against the punctuation
-rules in this file:
+and quoted, so the em-dashes inside it stand against the Punctuation
+rules in writing.md:
 
     Write like a human being in complete, plain sentences.
     Your inputs — the page itself on a restyle or a restructure, the
@@ -23,7 +26,7 @@ rules in this file:
 
 The style has two halves and the order between them is not optional.
 The content checklist runs first, because a page can pass every prose
-rule in this file and still be unusable. That has happened. A page
+rule in this skill and still be unusable. That has happened. A page
 rewritten against an explicit list of prose targets hit every one of
 them, and a reader with no context judged it unusable anyway, on four
 faults that no prose rule addresses. Where two rules contradict each
@@ -59,17 +62,18 @@ it.
    action without saying so first. On a console page that means a step
    committing the account to a charge, deleting data, or discarding
    entered values says what it costs in the step itself, before the
-   control is named. Checklist item 1 asks for every flag a **safe**
-   non-interactive run needs, so a command is complete even when the
-   flag it lacks is the one that skips a confirmation prompt. The
-   destructive-flag rule under Steps and procedures says how to show
-   it instead.
-2. **The content checklist.** A page that fails an item is wrong
-   however well it reads. **Job scope outranks this item on a restyle
-   or a restructure**: the writer adds no fact and does not go looking
-   for one, so a failing item that needs a new fact is not fixed. It
-   is reported in the hand-back instead, naming the item, so the
-   person who asked can request a fix or an overhaul.
+   control is named. Checklist item 1, in shape.md, asks for every flag
+   a **safe** non-interactive run needs, so a command is complete even
+   when the flag it lacks is the one that skips a confirmation prompt.
+   The destructive-flag rule under Steps and procedures, in writing.md,
+   says how to show it instead.
+2. **The content checklist**, in shape.md. A page that fails an item is
+   wrong however well it reads. **Job scope outranks this item on a
+   restyle or a restructure**: the writer adds no fact and does not go
+   looking for one, so a failing item that needs a new fact is not
+   fixed. It is reported in the hand-back instead, naming the item (the
+   item numbers are in shape.md, even where the job did not load it),
+   so the person who asked can request a fix or an overhaul.
 3. **Product truth.** Never delete a technical claim unless the same
    claim already stands elsewhere on the page. This outranks the rule
    that sends a number to the page owning it, so link out and keep the
@@ -79,15 +83,15 @@ it.
    and it goes. A count nobody acts on is a maintenance liability that
    is wrong the day the sixth case ships. The second exception is the
    same principle widened: a claim the reader cannot act on at all,
-   which "Say less, or say nothing" sorts and deletes on a fix, an
-   overhaul or a new page. A restyle or a restructure narrows that
-   sort to a restatement only, under "Say less, or say nothing" itself.
-   Product truth protects a fact the reader acts on, not every true
-   sentence. It also
-   outranks "keep the consequence, drop the mechanism", which applies
-   only where the mechanism is not itself the only statement of a
-   behavior.
-4. **House style.** Every other rule in this file. Two house-style
+   which "Say less, or say nothing" in writing.md sorts and deletes on
+   a fix, an overhaul or a new page. A restyle or a restructure narrows
+   that sort to a restatement only, under "Say less, or say nothing"
+   itself. Product truth protects a fact the reader acts on, not every
+   true sentence. It also
+   outranks "keep the consequence, drop the mechanism" in facts.md,
+   which applies only where the mechanism is not itself the only
+   statement of a behavior.
+4. **House style.** Every other rule in this skill. Two house-style
    rules can still collide, so three tie-breaks settle the pairs that
    keep recurring:
    - **The product name beats a heading example and beats link text.**
@@ -103,7 +107,7 @@ it.
      Where neither is more specific, keep the reader's ability to act
      and note the collision in the pull request.
 
-### Ask which job this is before you start
+## Ask which job this is before you start
 
 Five jobs wear similar words, and they produce different pull
 requests. Decide which one you are doing, and where the request does
@@ -130,12 +134,12 @@ not say, **ask the person who asked you** before writing anything.
   under a restructure.
 - A **new page** has nothing to inherit. There is no page to improve
   and no ledger of one (the ledger and the fact list are defined under
-  "Two artifacts, and the old page is not one of them"), so the facts
-  come from source and the shape comes from them. This is the commonest
-  request the skill gets and the easiest to under-scope: "write a page
-  about X" is a new page, not an overhaul of a page that does not
-  exist. It sits outside the restyle-restructure-overhaul ladder, the
-  same as a fix.
+  "Two artifacts, and the old page is not one of them" in facts.md), so
+  the facts come from source and the shape comes from them. This is the
+  commonest request the skill gets and the easiest to under-scope:
+  "write a page about X" is a new page, not an overhaul of a page that
+  does not exist. It sits outside the restyle-restructure-overhaul
+  ladder, the same as a fix.
 
 | Job | Reads old page | Ledger | Fact list | Heading tree | Gates | Reviews |
 |---|---|---|---|---|---|---|
@@ -144,6 +148,24 @@ not say, **ask the person who asked you** before writing anything.
 | Restructure | yes | no | no | short | `check-mechanics.py`, `signals.py` | meaning check + cold read, in parallel |
 | Overhaul | never | yes | yes | short | `check-sources.py`, `check-ledger.py` (`--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows and an image is available |
 | New page | no old page | no | yes | full | `check-ledger.py` (brief vs. draft, `--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows and an image is available |
+
+### Load these files before you start
+
+Every job loads `style-standard.md`, `writing.md`, `gates.md` and
+`product-vocabulary.md`. Add to that set by job:
+
+- **Fix** adds `reviews.md` (the correctness review section) and
+  `facts.md` (`## Never invent` only).
+- **Restyle** adds `reviews.md` (the meaning check and cold read
+  sections).
+- **Restructure** adds `shape.md` and `reviews.md` (the meaning check
+  and cold read sections).
+- **Overhaul** and **new page** add `shape.md`, `facts.md` and
+  `reviews.md`.
+
+Two files are surface add-ons, loaded only when the page itself is
+that surface: `in-app-copy.md` for in-app copy, `agent-pages.md` for a
+page an agent reads.
 
 One fix round for every job. A second round runs only where the first
 found a wrong fact or a defect in the work itself.
@@ -179,23 +201,26 @@ one ordering move named under restyle above. The difference between an
 overhaul and a new page is only where the facts come from: an overhaul
 has a ledger of the old page's coverage as well as a fact list, and a
 new page has the fact list alone. On an overhaul the writer never
-reads the old page, a rule with its own heading below, so the ledger
-is the only account of it you get. A restyle or a restructure works
-from the page itself and has no ledger. Where the rest of this section
-says ledger, only an overhaul has one.
+reads the old page, a rule under "The writer never reads the old page"
+in facts.md, so the ledger is the only account of it you get. A
+restyle or a restructure works from the page itself and has no ledger.
+Where the rest of this section says ledger, only an overhaul has one.
 
 **On an overhaul, dispatch a separate agent to extract the ledger from
 the old page, before any writing starts.** You never read that page
 yourself, so a separate reader is the only way the ledger comes to
-exist. "Two artifacts, and the old page is not one of them" gives the
-entry form, the sort order and the gate that runs on the ledger. A new
-page skips this step and works from the fact list alone.
+exist. "Two artifacts, and the old page is not one of them" in
+facts.md gives the entry form, the sort order and the gate that runs
+on the ledger. A new page skips this step and works from the fact list
+alone.
 
 ## What ships with the draft
 
 Hand the draft over with what the job requires, each a file or a named
 answer rather than a report that the work happened:
 
+- **The files read**, the skill files this job loaded, listed by name.
+  "Load these files before you start" gives the set for each job.
 - **The job you did**, one of fix, restyle, restructure, overhaul or
   new page. "Ask which job this is before you start" defines the five,
   and its table gives what each one reads, builds, gates and gets

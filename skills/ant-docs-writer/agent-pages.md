@@ -1,9 +1,10 @@
 # Pages an agent reads
 
 The CLI's embedded reference pages and its shipped skills are read by
-AI agents driving the CLI, not by people. Everything in `SKILL.md`
+AI agents driving the CLI, not by people. Everything in this skill
 applies unless this file says otherwise. STE was written for a human
 reader, so the divergences are worth stating rather than assuming.
+A surface add-on, loaded only when the page is one an agent reads.
 
 ## What changes
 

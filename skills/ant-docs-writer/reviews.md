@@ -1,25 +1,28 @@
+# Reviews
+
+The review each job runs, the cold-read and meaning-check dispatches,
+and who a finding binds. Every job loads at least one section here.
+
 ## Reviews
 
 Review composition follows the job, set out in the table under "Ask
-which job this is before you start". A fix gets a correctness review
-of the changed claim. A restyle and a restructure get a meaning check
-and a cold read, run in parallel. An overhaul and a new page get a
-correctness review and a cold read, run in parallel, plus a screenshot
-check on any page that states what a screen shows, where an image of
-it is available. One fix round runs
-on every job. A second round runs only where the first found a wrong
-fact or a defect in the work itself. Each review is performed by
-someone other than the writer, after the draft exists. A writer cannot
-be their own cold reader, because you cannot un-know the page you just
-wrote.
+which job this is before you start" in SKILL.md. A fix gets a
+correctness review of the changed claim. A restyle and a restructure
+get a meaning check and a cold read, run in parallel. An overhaul and
+a new page get a correctness review and a cold read, run in parallel,
+plus a screenshot check on any page that states what a screen shows,
+where an image of it is available. One fix round runs on every job. A
+second round runs only where the first found a wrong fact or a defect
+in the work itself. Each review is performed by someone other than the
+writer, after the draft exists. A writer cannot be their own cold
+reader, because you cannot un-know the page you just wrote.
 
 **Run the cold read yourself before calling the page done, on every
 job that gets one.** Do not hand it back as a recommendation and do
 not wait to be asked. Dispatch a fresh agent that has none of your
-context and give it the page, the pages it links to, `## Register`
-through the end of `### Constructions that read as a machine`, and the
-quoted-product-string exemption from `## Sentences`. Give it nothing
-else.
+context and give it the page, the pages it links to, and
+`style-standard.md`, handed over unchanged: never retyped, trimmed or
+excerpted. Give it nothing else.
 
 The correctness reviewer checks every claim on the page against its
 source, on an overhaul and a new page. On a fix, it checks the one
@@ -29,16 +32,14 @@ changed claim only, and there is no cold read.
 a claim goes on the page, so the reviewer verifies against a record
 built alongside the draft rather than rediscovering each source. "Fact
 list entry form" under "Two artifacts, and the old page is not one of
-them" gives its fields. On a fix, an overhaul and a new page, a claim
-you cannot put a source beside does not go on the page.
+them" in facts.md gives its fields. On a fix, an overhaul and a new
+page, a claim you cannot put a source beside does not go on the page.
 
 The cold-read reviewer gets no repository context at all, only the
-page, the pages it links to, `## Register` through the end of
-`### Constructions that read as a machine`, and the quoted-
-product-string exemption from `## Sentences`. They read as the
-customer and report where they got lost, what they could not type,
-where the page breaks the standard, and what they would search the
-web for instead.
+page, the pages it links to, and `style-standard.md`, handed over
+unchanged. They read as the customer and report where they got lost,
+what they could not type, where the page breaks the standard, and what
+they would search the web for instead.
 
 ### The meaning check
 
@@ -54,13 +55,13 @@ nothing else. It reports:
 
 On a restyle, every moved section is reported. A move the hand-back
 names under the ordering exception in "Ask which job this is before
-you start" is not a defect. Any other move is, because a restyle keeps
-the section order fixed otherwise. On a restructure a moved section is
-expected, and the report exists to confirm the move carried the facts
-the section held, not to flag the move. The meaning check does not
-comment on style. Its findings are wrong facts, so "A reviewer owns
-facts, the writer owns the page" applies to them the same way it
-applies to the correctness reviewer's findings.
+you start" in SKILL.md is not a defect. Any other move is, because a
+restyle keeps the section order fixed otherwise. On a restructure a
+moved section is expected, and the report exists to confirm the move
+carried the facts the section held, not to flag the move. The meaning
+check does not comment on style. Its findings are wrong facts, so "A
+reviewer owns facts, the writer owns the page" applies to them the
+same way it applies to the correctness reviewer's findings.
 
 Dispatch it with:
 
@@ -103,11 +104,11 @@ review only, and that review stands alone.
 
 **Where a job gets a cold read, it is the only gate that catches an
 ordering defect, and that is why it is never skipped there.** Every
-rule in this file is applied by
-someone who already knows what the page is for, so a step whose reason
-sits sixty lines below it, or a precondition parked after the failure
-it predicts, passes the checklist and passes the prose rules. Only a
-reader with no context skips the step and tells you they skipped it.
+rule in this skill is applied by someone who already knows what the
+page is for, so a step whose reason sits sixty lines below it, or a
+precondition parked after the failure it predicts, passes the
+checklist and passes the prose rules. Only a reader with no context
+skips the step and tells you they skipped it.
 
 Ask the cold reader for what they had to guess, what they would have
 done wrong, and where the page breaks the attached standard. A page
@@ -119,13 +120,12 @@ The cold reader is not a fact checker. The cold reader checks
 phrasing, style, legibility and comprehension. Completing the task
 only shows whether the page achieves that.
 
-Give the agent the page's path, the pages it links to, `## Register`
-through the end of `### Constructions that read as a machine`, and
-the quoted-product-string exemption from `## Sentences`. Give it
-nothing else: no repository access, no web search, no other skill
-files, no explanation of the product. That exemption travels with the
-extract, so a contraction or a banned word inside a quoted UI label is
-not reported. Tell it:
+Give the agent the page's path, the pages it links to, and
+`style-standard.md`, handed over unchanged: never retyped, trimmed or
+excerpted. Give it nothing else: no repository access, no web search,
+no other skill files, no explanation of the product. The file carries
+its own quoted-product-string exemption, so a contraction or a banned
+word inside a quoted UI label is not reported. Tell it:
 
 > You are a cold reader. You have never seen this product. Read only
 > this file, the pages it links to, and the attached style standard.
@@ -158,10 +158,10 @@ writer dispatches it, and a separate agent, someone other than the
 writer, performs it with image access and the page. That agent
 compares each on-screen claim in the draft against the screenshot and
 reports every mismatch. Settle a mismatch against the product, under
-the rule in "Never invent". Where the product agrees with the image,
-the prose is wrong and is corrected. Where the product agrees with the
-prose, the image is stale and is flagged for recapture. Its findings
-go into the same fix round as the cold read's.
+the rule in "Never invent" in facts.md. Where the product agrees with
+the image, the prose is wrong and is corrected. Where the product
+agrees with the prose, the image is stale and is flagged for
+recapture. Its findings go into the same fix round as the cold read's.
 
 **Fix what it found, then say what it found.** A cold read reported and
 not acted on is worse than none, because the page now ships with the

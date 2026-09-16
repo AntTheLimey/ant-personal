@@ -128,7 +128,8 @@ thing for the whole page.
   **notification** appears, is transient, and can be dismissed.
 - A **drop-down** is hyphenated, always. Never dropdown.
 - A **field** takes typed input. A **toggle** has two states. A
-  **button** is selected, per the standard verb list in `SKILL.md`.
+  **button** is selected, per the standard verb list in
+  `style-standard.md`.
 - A **tooltip** appears on hover or focus and holds no instruction the
   reader must have.
 - A **badge** is a small marker on a row or a card reporting one

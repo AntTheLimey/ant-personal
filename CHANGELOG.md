@@ -7,6 +7,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.3] — 2026-09-16
+
+### Changed
+
+- **SKILL.md splits into eight files, each loaded only by the jobs
+  that need it**, in place of one 1,695-line, 88,848-byte file every
+  job read in full:
+
+      SKILL.md           12,885 B  top rule, conflicts, jobs, ships, reading
+      style-standard.md  10,179 B  Register, Words
+      writing.md         26,102 B  sentences through repository mechanics
+      shape.md           12,895 B  checklist, shape, openings
+      facts.md           12,395 B  sources, never invent, two artifacts
+      gates.md            4,443 B  the gates
+      reviews.md          8,636 B  reviews
+      in-app-copy.md      1,313 B  in-app copy
+
+  SKILL.md is now the router: a load list names the files each job
+  reads, and "What ships with the draft" requires the files read as
+  the first item in the hand-back. Every cross-reference that used to
+  say "above", "below" or "this file" now names the file the rule
+  moved to. A 1.4.2 restyle measured 16.5 minutes, 6.6 of them before
+  the first draft, loading a 106 KB skill of which a restyle uses only
+  part. Nothing is re-measured yet: this release does not claim a
+  speed-up.
+- **The cold reader and the correctness reviewer get style-standard.md
+  handed over unchanged, never an extract.** Three places in
+  reviews.md used to instruct an agent to copy out `## Register`
+  through the end of `### Constructions that read as a machine`, plus
+  the quoted-product-string exemption; all three now hand over the
+  file whole. The exemption itself moved into style-standard.md, out
+  of a bullet under writing.md's `## Sentences`, so the handed-over
+  file carries it.
+- **check-mechanics.py gates the words and constructions the rules
+  name outright**, not only spelling and a quoted-sentence opener. It
+  checks the banned words, the named idioms and hedges, the register
+  swaps, the command verbs, the product and interface nouns, and the
+  signposting to delete on sight, from style-standard.md and
+  writing.md, matched across line breaks, plus the accumulation limit
+  of two per page. Masked spans block a phrase match, so "the `app`
+  user" is not "the user". On the 1.4.2 restyle's input page it
+  reports the cold read's two findings and nine it missed: six
+  "popup", two "a way back" and a third "rather than". On its output
+  it reports the eight "popup" the writer kept.
+
+---
+
 ## [1.4.2] — 2026-09-16
 
 ### Added

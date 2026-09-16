@@ -1,9 +1,14 @@
-### The gates, and when each runs
+# Gates
+
+The four gate scripts, when each runs, and what a failure means.
+Loaded by every job.
+
+## The gates, and when each runs
 
 Four scripts run here, and which of them apply depends on the job: the
-table under "Ask which job this is before you start" is the one place
-that is decided. Run every gate that applies before calling a page
-done, and report its numbers.
+table under "Ask which job this is before you start" in SKILL.md is
+the one place that is decided. Run every gate that applies before
+calling a page done, and report its numbers.
 
 **A gate that exits non-zero has not been passed, and neither has one
 whose output reads `FAIL`.** That is a failure to fix before the page
@@ -83,7 +88,7 @@ overhaul and a new page:
 
     <skill>/signals.py <draft>
 
-See "Reading signals".
+See "Reading signals" in writing.md.
 
 **A crossed bound fails the run.** The script exits non-zero and marks
 the line `FAIL`, so the rule above applies to it as it does to the
@@ -98,4 +103,12 @@ from a fixed word list, and a sentence that opens on a quoted string
 that is itself a complete sentence. It is a word list, not a
 dictionary: it catches the listed forms only, so a spelling it does
 not list still gets fixed the moment you see it.
+
+The script also fails a word or construction the rules name outright,
+from style-standard.md or writing.md. That covers the banned words,
+the named idioms and hedges, the register swaps, the standard-verb
+rule, the product and interface nouns, and the signposting to delete
+on sight. More than two of the accumulation words on one page fails
+it too. A quoted product string is exempt, the same exemption as
+everywhere else in this skill.
 

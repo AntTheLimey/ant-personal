@@ -1,3 +1,8 @@
+# Style standard
+
+The register and vocabulary rules every job loads, and the file handed
+to a cold reader unchanged.
+
 ## Register
 
 The voice is formal technical documentation. The reader is at work,
@@ -64,6 +69,16 @@ pressure. Every rule below follows from that.
   product string using a different noun is not a violation**, because
   those are the product's words. Quote the error exactly and use your
   own noun in the prose around it.
+- **A quoted product string is reproduced verbatim and is exempt from
+  every rule in this skill**, this file and every file beside it,
+  including the banned words in `product-vocabulary.md`. Button
+  labels, error messages, field names and status values are quoted so
+  the reader can match them against the screen, so a contraction, an
+  em-dash, a capital or a banned word inside one stays. A dialog
+  really named `Taking Pre-Restore Snapshot` is quoted with its
+  snapshot intact, and your own prose around it still uses the settled
+  word. Quote it or paraphrase it outside quotation marks. Never
+  correct it.
 - The one-noun rule applies within the change you are already making. A
   page-wide vocabulary sweep is its own pull request, never something
   folded into a factual fix, because a reviewer cannot then tell the two
@@ -71,7 +86,7 @@ pressure. Every rule below follows from that.
   rewriting is one change, and its vocabulary is part of that change.
 - The one-noun rule is house style, so product truth outranks it. Where
   the only way to use one noun is to drop a claim, keep the claim and
-  use two nouns. See "When two rules conflict".
+  use two nouns. See "When two rules conflict" in SKILL.md.
 - One wording for one repeated action. If step 2 says "apply a small
   quantity of oil to the threads", step 6 does not say "lubricate".
   Different wording for the same action reads as a different action.

@@ -58,8 +58,8 @@ punctuation-only edit hides the technical change underneath it in
 review.
 
 **Rules 8.4 to 8.7, word count.** The operative version of this now
-lives in `SKILL.md`, because a writer should not have to open a second
-file to know how to count. What follows is why it is generous.
+lives in `writing.md`, because a writer should not have to open a
+second file to know how to count. What follows is why it is generous.
 
 STE's counting method is what makes the 20 and 25 word caps checkable,
 and it is generous in the way this work needs. A number counts as one

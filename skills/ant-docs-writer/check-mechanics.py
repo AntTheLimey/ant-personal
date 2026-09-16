@@ -16,7 +16,10 @@ Two checks, both of defects no cold reader caught in 18 reps:
   "`Could not start the restore.` is a red notification". The reader
   crosses two sentence ends before reaching the verb.
 
-Exit 0 when no page has either, 1 otherwise.
+An unclosed fence is reported too, since nothing after it is checked.
+
+Exit 0 when no page has a finding, 1 when one does, 2 when a page
+could not be read or no page was given.
 """
 
 import pathlib
@@ -24,8 +27,9 @@ import re
 import sys
 
 # British form -> US form. A form listed here also matches with the
-# suffixes in SUFFIXES, so "organis" covers organise, organised and
-# organisation. Stems are chosen so that no US word shares them.
+# suffixes in SUFFIXES and after any prefix, so "organis" covers
+# organise, reorganised and organisational. ALLOWED holds the US words
+# a stem still reaches.
 STEMS = {
     "organis": "organiz", "recognis": "recogniz", "customis": "customiz",
     "initialis": "initializ", "authoris": "authoriz",
@@ -61,8 +65,9 @@ STEMS = {
 
 # The ending after a stem. An -ise stem alone is not a word, so the
 # empty ending only ever matches a whole -our word such as colour.
-SUFFIXES = (r"(?:e|es|ed|ing|er|ers|ation|ations|able|s|ite|ites|al|"
-            r"ally|ful|hood|hoods)?")
+SUFFIXES = (r"(?:e|es|ed|ing|ings|er|ers|ation|ations|ational|"
+            r"ationally|able|ably|s|ite|ites|al|ally|ful|less|hood|"
+            r"hoods)?")
 
 WORDS = {
     "licence": "license", "licences": "licenses", "defence": "defense",
@@ -84,15 +89,20 @@ WORDS = {
     "sceptical": "skeptical", "manoeuvre": "maneuver",
     "orientated": "oriented", "storey": "story", "mould": "mold",
     "practise": "practice", "practised": "practiced",
+    "practising": "practicing", "greyed": "grayed", "greying": "graying",
+    "defences": "defenses", "offences": "offenses",
+    "fulfilment": "fulfillment", "centring": "centering",
 }
 
-# US words a stem would otherwise swallow: the noun emphasis, the
-# plural of analysis, and cancellation, which keeps its double l.
-ALLOWED = {"emphasis", "analyses", "cancellation", "cancellations"}
+# US words a stem still reaches: the noun emphasis, the plurals of
+# analysis, paralysis and catalysis, and cancellation, which keeps its
+# double l. Matched on the word's ending, so overemphasis passes too.
+ALLOWED = ("emphasis", "analyses", "paralyses", "catalyses",
+           "cancellation", "cancellations")
 
 STEM_RE = re.compile(
-    r"\b(" + "|".join(sorted(STEMS, key=len, reverse=True)) + r")" +
-    SUFFIXES + r"\b", re.I)
+    r"\b([a-z]*?)(" + "|".join(sorted(STEMS, key=len, reverse=True)) +
+    r")(" + SUFFIXES + r")\b", re.I)
 WORD_RE = re.compile(r"\b(" + "|".join(WORDS) + r")\b", re.I)
 
 # A sentence start: the start of a line, after list or heading markup
@@ -100,8 +110,10 @@ WORD_RE = re.compile(r"\b(" + "|".join(WORDS) + r")\b", re.I)
 # quoted string must end on a word before its stop, so an ellipsis or a
 # bare "?" is not a sentence of its own.
 OPENER_RE = re.compile(
-    r"(?:^\s*(?:[-*+]\s+|\d+\.\s+|>\s*|#{1,6}\s+)?(?:\*\*|__)?"
-    r"|[.!?]\s+(?:\*\*|__)?)"
+    r"(?:^\s*(?:[-*+]\s+|\d+[.)]\s+|>\s*|#{1,6}\s+)?(?:\*\*|__)?"
+    r"|\|\s*(?:\*\*|__)?"
+    r"|(?<!\be\.g)(?<!\bi\.e)[.!?](?:\*\*|__)?\s*(?:\*\*|__)?"
+    r"(?<=[\s*_]))"
     r"(`[^`]*[\w>)\]'\"][.!?]`|\"[^\"]*[\w>)\]'][.!?]\"|"
     r"“[^”]*[\w>)\]'][.!?]”)"
     r"\s+[a-z]")
@@ -109,37 +121,69 @@ OPENER_RE = re.compile(
 
 def mask(line):
     """Blank inline code, quoted strings, URLs and link targets."""
-    line = re.sub(r"`[^`]*`", lambda m: " " * len(m.group()), line)
+    line = re.sub(r"``.*?``|`[^`]*`", lambda m: " " * len(m.group()),
+                  line)
     line = re.sub(r"\"[^\"]*\"|“[^”]*”",
                   lambda m: " " * len(m.group()), line)
-    line = re.sub(r"\]\([^)]*\)", lambda m: " " * len(m.group()), line)
+    line = re.sub(r"\]\([^)]*\)|\]\[[^\]]*\]|^\s*\[[^\]]+\]:.*$",
+                  lambda m: " " * len(m.group()), line)
+    line = re.sub(r"<!--.*?-->", lambda m: " " * len(m.group()), line)
     line = re.sub(r"https?://\S+", lambda m: " " * len(m.group()), line)
     return line
+
+
+def cased(us, word):
+    if word.isupper():
+        return us.upper()
+    if word[0].isupper():
+        return us[0].upper() + us[1:]
+    return us
 
 
 def spelling(line):
     found = []
     for m in STEM_RE.finditer(line):
         word = m.group(0)
-        if word.lower() in ALLOWED:
+        if word.lower().endswith(ALLOWED):
             continue
-        stem = m.group(1)
-        us = STEMS[stem.lower()] + word[len(stem):]
-        found.append((m.start(), word, us))
+        prefix, stem, suffix = m.groups()
+        # A bare -is or -ys stem is never an English word, so a match
+        # with no ending is Latin, such as borealis.
+        if not suffix and stem.lower().endswith(("is", "ys")):
+            continue
+        us = (prefix + STEMS[stem.lower()] + suffix).lower()
+        found.append((m.start(), word, cased(us, word)))
     for m in WORD_RE.finditer(line):
-        found.append((m.start(), m.group(0), WORDS[m.group(0).lower()]))
+        word = m.group(0)
+        found.append((m.start(), word, cased(WORDS[word.lower()], word)))
     return sorted(found)
 
 
-def check(path):
+def check(text):
     findings = []
-    fenced = False
-    for n, raw in enumerate(path.read_text().splitlines(), 1):
-        if re.match(r"^\s*(```|~~~)", raw):
-            fenced = not fenced
+    fence, fence_line, comment = None, 0, False
+    for n, raw in enumerate(text.splitlines(), 1):
+        # A fence closes only on its own character, at least as long as
+        # the opener, with nothing after it. A nested ``` inside a ````
+        # block would otherwise end the block early, or reopen one, and
+        # silently pass the rest of the page.
+        m = re.match(r"^\s*(`{3,}|~{3,})(.*)$", raw)
+        if fence:
+            if (m and m.group(1)[0] == fence[0]
+                    and len(m.group(1)) >= len(fence)
+                    and not m.group(2).strip()):
+                fence = None
             continue
-        if fenced or re.match(r"^\s*<!--.*-->\s*$", raw):
+        if m:
+            fence, fence_line = m.group(1), n
             continue
+        if comment:
+            if "-->" in raw:
+                comment = False
+            continue
+        if re.search(r"<!--(?!.*-->)", raw):
+            comment = True
+            raw = raw[:raw.index("<!--")]
         for col, word, us in spelling(mask(raw)):
             findings.append((n, col + 1,
                              f"British spelling \"{word}\", "
@@ -148,23 +192,38 @@ def check(path):
             findings.append((n, m.start(1) + 1,
                              f"sentence opens on {m.group(1)}, a "
                              f"complete sentence of its own"))
+    if fence:
+        findings.append((fence_line, 1, "fence never closes, so nothing "
+                                        "after it was checked"))
     return findings
 
 
 def main(argv):
-    if not argv:
+    if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
         return 2
-    total = 0
+    sys.stdout.reconfigure(encoding="utf-8")
+    total, unread = 0, 0
     for arg in argv:
         p = pathlib.Path(arg)
-        findings = check(p)
+        try:
+            text = p.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as err:
+            unread += 1
+            print(f"{p}: not checked: {err}", file=sys.stderr)
+            continue
+        findings = check(text)
         total += len(findings)
         for n, col, text in findings:
             print(f"{p}:{n}:{col}: {text}")
         print(f"{p.name:<44} {len(findings)} finding"
               f"{'' if len(findings) == 1 else 's'}")
     print()
+    if unread:
+        print(f"ERROR — {unread} page{'' if unread == 1 else 's'} could "
+              f"not be read, {total} finding{'' if total == 1 else 's'} "
+              f"on the rest.")
+        return 2
     if not total:
         print(f"PASS — no finding on {len(argv)} "
               f"page{'' if len(argv) == 1 else 's'}.")

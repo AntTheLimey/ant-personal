@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Fail a docs page carrying British spelling or a quoted-string opener.
+"""Fail a docs page on spelling, a quoted-string opener or a named word.
 
     <skill>/check-mechanics.py <page.md> [<page.md> ...]
 
-Two checks, both of defects no cold reader caught in 18 reps:
+Four checks. The first two are defects no cold reader caught in 18
+reps; the last two are the words and constructions style-standard.md
+and writing.md name, which a cold reader otherwise has to find:
 
 - British spelling. The docset is US English. The check is a word
   list, not a dictionary, so it catches the listed forms and nothing
@@ -15,6 +17,16 @@ Two checks, both of defects no cold reader caught in 18 reps:
   sentence, such as
   "`Could not start the restore.` is a red notification". The reader
   crosses two sentence ends before reaching the verb.
+- A word or phrase the rules name as banned: the banned words, the
+  named idioms and hedges, the register swaps, the command verbs, the
+  product and interface nouns, and the signposting to delete on sight.
+  Matched across line breaks. Each finding names the replacement.
+- Accumulation: more than two of "actually", "critical", "matters",
+  "exactly", "rather than" or "at scale" on one page.
+
+Every check skips fenced code, inline code, double-quoted strings, link
+targets and HTML comments. A word inside a quoted product string is
+the product's word, and stays.
 
 An unclosed fence is reported too, since nothing after it is checked.
 
@@ -119,16 +131,85 @@ OPENER_RE = re.compile(
     r"\s+[a-z]")
 
 
+# (pattern, replacement advice). Case-insensitive, whole words, and a
+# space in a pattern matches any run of whitespace, line breaks
+# included. Each entry is a rule stated in style-standard.md or
+# writing.md; a word only a careful reader could judge is not here.
+NAMED = [
+    (r"leverag(?:e|es|ed|ing)", "banned word"),
+    (r"utiliz(?:e|es|ed|ing|ation)", "banned word, use \"use\""),
+    (r"ensur(?:e|es|ed|ing)", "banned word"),
+    (r"seamless(?:ly)?", "banned word"),
+    (r"best-in-class", "banned word"),
+    (r"synerg(?:y|ies)", "banned word"),
+    (r"paradigm shifts?", "banned phrase"),
+    (r"stakeholder alignment", "banned phrase"),
+    (r"load-bearing", "banned word, use \"critical\" or \"essential\""),
+    (r"carr(?:y|ies) weight", "idiom, use \"matter\""),
+    (r"a way back", "idiom, use \"a way to undo it\""),
+    (r"the shape of it", "idiom, use \"the structure\""),
+    (r"lands wrong", "idiom"),
+    (r"worth knowing", "idiom and signposting, state the fact"),
+    (r"pretty much", "conversational hedge"),
+    (r"simply", "conversational hedge"),
+    (r"of course", "conversational hedge"),
+    (r"surfac(?:ed|ing)", "register, use \"shows\" or \"appears\""),
+    (r"surfaces (?:in|on|as|when|after|once|within|up)",
+     "register, use \"appears\" or \"shows\""),
+    (r"ahead of", "register, use \"before\""),
+    (r"more of them", "register, name what there is more of"),
+    (r"verbs?", "use \"command\""),
+    (r"poll(?:s|ed|ing)?", "jargon, write \"run X until Y\""),
+    (r"query an? command", "you run a command"),
+    (r"hit an? endpoint", "jargon"),
+    (r"fire an? request", "jargon"),
+    (r"grab an? value", "you read a value"),
+    (r"PostgreSQL", "use \"Postgres\""),
+    (r"pgEdge Cloud", "retired name, use \"pgEdge Starfleet\""),
+    (r"(?<!pgEdge\s)Starfleet", "write \"pgEdge Starfleet\""),
+    (r"unmeasured", "use \"unknown\""),
+    (r"not recorded here", "use \"unknown\""),
+    (r"pop-?ups?", "use \"dialog\""),
+    (r"modals?", "use \"dialog\""),
+    (r"panels?", "use \"pane\""),
+    (r"this (?:section|page) (?:covers|uses|has)",
+     "signposting, delete it"),
+    (r"now that we have", "signposting, delete it"),
+    (r"it is worth noting", "signposting, delete it"),
+    (r"importantly", "signposting, delete it"),
+    (r"crucially", "signposting, delete it"),
+    (r"pay special attention", "signposting, delete it"),
+    (r"the catch is", "signposting, delete it"),
+    (r"note that", "signposting, delete it"),
+    (r"coming soon", "forward-looking, describe what is"),
+    (r"we", "do not write \"we\""),
+]
+NAMED_RE = [(re.compile(r"(?<![\w-])" + pat.replace(" ", r"\s+") +
+                        r"(?![\w-])", re.I), advice)
+            for pat, advice in NAMED]
+
+TICS = ["actually", "critical", "matters", "exactly", "rather than",
+        "at scale"]
+TIC_LIMIT = 2
+
+
+BLANK = "\u00b7"
+
+
 def mask(line):
-    """Blank inline code, quoted strings, URLs and link targets."""
-    line = re.sub(r"``.*?``|`[^`]*`", lambda m: " " * len(m.group()),
+    """Blank inline code, quoted strings, URLs and link targets.
+
+    The blank is a middle dot, not a space, so a named phrase cannot
+    match across a masked span: "the `app` user" is not "the user".
+    """
+    line = re.sub(r"``.*?``|`[^`]*`", lambda m: BLANK * len(m.group()),
                   line)
     line = re.sub(r"\"[^\"]*\"|“[^”]*”",
-                  lambda m: " " * len(m.group()), line)
+                  lambda m: BLANK * len(m.group()), line)
     line = re.sub(r"\]\([^)]*\)|\]\[[^\]]*\]|^\s*\[[^\]]+\]:.*$",
-                  lambda m: " " * len(m.group()), line)
-    line = re.sub(r"<!--.*?-->", lambda m: " " * len(m.group()), line)
-    line = re.sub(r"https?://\S+", lambda m: " " * len(m.group()), line)
+                  lambda m: BLANK * len(m.group()), line)
+    line = re.sub(r"<!--.*?-->", lambda m: BLANK * len(m.group()), line)
+    line = re.sub(r"https?://\S+", lambda m: BLANK * len(m.group()), line)
     return line
 
 
@@ -159,8 +240,44 @@ def spelling(line):
     return sorted(found)
 
 
+def named(lines):
+    """Named words and tics over the checked lines, across line breaks.
+
+    lines is a list of (line number, masked text). The text is joined
+    with newlines so a phrase wrapped at 79 columns still matches, and
+    each match is mapped back to the line it starts on.
+    """
+    starts, parts, pos = [], [], 0
+    for n, text in lines:
+        starts.append((pos, n))
+        parts.append(text)
+        pos += len(text) + 1
+    joined = "\n".join(parts)
+
+    def where(offset):
+        line_start, n = max(s for s in starts if s[0] <= offset)
+        return n, offset - line_start + 1
+
+    found = []
+    for rx, advice in NAMED_RE:
+        for m in rx.finditer(joined):
+            n, col = where(m.start())
+            word = " ".join(m.group().split())
+            found.append((n, col, f"\"{word}\": {advice}"))
+    for tic in TICS:
+        rx = re.compile(r"(?<![\w-])" + tic.replace(" ", r"\s+") +
+                        r"(?![\w-])", re.I)
+        hits = list(rx.finditer(joined))
+        for m in hits[TIC_LIMIT:]:
+            n, col = where(m.start())
+            found.append((n, col, f"\"{tic}\" {len(hits)} times on the "
+                                  f"page, more than {TIC_LIMIT}"))
+    return found
+
+
 def check(text):
     findings = []
+    checked = []
     fence, fence_line, comment = None, 0, False
     for n, raw in enumerate(text.splitlines(), 1):
         # A fence closes only on its own character, at least as long as
@@ -184,6 +301,7 @@ def check(text):
         if re.search(r"<!--(?!.*-->)", raw):
             comment = True
             raw = raw[:raw.index("<!--")]
+        checked.append((n, mask(raw)))
         for col, word, us in spelling(mask(raw)):
             findings.append((n, col + 1,
                              f"British spelling \"{word}\", "
@@ -192,6 +310,8 @@ def check(text):
             findings.append((n, m.start(1) + 1,
                              f"sentence opens on {m.group(1)}, a "
                              f"complete sentence of its own"))
+    findings.extend(named(checked))
+    findings.sort()
     if fence:
         findings.append((fence_line, 1, "fence never closes, so nothing "
                                         "after it was checked"))

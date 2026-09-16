@@ -142,9 +142,9 @@ thing for the whole page.
   own procedure.
 
 Two of these overturn current usage on purpose: pane wins over panel
-even though both are in the corpus, and popup is retired in favour of
+even though both are in the corpus, and popup is retired in favor of
 dialog even though it is the more common of the two, because the
-register is semi-formal and popup is not.
+register is formal and popup is not.
 
 **This list is inert on a command-line page.** A page with no console
 object on it takes none of these words and needs none of them.

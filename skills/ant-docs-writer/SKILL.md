@@ -446,8 +446,8 @@ reason repeats the noun, finds the result choppy, and reaches for
 
 ## Register
 
-The voice is semi-formal technical documentation. The reader is at
-work, may not be a native English speaker, and may be reading under
+The voice is formal technical documentation. The reader is at work,
+may not be a native English speaker, and may be reading under
 pressure. Every rule below follows from that.
 
 - **Name a technical thing by its full name.** "exit status 1", not
@@ -622,8 +622,7 @@ looking only at structure.
   always deletable, because a following sentence adding to the previous
   one is the default reading anyway. "So" becomes "Thus" or "As a
   result". "But" becomes "However,", which reads as stiff beside a blog
-  and correct beside the semi-formal register these pages are written
-  in.
+  and correct beside the formal register these pages are written in.
 - Use a hyphen for a compound modifier before a noun: read-only role,
   copy-on-write branch, single-node database.
 

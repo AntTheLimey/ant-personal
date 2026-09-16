@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Six reviews hunted terminology drift, and none caught "pane" in the
   body against "page" in an image's alt text, because nothing told a
   reviewer to read alt text and headings as page vocabulary.
+- **The register is formal technical voice, not semi-formal.** Set at
+  the direction of pgEdge's technical writer.
 
 ### Added
 

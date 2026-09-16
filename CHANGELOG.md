@@ -7,6 +7,69 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.2] — 2026-09-16
+
+### Added
+
+- **Restructure, a job between restyle and overhaul.** Restyle,
+  restructure and overhaul are now levels, each adding one layer to
+  the one below: restyle rewrites wording only, restructure adds a
+  shape change on top of that (sections added, merged, split or
+  reordered, facts taken as the page states them), and overhaul adds
+  re-establishing every fact from source on top of both. The 1.4.1
+  rebuild of the PR #27 page took 34 minutes, most of it rewrite
+  passes against a phrase gate that could not pass on the page's own
+  UI labels and product terms, for a page that only needed its wording
+  and shape changed, not a full fact re-check.
+- **A meaning check, run on restyle and restructure.** A separate
+  agent compares the old page against the new one and reports every
+  fact added, dropped or changed, without commenting on style. Neither
+  job re-verifies against source, so nothing else was watching for a
+  fact that moved or dropped during a rewrite.
+- **`--allow` on every `check-ledger.py` invocation, and the allow
+  file that ships beside a draft.** A phrase the page must repeat,
+  such as its title, a product term or a label as the screen spells
+  it, is listed there once and excused, rather than rewritten pass
+  after pass chasing a gate that could not pass.
+- **`check-ledger.py` accepts an allow file that does not exist yet.**
+  The first run, before anyone has written one, reports shared
+  sequences instead of crashing. A sequence now passes when it lies
+  inside an allowed phrase or contains one whole, so a two- or
+  three-word product term excuses every longer sequence built around
+  it. A trailing `# reason` is a comment, not part of the phrase, and
+  a one-word phrase is ignored, because it would excuse every sequence
+  containing that word.
+
+### Changed
+
+- **The edit job is renamed restyle**, and stays the fast, cheap job:
+  wording only, facts untouched, section order untouched apart from
+  one reader-safety move.
+- **The fact set and the claim-to-source list merge into one fact
+  list.** Each entry carries the fact, its source, its disposition on
+  an overhaul (keep, adapt or drop), and, once drafted, the heading it
+  landed under.
+- **The heading tree splits into a short form and a full form.** A
+  restructure and an overhaul write the short form, headings only, no
+  rationale line. A new page writes the full form, one line per
+  heading saying what it establishes.
+- **The screenshot check runs on what a page states and requires an
+  image to check it against, not on whether the page carries one.** A
+  page that shows a screenshot but describes nothing on it, and a page
+  that describes a screen but has no image of it, both skip the check.
+- **`check-ledger.py` strips double-quoted strings the same as a code
+  span, and unwraps each paragraph first.** Unwrapping means a code
+  span or a quoted label broken across the 79-column wrap is still
+  stripped whole. On the PR #27 page this dropped its n5 count against
+  the ledger from 2 shared sequences to 0 on quote stripping alone,
+  and its n4 count from 8 to 3, with the remaining 3 passing under a
+  four-line allow file. The brief's own title sequences pass the same
+  way. A positive control held: the rejected 1.3.0 page against its
+  original still fails, at 343 shared sequences (339 before
+  unwrapping).
+
+---
+
 ## [1.4.1] — 2026-09-16
 
 ### Changed

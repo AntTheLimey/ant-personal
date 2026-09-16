@@ -31,11 +31,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   such as its title, a product term or a label as the screen spells
   it, is listed there once and excused, rather than rewritten pass
   after pass chasing a gate that could not pass.
+- **`check-ledger.py` accepts an allow file that does not exist yet.**
+  The first run, before anyone has written one, reports shared
+  sequences instead of crashing. A sequence now passes when it lies
+  inside an allowed phrase or contains one whole, so a two- or
+  three-word product term excuses every longer sequence built around
+  it. A trailing `# reason` is a comment, not part of the phrase, and
+  a one-word phrase is ignored, because it would excuse every sequence
+  containing that word.
 
 ### Changed
 
 - **The edit job is renamed restyle**, and stays the fast, cheap job:
-  wording only, facts and section order untouched.
+  wording only, facts untouched, section order untouched apart from
+  one reader-safety move.
 - **The fact set and the claim-to-source list merge into one fact
   list.** Each entry carries the fact, its source, its disposition on
   an overhaul (keep, adapt or drop), and, once drafted, the heading it
@@ -44,16 +53,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   restructure and an overhaul write the short form, headings only, no
   rationale line. A new page writes the full form, one line per
   heading saying what it establishes.
-- **The screenshot check runs on what a page states, not on whether it
-  carries an image.** A page that shows a screenshot but describes
-  nothing on it no longer gets the check.
+- **The screenshot check runs on what a page states and requires an
+  image to check it against, not on whether the page carries one.** A
+  page that shows a screenshot but describes nothing on it, and a page
+  that describes a screen but has no image of it, both skip the check.
 - **`check-ledger.py` strips double-quoted strings the same as a code
-  span.** On the PR #27 page this dropped its n5 count against the
-  ledger from 2 shared sequences to 0 on quote stripping alone, and
-  its n4 count from 8 to 3, with the remaining 3 passing under a
+  span, and unwraps each paragraph first.** Unwrapping means a code
+  span or a quoted label broken across the 79-column wrap is still
+  stripped whole. On the PR #27 page this dropped its n5 count against
+  the ledger from 2 shared sequences to 0 on quote stripping alone,
+  and its n4 count from 8 to 3, with the remaining 3 passing under a
   four-line allow file. The brief's own title sequences pass the same
   way. A positive control held: the rejected 1.3.0 page against its
-  original still fails at 339 shared sequences.
+  original still fails, at 343 shared sequences (339 before
+  unwrapping).
 
 ---
 

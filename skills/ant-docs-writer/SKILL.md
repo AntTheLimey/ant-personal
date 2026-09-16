@@ -15,10 +15,11 @@ and quoted, so the em-dashes inside it stand against the punctuation
 rules in this file:
 
     Write like a human being in complete, plain sentences.
-    Your inputs — the fact ledger, this brief, the style skill — are
-    written in a flat machine register. Take facts from them and
-    nothing else. Never carry over a phrasing, a cadence or a sentence
-    shape from any of them.
+    Your inputs — the page itself on a restyle or a restructure, the
+    ledger and its sources on an overhaul, the fact list on a new
+    page, this brief, the style skill — are written in a flat machine
+    register. Take facts from them and nothing else. Never carry over
+    a phrasing, a cadence or a sentence shape from any of them.
 
 The style has two halves and the order between them is not optional.
 The content checklist runs first, because a page can pass every prose
@@ -64,7 +65,11 @@ it.
    destructive-flag rule under Steps and procedures says how to show
    it instead.
 2. **The content checklist.** A page that fails an item is wrong
-   however well it reads.
+   however well it reads. **Job scope outranks this item on a restyle
+   or a restructure**: the writer adds no fact and does not go looking
+   for one, so a failing item that needs a new fact is not fixed. It
+   is reported in the hand-back instead, naming the item, so the
+   person who asked can request a fix or an overhaul.
 3. **Product truth.** Never delete a technical claim unless the same
    claim already stands elsewhere on the page. This outranks the rule
    that sends a number to the page owning it, so link out and keep the
@@ -74,8 +79,11 @@ it.
    and it goes. A count nobody acts on is a maintenance liability that
    is wrong the day the sixth case ships. The second exception is the
    same principle widened: a claim the reader cannot act on at all,
-   which "Say less, or say nothing" sorts and deletes. Product truth
-   protects a fact the reader acts on, not every true sentence. It also
+   which "Say less, or say nothing" sorts and deletes on a fix, an
+   overhaul or a new page. A restyle or a restructure narrows that
+   sort to a restatement only, under "Say less, or say nothing" itself.
+   Product truth protects a fact the reader acts on, not every true
+   sentence. It also
    outranks "keep the consequence, drop the mechanism", which applies
    only where the mechanism is not itself the only statement of a
    behavior.
@@ -102,6 +110,13 @@ pull request. Each is a question with a failing answer, not a
 preference. Passing all seven is not done: a page passes this list and
 still fails a reader who does not already know it, so the checks under
 "Reviews" are the last gate and you dispatch them yourself.
+
+**On a restyle or a restructure, an item that fails for want of a fact
+is not fixed by adding one.** Report it in the hand-back instead, with
+its number, under the job-scope rule in "When two rules conflict".
+Item 6 is the case this comes up most: a restructure may build the
+missing save-first step only from a fact already on the page, never a
+new one.
 
 **1. Can the reader do every action exactly as described?** On a
 command-line page, a command needs its full prefix, a placeholder for
@@ -391,6 +406,14 @@ name each of them there. A cold reader created a role as `admin`
 within five minutes, against a page whose Before You Start named only
 the rotation.
 
+**On a restyle or a restructure, this rule reaches only a hazard
+already stated somewhere on the page.** On a restyle, moving it into
+Before You Start is the one ordering exception the job allows, named
+in the hand-back. On a restructure, moving it is ordinary reordering.
+Neither job invents a hazard with no existing statement on the page:
+that is reported in the hand-back as a gap, with this rule as the
+reason.
+
 **Ask what the reader will do instead of this step, and answer that.**
 The instinct beats the instruction every time it is not named. The
 three instincts a cold read found on one page were to rotate the
@@ -491,8 +514,9 @@ pressure. Every rule below follows from that.
   That rule governs a **fix** job, where the diff must stay readable
   enough to review. **An overhaul, a restructure and a restyle are all
   bound by the register rules**: in an overhaul every sentence is new,
-  a restructure rewrites whatever does not fit the new shape, and a
-  restyle has sentences, words and headings in scope by definition.
+  a restructure rewrites all wording, because it includes a restyle,
+  and a restyle has sentences, words and headings in scope by
+  definition.
 - **"You" is allowed and is usually the right answer.** Removing it
   tends to produce the agentless passive this file bans two rules
   higher up. "After you authenticate" beats "after authentication is
@@ -721,11 +745,16 @@ not say, **ask the person who asked you** before writing anything.
 
 - A **fix** changes a fact and touches nothing else. No restructuring,
   no style edits, no vocabulary sweep. A reviewer must be able to see
-  the factual change on its own.
+  the factual change on its own, apart from the one ordering move a
+  restyle may also make, described next: reader safety outranks scope
+  on a fix too.
 - A **restyle**, the base level, rewrites wording: sentences, words,
   and headings' wording and formatting move to house style. The facts
-  and the order of the sections do not change. This is the fast, cheap
-  job.
+  and the order of the sections do not change, except that a step,
+  precondition or hazard already on the page may move to sit before
+  the action it guards: reader safety (rank 1, under "When two rules
+  conflict") outranks the job's scope. Name the move in the hand-back.
+  This is the fast, cheap job.
 - A **restructure** is a restyle, and also changes the page's shape:
   sections are added, merged, split or reordered, and the prose is
   rewritten to fit. Its facts are taken as the page states them.
@@ -747,18 +776,19 @@ not say, **ask the person who asked you** before writing anything.
 | Fix | yes | no | no (the entry for the changed claim goes in the hand-back) | no | `check-mechanics.py` | correctness review of the changed claim only |
 | Restyle | yes | no | no | no | `check-mechanics.py`, `signals.py` | meaning check + cold read, in parallel |
 | Restructure | yes | no | no | short | `check-mechanics.py`, `signals.py` | meaning check + cold read, in parallel |
-| Overhaul | never | yes | yes | short | `check-sources.py`, `check-ledger.py` (`--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows |
-| New page | no old page | no | yes | full | `check-ledger.py` (brief vs. draft, `--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows |
+| Overhaul | never | yes | yes | short | `check-sources.py`, `check-ledger.py` (`--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows and an image is available |
+| New page | no old page | no | yes | full | `check-ledger.py` (brief vs. draft, `--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows and an image is available |
 
 One fix round for every job. A second round runs only where the first
-found a wrong fact.
+found a wrong fact or a defect in the work itself.
 
 **When handed an existing page without a clear instruction, ask before
 doing anything.** Offer exactly three choices, worded as levels, each
 naming what it adds to the one below:
 
 - **Restyle** rewrites the wording, and keeps the facts and the
-  section order in place.
+  section order in place, apart from the one reader-safety move named
+  above.
 - **Restructure** does what restyle does, and also changes the page's
   shape: sections are added, merged, split or reordered.
 - **Overhaul** does what restructure does, and also fact-checks the
@@ -778,15 +808,15 @@ page someone wanted reorganized returns the same badly organized page
 with better sentences.
 
 The rest of this section is for a restructure, an overhaul or a new
-page. On a restyle the section order does not change, so there is
-nothing here to decide. The difference between an overhaul and a new
-page is only where the facts come from: an overhaul has a ledger of
-the old page's coverage as well as a fact list, and a new page has the
-fact list alone. On an overhaul the writer never reads the old page, a
-rule with its own heading below, so the ledger is the only account of
-it you get. A restyle or a restructure works from the page itself and
-has no ledger. Where the rest of this section says ledger, only an
-overhaul has one.
+page. On a restyle the section order does not change, apart from the
+one ordering move named under restyle above. The difference between an
+overhaul and a new page is only where the facts come from: an overhaul
+has a ledger of the old page's coverage as well as a fact list, and a
+new page has the fact list alone. On an overhaul the writer never
+reads the old page, a rule with its own heading below, so the ledger
+is the only account of it you get. A restyle or a restructure works
+from the page itself and has no ledger. Where the rest of this section
+says ledger, only an overhaul has one.
 
 **On an overhaul, dispatch a separate agent to extract the ledger from
 the old page, before any writing starts.** You never read that page
@@ -815,8 +845,8 @@ important each time.
 ### Deciding the order
 
 This section governs a restructure, an overhaul and a new page. On a
-restyle the section order does not change, so there is nothing here to
-decide.
+restyle the section order does not change, apart from the one ordering
+move named under restyle in "Ask which job this is before you start".
 
 **Fixing the sentences of a badly organized page produces a badly
 organized page with better sentences.** In a restructure or an
@@ -867,11 +897,10 @@ an optional convenience layer and nothing on the page was formatted as
 a stop sign. Order is necessary and it is not sufficient. See "Marking
 a step the reader will otherwise skip".
 
-**One ordering defect is worth fixing even in a fix or a restyle**: a
-destructive action printed before the step that makes it survivable.
-That is reader safety, rank 1, and it outranks the scope of the job.
-Move it, and say in the pull request why the diff is larger than the
-request.
+**The one ordering move a fix or a restyle may make is defined under
+those jobs in "Ask which job this is before you start", not here.**
+Where it applies, say in the pull request why the diff is larger than
+the request.
 
 **On a new page the shape is the whole risk.** There is no prior
 structure to inherit and no reviewer comparing against one, so a
@@ -890,10 +919,9 @@ quietly revising the tree to match.
 
 **On a restructure or an overhaul, write the short heading tree to a
 file beside the draft, before a word of prose.** The headings only, one
-per line, in the order decided, with no rationale line: the shape has
-already been argued in the pull request under "Deciding the order",
-so the file exists to fix it, not to justify it. It is handed over
-with the draft the same way.
+per line, in the order already decided under "Deciding the order",
+with no rationale line: the file exists to fix that decision, not to
+justify it. It is handed over with the draft the same way.
 
 ## How a page opens
 
@@ -1067,11 +1095,18 @@ A page carries no trace of how it was made or who made it.
 
 ## Never invent
 
-- Every command and flag exists in the generated reference. Every
-  behavioral claim traces to a live capture, a spec field, the
-  product's own source, or an existing gated page. A claim with no
-  source stays out, and what is true goes in its place. Record the
-  source as you write the claim, in the fact list under "Reviews".
+A restyle or a restructure sources nothing here: both take the page's
+own claims as given and verify nothing against source. Where a rule
+below asks for a source or for new material, it binds a fix, an
+overhaul and a new page. "Say less, or say nothing" governs what a
+restyle or a restructure may still cut.
+
+- On a fix, an overhaul and a new page: every command and flag exists
+  in the generated reference, and every behavioral claim traces to a
+  live capture, a spec field, the product's own source, or an existing
+  gated page. A claim with no source stays out, and what is true goes
+  in its place. Record the source as you write the claim, in the fact
+  list under "Reviews".
 - **Keep the consequence, drop the mechanism.** The reader is told what
   they can do and see, never how the platform does it. "Rotating the
   credential for the app role restarts AI services" is the right weight.
@@ -1112,16 +1147,20 @@ A page carries no trace of how it was made or who made it.
   billing service, may still be stated: attribute it to what the console
   shows, never present it as a contract, and re-check it whenever the
   page is touched.
-- **A rewrite may add facts, and often must.** The content checklist
-  asks for things a page frequently does not have, and the answer is to
-  go and find them rather than to leave the item failing. Source every
-  addition and say where it came from in the pull request. What a
-  rewrite may never do is add a fact it did not verify.
-- **A rewrite may add a step**, when the checklist requires one and the
-  step follows from a fact that is sourced. A procedure that identifies
-  something by when it happened needs a step telling the reader to
-  record that, or the identification is unusable. Say in the pull
-  request which fact the step follows from.
+- **On an overhaul or a new page, a rewrite may add facts, and often
+  must.** The content checklist asks for things a page frequently does
+  not have, and the answer is to go and find them rather than to leave
+  the item failing. Source every addition and say where it came from
+  in the pull request. What a rewrite may never do is add a fact it
+  did not verify. A fix changes the one fact it was asked to change and
+  adds no other. A restyle or a restructure adds none at all, under
+  the job-scope rule in "When two rules conflict".
+- **On an overhaul or a new page, a rewrite may add a step**, when the
+  checklist requires one and the step follows from a fact that is
+  sourced. A procedure that identifies something by when it happened
+  needs a step telling the reader to record that, or the
+  identification is unusable. Say in the pull request which fact the
+  step follows from.
 - **State an absence in the form "no X does Y", scoped to what you
   checked.** "No command in the reference reads whether the tier is
   enabled" is a claim you can support. "There is no way to check"
@@ -1146,6 +1185,16 @@ A page carries no trace of how it was made or who made it.
 
 Every sentence sorts into one of two outcomes, and the sort happens
 before any rewording.
+
+**On a restyle or a restructure, only a restatement sorts to delete.**
+The writer may delete a sentence where the same fact still stands
+elsewhere on the page. A fact whose only statement on the page looks
+safe to cut is not deleted: neither job re-verifies what the reader
+needs, and the meaning check reports any other drop as a defect. Leave
+it in, and list it in the hand-back as a deletion candidate.
+
+On a fix, an overhaul and a new page, sort every sentence by this
+question:
 
 **Would the reader act wrong without this fact?**
 
@@ -1319,12 +1368,19 @@ judgment and must not be followed.
 
 ### Fact list entry form
 
-One entry per fact, four fields:
+One entry per fact, four fields, and a fifth on an overhaul:
 
     fact: <the fact, as a sentence>
-    source: <file:line, or a ledger entry id>
+    source: <file:line that settles it>
     disposition: keep | adapt | drop
     heading: <where it landed on the page, once drafted>
+    ledger: <the ledger entry id, on an overhaul>
+
+`source` is always a file and line that settles the fact, never a
+ledger entry id alone: the ledger is a record of what the old page
+covered, not of what is true, so an id cannot stand as source. On an
+overhaul, record the ledger entry id too, in `ledger`, alongside the
+source that settled it.
 
 `disposition` records what an overhaul did with a fact the ledger
 carried: `keep` unchanged, `adapt` with a few words saying how, or
@@ -1333,7 +1389,7 @@ carried: `keep` unchanged, `adapt` with a few words saying how, or
 `heading` is filled in as the draft reaches that heading, not written
 up front.
 
-On a fix, the same four fields cover the one changed claim, carried
+On a fix, the same fields cover the one changed claim, carried
 directly in the hand-back rather than as a separate file.
 
 ### The gates, and when each runs
@@ -1354,11 +1410,11 @@ only a hand-written page:
 
     <skill>/check-sources.py <ledger>
 
-A restyle, a restructure and a new page build no ledger, so this gate
-does not run on them.
+A fix, a restyle, a restructure and a new page build no ledger, so
+this gate does not run on them.
 
-The phrase gate is `check-ledger.py`, which is the name
-`check-sources.py` uses for it. It runs on an overhaul and on a new
+The phrase gate is `check-ledger.py`. `check-sources.py`'s own
+docstring calls it that. It runs on an overhaul and on a new
 page. A restyle and a restructure keep the page's own wording as the
 starting point and skip it, and a fix touches one claim and skips it
 too. It takes two files, the text the draft may have copied from and
@@ -1380,9 +1436,8 @@ the one above to what came through the ledger:
 
     <skill>/check-ledger.py <ledger> <draft> --allow <accepted.txt>
 
-On an overhaul and on a new page, measure the brief against the draft.
-The brief is a channel nobody was measuring until a finished page
-shared eleven sequences with its own brief:
+On an overhaul and on a new page, measure the brief against the draft,
+a channel a finished page has shared sequences with before:
 
     <skill>/check-ledger.py <brief> <draft> --allow <accepted.txt>
 
@@ -1394,13 +1449,24 @@ so report it as the draft.
 rewrite each shared sequence once. A sequence still shared that the
 page must repeat, such as its title, a product term or a label as the
 screen spells it, goes in an allow file beside the draft, one phrase
-per line, with a `#` comment giving the reason, and the gate runs
-again. **Never a second rewrite pass.** The allow file ships with the
-draft, so a reviewer can see what was excused.
+per line. A trailing `# reason` after the phrase is a comment, not
+part of it. A one-word phrase is ignored, because it would excuse
+every sequence containing that word. Backticks inside a phrase do
+nothing, since code spans are already stripped from both pages before
+comparison. **Never a second rewrite pass.** The allow file ships with
+the draft, so a reviewer can see what was excused.
 
-Double-quoted strings are stripped from both sides before comparison,
-the same as a code span, so a quoted UI label no longer costs an entry
-in the allow file.
+The `--allow` flag may name a file that does not exist yet: the first
+run needs none, and a missing file allows nothing rather than failing
+the run. A sequence passes once it lies inside an allowed phrase, or
+contains one whole, so a two- or three-word product term excuses every
+longer sequence built around it.
+
+Code spans and double-quoted strings are stripped from both sides
+before comparison. Each paragraph is unwrapped onto one line first, so
+a code span or a quoted label broken across the 79-column wrap is
+still stripped whole, and prose sitting between two quoted strings is
+still measured.
 
 A shared sequence is re-expressed, never padded around. A phrase that
 is vocabulary already shipped in a sibling page stays: consistency
@@ -1434,7 +1500,8 @@ answer rather than a report that the work happened:
 
 - **The job you did**, one of fix, restyle, restructure, overhaul or
   new page. "Ask which job this is before you start" defines the five,
-  and its table says what each one ships.
+  and its table gives what each one reads, builds, gates and gets
+  reviewed.
 - **The fact list**, on an overhaul and on a new page. A fix carries no
   fact list file: the entry for the changed claim goes directly in the
   hand-back.
@@ -1453,35 +1520,40 @@ which job this is before you start". A fix gets a correctness review
 of the changed claim. A restyle and a restructure get a meaning check
 and a cold read, run in parallel. An overhaul and a new page get a
 correctness review and a cold read, run in parallel, plus a screenshot
-check on any page that states what a screen shows. One fix round runs
+check on any page that states what a screen shows, where an image of
+it is available. One fix round runs
 on every job. A second round runs only where the first found a wrong
-fact. Each review is performed by someone other than the writer, after
-the draft exists. A writer cannot be their own cold reader, because
-you cannot un-know the page you just wrote.
+fact or a defect in the work itself. Each review is performed by
+someone other than the writer, after the draft exists. A writer cannot
+be their own cold reader, because you cannot un-know the page you just
+wrote.
 
 **Run the cold read yourself before calling the page done, on every
 job that gets one.** Do not hand it back as a recommendation and do
 not wait to be asked. Dispatch a fresh agent that has none of your
 context and give it the page, the pages it links to, `## Register`
-through the end of `### Constructions that read as a machine`, and
-nothing else.
+through the end of `### Constructions that read as a machine`, and the
+quoted-product-string exemption from `## Sentences`. Give it nothing
+else.
 
 The correctness reviewer checks every claim on the page against its
-source, on a fix, an overhaul and a new page.
+source, on an overhaul and a new page. On a fix, it checks the one
+changed claim only, and there is no cold read.
 
 **The fact list** is what makes that possible. Add an entry the moment
 a claim goes on the page, so the reviewer verifies against a record
 built alongside the draft rather than rediscovering each source. "Fact
 list entry form" under "Two artifacts, and the old page is not one of
-them" gives its fields. A claim you cannot put a source beside does
-not go on the page.
+them" gives its fields. On a fix, an overhaul and a new page, a claim
+you cannot put a source beside does not go on the page.
 
 The cold-read reviewer gets no repository context at all, only the
-page, the pages it links to, and `## Register` through the end of
-`### Constructions that read as a machine`. They read as the customer
-and report where they got lost, what they could not type, where the
-page breaks the standard, and what they would search the web for
-instead.
+page, the pages it links to, `## Register` through the end of
+`### Constructions that read as a machine`, and the quoted-
+product-string exemption from `## Sentences`. They read as the
+customer and report where they got lost, what they could not type,
+where the page breaks the standard, and what they would search the
+web for instead.
 
 ### The meaning check
 
@@ -1495,8 +1567,10 @@ nothing else. It reports:
   or lost
 - whether any section moved from where it stood in the old page
 
-On a restyle a moved section is itself a defect, because a restyle
-keeps the section order fixed. On a restructure a moved section is
+On a restyle, every moved section is reported. A move the hand-back
+names under the ordering exception in "Ask which job this is before
+you start" is not a defect. Any other move is, because a restyle keeps
+the section order fixed otherwise. On a restructure a moved section is
 expected, and the report exists to confirm the move carried the facts
 the section held, not to flag the move. The meaning check does not
 comment on style. Its findings are wrong facts, so "A reviewer owns
@@ -1537,12 +1611,14 @@ A second review round happens only when the first found a wrong fact or
 a defect in the work itself. A round spent on suggestions is a round
 spent making the page longer.
 
-The job's pair of reviews finds different defects than either would
-alone, and neither substitutes for the other. Run both, even on a
-small change, and run the screenshot check too wherever it applies.
+Where a job runs a pair of reviews, each finds defects the other would
+not, and neither substitutes for it. Run both, even on a small change,
+and run the screenshot check too wherever it applies. A fix runs one
+review only, and that review stands alone.
 
-**The cold read is the only gate that catches an ordering defect**, and
-that is why it is not optional. Every rule in this file is applied by
+**Where a job gets a cold read, it is the only gate that catches an
+ordering defect, and that is why it is never skipped there.** Every
+rule in this file is applied by
 someone who already knows what the page is for, so a step whose reason
 sits sixty lines below it, or a precondition parked after the failure
 it predicts, passes the checklist and passes the prose rules. Only a
@@ -1587,18 +1663,20 @@ review produces it.
 
 **On an overhaul and a new page, a page that states what a screen
 shows gets a separate check against the image, run alongside the cold
-read.** A field, a label, a button, a message or a sequence on screen
-is what triggers it, not the presence of an image: a page that carries
-a screenshot but describes nothing on it skips this check. The writer
-dispatches it, and a separate agent, someone other than the writer,
-performs it with image access and the page. That agent compares each
-on-screen claim in the draft against the screenshot and reports every
-mismatch. Settle a mismatch against the product, under the rule in
-"Never invent". Where the product agrees with the image, the prose is
-wrong and is corrected. Where the product agrees with the prose, the
-image is stale and is flagged for recapture. Its findings go into the
-same fix round as the cold read's. A page with no on-screen claim
-skips this check, and its facts rest on the fact list instead.
+read, where an image of that screen is available.** Both conditions
+gate it: a field, a label, a button, a message or a sequence on screen
+stated in the draft, and an image to check it against. A page that
+carries a screenshot but describes nothing on it skips this check, and
+so does a page that describes a screen but has no image of it. Either
+way, its on-screen facts rest on the fact list instead. The
+writer dispatches it, and a separate agent, someone other than the
+writer, performs it with image access and the page. That agent
+compares each on-screen claim in the draft against the screenshot and
+reports every mismatch. Settle a mismatch against the product, under
+the rule in "Never invent". Where the product agrees with the image,
+the prose is wrong and is corrected. Where the product agrees with the
+prose, the image is stale and is flagged for recapture. Its findings
+go into the same fix round as the cold read's.
 
 **Fix what it found, then say what it found.** A cold read reported and
 not acted on is worse than none, because the page now ships with the

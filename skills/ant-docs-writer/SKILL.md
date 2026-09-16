@@ -489,9 +489,10 @@ pressure. Every rule below follows from that.
   "it was already there" is not a defense a reader ever sees. This is
   the "do not touch a sentence for style alone" rule does not reach.
   That rule governs a **fix** job, where the diff must stay readable
-  enough to review. **A rewrite and an edit are both bound by the
-  register rules**: in a rewrite every sentence is new, and an edit has
-  sentences, words and headings in scope by definition.
+  enough to review. **An overhaul, a restructure and a restyle are all
+  bound by the register rules**: in an overhaul every sentence is new,
+  a restructure rewrites whatever does not fit the new shape, and a
+  restyle has sentences, words and headings in scope by definition.
 - **"You" is allowed and is usually the right answer.** Removing it
   tends to produce the agentless passive this file bans two rules
   higher up. "After you authenticate" beats "after authentication is
@@ -699,57 +700,100 @@ When two disagree, the stronger one is the source of truth: a
 measurement beats a spec, a generated reference cannot be wrong
 about a flag, and a sibling page settles nothing.
 
-**Build the fact set from these sources before you write, on every
-job.** Record each fact with the file and line that settles it, in a
-file beside the draft. The fact set is what you write from, so a fact
-you did not gather is one the page cannot carry. A new page has nothing
-else, and an overhaul has only the ledger beside the fact set. "Two
-artifacts, and the old page is not one of them" defines both.
+**Build the fact list from these sources before you write, on an
+overhaul and on a new page.** Record each fact with the file and line
+that settles it, in a file beside the draft. The fact list is what you
+write from, so a fact you did not gather is one the page cannot carry.
+A new page has nothing else, and an overhaul has only the ledger
+beside the fact list. A fix takes the source for the one changed claim
+and carries it as a single fact-list entry in the hand-back. A restyle
+or a restructure takes the page's own facts as the page states them
+and builds no fact list. "Two artifacts, and the old page is not one
+of them" defines the fact list and the ledger.
 
 ## The shape of the page
 
 ### Ask which job this is before you start
 
-Four jobs wear the same words, and they produce different pull
+Five jobs wear similar words, and they produce different pull
 requests. Decide which one you are doing, and where the request does
 not say, **ask the person who asked you** before writing anything.
 
 - A **fix** changes a fact and touches nothing else. No restructuring,
   no style edits, no vocabulary sweep. A reviewer must be able to see
   the factual change on its own.
-- An **edit** improves the prose inside the structure the page has.
-  Sentences, words, headings and formatting are in scope. The order of
-  the sections is not.
-- An **overhaul** rewrites the page, its shape included.
+- A **restyle**, the base level, rewrites wording: sentences, words,
+  and headings' wording and formatting move to house style. The facts
+  and the order of the sections do not change. This is the fast, cheap
+  job.
+- A **restructure** is a restyle, and also changes the page's shape:
+  sections are added, merged, split or reordered, and the prose is
+  rewritten to fit. Its facts are taken as the page states them.
+  Nothing is re-verified against source, and nothing is added.
+- An **overhaul** is a restructure, and also re-establishes every fact
+  from source, through the ledger. Its shape may change, the same as
+  under a restructure.
 - A **new page** has nothing to inherit. There is no page to improve
-  and no ledger of one (the ledger and the fact set are defined under
+  and no ledger of one (the ledger and the fact list are defined under
   "Two artifacts, and the old page is not one of them"), so the facts
   come from source and the shape comes from them. This is the commonest
   request the skill gets and the easiest to under-scope: "write a page
   about X" is a new page, not an overhaul of a page that does not
-  exist.
+  exist. It sits outside the restyle-restructure-overhaul ladder, the
+  same as a fix.
 
-The request usually names the job: "correct the timing claim" is a fix,
-"bring this page into style" is an edit, "rewrite this page" is an
-overhaul. Where it does not, ask. Guessing overhaul on a page someone
-wanted corrected buries a one-line change in a diff nobody can review,
-and guessing edit on a page someone wanted rebuilt returns the same
-badly organized page with better sentences.
+| Job | Reads old page | Ledger | Fact list | Heading tree | Gates | Reviews |
+|---|---|---|---|---|---|---|
+| Fix | yes | no | no (the entry for the changed claim goes in the hand-back) | no | `check-mechanics.py` | correctness review of the changed claim only |
+| Restyle | yes | no | no | no | `check-mechanics.py`, `signals.py` | meaning check + cold read, in parallel |
+| Restructure | yes | no | no | short | `check-mechanics.py`, `signals.py` | meaning check + cold read, in parallel |
+| Overhaul | never | yes | yes | short | `check-sources.py`, `check-ledger.py` (`--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows |
+| New page | no old page | no | yes | full | `check-ledger.py` (brief vs. draft, `--allow`), `signals.py`, `check-mechanics.py` | correctness review + cold read, plus the screenshot check where the page states what a screen shows |
 
-The rest of this section is for an overhaul or a new page. The
-difference between those two is only where the facts come from: an
-overhaul has a ledger of the old page's coverage as well as a fact
-set, and a new page has the fact set alone. The writer never reads the
-old page, a rule with its own heading below, so the ledger is the only
-account of it you get. Where the rest of this section says ledger, a
-new page has none.
+One fix round for every job. A second round runs only where the first
+found a wrong fact.
+
+**When handed an existing page without a clear instruction, ask before
+doing anything.** Offer exactly three choices, worded as levels, each
+naming what it adds to the one below:
+
+- **Restyle** rewrites the wording, and keeps the facts and the
+  section order in place.
+- **Restructure** does what restyle does, and also changes the page's
+  shape: sections are added, merged, split or reordered.
+- **Overhaul** does what restructure does, and also fact-checks the
+  page from the ground up, re-establishing every fact from source.
+
+A request that names a factual correction is a fix and needs no
+question.
+
+The request usually names the job: "correct the timing claim" is a
+fix, "clean up the wording on this page" is a restyle, "reorganize
+this page" or "split the troubleshooting section out" is a
+restructure, "rewrite this page" or "fact-check this from scratch" is
+an overhaul, "write a page about X" is a new page. Where it does not,
+ask. Guessing overhaul on a page someone wanted corrected buries a
+one-line change in a diff nobody can review, and guessing restyle on a
+page someone wanted reorganized returns the same badly organized page
+with better sentences.
+
+The rest of this section is for a restructure, an overhaul or a new
+page. On a restyle the section order does not change, so there is
+nothing here to decide. The difference between an overhaul and a new
+page is only where the facts come from: an overhaul has a ledger of
+the old page's coverage as well as a fact list, and a new page has the
+fact list alone. On an overhaul the writer never reads the old page, a
+rule with its own heading below, so the ledger is the only account of
+it you get. A restyle or a restructure works from the page itself and
+has no ledger. Where the rest of this section says ledger, only an
+overhaul has one.
 
 **On an overhaul, dispatch a separate agent to extract the ledger from
 the old page, before any writing starts.** You never read that page
 yourself, so a separate reader is the only way the ledger comes to
 exist. "Two artifacts, and the old page is not one of them" gives the
 entry form, the sort order and the gate that runs on the ledger. A new
-page skips this step and works from the fact set alone.
+page skips this step and works from the fact list alone.
 
 ### The reader wants the least that works
 
@@ -770,11 +814,15 @@ important each time.
 
 ### Deciding the order
 
+This section governs a restructure, an overhaul and a new page. On a
+restyle the section order does not change, so there is nothing here to
+decide.
+
 **Fixing the sentences of a badly organized page produces a badly
-organized page with better sentences.** In an overhaul the order of the
-sections is part of the work, not the part you inherit. Decide the
-shape before you write a word, and expect to move, merge, split or drop
-a section.
+organized page with better sentences.** In a restructure or an
+overhaul the order of the sections is part of the work, not the part
+you inherit. Decide the shape before you write a word, and expect to
+move, merge, split or drop a section.
 
 Order a page by what the reader is doing, in the order they do it:
 
@@ -808,9 +856,9 @@ Two orderings are wrong however good the prose:
 - A definition placed after the sentence that leans on it. Checklist
   item 4.
 
-The ledger carries no order, so the shape is always yours to decide.
-Say in the pull request how you decided it, so a reviewer knows the
-shape was a decision rather than an inheritance.
+A ledger, where the job has one, carries no order, so the shape is
+always yours to decide. Say in the pull request how you decided it, so
+a reviewer knows the shape was a decision rather than an inheritance.
 
 **Placing a step first does not stop a reader skipping it.** A cold
 reader given a page whose first procedure existed solely to prevent an
@@ -819,7 +867,7 @@ an optional convenience layer and nothing on the page was formatted as
 a stop sign. Order is necessary and it is not sufficient. See "Marking
 a step the reader will otherwise skip".
 
-**One ordering defect is worth fixing even in a fix or an edit**: a
+**One ordering defect is worth fixing even in a fix or a restyle**: a
 destructive action printed before the step that makes it survivable.
 That is reader safety, rank 1, and it outranks the scope of the job.
 Move it, and say in the pull request why the diff is larger than the
@@ -829,16 +877,23 @@ request.
 structure to inherit and no reviewer comparing against one, so a
 badly indexed page ships looking finished. Two things guard it: the
 source-of-truth question above, because a page can only be indexed on
-facts you were able to gather; and the heading tree written down
+facts you were able to gather; and the full heading tree written down
 before a word of prose, so the shape is arguable while it is still
 cheap to change.
 
-**Write the heading tree to a file beside the draft, before a word of
-prose**, one line per heading saying what that heading establishes for
-the reader. The file is handed over with the draft. An unwritten tree
-is not arguable, so the file is the point. Where the finished page ends
-up differently shaped, say so rather than quietly revising the tree to
-match.
+**Write the full heading tree to a file beside the draft, before a
+word of prose, on a new page.** One line per heading, saying what that
+heading establishes for the reader. The file is handed over with the
+draft. An unwritten tree is not arguable, so the file is the point.
+Where the finished page ends up differently shaped, say so rather than
+quietly revising the tree to match.
+
+**On a restructure or an overhaul, write the short heading tree to a
+file beside the draft, before a word of prose.** The headings only, one
+per line, in the order decided, with no rationale line: the shape has
+already been argued in the pull request under "Deciding the order",
+so the file exists to fix it, not to justify it. It is handed over
+with the draft the same way.
 
 ## How a page opens
 
@@ -983,9 +1038,9 @@ runs past a screen, because GitHub renders it with no navigation pane.
 - In a pull request that changes facts, do not touch a sentence for
   style alone. Voice and punctuation changes to existing text go in
   their own pull request, so a reviewer can tell a technical change
-  from a preference. This is the fix job under "The shape of the
-  page", and it is why the three jobs are worth separating before you
-  start rather than after.
+  from a preference. This is the difference between a fix and a
+  restyle under "The shape of the page", and it is why the jobs are
+  worth separating before you start rather than after.
 
 ## No internal history, and no internal names
 
@@ -1016,8 +1071,7 @@ A page carries no trace of how it was made or who made it.
   behavioral claim traces to a live capture, a spec field, the
   product's own source, or an existing gated page. A claim with no
   source stays out, and what is true goes in its place. Record the
-  source as you write the claim, in the claim-to-source list under
-  "Reviews".
+  source as you write the claim, in the fact list under "Reviews".
 - **Keep the consequence, drop the mechanism.** The reader is told what
   they can do and see, never how the platform does it. "Rotating the
   credential for the app role restarts AI services" is the right weight.
@@ -1192,24 +1246,28 @@ there for.
 
 ## Two artifacts, and the old page is not one of them
 
-You build a **fact set** from source: the generated reference, the
+You build a **fact list** from source: the generated reference, the
 product's own code, the vendored specs, the probe logs. It feeds
-shaping and writing, and it exists on every job including one with no
-old page at all.
+shaping and writing, on an overhaul and on a new page.
 
-**The fact set is a file, written before any prose and handed over
-with the draft.** It sits beside the draft, and each fact takes the
-entry form below. Reporting that you built one is not building one.
+**The fact list is a file, written before any prose and completed as
+the draft is written, then handed over with the draft.** It sits
+beside the draft, and each entry takes the form under "Fact list entry
+form" below. Reporting that you built one is not building one.
 
-A separate agent builds a **ledger** from the page you are replacing.
-It is a record of what that page covered. It is never a record of what
-is true.
+On an overhaul, a separate agent builds a **ledger** from the page you
+are replacing. It is a record of what that page covered. It is never a
+record of what is true.
 
 Different provenance, different trust. Keep them apart, and never let
-an entry cross from one to the other without being settled against
-source first.
+an entry cross from the ledger to the fact list without being settled
+against source first.
 
 ### The writer never reads the old page
+
+**This applies to an overhaul only.** A restyle and a restructure work
+from the page itself, because they keep its facts as the page states
+them.
 
 Not once, not for reference, not to check a heading. Read the ledger
 instead. A writer that has read the page reproduces its phrasing from
@@ -1221,7 +1279,7 @@ does any recursive grep. A prohibition on opening a file does not
 survive a wildcard: two writers in one run were exposed exactly that
 way.
 
-### Entry form
+### Ledger entry form
 
 Three lines, fragments, nothing liftable as prose:
 
@@ -1259,11 +1317,31 @@ writer the page's structure back.
 Tell the writer in as many words that the order carries no editorial
 judgment and must not be followed.
 
+### Fact list entry form
+
+One entry per fact, four fields:
+
+    fact: <the fact, as a sentence>
+    source: <file:line, or a ledger entry id>
+    disposition: keep | adapt | drop
+    heading: <where it landed on the page, once drafted>
+
+`disposition` records what an overhaul did with a fact the ledger
+carried: `keep` unchanged, `adapt` with a few words saying how, or
+`drop` with a few words saying why. On a new page every fact keeps
+`disposition: keep`, since there is no ledger to adapt against.
+`heading` is filled in as the draft reaches that heading, not written
+up front.
+
+On a fix, the same four fields cover the one changed claim, carried
+directly in the hand-back rather than as a separate file.
+
 ### The gates, and when each runs
 
-Four scripts run here, and which of them apply depends on the job.
-Run every gate that applies before calling a page done, and report its
-numbers.
+Four scripts run here, and which of them apply depends on the job: the
+table under "Ask which job this is before you start" is the one place
+that is decided. Run every gate that applies before calling a page
+done, and report its numbers.
 
 **A gate that exits non-zero has not been passed, and neither has one
 whose output reads `FAIL`.** That is a failure to fix before the page
@@ -1271,47 +1349,65 @@ is done, rather than a number to report. Fix what the gate names, run
 it again, and report the numbers from the run that passed.
 
 Run `check-sources.py` on the ledger the moment it arrives, before you
-write a word. The gate fails a `V` entry that cites only a hand-written
-page:
+write a word, on an overhaul. The gate fails a `V` entry that cites
+only a hand-written page:
 
     <skill>/check-sources.py <ledger>
 
-A new page has no ledger, so this gate does not run on one.
+A restyle, a restructure and a new page build no ledger, so this gate
+does not run on them.
 
 The phrase gate is `check-ledger.py`, which is the name
-`check-sources.py` uses for it. It takes two files. The first is the
-text the draft may have copied from, and the second is always the
-draft. **The two are never the same file.** The draft passed in both
-slots reports every sequence in it as shared, which measures the
-invocation rather than the draft. Run each of the three below that
-applies, after the draft exists, at `--n 5` and again at `--n 4`.
+`check-sources.py` uses for it. It runs on an overhaul and on a new
+page. A restyle and a restructure keep the page's own wording as the
+starting point and skip it, and a fix touches one claim and skips it
+too. It takes two files, the text the draft may have copied from and
+the draft, and takes `--allow <accepted.txt>` naming phrases the gate
+should not fail on. **The source and the draft are never the same
+file.** The draft passed in both slots reports every sequence in it as
+shared, which measures the invocation rather than the draft. Run each
+of the below that applies, after the draft exists, at `--n 5` and
+again at `--n 4`.
 
 On an overhaul, measure the old page against the draft. This run
 reports how much of that page's phrasing reached the draft by any
 route:
 
-    <skill>/check-ledger.py <old-page> <draft>
+    <skill>/check-ledger.py <old-page> <draft> --allow <accepted.txt>
 
 On an overhaul, measure the ledger against the draft. This run narrows
 the one above to what came through the ledger:
 
-    <skill>/check-ledger.py <ledger> <draft>
+    <skill>/check-ledger.py <ledger> <draft> --allow <accepted.txt>
 
-On every job, including a new page, measure the brief against the
-draft. The brief is a channel nobody was measuring until a finished
-page shared eleven sequences with its own brief:
+On an overhaul and on a new page, measure the brief against the draft.
+The brief is a channel nobody was measuring until a finished page
+shared eleven sequences with its own brief:
 
-    <skill>/check-ledger.py <brief> <draft>
+    <skill>/check-ledger.py <brief> <draft> --allow <accepted.txt>
 
 The script prints its first operand as the source and its second as
 the ledger, whatever you pass. The second is your draft in every run,
 so report it as the draft.
 
+**Rewrite once, then allow what must repeat.** After the first run,
+rewrite each shared sequence once. A sequence still shared that the
+page must repeat, such as its title, a product term or a label as the
+screen spells it, goes in an allow file beside the draft, one phrase
+per line, with a `#` comment giving the reason, and the gate runs
+again. **Never a second rewrite pass.** The allow file ships with the
+draft, so a reviewer can see what was excused.
+
+Double-quoted strings are stripped from both sides before comparison,
+the same as a code span, so a quoted UI label no longer costs an entry
+in the allow file.
+
 A shared sequence is re-expressed, never padded around. A phrase that
 is vocabulary already shipped in a sibling page stays: consistency
 beats novelty there.
 
-Run `signals.py` on the draft, on every job:
+Run `signals.py` on the draft, on a restyle, a restructure, an
+overhaul and a new page:
 
     <skill>/signals.py <draft>
 
@@ -1333,39 +1429,52 @@ not list still gets fixed the moment you see it.
 
 ## What ships with the draft
 
-Hand the draft over with four things beside it, each a file or a named
+Hand the draft over with what the job requires, each a file or a named
 answer rather than a report that the work happened:
 
-- **The job you did**, one of fix, edit, overhaul or new page. "Ask
-  which job this is before you start" defines the four.
-- **The fact set**, the file written before the prose.
-- **The heading tree**, on an overhaul or a new page.
-- **The claim-to-source list**, defined under "Reviews".
+- **The job you did**, one of fix, restyle, restructure, overhaul or
+  new page. "Ask which job this is before you start" defines the five,
+  and its table says what each one ships.
+- **The fact list**, on an overhaul and on a new page. A fix carries no
+  fact list file: the entry for the changed claim goes directly in the
+  hand-back.
+- **The allow file**, on an overhaul and on a new page, from the moment
+  a shared sequence needed one.
+- **The heading tree**, on a restructure, an overhaul and a new page:
+  short on a restructure and an overhaul, full on a new page.
 
-Report the gate numbers with them.
+Report the gate numbers, and the review findings and what changed in
+response, on every job.
 
 ## Reviews
 
-Every documentation change gets two reviews and one fix round. A page
-with a screenshot gets a third check, in the same round. Each is
-performed by someone other than the writer, after the draft exists. A
-writer cannot be their own cold reader, because you cannot un-know the
-page you just wrote.
+Review composition follows the job, set out in the table under "Ask
+which job this is before you start". A fix gets a correctness review
+of the changed claim. A restyle and a restructure get a meaning check
+and a cold read, run in parallel. An overhaul and a new page get a
+correctness review and a cold read, run in parallel, plus a screenshot
+check on any page that states what a screen shows. One fix round runs
+on every job. A second round runs only where the first found a wrong
+fact. Each review is performed by someone other than the writer, after
+the draft exists. A writer cannot be their own cold reader, because
+you cannot un-know the page you just wrote.
 
-**Run the cold read yourself before calling the page done.** Do not
-hand it back as a recommendation and do not wait to be asked. Dispatch
-a fresh agent that has none of your context and give it the page, the
-pages it links to, `## Register` through the end of `### Constructions
-that read as a machine`, and nothing else.
+**Run the cold read yourself before calling the page done, on every
+job that gets one.** Do not hand it back as a recommendation and do
+not wait to be asked. Dispatch a fresh agent that has none of your
+context and give it the page, the pages it links to, `## Register`
+through the end of `### Constructions that read as a machine`, and
+nothing else.
 
-The correctness reviewer checks every claim against its source.
+The correctness reviewer checks every claim on the page against its
+source, on a fix, an overhaul and a new page.
 
-**The claim-to-source list** is a flat list, one line per factual
-claim on the page, each naming the file and line that settles it.
-**Build it as you draft**, adding a line the moment a claim goes on the
-page. Send it with the draft so the reviewer verifies rather than
-rediscovers. A claim you cannot put a source beside does not go on the
-page.
+**The fact list** is what makes that possible. Add an entry the moment
+a claim goes on the page, so the reviewer verifies against a record
+built alongside the draft rather than rediscovering each source. "Fact
+list entry form" under "Two artifacts, and the old page is not one of
+them" gives its fields. A claim you cannot put a source beside does
+not go on the page.
 
 The cold-read reviewer gets no repository context at all, only the
 page, the pages it links to, and `## Register` through the end of
@@ -1373,6 +1482,37 @@ page, the pages it links to, and `## Register` through the end of
 and report where they got lost, what they could not type, where the
 page breaks the standard, and what they would search the web for
 instead.
+
+### The meaning check
+
+On a restyle and a restructure, a separate agent, not the writer,
+verifies that the rewrite kept the page's facts, since neither job
+re-verifies against source. Give it the old page and the new page and
+nothing else. It reports:
+
+- every fact added, dropped or changed
+- every condition, number, scope or hazard that was weakened, widened
+  or lost
+- whether any section moved from where it stood in the old page
+
+On a restyle a moved section is itself a defect, because a restyle
+keeps the section order fixed. On a restructure a moved section is
+expected, and the report exists to confirm the move carried the facts
+the section held, not to flag the move. The meaning check does not
+comment on style. Its findings are wrong facts, so "A reviewer owns
+facts, the writer owns the page" applies to them the same way it
+applies to the correctness reviewer's findings.
+
+Dispatch it with:
+
+> You check meaning, not style. You have the old page and the new
+> page and nothing else. Compare them and report: every fact added,
+> dropped or changed. Every condition, number, scope or hazard that
+> was weakened, widened or lost. Whether any section moved from where
+> it stood in the old page. Say nothing about wording, sentence length
+> or tone. Where you are not sure whether a change is a difference in
+> meaning or only in phrasing, report it and say which you think it
+> is.
 
 ### A reviewer owns facts, the writer owns the page
 
@@ -1397,9 +1537,9 @@ A second review round happens only when the first found a wrong fact or
 a defect in the work itself. A round spent on suggestions is a round
 spent making the page longer.
 
-The two find different defects and neither finds the other's. Run
-both, even on a small change, and run the screenshot check too on a
-page that has one.
+The job's pair of reviews finds different defects than either would
+alone, and neither substitutes for the other. Run both, even on a
+small change, and run the screenshot check too wherever it applies.
 
 **The cold read is the only gate that catches an ordering defect**, and
 that is why it is not optional. Every rule in this file is applied by
@@ -1445,17 +1585,20 @@ The fourth answer is the one that matters. "I would have skipped that
 step because it reads as ceremony" is a defect report, and no other
 review produces it.
 
-**A page describing a console screen gets a separate check against the
-image, run alongside the cold read.** The writer dispatches it, and a
-separate agent, someone other than the writer, performs it with image
-access and the page. That agent compares each on-screen claim in the
-draft against the screenshot and reports every mismatch. Settle a
-mismatch against the product, under the rule in "Never invent". Where
-the product agrees with the image, the prose is wrong and is
-corrected. Where the product agrees with the prose, the image is
-stale and is flagged for recapture. Its findings go into the same fix
-round as the cold read's. A page with no screenshot skips this check,
-and its on-screen claims rest on the claim-to-source list instead.
+**On an overhaul and a new page, a page that states what a screen
+shows gets a separate check against the image, run alongside the cold
+read.** A field, a label, a button, a message or a sequence on screen
+is what triggers it, not the presence of an image: a page that carries
+a screenshot but describes nothing on it skips this check. The writer
+dispatches it, and a separate agent, someone other than the writer,
+performs it with image access and the page. That agent compares each
+on-screen claim in the draft against the screenshot and reports every
+mismatch. Settle a mismatch against the product, under the rule in
+"Never invent". Where the product agrees with the image, the prose is
+wrong and is corrected. Where the product agrees with the prose, the
+image is stale and is flagged for recapture. Its findings go into the
+same fix round as the cold read's. A page with no on-screen claim
+skips this check, and its facts rest on the fact list instead.
 
 **Fix what it found, then say what it found.** A cold read reported and
 not acted on is worse than none, because the page now ships with the

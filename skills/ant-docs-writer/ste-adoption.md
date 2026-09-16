@@ -49,7 +49,7 @@ start of a sentence, precisely because it bans the semicolon and caps
 sentence length, which removes the alternatives. This style keeps that
 reasoning for "But", which has no short substitute, and drops it for
 And, So, Or and Yet, which do. The register the pgEdge docs pages are
-written in is the reason, and it was a judgement call rather than a
+written in is the reason, and it was a judgment call rather than a
 finding.
 
 **Rule 8.1, the semicolon.** STE bans it outright. This style bans it in

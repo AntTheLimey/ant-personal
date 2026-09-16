@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.1] — 2026-09-16
+
+### Changed
+
+- **The cold reader gets the Register and Words sections.** Six reps
+  without the standard filed 112 findings at 22.3% actionable; six
+  reps with it filed 78 at 52.6% actionable, 13.7 actionable findings
+  per rep against 8.3. Every reviewer with the standard beat every
+  reviewer without it. Deprivation stays scoped to the product, never
+  to house style.
+- **The cold-read prompt drops the persona sentence.** A 2x2 test
+  measured its effect at +2 findings total, with the sign flipping
+  depending on product deprivation. Deprivation did all the work:
+  zero imported-knowledge findings across six deprived reps against
+  fifteen across six reps that were not deprived.
+- **Alt text and headings are named as in scope for the cold read.**
+  Six reviews hunted terminology drift and all walked past "pane" in
+  the body against "page" in an image's alt text, because nothing told
+  a reviewer to read them as page vocabulary.
+
+### Added
+
+- **A spelling and mechanics gate, separate from the cold read.** No
+  reviewer across 18 reps caught a British spelling in a US docset, or
+  a sentence opening on a quoted string that ends in a period. The
+  skill now states the requirement; it ships no new script.
+- **A separate check for screenshot claims.** A cold reader has no
+  image access. The defect "the page claims a backup ID field the
+  screen does not have" was found by 0 of 6 deprived reps and 3 of 6
+  reviewers who could see the product.
+
+---
+
 ## [1.4.0] — 2026-09-15
 
 ### Removed

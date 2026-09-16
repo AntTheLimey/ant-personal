@@ -1317,6 +1317,12 @@ See "Reading signals".
 the line `FAIL`, so the rule above applies to it as it does to the
 other two gates.
 
+**A spelling and mechanics gate runs on every draft, separate from
+these three scripts and from the cold read.** Neither catches a
+British spelling in a US docset, or a sentence opening on a quoted
+string that ends in a period. The pipeline runs that gate before a
+page ships.
+
 ## What ships with the draft
 
 Hand the draft over with four things beside it, each a file or a named
@@ -1339,8 +1345,8 @@ page you just wrote.
 
 **Run the cold read yourself before calling the page done.** Do not
 hand it back as a recommendation and do not wait to be asked. Dispatch
-a fresh agent that has none of your context and give it the page and
-nothing else.
+a fresh agent that has none of your context and give it the page, the
+Register and Words sections of this skill, and nothing else.
 
 The correctness reviewer checks every claim against its source.
 
@@ -1351,10 +1357,11 @@ page. Send it with the draft so the reviewer verifies rather than
 rediscovers. A claim you cannot put a source beside does not go on the
 page.
 
-The cold-read reviewer gets no repository context at all, only the page
-and the pages it links to. They read as the customer and report where
-they got lost, what they could not type, and what they would search the
-web for instead.
+The cold-read reviewer gets no repository context at all, only the
+page, the pages it links to, and the Register and Words sections of
+this skill. They read as the customer and report where they got lost,
+what they could not type, and what they would search the web for
+instead.
 
 ### A reviewer owns facts, the writer owns the page
 
@@ -1395,23 +1402,36 @@ and still be executed in the wrong order.
 
 ### The cold-read dispatch
 
-Give the agent the page's path and nothing else. No repository access,
-no web search, no skill files, no explanation of the product. Tell it:
+The cold reader is not a fact checker. The cold reader checks
+phrasing, style, legibility and comprehension. Following the
+instructions is the vehicle for that check, not the goal.
+
+Give the agent the page's path, the Register and Words sections above,
+and nothing else. No repository access, no web search, no other skill
+files, no explanation of the product. Tell it:
 
 > You are a cold reader. You have never seen this product. Read only
-> this file. Whatever it does not tell you, you do not know. You are a
-> competent engineer handed this page and told to do what it describes.
-> Report: could you complete the task, and if not, the first sentence
-> at which you were stuck. Every place you had to guess, quoting the
-> sentence and naming the readings. Every question the page raises and
-> does not answer. Anything you would have done wrong, and what the
-> consequence would have been. What the page does well. Judge only what
-> is on the page. If you find yourself reasoning "it presumably works
-> like X", record that as a guess instead.
+> this file and the attached style standard. Whatever the page does not
+> tell you, you do not know. Report: could you complete the task, and
+> if not, the first sentence at which you were stuck. Every place you
+> had to guess, quoting the sentence and naming the readings. Every
+> question the page raises and does not answer. Anything you would have
+> done wrong, and what the consequence would have been. Where the page
+> breaks the attached standard, quoting the sentence and the rule. Read
+> alt text and headings as page vocabulary too, not as decoration. What
+> the page does well. Judge only what is on the page. If you find
+> yourself reasoning "it presumably works like X", record that as a
+> guess instead.
 
 The fourth answer is the one that matters. "I would have skipped that
 step because it reads as ceremony" is a defect report, and no other
 review produces it.
+
+**A page describing a console screen needs a separate check against
+the image.** The cold reader has no image access, so a claim naming
+something the screen does not show is invisible to a reader without
+one. Compare each on-screen claim in the draft against the actual
+screenshot before the page ships.
 
 **Fix what it found, then say what it found.** A cold read reported and
 not acted on is worse than none, because the page now ships with the

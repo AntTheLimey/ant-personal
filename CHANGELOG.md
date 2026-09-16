@@ -31,11 +31,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **A spelling and mechanics gate, separate from the cold read.** No
-  reviewer across 18 reps caught a British spelling in a US docset, or
-  a sentence opening on a quoted string that ends in a period. The
-  writer now runs a US-English spell check by hand and reports the
-  count with the other gates. No script exists yet.
+- **`check-mechanics.py`, a fourth gate script.** No reviewer across
+  18 reps caught a British spelling in a US docset, or a sentence
+  opening on a quoted string that ends in a period. Across 89 pages in
+  pgedge-cli and pgedge-starfleet-docs it found 176 British spellings
+  and 14 quoted-sentence openers, with a sample of each spelling word
+  and all 14 openers inspected and genuine. Positive control: it found
+  all three defects a cold reader missed on the experiment page, two
+  instances of "afterwards" and one quoted-sentence opener. Negative
+  control: a US word list produced zero findings.
 - **A separate check for screenshot claims, resolved against the
   product.** A cold reader has no image access. The defect "the page
   claims a backup ID field the screen does not have" was found by 0

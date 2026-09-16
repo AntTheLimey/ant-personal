@@ -34,16 +34,17 @@ checklist, the settled product vocabulary and the repository mechanics
 a writer needs, so there is no second rules file to open and no way for
 two documents to drift apart into contradicting each other.
 
-**Three gate scripts ship beside this file**: `signals.py`,
-`check-ledger.py` and `check-sources.py`. Your working directory is the
-documentation repository, not the skill directory, so invoke each by
-its path. Below, `<skill>/` stands for the absolute path this skill
-announced when it loaded, on the line reading `Base directory for this
-skill:` above the first heading. Where that line did not arrive, or the
-directory it names holds no `signals.py`, find the scripts with `find
-~/.claude -path '*ant-docs-writer*' -name 'signals.py'`. The scripts
-are mode 755 and carry a `#!/usr/bin/env python3` shebang, so the path
-alone runs one and a `python3` prefix is never needed.
+**Four gate scripts ship beside this file**: `signals.py`,
+`check-ledger.py`, `check-sources.py` and `check-mechanics.py`. Your
+working directory is the documentation repository, not the skill
+directory, so invoke each by its path. Below, `<skill>/` stands for
+the absolute path this skill announced when it loaded, on the line
+reading `Base directory for this skill:` above the first heading.
+Where that line did not arrive, or the directory it names holds no
+`signals.py`, find the scripts with `find ~/.claude -path
+'*ant-docs-writer*' -name 'signals.py'`. The scripts are mode 755 and
+carry a `#!/usr/bin/env python3` shebang, so the path alone runs one
+and a `python3` prefix is never needed.
 
 ## When two rules conflict
 
@@ -1261,7 +1262,7 @@ judgement and must not be followed.
 
 ### The gates, and when each runs
 
-Three scripts run here, and which of them apply depends on the job.
+Four scripts run here, and which of them apply depends on the job.
 Run every gate that applies before calling a page done, and report its
 numbers.
 
@@ -1321,13 +1322,15 @@ See "Reading signals".
 the line `FAIL`, so the rule above applies to it as it does to the
 other two gates.
 
-**A spelling and mechanics gate runs on every draft, separate from
-these three scripts and from the cold read.** The writer runs it
-alongside the other gates and reports its count with them. This
-docset uses US spelling, so a British spelling is a defect. So is a
-sentence opening on a quoted string that ends in a period. No script
-checks either yet: run a US-English spell check over the draft by
-hand.
+Run `check-mechanics.py` on the draft, on every job:
+
+    <skill>/check-mechanics.py <draft>
+
+This docset uses US spelling. The script catches a British spelling
+from a fixed word list, and a sentence that opens on a quoted string
+that is itself a complete sentence. It is a word list, not a
+dictionary: it catches the listed forms only, so a spelling it does
+not list still gets fixed the moment you see it.
 
 ## What ships with the draft
 

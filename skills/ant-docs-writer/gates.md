@@ -4,9 +4,14 @@ Loaded by every job.
 
 Which of the four gate scripts run for a job is stated in each gate's
 own heading below. Run every gate that applies before calling a page
-done, and report its numbers. A gate that exits non-zero, or whose output reads
-FAIL, has not been passed: fix what it names, rerun it, and report
-only the numbers from the run that passed.
+done, and report its numbers. A gate that exits non-zero, or whose
+output reads FAIL, has not been passed: fix what it names, rerun it,
+and report only the numbers from the run that passed.
+
+A fix is the one job that ends on a failing gate, because the carve-out
+under check-mechanics.py leaves untouched sentences alone. There, report
+the findings from the failing run and say which sentences they sit in.
+On every other job a failing gate means the page is not done.
 
 Invoke each script by its path from `<skill>/`, since the working
 directory is the documentation repository, not the skill directory.
@@ -49,7 +54,7 @@ second rewrite pass.
 term, a screen-spelled label) goes in an allow file beside the draft,
 one phrase per line. A trailing `# reason` after the phrase is a
 comment; a one-word phrase is ignored. A missing `--allow` file allows
-nothing rather than failing the run. A sequence passes once it lies
+nothing rather than failing the run. A sequence passes when it lies
 inside an allowed phrase, or contains one whole. The allow file ships
 with the draft, so a reviewer can see what was excused.
 
@@ -89,9 +94,10 @@ scope.
 
 Run on the draft before finishing; report what it says. Strips code,
 tables and headings first and measures prose only, since a docs page
-is mostly not prose. Reports Flesch reading ease (floor 58),
-Flesch-Kincaid grade (ceiling 8.0), mean sentence length, and syllable
-density, with a verdict per bound. A crossed bound fails the run the
-same as any other gate. The 20/25-word sentence-length signal it also
-prints sets no exit status; only the reading-ease floor and the grade
-ceiling fail a run.
+is mostly not prose. Reports Flesch reading ease, Flesch-Kincaid
+grade, mean sentence length and syllable density, with a verdict per
+bound. A crossed bound fails the run the same as any other gate.
+
+"Reading signals" in writing.md holds the two bounds and what to do
+about a crossed one. They are stated there rather than here so that a
+change to either lands in one file.

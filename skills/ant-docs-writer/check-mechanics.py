@@ -157,6 +157,13 @@ NAMED = [
     (r"surfaces (?:in|on|as|when|after|once|within|up)",
      "register, use \"appears\" or \"shows\""),
     (r"ahead of", "register, use \"before\""),
+    # "every" and "each" are left out: "once every hour" is a
+    # frequency, not a clause about time, and "when every hour" is
+    # nonsense. The participles catch the elliptical "Once enabled,".
+    (r"once (?:the|you|a|an|it|that|this|they|there|all|both|your|its|"
+     r"enabled|disabled|created|deleted|complete|completed|started|"
+     r"finished|done|ready|applied|set)",
+     "temporal \"once\", use \"when\""),
     (r"(?:can|could|will|may|might) \w+ more of them",
      "register, name what there is more of"),
     (r"verbs?", "use \"command\""),

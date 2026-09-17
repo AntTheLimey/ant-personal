@@ -1,13 +1,11 @@
 # Facts
 
-Loaded by fix, overhaul and new page.
+Loaded by fix, overhaul and new page. A restyle and a restructure
+verify nothing against source, so nothing here binds them.
 
-A restyle or a restructure verifies nothing against source: nothing in
-this file binds them. They take the page's own facts as stated and
-build no fact list. "Say less, or say nothing" in writing.md governs
-what they may still cut. A fix takes the source for the one changed
-claim; a restyle or restructure adds no new fact at all, and a fix
-adds none beyond the one requested.
+A fix takes the source for each claim it was asked to change, and adds
+no fact beyond those. A fix of several claims is still one fix: work
+them together, and keep each one's source beside it.
 
 ## Ask first
 
@@ -99,12 +97,12 @@ An entry has these fields:
 | fact | The claim. |
 | source | A file:line, never a ledger id alone. |
 | disposition | keep / adapt / drop, with a reason for adapt or drop. |
-| heading | Filled in once drafted. |
+| heading | Filled in when drafted. |
 | ledger id | Overhaul only. |
 
 On a new page, every fact keeps `disposition: keep`, since there is no
 ledger to adapt against. On a fix, the same fields go directly into
-the hand-back instead of a separate file.
+the hand-back instead of a separate file, one row per claim changed.
 
 ## The ledger (overhaul only)
 

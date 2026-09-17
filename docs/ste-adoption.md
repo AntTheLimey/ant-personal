@@ -5,6 +5,9 @@ the prose half of this style. This file records which of its rules were
 taken, which were adapted and which were dropped, with rule numbers, so
 that nobody has to re-derive the decision from a 434-page standard.
 
+No job loads this file. It records where the rules came from, and the
+rules themselves live in `skills/ant-docs-writer/`.
+
 STE is a controlled language written for aerospace maintenance manuals
 read by non-native English speakers. Two things follow. Its sentence
 and procedure rules transfer to software documentation almost
@@ -34,7 +37,7 @@ unchanged. Its controlled dictionary does not.
 | 3.6 | Use the active voice. |
 | 3.7 | Describe an action with a verb, not a nominalisation. |
 
-Rule 5.5 also carries the test this style adopts as checklist item 7:
+Rule 5.5 also carries the test this style adopts as checklist item 8:
 read the procedure with every note removed, and confirm the reader can
 still finish it. If they cannot, the note held a step.
 
@@ -58,8 +61,9 @@ punctuation-only edit hides the technical change underneath it in
 review.
 
 **Rules 8.4 to 8.7, word count.** The operative version of this now
-lives in `writing.md`, because a writer should not have to open a
-second file to know how to count. What follows is why it is generous.
+lives in `skills/ant-docs-writer/writing.md`, because a writer should
+not have to open a second file to know how to count. What follows is
+why it is generous.
 
 STE's counting method is what makes the 20 and 25 word caps checkable,
 and it is generous in the way this work needs. A number counts as one

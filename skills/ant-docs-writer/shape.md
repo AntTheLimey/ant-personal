@@ -4,8 +4,8 @@ Loaded by restructure, overhaul and new page.
 
 ## Content checklist
 
-Run all seven items before writing and again before opening a pull
-request. Passing all seven is necessary but not sufficient; the
+Run all eight items before writing and again before opening a pull
+request. Passing all eight is necessary but not sufficient; the
 reviews in reviews.md are the last gate.
 
 1. **Every step is runnable as written.**
@@ -18,19 +18,19 @@ reviews in reviews.md are the last gate.
      A destructive command prints its connection flag in the step
      anyway, because there it answers which tenant the command runs
      against, not whether the reader is authenticated.
-1b. Name what the reader would do instead of the written step, and
-    say what it costs. A step naming no command also fails this item,
-    because the reader invents one.
-2. Every placeholder gets a sentence naming the command or screen
+2. Name what the reader would do instead of the written step, and
+   say what it costs. A step naming no command also fails this item,
+   because the reader invents one.
+3. Every placeholder gets a sentence naming the command or screen
    that produces its value.
-3. The page must work for a reader who did not create the resource:
+4. The page must work for a reader who did not create the resource:
    say where the value lives now and what to do without it.
-4. Every term the procedure depends on is defined, on the page, before
+5. Every term the procedure depends on is defined, on the page, before
    the first sentence that leans on it.
-5. The page answers the question its own opening raises.
-6. No step destroys something a later step needs. Read the procedure
+6. The page answers the question its own opening raises.
+7. No step destroys something a later step needs. Read the procedure
    as a sequence and track state.
-7. Strip every note and re-read the procedure. If the reader can no
+8. Strip every note and re-read the procedure. If the reader can no
    longer finish it, move that information into a step. The test is
    whether removing a block changes an action, not whether the block
    is indented; a step is allowed to be more than one line.
@@ -62,12 +62,8 @@ where to go next.
 - A conceptual model the reader must hold before step one goes into
   the opening as one-sentence terms, never as a top section of its
   own.
-- Two orderings are always wrong on any job: a destructive action
-  printed before the step that makes it survivable, and a definition
-  placed after the sentence that leans on it.
-
-Placing a hazard step first does not stop a reader skipping it; order
-is necessary and not sufficient on its own.
+- The two orderings that are always wrong, in writing.md, bind here
+  too: they are the commonest way a reordered page breaks.
 
 ## Heading tree
 

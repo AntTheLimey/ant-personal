@@ -24,6 +24,9 @@ pressure.
   exist. A record, response or field may still "hold" a value.
 - Prefer the plain formal word where two differ only in register:
   "needs" not "wants", "shows" not "surfaces".
+- Write "when", not "once", to introduce a clause about time: "when
+  the restore completes". "Once" keeps its counting sense, as in
+  "the secret is returned once".
 - Formal means precise and unmarked, not longer.
 - Register rules bind every sentence in a rewrite, including phrasing
   inherited from a ledger or the old page. Only a fix's no-style-touch

@@ -1,224 +1,139 @@
 # Facts
 
-Sourcing, fact-checking and the ledger, loaded in full on a fix, an
-overhaul and a new page.
+Loaded by fix, overhaul and new page.
 
-## Ask what your sources are, before you gather anything
+A restyle or a restructure verifies nothing against source: nothing in
+this file binds them. They take the page's own facts as stated and
+build no fact list. "Say less, or say nothing" in writing.md governs
+what they may still cut. A fix takes the source for the one changed
+claim; a restyle or restructure adds no new fact at all, and a fix
+adds none beyond the one requested.
+
+## Ask first
 
 Your reader is a constant: a competent developer who does not know
-this product. They need no account of SQL, HTTP, cron or their own
-framework, and they need every term that belongs to us.
+this product. What varies page to page is where the truth lives, and
+that decides both what you can write and the page's shape. Ask before
+gathering, on a fix, overhaul or new page:
 
-What varies from page to page is **where the truth lives**, and that
-decides both what you can write and what shape the page takes. Ask
-before you gather, because a source you were never given is a fact you
-will never have, and nothing downstream recovers it.
+- Which codebases may be read. A page about another framework needs
+  facts about that framework, not from reading pgEdge source.
+- What structure to compare the page against, and name it if borrowed
+  from elsewhere, so a fresh writer can reproduce or question it.
+- Whether real resources may be created, run and torn down to verify
+  behavior. Where the answer is no, say so on the artifact.
+- Where measurements are recorded. Get the probe-log path if one
+  exists; say so rather than treating an unrecorded measurement as
+  known.
 
-Four things to settle, and they are the only questions worth spending
-the requester's attention on:
+Look up everything else rather than asking. A skill that asks what it
+could have discovered spends the requester's scarcest resource.
 
-- **Which codebases may I read?** Ours is rarely all of them. A page
-  about using this product from someone else's framework is mostly
-  facts about that framework, and reading our source produces none of
-  them.
-- **What should I compare this against?** Name it if a structure was
-  borrowed from somewhere. A shape we took and never wrote down is one
-  a fresh writer can neither reproduce nor question.
-- **May I create, run and tear down real resources to verify
-  behavior?** Where the answer is no, say so on the artifact, so that
-  an unmeasured claim is visible rather than silently absorbed.
-- **Where are the measurements?** A measurement recorded outside the
-  probe-log directory is a measurement lost. If probe logs exist, get
-  their path. If a measurement was taken and never written down, say
-  so rather than treating it as known.
+## Source hierarchy
 
-Everything else, look up. **A skill that asks what it could have
-discovered spends the one thing the requester has least of.**
+- Treat the generated command reference as truth for verbs, flags,
+  defaults and help text: it is produced from the command tree.
+- Read `pgedge llms`, index first then module, for the agent
+  reference.
+- Read the product's own code for the order of operations, what is
+  validated locally, and which exit status each failure takes.
+- Treat the vendored specs as what the platform says about itself, and
+  probe logs as what someone watched it do.
+- When two sources disagree, the stronger wins: a measurement beats a
+  spec, a generated reference cannot be wrong about a flag, and a
+  sibling page settles nothing.
 
-### Where to look
+On an overhaul and a new page, build the fact list from these sources
+before writing; record each fact with the file and line that settles
+it.
 
-- **The generated command reference.** Produced from the command tree,
-  so it cannot drift from the binary. Truth for verbs, flags,
-  defaults and help text. In pgedge-cli that is `docs/reference/`.
-- **`pgedge llms`** for the agent reference: the index first, then the
-  module.
-- **The product's own code.** Read it for the order of operations,
-  what is validated locally, and which exit status each failure takes.
-- **The vendored specs**, remembering they are what the platform says
-  about itself.
-- **The probe logs**, which are what someone watched it do.
-
-When two disagree, the stronger one is the source of truth: a
-measurement beats a spec, a generated reference cannot be wrong
-about a flag, and a sibling page settles nothing.
-
-**Build the fact list from these sources before you write, on an
-overhaul and on a new page.** Record each fact with the file and line
-that settles it, in a file beside the draft. The fact list is what you
-write from, so a fact you did not gather is one the page cannot carry.
-A new page has nothing else, and an overhaul has only the ledger
-beside the fact list. A fix takes the source for the one changed claim
-and carries it as a single fact-list entry in the hand-back. A restyle
-or a restructure takes the page's own facts as the page states them
-and builds no fact list. "Two artifacts, and the old page is not one
-of them" defines the fact list and the ledger.
-
-## Never invent
-
-A restyle or a restructure verifies nothing against source, so nothing
-below binds them: every rule here is about sourcing or checking a
-claim, and binds a fix, an overhaul and a new page. "Say less, or say
-nothing" in writing.md governs what a restyle or a restructure may
-still cut.
+## What may go on the page
 
 - On a fix, an overhaul and a new page: every command and flag exists
   in the generated reference, and every behavioral claim traces to a
-  live capture, a spec field, the product's own source, or an existing
-  gated page. A claim with no source stays out, and what is true goes
-  in its place. Record the source as you write the claim, in the fact
-  list under "Reviews" in reviews.md.
-- **Attribute a runtime number only to a surface you checked.** "The
-  console shows these prices" is a claim like any other and needs a
-  source. Where you cannot source where the number is displayed, print
-  the number without the attribution sentence rather than writing one
-  you cannot support. Never attribute a number to a screenshot.
-- **A mismatch between the prose and a kept image is settled by the
-  product, never by trusting either one.** Check the on-screen claim
-  against the live screen or the source that renders it. Where the
-  product agrees with the image, the prose is wrong: correct it. Where
-  the product agrees with the prose, the image is stale: write what
-  the source says, flag the image for recapture in the pull request,
-  and say nothing on the page about the discrepancy. Never write prose
-  backward to match a stale screenshot.
-- **A screenshot is not a source.** It is evidence that something
-  appeared on screen once, and it goes stale silently. A value that
-  exists only at runtime, such as a price the console fetches from a
-  billing service, may still be stated: attribute it to what the console
-  shows, never present it as a contract, and re-check it whenever the
-  page is touched.
-- **On an overhaul or a new page, a rewrite may add facts, and often
-  must.** The content checklist in shape.md asks for things a page
-  frequently does not have, and the answer is to go and find them
-  rather than to leave the item failing. Source every addition and say
-  where it came from in the pull request. What a rewrite may never do
-  is add a fact it did not verify. A fix changes the one fact it was
-  asked to change and adds no other. A restyle or a restructure adds
-  none at all, under the job-scope rule in "When two rules conflict"
-  in SKILL.md.
-- **On an overhaul or a new page, a rewrite may add a step**, when the
-  checklist requires one and the step follows from a fact that is
-  sourced. A procedure that identifies something by when it happened
-  needs a step telling the reader to record that, or the
-  identification is unusable. Say in the pull request which fact the
-  step follows from.
-- **State an absence in the form "no X does Y", scoped to what you
-  checked.** "No command in the reference reads whether the tier is
-  enabled" is a claim you can support. "There is no way to check"
-  is not, because you searched rather than proved. On a console page
-  the scope is a screen rather than a reference: "the wizard offers no
-  control for this" is supportable, "the console cannot do it" is not.
-  Follow it with what the reader should do instead, and record the
-  search in the pull request. A search that found nothing is evidence,
-  not proof.
-- Scope every claim to the command and the module actually checked. The
-  same sentence written generally is often false for the sibling.
+  live capture, a spec field, the product's own source, or an
+  existing gated page.
+- A claim with no source stays out, and what is true goes in its
+  place. Record the source as you write the claim.
+- Attribute a runtime number only to a surface you checked. Where you
+  cannot source the display surface, print the number without the
+  attribution sentence, and never attribute a number to a screenshot.
+- On an overhaul or a new page, a rewrite may add a fact the checklist
+  requires, sourced and explained in the pull request, and may add a
+  step the checklist requires when it follows from a sourced fact;
+  say in the pull request which fact the step follows from. Scope
+  every claim this way to the exact command and module actually
+  checked, per "Editing existing text" in writing.md.
 
-## Two artifacts, and the old page is not one of them
+## Screenshots
 
-You build a **fact list** from source: the generated reference, the
-product's own code, the vendored specs, the probe logs. It feeds
-shaping and writing, on an overhaul and on a new page.
+A screenshot is not a source. It is evidence something appeared on
+screen once, and it goes stale silently.
 
-**The fact list is a file, written before any prose and completed as
-the draft is written, then handed over with the draft.** It sits
-beside the draft, and each entry takes the form under "Fact list entry
-form" below. Reporting that you built one is not building one.
+- Settle a mismatch between prose and a kept image against the
+  product, never by trusting either on its own.
+- Where the product agrees with the image, correct the prose. Where
+  the product agrees with the prose, flag the image for recapture in
+  the pull request and say nothing on the page about the discrepancy.
+- A runtime-only value, such as a console-fetched price, may still be
+  stated if attributed to what the console shows. Never present it as
+  a contract, and re-check it whenever the page is touched.
 
-On an overhaul, a separate agent builds a **ledger** from the page you
-are replacing. It is a record of what that page covered. It is never a
-record of what is true.
+## Absence claims
 
-Different provenance, different trust. Keep them apart, and never let
-an entry cross from the ledger to the fact list without being settled
-against source first.
+State an absence in the form "no X does Y", scoped to exactly what was
+checked: a reference for a CLI claim, a screen for a console claim.
+Follow it with what the reader should do instead, and record the
+search that supports it in the pull request.
 
-### The writer never reads the old page
+## The fact list
 
-**This applies to an overhaul only.** A restyle and a restructure work
-from the page itself, because they keep its facts as the page states
-them.
+Build it as a file, written before any prose and completed as the
+draft is written, then handed over with the draft. Reporting that a
+fact list was built does not count as building it.
 
-Not once, not for reference, not to check a heading. Read the ledger
-instead. A writer that has read the page reproduces its phrasing from
-memory without meaning to, and its ordering along with it.
+An entry has these fields:
 
-Name the excluded file as a path to filter out of every glob, not
-only as a file not to open. `docs/managed/*.md` contains it and so
-does any recursive grep. A prohibition on opening a file does not
-survive a wildcard: two writers in one run were exposed exactly that
-way.
+| Field | Value |
+|---|---|
+| fact | The claim. |
+| source | A file:line, never a ledger id alone. |
+| disposition | keep / adapt / drop, with a reason for adapt or drop. |
+| heading | Filled in once drafted. |
+| ledger id | Overhaul only. |
 
-### Ledger entry form
+On a new page, every fact keeps `disposition: keep`, since there is no
+ledger to adapt against. On a fix, the same fields go directly into
+the hand-back instead of a separate file.
 
-Three lines, fragments, nothing liftable as prose:
+## The ledger (overhaul only)
 
-    F<n>. <note, under about 15 words>
-          src: <file:line that verifies it>
-          st: V|U|C|S
+On an overhaul, dispatch a separate agent to build the ledger from the
+old page before any writing starts, since the writer never reads that
+page. The ledger records what the old page covered, never what is
+true, and stays apart from the fact list. Never let an entry cross
+from the ledger to the fact list without being settled against source
+first.
 
-`V` verified against source. `U` unsourced, asserted by the page
-alone. `C` contradicted by source. `S` stale.
+The writer never reads the old page, not once and not for reference;
+read the ledger instead. Filter the excluded old page out of every
+glob search, not only avoid opening it directly: two writers in one
+run were exposed to it exactly that way.
 
-**`V` means verified against something that is not a hand-written
-page.** The generated reference is exempt, because it is produced from
-the command tree and cannot drift from the binary. A sibling docs page
-is the weakest authority there is: a false sentence in one reached a
-ledger, a writer and a finished page, and the same claim was still
-live two review rounds later.
+An entry is three fragment lines: a note under about 15 words, the
+source file:line, and a status:
 
-**A spec description that a measurement contradicts is `C`, not `V`.**
-A measurement outranks upstream documentation. A vendored spec is what
-the platform says about itself, and it has been wrong.
+| Status | Means |
+|---|---|
+| V | Verified against something other than a hand-written page. The generated reference is exempt from that exclusion; a sibling docs page is not. |
+| C | A spec description a measurement contradicts. A measurement outranks upstream documentation. |
+| U | Unverified. |
+| S | (situation, as stated on the old page) |
 
-**Write every entry as the situation, never as the missing thing.** An
-entry framed as an absence reaches the page as an absence, and no gate
-can see it: `F119. No delete verb exists` became "No command deletes a
-backup" on a finished page, and the two share no words. Write what the
-reader does instead.
+Write an entry as the situation, never as the missing thing: an entry
+framed as an absence reaches the page as an absence, and no gate can
+see it.
 
-### Sort it, and say so
-
-Group by topic. Sort the headings alphabetically, and the entries
-within each heading. Number from F1 in the sorted order. Ordering
-leaks separately from phrasing, so a ledger in page order hands the
-writer the page's structure back.
-
-Tell the writer in as many words that the order carries no editorial
-judgment and must not be followed.
-
-### Fact list entry form
-
-One entry per fact, four fields, and a fifth on an overhaul:
-
-    fact: <the fact, as a sentence>
-    source: <file:line that settles it>
-    disposition: keep | adapt | drop
-    heading: <where it landed on the page, once drafted>
-    ledger: <the ledger entry id, on an overhaul>
-
-`source` is always a file and line that settles the fact, never a
-ledger entry id alone: the ledger is a record of what the old page
-covered, not of what is true, so an id cannot stand as source. On an
-overhaul, record the ledger entry id too, in `ledger`, alongside the
-source that settled it.
-
-`disposition` records what an overhaul did with a fact the ledger
-carried: `keep` unchanged, `adapt` with a few words saying how, or
-`drop` with a few words saying why. On a new page every fact keeps
-`disposition: keep`, since there is no ledger to adapt against.
-`heading` is filled in as the draft reaches that heading, not written
-up front.
-
-On a fix, the same fields cover the one changed claim, carried
-directly in the hand-back rather than as a separate file.
-
+Group the ledger by topic, sort headings and entries alphabetically,
+and number from F1 in that order. Tell the writer explicitly that this
+order carries no editorial judgment and must not be followed.

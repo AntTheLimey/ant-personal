@@ -15,21 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that need it**, in place of one 1,695-line, 88,848-byte file every
   job read in full:
 
-      SKILL.md           13,882 B  top rule, conflicts, jobs, ships, reading
-      style-standard.md  10,946 B  Register, Words
-      writing.md         28,565 B  sentences through repository mechanics
-      shape.md           12,350 B  checklist, shape, openings
-      facts.md           10,777 B  sources, never invent, two artifacts
-      gates.md            5,285 B  the gates
-      reviews.md           8,627 B  reviews
-      in-app-copy.md       1,452 B  in-app copy
+      SKILL.md            4,962 B  top rule, conflicts, jobs, ships, reading
+      style-standard.md   5,509 B  Register, Words
+      writing.md         17,787 B  sentences through repository mechanics
+      shape.md            4,160 B  checklist, shape, openings
+      facts.md            6,110 B  sources, never invent, two artifacts
+      gates.md            4,031 B  the gates
+      reviews.md          4,872 B  reviews
+      in-app-copy.md      1,129 B  in-app copy
 
   SKILL.md is now the router: a load list names the files each job
   reads, and "What ships with the draft" requires the files read as
   the first item in the hand-back. Every cross-reference that used to
   say "above", "below" or "this file" now names the file the rule
   moved to. A restyle loads SKILL.md plus style-standard.md,
-  writing.md, gates.md, product-vocabulary.md and reviews.md: 74,884
+  writing.md, gates.md, product-vocabulary.md and reviews.md: 41,519
   bytes, against 105,938 bytes for the whole 1.4.2 skill. A 1.4.2
   restyle measured 16.5 minutes, 6.6 of them before the first draft,
   loading a 106 KB skill of which a restyle uses only part. Nothing is
@@ -80,6 +80,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   resolves a finding both reviews name in favor of the fact-bearing
   one, and runs the gates once after both are applied. This does not
   claim a speed-up; nothing is re-measured yet.
+- **The skill is rebuilt from a 399-rule ledger**, replacing the ten
+  hand-edited `.md` files above in place; `ste-adoption.md` is
+  untouched. Five rules were dropped as duplicates or restatements of
+  an existing gate: R141, R234, R236a, R236b, R238. Total size: from
+  104,153 bytes to 54,681 bytes; restyle load (SKILL.md,
+  style-standard.md, writing.md, gates.md, product-vocabulary.md,
+  reviews.md): from 74,884 bytes to 41,519 bytes.
+
+  An A/B test restyled the PR #27 console backups page once per arm,
+  on sonnet, from identical briefs, run in parallel (RESULT.md in the
+  `docs_writing/experiments/skill-rebuild/` research directory): OLD
+  read the pre-rebuild skill (104,153 B, restyle load 74,884 B), NEW
+  read the rebuilt skill (54,647 B, restyle load 41,485 B, before the
+  "|" separator below was restored). NEW ties OLD on every quality
+  measure scored — words, check-mechanics.py, signals.py ease/grade,
+  "popup" count, cold-read report bytes — and reached cold-read return
+  in 12.8 minutes against 19.2, 33% faster. n=1 per arm, so the timing
+  difference is indicative, not settled; OLD hit its account's session
+  limit during its fix round after both reviews had returned, so OLD's
+  fix round and token count were not measured. The A/B run surfaced
+  one defect: NEW's cold-read dispatch had lost the "|" field
+  separator that reviews.md's format depends on, restored in
+  reviews.md as part of this port.
 
 ---
 

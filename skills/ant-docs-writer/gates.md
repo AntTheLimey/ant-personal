@@ -1,120 +1,95 @@
 # Gates
 
-The four gate scripts, when each runs, and what a failure means.
 Loaded by every job.
 
-## The gates, and when each runs
+Which of the four gate scripts run is fixed by the job table in
+SKILL.md. Run every gate that applies before calling a page done, and
+report its numbers. A gate that exits non-zero, or whose output reads
+FAIL, has not been passed: fix what it names, rerun it, and report
+only the numbers from the run that passed.
 
-Four scripts run here, and which of them apply depends on the job: the
-table under "Ask which job this is before you start" in SKILL.md is
-the one place that is decided. Run every gate that applies before
-calling a page done, and report its numbers.
+Invoke each script by its path from `<skill>/`, since the working
+directory is the documentation repository, not the skill directory.
+Locate the base directory via the skill's own announced path, or with
+`find ~/.claude -path '*ant-docs-writer*' -name 'signals.py'`.
 
-**A gate that exits non-zero has not been passed, and neither has one
-whose output reads `FAIL`.** That is a failure to fix before the page
-is done, rather than a number to report. Fix what the gate names, run
-it again, and report the numbers from the run that passed.
+## check-sources.py (overhaul only)
 
-Run `check-sources.py` on the ledger the moment it arrives, before you
-write a word, on an overhaul. The gate fails a `V` entry that cites
-only a hand-written page:
+    <skill>/check-sources.py <ledger.md>
 
-    <skill>/check-sources.py <ledger>
+Fails a ledger entry marked `st: V` that cites only a hand-written
+page. A documentation page is not a source; it is evidence that a
+page says something, which `st: U` is for. Run it on the ledger the
+moment it arrives, before writing a word.
 
-A fix, a restyle, a restructure and a new page build no ledger, so
-this gate does not run on them.
+## check-ledger.py (the phrase gate; overhaul and new page only)
 
-The phrase gate is `check-ledger.py`. `check-sources.py`'s own
-docstring calls it that. It runs on an overhaul and on a new
-page. A restyle and a restructure keep the page's own wording as the
-starting point and skip it, and a fix touches one claim and skips it
-too. It takes two files, the text the draft may have copied from and
-the draft, and takes `--allow <accepted.txt>` naming phrases the gate
-should not fail on. **The source and the draft are never the same
-file.** The draft passed in both slots reports every sequence in it as
-shared, which measures the invocation rather than the draft. Run each
-of the below that applies, after the draft exists, at `--n 5` and
-again at `--n 4`.
+A fix, a restyle and a restructure skip it.
 
-On an overhaul, measure the old page against the draft. This run
-reports how much of that page's phrasing reached the draft by any
-route:
+    <skill>/check-ledger.py <source.md> <ledger.md> [--n 5]
+        [--allow accepted.txt]
 
-    <skill>/check-ledger.py <old-page> <draft> --allow <accepted.txt>
+The source and the target must never be the same file. The script
+always reports its second operand as "the ledger" whatever is passed;
+report that operand as the draft in every run.
 
-On an overhaul, measure the ledger against the draft. This run narrows
-the one above to what came through the ledger:
+Run each applicable comparison at `--n 5` and again at `--n 4`, after
+the draft exists:
 
-    <skill>/check-ledger.py <ledger> <draft> --allow <accepted.txt>
+- Overhaul: old page as source, draft as target. Measures how much of
+  the old page's phrasing reached the draft by any route.
+- Overhaul: ledger as source, draft as target. Narrows the old-page
+  run to phrasing that came through the ledger.
+- Overhaul and new page: brief as source, draft as target.
 
-On an overhaul and on a new page, measure the brief against the draft,
-a channel a finished page has shared sequences with before:
+After the first run, rewrite each shared sequence once. Never a
+second rewrite pass.
 
-    <skill>/check-ledger.py <brief> <draft> --allow <accepted.txt>
+**Allow file.** A sequence the page must repeat (a title, a product
+term, a screen-spelled label) goes in an allow file beside the draft,
+one phrase per line. A trailing `# reason` after the phrase is a
+comment; a one-word phrase is ignored. A missing `--allow` file allows
+nothing rather than failing the run. A sequence passes once it lies
+inside an allowed phrase, or contains one whole. The allow file ships
+with the draft, so a reviewer can see what was excused.
 
-The script prints its first operand as the source and its second as
-the ledger, whatever you pass. The second is your draft in every run,
-so report it as the draft.
+**What the script strips.** Code spans and double-quoted strings are
+stripped from both sides before comparing, and each paragraph is
+unwrapped onto one line first, so a wrapped span is still stripped
+whole. A shared sequence is re-expressed, never padded around; a
+phrase already shipped as vocabulary on a sibling page may stay
+shared.
 
-**Rewrite once, then allow what must repeat.** After the first run,
-rewrite each shared sequence once. A sequence still shared that the
-page must repeat, such as its title, a product term or a label as the
-screen spells it, goes in an allow file beside the draft, one phrase
-per line. A trailing `# reason` after the phrase is a comment, not
-part of it. A one-word phrase is ignored, because it would excuse
-every sequence containing that word. Backticks inside a phrase do
-nothing, since code spans are already stripped from both pages before
-comparison. **Never a second rewrite pass.** The allow file ships with
-the draft, so a reviewer can see what was excused.
+## check-mechanics.py (every job)
 
-The `--allow` flag may name a file that does not exist yet: the first
-run needs none, and a missing file allows nothing rather than failing
-the run. A sequence passes once it lies inside an allowed phrase, or
-contains one whole, so a two- or three-word product term excuses every
-longer sequence built around it.
+    <skill>/check-mechanics.py <page.md> [<page.md> ...]
 
-Code spans and double-quoted strings are stripped from both sides
-before comparison. Each paragraph is unwrapped onto one line first, so
-a code span or a quoted label broken across the 79-column wrap is
-still stripped whole, and prose sitting between two quoted strings is
-still measured.
+Runs on the draft on every job. Catches:
 
-A shared sequence is re-expressed, never padded around. A phrase that
-is vocabulary already shipped in a sibling page stays: consistency
-beats novelty there.
-
-Run `signals.py` on the draft, on a restyle, a restructure, an
-overhaul and a new page:
-
-    <skill>/signals.py <draft>
-
-See "Reading signals" in writing.md.
-
-**A crossed bound fails the run.** The script exits non-zero and marks
-the line `FAIL`, so the rule above applies to it as it does to the
-other gates.
-
-Run `check-mechanics.py` on the draft, on every job:
-
-    <skill>/check-mechanics.py <draft>
-
-This docset uses US spelling. The script catches a British spelling
-from a fixed word list, and a sentence that opens on a quoted string
-that is itself a complete sentence. It is a word list, not a
-dictionary: it catches the listed forms only, so a spelling it does
-not list still gets fixed the moment you see it.
-
-The script also fails a word or construction the rules name outright,
-from style-standard.md or writing.md. That covers the banned words,
-the named idioms and hedges, the register swaps, the standard-verb
-rule, the product and interface nouns, and the signposting to delete
-on sight. More than two of the accumulation words on one page fails
-it too. A quoted product string is exempt, as style-standard.md
-defines under "Words".
+- British spelling, word-list only.
+- A sentence opening on a quoted string that is itself a complete
+  sentence.
+- A banned word, idiom, hedge, register swap, standard-verb violation,
+  or product or interface noun error named in style-standard.md,
+  writing.md or product-vocabulary.md.
+- More than two uses of one accumulation word. A quoted product string
+  is exempt from all four checks.
 
 On a fix, a finding in a sentence the fix did not change is listed in
-the hand-back and not fixed; only a finding in a sentence the fix
-changed must be fixed before the page is done. A restyle, a
-restructure, an overhaul and a new page fix every finding, because
-wording is in their scope.
+the hand-back and left unfixed; a finding in a sentence the fix did
+change must be fixed before the page is done. A restyle, restructure,
+overhaul and new page fix every finding, since wording is in their
+scope.
 
+## signals.py (restyle, restructure, overhaul, new page)
+
+    <skill>/signals.py <page.md> [<page.md> ...]
+
+Run on the draft before finishing; report what it says. Strips code,
+tables and headings first and measures prose only, since a docs page
+is mostly not prose. Reports Flesch reading ease (floor 58),
+Flesch-Kincaid grade (ceiling 8.0), mean sentence length, and syllable
+density, with a verdict per bound. A crossed bound fails the run the
+same as any other gate. The 20/25-word sentence-length signal it also
+prints sets no exit status; only the reading-ease floor and the grade
+ceiling fail a run.

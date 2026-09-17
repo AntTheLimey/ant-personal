@@ -7,6 +7,105 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.3] — 2026-09-16
+
+### Changed
+
+- **SKILL.md splits into eight files, each loaded only by the jobs
+  that need it**, in place of one 1,695-line, 88,848-byte file every
+  job read in full:
+
+      SKILL.md            4,962 B  top rule, conflicts, jobs, ships, reading
+      style-standard.md   5,509 B  Register, Words
+      writing.md         17,787 B  sentences through repository mechanics
+      shape.md            4,160 B  checklist, shape, openings
+      facts.md            6,110 B  sources, never invent, two artifacts
+      gates.md            4,031 B  the gates
+      reviews.md          4,872 B  reviews
+      in-app-copy.md      1,129 B  in-app copy
+
+  SKILL.md is now the router: a load list names the files each job
+  reads, and "What ships with the draft" requires the files read as
+  the first item in the hand-back. Every cross-reference that used to
+  say "above", "below" or "this file" now names the file the rule
+  moved to. A restyle loads SKILL.md plus style-standard.md,
+  writing.md, gates.md, product-vocabulary.md and reviews.md: 41,519
+  bytes, against 105,938 bytes for the whole 1.4.2 skill. A 1.4.2
+  restyle measured 16.5 minutes, 6.6 of them before the first draft,
+  loading a 106 KB skill of which a restyle uses only part. Nothing is
+  re-measured yet: this release does not claim a speed-up.
+- **The cold reader and the correctness reviewer get style-standard.md
+  handed over unchanged, never an extract.** Three places in
+  reviews.md used to instruct an agent to copy out `## Register`
+  through the end of `### Constructions that read as a machine`, plus
+  the quoted-product-string exemption; all three now hand over the
+  file whole. The exemption itself moved into style-standard.md, out
+  of a bullet under writing.md's `## Sentences`, so the handed-over
+  file carries it.
+- **check-mechanics.py gates the words and constructions the rules
+  name outright**, not only spelling and a quoted-sentence opener. It
+  checks the banned words, the named idioms and hedges, the register
+  swaps, the command verbs, the product and interface nouns, and the
+  signposting to delete on sight, from style-standard.md and
+  writing.md, matched across line breaks, plus the accumulation limit
+  of two per page. Masked spans block a phrase match, so "the `app`
+  user" is not "the user". On the 1.4.2 restyle's input page it
+  reports the cold read's two findings and nine it missed: six
+  "popup", two "a way back" and a third "rather than". On its output
+  it reports the eight "popup" the writer kept.
+- **check-mechanics.py masks a quoted string or code span wrapped
+  across a line break, and joins a phrase match at a barrier no
+  paragraph gap crosses.** A quoted string or code span broken at 79
+  columns was masked line by line, so a banned word inside it was
+  flagged; a phrase could also match across a blank line, a skipped
+  fence or a skipped comment. "more of them" no longer flags "one or
+  more of them": the rule now needs the modal-verb construction it
+  names. "load-bearing" is gone, having no rule in the skill; the
+  panel advice now names "section" inside a dialog, as
+  product-vocabulary.md does; "carried weight", "carrying weight" and
+  "and this is why it bites" are added; "this section uses/has" is no
+  longer matched. All seven reproducing inputs from the review pass.
+  Corpus of 89 pages: 1,347 findings, down from 1,401 before 122eeb0's
+  "the user" removal; the restyle input page and the persona-test page
+  are unchanged at 14 each.
+- **The cold-read report format is fixed, and the fix round starts on
+  the first review back.** Measured on the 1.4.2 restyle: the meaning
+  check took 1.5 minutes, and the cold read took 5.5 minutes, most of
+  it writing the report. The cold-read prompt in reviews.md now asks
+  for a first line on task completion, then one pipe-delimited line
+  per finding (the quoted sentence, heading or alt text, the kind, and
+  the matching detail), with no summary, no praise, and no cap on the
+  count. reviews.md also states that the writer applies a review's
+  findings as soon as it returns rather than waiting for the second,
+  resolves a finding both reviews name in favor of the fact-bearing
+  one, and runs the gates once after both are applied. This does not
+  claim a speed-up; nothing is re-measured yet.
+- **The skill is rebuilt from a 399-rule ledger**, replacing the ten
+  hand-edited `.md` files above in place; `ste-adoption.md` is
+  untouched. Five rules were dropped as duplicates or restatements of
+  an existing gate: R141, R234, R236a, R236b, R238. Total size: from
+  104,153 bytes to 54,681 bytes; restyle load (SKILL.md,
+  style-standard.md, writing.md, gates.md, product-vocabulary.md,
+  reviews.md): from 74,884 bytes to 41,519 bytes.
+
+  An A/B test restyled the PR #27 console backups page once per arm,
+  on sonnet, from identical briefs, run in parallel (RESULT.md in the
+  `docs_writing/experiments/skill-rebuild/` research directory): OLD
+  read the pre-rebuild skill (104,153 B, restyle load 74,884 B), NEW
+  read the rebuilt skill (54,647 B, restyle load 41,485 B, before the
+  "|" separator below was restored). NEW ties OLD on every quality
+  measure scored — words, check-mechanics.py, signals.py ease/grade,
+  "popup" count, cold-read report bytes — and reached cold-read return
+  in 12.8 minutes against 19.2, 33% faster. n=1 per arm, so the timing
+  difference is indicative, not settled; OLD hit its account's session
+  limit during its fix round after both reviews had returned, so OLD's
+  fix round and token count were not measured. The A/B run surfaced
+  one defect: NEW's cold-read dispatch had lost the "|" field
+  separator that reviews.md's format depends on, restored in
+  reviews.md as part of this port.
+
+---
+
 ## [1.4.2] — 2026-09-16
 
 ### Added

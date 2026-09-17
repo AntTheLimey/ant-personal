@@ -45,8 +45,7 @@ code, tables and headings first and measures prose only.
 
 ## Punctuation
 
-- No em-dashes; use a comma, a period or parentheses. The verbatim
-  quoted core instruction in SKILL.md is the one exempt text.
+- No em-dashes; use a comma, a period or parentheses.
 - No semicolons in new text; write two sentences instead. Never strip
   a semicolon from existing text: a punctuation-only edit would hide
   the technical change underneath it.

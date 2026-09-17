@@ -2,9 +2,9 @@
 
 Loaded by every job.
 
-Which of the four gate scripts run is fixed by the job table in
-SKILL.md. Run every gate that applies before calling a page done, and
-report its numbers. A gate that exits non-zero, or whose output reads
+Which of the four gate scripts run for a job is stated in each gate's
+own heading below. Run every gate that applies before calling a page
+done, and report its numbers. A gate that exits non-zero, or whose output reads
 FAIL, has not been passed: fix what it names, rerun it, and report
 only the numbers from the run that passed.
 
@@ -53,12 +53,13 @@ nothing rather than failing the run. A sequence passes once it lies
 inside an allowed phrase, or contains one whole. The allow file ships
 with the draft, so a reviewer can see what was excused.
 
-**What the script strips.** Code spans and double-quoted strings are
-stripped from both sides before comparing, and each paragraph is
-unwrapped onto one line first, so a wrapped span is still stripped
-whole. A shared sequence is re-expressed, never padded around; a
-phrase already shipped as vocabulary on a sibling page may stay
-shared.
+**What the script strips.** Code spans, double-quoted strings and a
+sequence containing an identifier with an underscore (such as
+`pg_dump`) are stripped from both sides before comparing, and each
+paragraph is unwrapped onto one line first, so a wrapped span is
+still stripped whole. A shared sequence is re-expressed, never padded
+around; a phrase already shipped as vocabulary on a sibling page may
+stay shared.
 
 ## check-mechanics.py (every job)
 
@@ -72,8 +73,9 @@ Runs on the draft on every job. Catches:
 - A banned word, idiom, hedge, register swap, standard-verb violation,
   or product or interface noun error named in style-standard.md,
   writing.md or product-vocabulary.md.
-- More than two uses of one accumulation word. A quoted product string
-  is exempt from all four checks.
+- More than two uses of one accumulation word. A quoted product
+  string is exempt from the spelling, named-word and accumulation
+  checks; the opener check still reads it.
 
 On a fix, a finding in a sentence the fix did not change is listed in
 the hand-back and left unfixed; a finding in a sentence the fix did

@@ -48,14 +48,14 @@ cumulative levels; fix and new page sit outside that ladder.
 
 | Job | Scope |
 |---|---|
-| Fix | Changes one fact and touches nothing else: no restructuring, style edits or vocabulary sweep, apart from the one reader-safety hazard move a restyle may also make. Takes the source for the one changed claim and carries it as a single fact-list entry in the hand-back. Adds no fact beyond the one requested. |
+| Fix | Changes the facts it was asked to change and touches nothing else: no restructuring, style edits or vocabulary sweep, apart from the one reader-safety hazard move a restyle may also make. Takes the source for each changed claim and carries it as a fact-list entry in the hand-back, one per claim. Adds no fact beyond those requested. |
 | Restyle | Rewrites wording only. Facts and section order stay fixed, except the one hazard move, named in the hand-back. Takes the page's own facts as stated, builds no fact list, and adds no new fact. |
 | Restructure | A restyle that also reorders, merges, splits or adds sections. Facts are taken as the page states them: nothing re-verified or added, and no fact list is built. |
 | Overhaul | A restructure that also re-establishes every fact from source through the ledger. May add a fact or a step the content checklist requires, sourced and explained in the pull request. |
 | New page | Has no page or ledger to inherit. Facts come from source and shape comes from them. May add any fact the checklist requires, sourced and explained in the pull request. |
 
-A request that names a factual correction is a fix and needs no
-clarifying question. When handed an existing page with no clear
+A request that names one or more factual corrections is a fix and
+needs no clarifying question. When handed an existing page with no clear
 instruction otherwise, ask before doing anything, offering exactly
 three named levels: restyle, restructure, overhaul, each stated as
 what it adds over the one below.
@@ -85,7 +85,7 @@ changed in response.
 
 | Job | Also hand back |
 |---|---|
-| Fix | The changed claim's fact-list-entry fields, directly in the hand-back. |
+| Fix | Each changed claim's fact-list-entry fields, directly in the hand-back. |
 | Overhaul, new page | The fact list; the allow file, from the point a shared sequence first needed one. |
 | Restructure, overhaul | The short heading tree. |
 | New page | The full heading tree. |

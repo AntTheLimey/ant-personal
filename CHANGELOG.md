@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.4] — 2026-09-17
+
+### Added
+
+- **A rule against the temporal "once"**, in `style-standard.md` and
+  in `check-mechanics.py`: write "when the restore completes", not
+  "once the restore completes". The counting sense ("returned once, at
+  creation") stays, so the gate matches "once" only where a clause
+  about time follows it. Measured against both docsets first: 48 of
+  109 uses are temporal, and none of the other 61 is a false positive.
+- **ASD-STE100 rule 3.7**, in `writing.md`. The provenance record
+  listed it as taken unchanged, but no rules file ever carried it.
+
+### Changed
+
+- **`ste-adoption.md` moves to `docs/`.** No job loaded it and no file
+  referenced it, so it shipped in every install unreachable. It is a
+  provenance record, not a rule, and it now says so. The skill payload
+  drops from 60,226 B to 55,121 B.
+- **The two orderings that are always wrong are stated once**, in
+  `writing.md`. `shape.md` now points at them instead of repeating
+  them.
+- **The readability bounds are stated once**, in `writing.md`.
+  `gates.md` described the same floor and ceiling, so either could
+  drift from the other.
+- **The content checklist is eight items, numbered 1 to 8.** Item 1b
+  was a separate requirement wearing item 1's number.
+
+### Fixed
+
+- **A fix job could not satisfy `gates.md`.** Its opening rule said a
+  failing gate means the page is not done; the carve-out under
+  `check-mechanics.py` said to leave findings in untouched sentences
+  alone. Both bind a fix, so the gate could never pass. A fix is now
+  named as the one job that ends on a failing gate.
+- **The fix job is no longer written for exactly one claim.**
+  `facts.md` and `SKILL.md` described "the one changed claim"
+  throughout, leaving a brief carrying three corrections undefined.
+  Found by running a three-claim fix.
+- **`facts.md` no longer opens by explaining restyle and
+  restructure**, neither of which loads it.
+
 ## [1.4.3] — 2026-09-16
 
 ### Changed

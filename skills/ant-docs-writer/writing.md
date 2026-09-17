@@ -15,6 +15,9 @@ Loaded by every job.
   "Save the spec and run the restore" is two steps.
 - Put a condition first, then a comma, then the command.
 - Write in the active voice and the present tense.
+- Write an action as something done, not as a noun built from it:
+  "configure the database", not "perform configuration of the
+  database".
 - A passive verb that omits the actor is a defect whenever more than
   one candidate could be the actor; name the actor. "The resource is
   busy and should be retried" reads as though the resource is

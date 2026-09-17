@@ -157,6 +157,9 @@ NAMED = [
     (r"surfaces (?:in|on|as|when|after|once|within|up)",
      "register, use \"appears\" or \"shows\""),
     (r"ahead of", "register, use \"before\""),
+    (r"once (?:the|you|a|an|it|that|this|they|there|all|every|each|"
+     r"both|your)",
+     "temporal \"once\", use \"when\""),
     (r"(?:can|could|will|may|might) \w+ more of them",
      "register, name what there is more of"),
     (r"verbs?", "use \"command\""),

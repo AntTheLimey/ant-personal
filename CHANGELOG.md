@@ -15,8 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   in `check-mechanics.py`: write "when the restore completes", not
   "once the restore completes". The counting sense ("returned once, at
   creation") stays, so the gate matches "once" only where a clause
-  about time follows it. Measured against both docsets first: 48 of
-  109 uses are temporal, and none of the other 61 is a false positive.
+  about time follows it. Across the 88 pages of both docsets, "once"
+  appears 109 times and the gate flags 53, every one of them a
+  temporal clause. It is deliberately incomplete: a temporal "once"
+  followed by an inline-code span or a proper noun is missed, and
+  "once every hour" is left alone because it states a frequency.
 - **ASD-STE100 rule 3.7**, in `writing.md`. The provenance record
   listed it as taken unchanged, but no rules file ever carried it.
 
@@ -25,7 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`ste-adoption.md` moves to `docs/`.** No job loaded it and no file
   referenced it, so it shipped in every install unreachable. It is a
   provenance record, not a rule, and it now says so. The skill payload
-  drops from 60,226 B to 55,121 B.
+  drops from 60,226 B to 55,194 B. Per-job load does not drop: a restyle
+  reads 672 B more than it did, because the rules this release adds
+  and the contradiction it resolves cost more text than the duplicates
+  removed.
 - **The two orderings that are always wrong are stated once**, in
   `writing.md`. `shape.md` now points at them instead of repeating
   them.

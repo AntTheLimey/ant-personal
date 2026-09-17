@@ -6,7 +6,7 @@ Loaded by every job.
 
 | Job | Reviews |
 |---|---|
-| fix | Correctness review of the changed claim only. No cold read. |
+| fix | Correctness review of the changed claims only. No cold read. |
 | restyle | Meaning check and cold read, in parallel. |
 | restructure | Meaning check and cold read, in parallel. |
 | overhaul | Correctness review and cold read, in parallel. Screenshot check where a page states what a screen shows and an image is available. |
@@ -15,7 +15,8 @@ Loaded by every job.
 Each review is performed by someone other than the writer, after the
 draft exists, since a writer cannot be their own cold reader. Run both
 reviews of a pair even on a small change, since each finds defects the
-other would not; a fix runs one review only. Run the screenshot check
+other would not; a fix runs one review only, covering every claim it
+changed. Run the screenshot check
 wherever it applies.
 
 ## Correctness review

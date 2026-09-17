@@ -9,10 +9,12 @@ and writing.md name, which a cold reader otherwise has to find:
 
 - British spelling. The docset is US English. The check is a word
   list, not a dictionary, so it catches the listed forms and nothing
-  else. Headings, image alt text, table cells and indented lines are
-  checked, since step prose shares its indent with code. Fenced code,
-  inline code and double-quoted strings are not, because a quoted
-  product string is reproduced as the product prints it.
+  else. Headings, image alt text and table cells are checked. A step's
+  indented prose is checked too, but an indented code block is not,
+  since the two share an indent and only a list-aware column tells
+  them apart. Fenced code, inline code and double-quoted strings are
+  not, because a quoted product string is reproduced as the product
+  prints it.
 - A sentence that opens on a quoted string that is itself a complete
   sentence, such as
   "`Could not start the restore.` is a red notification". The reader
@@ -24,9 +26,9 @@ and writing.md name, which a cold reader otherwise has to find:
 - Accumulation: more than two of "actually", "critical", "matters",
   "exactly", "rather than" or "at scale" on one page.
 
-Every check skips fenced code, inline code, double-quoted strings, link
-targets and HTML comments. A word inside a quoted product string is
-the product's word, and stays.
+Every check skips fenced code, an indented code block, inline code,
+double-quoted strings, link targets and HTML comments. A word inside a
+quoted product string is the product's word, and stays.
 
 An unclosed fence is reported too, since nothing after it is checked.
 
@@ -37,6 +39,8 @@ could not be read or no page was given.
 import pathlib
 import re
 import sys
+
+from indent import indented_code_lines
 
 # British form -> US form. A form listed here also matches with the
 # suffixes in SUFFIXES and after any prefix, so "organis" covers
@@ -317,6 +321,7 @@ def named(lines):
 def check(text):
     findings = []
     checked = []
+    code_lines = indented_code_lines(text)
     fence, fence_line, comment = None, 0, False
     for n, raw in enumerate(text.splitlines(), 1):
         # A fence closes only on its own character, at least as long as
@@ -340,6 +345,8 @@ def check(text):
         if re.search(r"<!--(?!.*-->)", raw):
             comment = True
             raw = raw[:raw.index("<!--")]
+        if n in code_lines:
+            continue
         checked.append((n, raw))
         for col, word, us in spelling(mask(raw)):
             findings.append((n, col + 1,

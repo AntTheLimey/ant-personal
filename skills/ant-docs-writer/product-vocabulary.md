@@ -5,6 +5,13 @@ Loaded by every job.
 Treat every word choice below as a settled decision to apply, not a
 preference to reopen or debate.
 
+A rule that says a feature does not exist is different: it is a
+negative, and a negative goes stale the moment the feature ships, with
+nothing to fail and warn a writer. Before repeating one of those
+claims (the missing certificate authority, an unreleased feature) on a
+new page, check it against the current product rather than taking
+this file's word for it.
+
 ## Product and architecture boundaries
 
 - Where the interface still renders the retired name "pgEdge Cloud",

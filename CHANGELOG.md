@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.5] — 2026-09-17
+
+### Fixed
+
+- **`check-mechanics.py` and `signals.py` now agree on what an
+  indented block is**, via a shared `indent.py` classifier. Code is
+  whatever sits four columns past its container's own content column
+  — four past 0 at the top level, four past a list item's marker
+  inside one — rather than a flat four-space rule. Previously
+  `check-mechanics.py` read every indented shell command as prose
+  (pgEdge/pgedge-cli#520 edited a literal `postgresql://` string to
+  clear a spelling finding on one), and `signals.py` stripped a
+  step's own indented prose along with its code, scoring a
+  step-heavy page on a fraction of itself.
+- **`check-sources.py` accepts a dated probe log under `research/`**
+  as a source for a ledger entry marked `st: V`, alongside the
+  existing exemption for generated reference pages. It previously
+  rejected the strongest source a ledger entry can have — a live
+  measurement — on the same grounds as a sibling guide citing
+  nothing.
+- **`product-vocabulary.md` flags its own negative claims** (the
+  missing certificate authority, an unreleased feature) for a check
+  against the current product before a new page repeats one. A
+  feature shipping does not fail the gate the way a wrong word does.
+
+### Noted, not changed
+
+- `check-mechanics.py`'s US-spelling rule stays as written. The
+  pgedge-cli docset's prose is measurably British (`behaviour` 43:1,
+  `catalogue` 22:0, `analyse` 20:3), so the rule keeps producing a
+  false "fix" on a restyle of an old page until the docset itself is
+  swept to US English in a dedicated pass.
+
 ## [1.4.4] — 2026-09-17
 
 ### Added

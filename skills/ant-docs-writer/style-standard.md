@@ -87,10 +87,10 @@ pressure.
   not read the page you were handed, or its neighbors, as evidence
   that the standard is British.
 - Link text is the target page's own title (writing.md), so a British
-  word in link text is fixed on the target page's title first and
-  the links after, in one change. A job scoped to one page reports
-  it and leaves the link text as it stands; it does not change the
-  link text alone.
+  word in link text is fixed by retitling the target page and every
+  link to it in the same change. Never change the link text alone.
+  When the target page is outside the change, this is the one finding
+  any job reports and leaves; gates.md names it.
 - A quoted product string keeps the product's spelling.
 
 ## Product names

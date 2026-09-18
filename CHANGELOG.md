@@ -18,10 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   pgedge-cli's British docset ("behaviour" 43 to 1) is the outlier, so
   the gate keeps its rule and a writer is told not to read the page
   in hand as evidence against it. A British word in link text is
-  fixed on the target page's title first, in one change, or reported
-  when the job is scoped to one page; two writers on
-  pgEdge/pgedge-cli#520 changed link text alone and both edits were
-  reverted. This replaces 1.4.5's "noted, not changed".
+  fixed by retitling the target page and every link to it together;
+  when the target is outside the change, it is the one finding any
+  job reports and leaves, and `gates.md` names the exception. Two
+  writers on pgEdge/pgedge-cli#520 changed link text alone and both
+  edits were reverted. This replaces 1.4.5's "noted, not changed".
 
 ## [1.4.6] — 2026-09-18
 

@@ -75,9 +75,7 @@ stay shared.
 Runs on the draft on every job. Catches:
 
 - British spelling, word-list only. The standard is US English
-  (style-standard.md, "Spelling"); a finding in link text is fixed on
-  the target page's title first, or reported when the job's scope is
-  one page.
+  (style-standard.md, "Spelling").
 - A sentence opening on a quoted string that is itself a complete
   sentence.
 - A banned word, idiom, hedge, register swap, standard-verb violation,
@@ -103,7 +101,11 @@ On a fix, a finding in a sentence the fix did not change is listed in
 the hand-back and left unfixed; a finding in a sentence the fix did
 change must be fixed before the page is done. A restyle, restructure,
 overhaul and new page fix every finding, since wording is in their
-scope.
+scope, with one exception on every job: a spelling finding in link
+text whose target page is outside the change. Fixing it means
+retitling the target and every link to it together, so when the
+target cannot be touched the finding is listed in the hand-back and
+left, and the gate stays red on it.
 
 ## signals.py (restyle, restructure, overhaul, new page)
 

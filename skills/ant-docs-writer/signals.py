@@ -3,9 +3,13 @@
 
     <skill>/signals.py <page.md> [<page.md> ...]
 
-Fenced code, indented blocks, tables and headings are stripped before
-scoring. A docs page is mostly not prose, and counting the commands
-makes the number meaningless.
+Fenced code, an indented code block, tables and headings are stripped
+before scoring. A step's own indented prose is not: only a further
+four columns past a list item's content column counts as its nested
+code. A docs page is mostly not prose, and counting the commands makes
+the number meaningless — but a step-heavy page is disproportionately
+its indented prose, and dropping that too would score it on a
+fraction of itself.
 
 Reports Flesch reading ease, Flesch-Kincaid grade, mean sentence
 length, and syllable density, then a verdict line per bound. The ease
@@ -20,6 +24,8 @@ import pathlib
 import re
 import sys
 
+from indent import indented_code_lines
+
 VOWELS = "aeiouy"
 EASE_FLOOR = 58.0
 GRADE_CEILING = 8.0
@@ -27,7 +33,9 @@ GRADE_CEILING = 8.0
 
 def prose(text):
     text = re.sub(r"```.*?```", " ", text, flags=re.S)
-    text = re.sub(r"^(?: {4,}|\t).*$", " ", text, flags=re.M)
+    code_lines = indented_code_lines(text)
+    text = "\n".join("" if n in code_lines else line
+                      for n, line in enumerate(text.splitlines(), 1))
     text = re.sub(r"^\s*\|.*$", " ", text, flags=re.M)
     text = re.sub(r"^\s*#{1,6} .*$", " ", text, flags=re.M)
     text = re.sub(r"^\s*[-*_]{3,}\s*$", " ", text, flags=re.M)

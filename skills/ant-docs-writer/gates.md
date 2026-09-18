@@ -24,8 +24,10 @@ Locate the base directory via the skill's own announced path, or with
 
 Fails a ledger entry marked `st: V` that cites only a hand-written
 page. A documentation page is not a source; it is evidence that a
-page says something, which `st: U` is for. Run it on the ledger the
-moment it arrives, before writing a word.
+page says something, which `st: U` is for. Generated reference and a
+dated probe log under `research/` both count as a source; only a
+sibling guide does not. Run it on the ledger the moment it arrives,
+before writing a word.
 
 ## check-ledger.py (the phrase gate; overhaul and new page only)
 
@@ -82,6 +84,11 @@ Runs on the draft on every job. Catches:
   string is exempt from the spelling, named-word and accumulation
   checks; the opener check still reads it.
 
+A step's own indented prose is checked; the step's indented code is
+not. The two are told apart by column, not by a flat four-space rule:
+code is whatever sits four columns past the list item's own content,
+so a bare four-space indent outside any list is still code.
+
 On a fix, a finding in a sentence the fix did not change is listed in
 the hand-back and left unfixed; a finding in a sentence the fix did
 change must be fixed before the page is done. A restyle, restructure,
@@ -94,9 +101,12 @@ scope.
 
 Run on the draft before finishing; report what it says. Strips code,
 tables and headings first and measures prose only, since a docs page
-is mostly not prose. Reports Flesch reading ease, Flesch-Kincaid
-grade, mean sentence length and syllable density, with a verdict per
-bound. A crossed bound fails the run the same as any other gate.
+is mostly not prose — but a step's own indented prose stays in the
+count, by the same column rule check-mechanics.py uses, so a
+step-heavy page is not scored on a fraction of itself. Reports Flesch
+reading ease, Flesch-Kincaid grade, mean sentence length and syllable
+density, with a verdict per bound. A crossed bound fails the run the
+same as any other gate.
 
 "Reading signals" in writing.md holds the two bounds and what to do
 about a crossed one. They are stated there rather than here so that a

@@ -16,7 +16,9 @@ mark is self-assigned, so nothing contradicted it.
 
 Generated reference pages under `docs/reference/` are exempt: they
 are produced from the cobra command tree and cannot drift from the
-binary.
+binary. A dated probe log under `research/` is exempt too: it is a
+record of a live measurement against the API, not prose that cites
+nothing.
 
 Exit 0 when every V entry cites something other than a hand-written
 page, 1 otherwise.
@@ -29,10 +31,13 @@ import sys
 SOURCE_RE = re.compile(r"[\w./-]+\.(?:go|ya?ml|txt|md|json|sql|sh|py)")
 
 
+GENERATED = ("reference/", "research/")
+
+
 def hand_written_page(ref):
     if not ref.endswith(".md"):
         return False
-    return "reference/" not in ref
+    return not any(seg in ref for seg in GENERATED)
 
 
 def main(argv):

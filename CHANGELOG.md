@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   documentation is US English, set by the public docs repository and
   measured 2026-09-18 (behavior 34 to 2, color 43 to 1, initialize 17
   to 0, center 8 to 0); the pgedge-docs skill's own prose is US too.
-  pgedge-cli's British docset (behaviour 43 to 1) is the outlier, so
+  pgedge-cli's British docset ("behaviour" 43 to 1) is the outlier, so
   the gate keeps its rule and a writer is told not to read the page
   in hand as evidence against it. A British word in link text is
   fixed on the target page's title first, in one change, or reported

@@ -83,6 +83,13 @@ Runs on the draft on every job. Catches:
 - More than two uses of one accumulation word. A quoted product
   string is exempt from the spelling, named-word and accumulation
   checks; the opener check still reads it.
+- A precondition true of every page: the login statement in any of
+  its wordings, anywhere on the page; and, inside a Before You Start
+  or Prerequisites section, a profile, a network connection, a shell,
+  an account, or nothing at all. This is the writing.md rule that no
+  writer applied on pgEdge/pgedge-cli#520, so it is checked here
+  rather than trusted to a reader. The fix is deletion, and a section
+  left empty by it goes too.
 
 A step's own indented prose is checked; the step's indented code is
 not. The two are told apart by column, not by a flat four-space rule:

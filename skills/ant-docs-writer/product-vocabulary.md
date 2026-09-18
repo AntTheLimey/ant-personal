@@ -51,8 +51,10 @@ this file's word for it.
 
 ## Unreleased features
 
-- Read replicas and branching are not described. A feature carrying a
-  "Coming soon" badge gets no explanatory text.
+- Read replicas are not described. A feature carrying a "Coming soon"
+  badge gets no explanatory text. Branching left this list on
+  2026-09-18: the CLI ships `database branch` commands, a reference
+  page and skill workflows for it, so a page may describe it.
 
 ## AI features
 

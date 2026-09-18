@@ -74,7 +74,10 @@ stay shared.
 
 Runs on the draft on every job. Catches:
 
-- British spelling, word-list only.
+- British spelling, word-list only. The standard is US English
+  (style-standard.md, "Spelling"); a finding in link text is fixed on
+  the target page's title first, or reported when the job's scope is
+  one page.
 - A sentence opening on a quoted string that is itself a complete
   sentence.
 - A banned word, idiom, hedge, register swap, standard-verb violation,

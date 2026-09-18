@@ -77,6 +77,22 @@ pressure.
   every asynchronous procedure and is not a fixed verb for any one
   object.
 
+## Spelling
+
+- pgEdge documentation is US English: behavior, color, initialize,
+  center, license, catalog. The standard is set by the public docs
+  repository, measured 2026-09-18 at behavior 34 to 2, color 43 to 1,
+  initialize 17 to 0, center 8 to 0.
+- A page written in British spelling is the defect, not the rule. Do
+  not read the page you were handed, or its neighbors, as evidence
+  that the standard is British.
+- Link text is the target page's own title (writing.md), so a British
+  word in link text is fixed on the target page's title first and
+  the links after, in one change. A job scoped to one page reports
+  it and leaves the link text as it stands; it does not change the
+  link text alone.
+- A quoted product string keeps the product's spelling.
+
 ## Product names
 
 - Write "Postgres", never "PostgreSQL".

@@ -8,9 +8,11 @@ reps; the next two are the words and constructions style-standard.md
 and writing.md name, which a cold reader otherwise has to find; the
 last is a rule three writers loaded and none applied:
 
-- British spelling. The docset is US English. The check is a word
-  list, not a dictionary, so it catches the listed forms and nothing
-  else. Headings, image alt text and table cells are checked. A step's
+- British spelling. pgEdge documentation is US English, set by the
+  public docs repository (behavior 34:2, color 43:1, initialize 17:0,
+  measured 2026-09-18); a docset that reads British is the defect.
+  The check is a word list, not a dictionary, so it catches the
+  listed forms and nothing else. Headings, image alt text and table cells are checked. A step's
   indented prose is checked too, but an indented code block is not,
   since the two share an indent and only a list-aware column tells
   them apart. Fenced code, inline code and double-quoted strings are

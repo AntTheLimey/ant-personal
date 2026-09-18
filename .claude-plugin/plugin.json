@@ -1,7 +1,7 @@
 {
   "name": "ant-personal",
   "description": "Personal productivity skills for Claude -- voice-matched writing, pgEdge documentation style, blog creation with automated review, and executive document review simulation",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "license": "MIT",
   "author": {
     "name": "AntTheLimey"

@@ -215,14 +215,15 @@ NAMED = [
 # prose around it.
 UNIVERSAL = "universal precondition, true of every page: delete it"
 PRECONDITION = [
-    (r"you (?:need|must|have|will need|'ll need|should) to (?:be )?"
-     r"(?:logged in|log in|logged on|log on|signed in|sign in|"
-     r"authenticated?)", UNIVERSAL),
+    # The subject is "you": "the role must be logged in to the source"
+    # describes a role, not the reader.
+    (r"you (?:need to|must|have to|will need to|'ll need to|should) "
+     r"(?:already )?(?:be )?(?:logged in|log in|logged on|log on|"
+     r"signed in|sign in|authenticated?)", UNIVERSAL),
     (r"you (?:need|will need|'ll need|must have|should have) an? "
      r"(?:authenticated|logged-in|active|valid|working) "
      r"(?:profile|session|login)", UNIVERSAL),
     (r"an authenticated profile", UNIVERSAL),
-    (r"(?:be|being|are) (?:logged|signed) (?:in|on)", UNIVERSAL),
     # Not "authenticate with": that is the generated Short text of
     # `auth login` on the reference page.
     (r"authenticate (?:first|before)", UNIVERSAL),
@@ -234,7 +235,7 @@ PRECONDITION = [
 # "a network connection" may be the subject, so these do not run
 # page-wide.
 SECTION_HEADING_RE = re.compile(
-    r"^\s*#{2,6}\s+(?:before you (?:start|begin)|prerequisites?)\s*$",
+    r"^\s*#{2,6}\s+(?:before you (?:start|begin)|prerequisites?)\s*:?\s*$",
     re.I)
 SECTION_ONLY = [
     (r"(?:an? |the )?(?:authenticated|active|logged-in) profile",
@@ -324,8 +325,13 @@ PARAGRAPH_MASKS = [
 ]
 
 
-def named(lines, rules=None, tics=None):
+def named(lines, section_lines=()):
     """Named words and tics over the checked lines, across line breaks.
+
+    section_lines holds the line numbers inside a Before You Start
+    section; SECTION_RE runs over the same joined text and keeps only a
+    match starting on one of them, so a phrase both rule sets match is
+    deduplicated once, in one offset space.
 
     lines is a list of (line number, raw text). Consecutive lines of one
     paragraph are joined with a newline, so a phrase wrapped at 79
@@ -359,9 +365,13 @@ def named(lines, rules=None, tics=None):
         return n, offset - line_start + 1
 
     found, spans = [], []
-    for rx, advice in (NAMED_RE if rules is None else rules):
+    for rx, advice in NAMED_RE:
         for m in rx.finditer(joined):
             spans.append((m.start(), m.end(), advice))
+    for rx, advice in SECTION_RE:
+        for m in rx.finditer(joined):
+            if where(m.start())[0] in section_lines:
+                spans.append((m.start(), m.end(), advice))
     # Two rules matching one stretch of text ("you need to be logged
     # in" and "be logged in") is one finding, the longer one.
     for start, end, advice in spans:
@@ -371,7 +381,7 @@ def named(lines, rules=None, tics=None):
         n, col = where(start)
         word = " ".join(joined[start:end].split())
         found.append((n, col, f"\"{word}\": {advice}"))
-    for tic in (TICS if tics is None else tics):
+    for tic in TICS:
         rx = re.compile(r"(?<![\w-])" + tic.replace(" ", r"\s+") +
                         r"(?![\w-])", re.I)
         hits = list(rx.finditer(joined))
@@ -441,13 +451,13 @@ def check(text):
             findings.append((n, m.start(1) + 1,
                              f"sentence opens on {m.group(1)}, a "
                              f"complete sentence of its own"))
-    findings.extend(named(checked))
+    section_lines = set()
     for heading, body in sections(checked):
         if not any(raw.strip() for _, raw in body):
             findings.append((heading, 1, "Before You Start is empty: "
                                          "carry no section"))
-            continue
-        findings.extend(named(body, rules=SECTION_RE, tics=()))
+        section_lines.update(n for n, _ in body)
+    findings.extend(named(checked, section_lines))
     findings.sort()
     if fence:
         findings.append((fence_line, 1, "fence never closes, so nothing "

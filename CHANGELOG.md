@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.7] — 2026-09-18
+
+### Added
+
+- **`style-standard.md` states the spelling standard** (#11). pgEdge
+  documentation is US English, set by the public docs repository and
+  measured 2026-09-18 (behavior 34 to 2, color 43 to 1, initialize 17
+  to 0, center 8 to 0); the pgedge-docs skill's own prose is US too.
+  pgedge-cli's British docset ("behaviour" 43 to 1) is the outlier, so
+  the gate keeps its rule and a writer is told not to read the page
+  in hand as evidence against it. A British word in link text is
+  fixed by retitling the target page and every link to it together;
+  when the target is outside the change, it is the one finding any
+  job reports and leaves, and `gates.md` names the exception. Two
+  writers on pgEdge/pgedge-cli#520 changed link text alone and both
+  edits were reverted. This replaces 1.4.5's "noted, not changed".
+
 ## [1.4.6] — 2026-09-18
 
 ### Added

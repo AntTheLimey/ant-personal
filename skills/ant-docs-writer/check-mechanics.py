@@ -3,9 +3,10 @@
 
     <skill>/check-mechanics.py <page.md> [<page.md> ...]
 
-Four checks. The first two are defects no cold reader caught in 18
-reps; the last two are the words and constructions style-standard.md
-and writing.md name, which a cold reader otherwise has to find:
+Five checks. The first two are defects no cold reader caught in 18
+reps; the next two are the words and constructions style-standard.md
+and writing.md name, which a cold reader otherwise has to find; the
+last is a rule three writers loaded and none applied:
 
 - British spelling. The docset is US English. The check is a word
   list, not a dictionary, so it catches the listed forms and nothing
@@ -25,6 +26,13 @@ and writing.md name, which a cold reader otherwise has to find:
   Matched across line breaks. Each finding names the replacement.
 - Accumulation: more than two of "actually", "critical", "matters",
   "exactly", "rather than" or "at scale" on one page.
+- A precondition true of every page. Anywhere on the page: "you need
+  to be logged in", "an authenticated profile" and the other forms of
+  the login statement. Inside a Before You Start or Prerequisites
+  section only: a profile, a network connection, a shell or an
+  account, and a section with nothing in it. Matched by the sentence,
+  not the heading, since six of the pages that carried it stated it in
+  an unheaded opening paragraph.
 
 Every check skips fenced code, an indented code block, inline code,
 double-quoted strings, link targets and HTML comments. A word inside a
@@ -198,9 +206,58 @@ NAMED = [
     (r"coming soon", "forward-looking, describe what is"),
     (r"we", "do not write \"we\""),
 ]
-NAMED_RE = [(re.compile(r"(?<![\w-])" + pat.replace(" ", r"\s+") +
+
+# A precondition true of every page, stated anywhere on it. These are
+# the sentences pgEdge/pgedge-cli#520 removed from 21 pages after the
+# rule in writing.md, loaded on every job, produced no edit and no
+# report three times out of three (ant-personal#14). The login command
+# itself sits in inline code, so it is masked; what these match is the
+# prose around it.
+UNIVERSAL = "universal precondition, true of every page: delete it"
+PRECONDITION = [
+    (r"you (?:need|must|have|will need|'ll need|should) to (?:be )?"
+     r"(?:logged in|log in|logged on|log on|signed in|sign in|"
+     r"authenticated?)", UNIVERSAL),
+    (r"you (?:need|will need|'ll need|must have|should have) an? "
+     r"(?:authenticated|logged-in|active|valid|working) "
+     r"(?:profile|session|login)", UNIVERSAL),
+    (r"an authenticated profile", UNIVERSAL),
+    (r"(?:be|being|are) (?:logged|signed) (?:in|on)", UNIVERSAL),
+    # Not "authenticate with": that is the generated Short text of
+    # `auth login` on the reference page.
+    (r"authenticate (?:first|before)", UNIVERSAL),
+    (r"creates the profile (?:that )?every command", UNIVERSAL),
+]
+
+# Inside a Before You Start or Prerequisites section only: the four
+# entries writing.md names as never page-specific. Elsewhere on a page
+# "a network connection" may be the subject, so these do not run
+# page-wide.
+SECTION_HEADING_RE = re.compile(
+    r"^\s*#{2,6}\s+(?:before you (?:start|begin)|prerequisites?)\s*$",
+    re.I)
+SECTION_ONLY = [
+    (r"(?:an? |the )?(?:authenticated|active|logged-in) profile",
+     UNIVERSAL),
+    # "a network connection" is the rule's own example; "network
+    # access" is the title of the guide these sections link to.
+    (r"an? (?:working |stable )?(?:network|internet) connection",
+     UNIVERSAL),
+    (r"an? (?:supported |working |unix |posix )?shell"
+     r"(?! variable| session| script| prompt| function)", UNIVERSAL),
+    (r"an? (?:pgedge |starfleet )?account\b", UNIVERSAL),
+    (r"(?:logged|signed|log|sign) (?:in|on)", UNIVERSAL),
+]
+
+
+def compile_rules(rules):
+    return [(re.compile(r"(?<![\w-])" + pat.replace(" ", r"\s+") +
                         r"(?![\w-])", re.I), advice)
-            for pat, advice in NAMED]
+            for pat, advice in rules]
+
+
+NAMED_RE = compile_rules(NAMED + PRECONDITION)
+SECTION_RE = compile_rules(SECTION_ONLY)
 
 TICS = ["actually", "critical", "matters", "exactly", "rather than",
         "at scale"]
@@ -267,7 +324,7 @@ PARAGRAPH_MASKS = [
 ]
 
 
-def named(lines):
+def named(lines, rules=None, tics=None):
     """Named words and tics over the checked lines, across line breaks.
 
     lines is a list of (line number, raw text). Consecutive lines of one
@@ -301,13 +358,20 @@ def named(lines):
         line_start, n = max(s for s in starts if s[0] <= offset)
         return n, offset - line_start + 1
 
-    found = []
-    for rx, advice in NAMED_RE:
+    found, spans = [], []
+    for rx, advice in (NAMED_RE if rules is None else rules):
         for m in rx.finditer(joined):
-            n, col = where(m.start())
-            word = " ".join(m.group().split())
-            found.append((n, col, f"\"{word}\": {advice}"))
-    for tic in TICS:
+            spans.append((m.start(), m.end(), advice))
+    # Two rules matching one stretch of text ("you need to be logged
+    # in" and "be logged in") is one finding, the longer one.
+    for start, end, advice in spans:
+        if any(s <= start and end <= e and (s, e) != (start, end)
+               and a == advice for s, e, a in spans):
+            continue
+        n, col = where(start)
+        word = " ".join(joined[start:end].split())
+        found.append((n, col, f"\"{word}\": {advice}"))
+    for tic in (TICS if tics is None else tics):
         rx = re.compile(r"(?<![\w-])" + tic.replace(" ", r"\s+") +
                         r"(?![\w-])", re.I)
         hits = list(rx.finditer(joined))
@@ -316,6 +380,27 @@ def named(lines):
             found.append((n, col, f"\"{tic}\" {len(hits)} times on the "
                                   f"page, more than {TIC_LIMIT}"))
     return found
+
+
+def sections(lines):
+    """Split the checked lines into Before You Start sections.
+
+    Returns (heading line number, [(n, raw), ...] body) per section
+    whose heading SECTION_HEADING_RE matches. The body runs to the next
+    heading of any level. The lines are the checked ones, so a fence or
+    an indented command inside the section is already gone from it.
+    """
+    out, current = [], None
+    for n, raw in lines:
+        if re.match(r"^\s*#{1,6}\s+\S", raw):
+            current = None
+            if SECTION_HEADING_RE.match(raw):
+                current = (n, [])
+                out.append(current)
+            continue
+        if current is not None:
+            current[1].append((n, raw))
+    return out
 
 
 def check(text):
@@ -357,6 +442,12 @@ def check(text):
                              f"sentence opens on {m.group(1)}, a "
                              f"complete sentence of its own"))
     findings.extend(named(checked))
+    for heading, body in sections(checked):
+        if not any(raw.strip() for _, raw in body):
+            findings.append((heading, 1, "Before You Start is empty: "
+                                         "carry no section"))
+            continue
+        findings.extend(named(body, rules=SECTION_RE, tics=()))
     findings.sort()
     if fence:
         findings.append((fence_line, 1, "fence never closes, so nothing "

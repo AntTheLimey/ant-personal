@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.6] — 2026-09-18
+
+### Added
+
+- **`check-mechanics.py` gates the Before You Start rule** (#14). A
+  precondition true of every page is a finding: the login statement
+  in any of its wordings ("you need to be logged in", "you need an
+  authenticated profile", "creates the profile every command below
+  uses") anywhere on the page, and, inside a Before You Start or
+  Prerequisites section, a profile, a network connection, a shell, an
+  account, or an empty section. Matched by the sentence, not the
+  heading, since six of the pages that carried it stated it in an
+  unheaded opening paragraph. Measured against pgedge-cli's docs as
+  they stood before pgEdge/pgedge-cli#520: 19 pages carried the
+  statement and the gate flags all 19 (#520 touched two more for
+  other reasons); on current `main` and on the five shipped skills it
+  flags nothing, and the other four checks' 208 findings on those 21
+  pages are byte-identical between the old script and this one. "Authenticate with" is deliberately not
+  matched: it is the generated `auth login` Short text on the
+  reference page.
+- Two rules matching one stretch of text ("you need to be logged in"
+  and "be logged in") now report once, as the longer match.
+
+### Changed
+
+- **`product-vocabulary.md` no longer lists branching as unreleased.**
+  pgEdge/pgedge-cli#523 shipped the `database branch` commands and
+  their reference page, and #525 the skill workflows, so the negative
+  the 1.4.5 review-trigger note asked writers to re-check had gone
+  stale within a day. Read replicas stay on the list.
+
 ## [1.4.5] — 2026-09-17
 
 ### Fixed

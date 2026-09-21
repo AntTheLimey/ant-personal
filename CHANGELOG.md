@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.8] — 2026-09-21
+
+### Changed
+
+- **Cold read no longer follows a page's outbound links** (#18). In
+  the 2026-09-21 restyle run the cold read was the largest single
+  spend, and 18 of them running in parallel had to be killed; on a hub
+  page that meant five to eight extra pages fetched for a check whose
+  job is only to find where a reader of the page itself gets lost. It
+  now reads the page and `style-standard.md` alone, and reports a link
+  the reader needs to act on as an unanswered question instead of
+  following it.
+- **A restyle keeps its meaning check, and now runs it before the cold
+  read instead of in parallel** (#19). Measured across five completed
+  restyles, the meaning check caught two real defects — a flattened
+  field name and a register slip that carried a fact — at roughly a
+  third of the cold read's cost, a rate no cheaper substitute (a
+  writer's own read-back, a numeric/condition/hazard gate, or a
+  per-batch check) would have reliably matched. Running it first means
+  the cold read only ever reads text the meaning check has already
+  settled, instead of reading a draft that a wrong-fact fix is about
+  to change.
+
 ## [1.4.7] — 2026-09-18
 
 ### Added

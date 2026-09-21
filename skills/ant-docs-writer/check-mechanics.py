@@ -24,8 +24,9 @@ last is a rule three writers loaded and none applied:
   crosses two sentence ends before reaching the verb.
 - A word or phrase the rules name as banned: the banned words, the
   named idioms and hedges, the register swaps, the command verbs, the
-  product and interface nouns, and the signposting to delete on sight.
-  Matched across line breaks. Each finding names the replacement.
+  product and interface nouns, the signposting to delete on sight, and
+  a shorthand standing in for a technical thing's full name. Matched
+  across line breaks. Each finding names the replacement.
 - Accumulation: more than two of "actually", "critical", "matters",
   "exactly", "rather than" or "at scale" on one page.
 - A precondition true of every page. Anywhere on the page: "you need
@@ -181,6 +182,10 @@ NAMED = [
     (r"(?:can|could|will|may|might) \w+ more of them",
      "register, name what there is more of"),
     (r"verbs?", "use \"command\""),
+    # Not "exit status N": "status" between "exit" and the number means
+    # the full name is already there. A quoted or coded literal such as
+    # `exit 1` or "exit 1" is masked before this ever runs.
+    (r"exits? \d+", "shorthand, use \"exit status N\""),
     (r"poll(?:s|ed|ing)?", "jargon, write \"run X until Y\""),
     (r"query an? command", "you run a command"),
     (r"hit an? endpoint", "jargon"),

@@ -7,16 +7,21 @@ Loaded by every job.
 | Job | Reviews |
 |---|---|
 | fix | Correctness review of the changed claims only. No cold read. |
-| restyle | Meaning check and cold read, in parallel. |
-| restructure | Meaning check and cold read, in parallel. |
+| restyle | Meaning check, then cold read once its findings are fixed. |
+| restructure | Meaning check, then cold read once its findings are fixed. |
 | overhaul | Correctness review and cold read, in parallel. Screenshot check where a page states what a screen shows and an image is available. |
 | new page | Correctness review and cold read, in parallel. Screenshot check where a page states what a screen shows and an image is available. |
 
 Each review is performed by someone other than the writer, after the
-draft exists, since a writer cannot be their own cold reader. Run both
-reviews of a pair even on a small change, since each finds defects the
-other would not; a fix runs one review only, covering every claim it
-changed. Run the screenshot check
+draft exists, since a writer cannot be their own cold reader. Run
+every review a job gets, even on a small change, since each finds
+defects the other would not; a fix runs one review only, covering
+every claim it changed. On restyle and restructure, run the meaning
+check to completion and fix what it found before dispatching the
+cold read: the meaning check is the cheaper of the two, and a wrong
+fact it finds changes the very sentence a parallel cold read would
+be reading, wasting that read. On overhaul and new page, correctness
+review and cold read still run in parallel. Run the screenshot check
 wherever it applies.
 
 ## Correctness review
@@ -47,8 +52,9 @@ The meaning check never comments on style. Its findings are wrong-fact
 findings, owned the same way a correctness reviewer's are.
 
 Run it as a separate agent on every restyle, not folded into the
-writer's own read-back or batched across pages. Measured on 2026-09-21
-across five completed restyles, it found one real fact regression
+writer's own read-back or batched across pages, and before the cold
+read is dispatched. Measured on 2026-09-21 across five completed
+restyles, it found one real fact regression
 (byoc/provision.md, a flattened field name) and one register slip that
 carried a fact (managed/connect-an-application.md) — two catches in
 five restyles, at roughly a third of the cold read's cost. Neither
@@ -65,7 +71,9 @@ Run it yourself before calling the page done, on every job that gets
 one. Do not defer it as a recommendation and do not wait to be asked;
 never skip it on a job that gets one. Where a job gets a cold read, it
 is the only check that catches an ordering defect, since every other
-check is applied by someone who knows the page's purpose.
+check is applied by someone who knows the page's purpose. On a restyle
+and a restructure, dispatch it only once the meaning check's findings
+are fixed, so it always reads settled text.
 
 Give the cold-read agent the page and style-standard.md, handed over
 unchanged, and nothing else. The reviewer gets no repository context
@@ -123,12 +131,19 @@ one finding at a time, which is the reading that makes every omission
 look like a gap. Taking all of them is how a page fills back up with
 the fluff the last pass removed.
 
-Apply a review's findings as soon as it returns, then the second
-review's findings when they arrive, all within one fix round. Where
-both reviews name the same sentence, apply the fact-bearing finding
-(meaning check or correctness review) first. Run the gates once, after
-both reviews' findings are applied. A second review round happens only
-when the first found a wrong fact or a defect in the work itself.
+On an overhaul and a new page, apply each review's findings as soon
+as it returns; where both name the same sentence, apply the
+fact-bearing finding (correctness review) first. On a restyle and a
+restructure, there is nothing to arrive out of order: apply the
+meaning check's findings in full before the cold read is even
+dispatched, so the cold reader only ever sees text the meaning check
+has already settled. Run the gates once, after every review for the
+job has returned and its findings are applied. A second review round
+happens only when a review found a wrong fact or a defect in the work
+itself — on a restyle and a restructure that means re-running the
+meaning check, since the cold read's findings (guess, unanswered
+question, would do wrong, breaks the standard) are never wrong-fact
+findings and so never compel one on their own.
 
 Fix what a cold read found, then report what it found. A reported and
 unactioned finding is worse than none.

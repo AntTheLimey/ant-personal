@@ -46,6 +46,19 @@ expected; the check confirms only that the move carried its facts.
 The meaning check never comments on style. Its findings are wrong-fact
 findings, owned the same way a correctness reviewer's are.
 
+Run it as a separate agent on every restyle, not folded into the
+writer's own read-back or batched across pages. Measured on 2026-09-21
+across five completed restyles, it found one real fact regression
+(byoc/provision.md, a flattened field name) and one register slip that
+carried a fact (managed/connect-an-application.md) — two catches in
+five restyles, at roughly a third of the cold read's cost. Neither
+catch would reliably survive a cheaper substitute: the register slip
+touched no number, condition or hazard, so gating the check on those
+sentence types would have let it through, and a check done by the
+writer who made the change is not independent of the change. At this
+cost, a 2-in-5 real-defect rate is worth keeping as a standing,
+per-page, separately-agented check.
+
 ## Cold read
 
 Run it yourself before calling the page done, on every job that gets
@@ -54,14 +67,20 @@ never skip it on a job that gets one. Where a job gets a cold read, it
 is the only check that catches an ordering defect, since every other
 check is applied by someone who knows the page's purpose.
 
-Give the cold-read agent the page, the pages it links to, and
-style-standard.md, handed over unchanged, and nothing else. The
-reviewer gets no repository context at all and reads as the customer.
+Give the cold-read agent the page and style-standard.md, handed over
+unchanged, and nothing else. The reviewer gets no repository context
+at all and reads as the customer. The page's links are not the cold
+reader's job: whether a linked page answers the question it points to
+is that page's own review, not this one's. Where a sentence sends the
+reader to a link for something they need to act, the reviewer reports
+it as an unanswered question and does not follow it.
 
 Dispatch prompt:
 
 > You have never seen this product. Read only the page at
-> `<path>`, the pages it links to, and the attached style standard.
+> `<path>` and the attached style standard. Do not follow any links
+> on the page; where a link is the only way to act on something the
+> page tells you, report it as an unanswered question instead.
 > Record any belief you infer rather than read as a guess. Report
 > where you got lost, what you could not type, where the page breaks
 > the attached standard, and what you would search the web for

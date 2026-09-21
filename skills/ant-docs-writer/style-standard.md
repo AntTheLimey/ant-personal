@@ -59,6 +59,10 @@ pressure.
 - Say "command", never "verb".
 - Choose a verb by its literal sense, not an idiomatic one that
   contradicts the action: a trial "provides" a size, not "covers" it.
+  This governs a feature's own behavior, not what a document explains;
+  "the [guide] covers [topic]" is the fixed verb for a linked
+  document's content (see the object table) and is not a violation of
+  this rule.
 - Prefer the precise verb over the general one: "retains", not
   "keeps"; "navigates", not "moves".
 - A control named in prose takes its verb ("selecting Back"), never a
@@ -71,7 +75,17 @@ pressure.
   | Page or dialog | open |
   | Control | select |
   | Value | read |
-  | Flag | pass, sets a value |
+  | Flag | pass |
+  | Document (what it explains) | covers |
+
+  "Pass" governs the user's own action ("pass `--role` to
+  `rotate-password`"). It does not cover a command naming what it
+  accepts as an argument: "`[Command]` takes `[Flag]`" ("`cluster
+  create` takes a `--cloud-account-id`") describes the command's
+  interface, not a user action or a flag setting a value, and is not
+  a violation of this table. Where a flag itself is the grammatical
+  subject taking a value, use "sets": "`--format` sets `uri`", never
+  "`--format` takes `uri`".
 
 - Write "run X until Y" for repeated reading. "Poll" is jargon for
   every asynchronous procedure and is not a fixed verb for any one

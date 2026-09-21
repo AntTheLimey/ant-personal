@@ -83,12 +83,26 @@ is that page's own review, not this one's. Where a sentence sends the
 reader to a link for something they need to act, the reviewer reports
 it as an unanswered question and does not follow it.
 
+Where a job is working a doc set (several pages in one restyle,
+restructure or overhaul run) and a prior page's cold read has already
+surfaced a cross-page pattern that is filed as its own tracked issue,
+carry that issue forward to every later dispatch in the run as a known
+finding: name it in one line the reviewer can match against what it
+would otherwise find. This does not exempt any page from its own cold
+read; it stops the same already-filed defect from being independently
+rediscovered, and the orchestrator from re-verifying it, on every page
+that repeats it.
+
 Dispatch prompt:
 
 > You have never seen this product. Read only the page at
 > `<path>` and the attached style standard. Do not follow any links
 > on the page; where a link is the only way to act on something the
 > page tells you, report it as an unanswered question instead.
+> [If the run has known findings:] The following are already filed as
+> cross-page issues and do not need rediscovering: `<known findings,
+> one per line, by their filed reference>`. Report an instance of one
+> only if this page's own fix should happen now; otherwise skip it.
 > Record any belief you infer rather than read as a guess. Report
 > where you got lost, what you could not type, where the page breaks
 > the attached standard, and what you would search the web for

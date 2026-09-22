@@ -87,8 +87,8 @@ Runs on the draft on every job. Catches:
 - A precondition true of every page: the login statement in any of
   its wordings, anywhere on the page; and, inside a Before You Start
   or Prerequisites section, a profile, a network connection, a shell,
-  an account, or nothing at all. This is the writing.md rule that no
-  writer applied on pgEdge/pgedge-cli#520, so it is checked here
+  an account, or nothing at all. This is the writing.md rule that a
+  writer reliably loads and still misses, so it is checked here
   rather than trusted to a reader. The fix is deletion, and a section
   left empty by it goes too.
 

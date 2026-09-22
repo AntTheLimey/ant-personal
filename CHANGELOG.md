@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.9] — 2026-09-22
+
+### Changed
+
+- **Meaning check is a self-read, not a dispatched agent** (#26).
+  1.4.8 kept it as a separate agent on a five-restyle sample where it
+  found two real defects (a flattened field name, a register slip
+  carrying a fact) at roughly a third of the cold read's cost. A later
+  16-page batch reversed that: the same agent, dispatched once and
+  measured, cost 74,356 tokens and found nothing, while the writer
+  reading the diff themselves — already happening ad hoc on the
+  batch's other pages — caught that batch's one real regression (a
+  wrong flag name). Both real defects across both samples were a
+  same-length wrong value swapped for a right one, which a
+  size-mismatch script heuristic would not reliably flag, so the fix
+  is doing the read yourself rather than building a cheaper automated
+  stand-in for it.
+- **Cold read carries an already-filed, cross-page finding forward**
+  instead of rediscovering it on every page of a doc-set run (#22). A
+  pattern flagged once and tracked as its own issue is named in later
+  dispatches within the same run so it isn't independently
+  re-derived, at full dispatch cost, on every page that repeats it.
+- **The Verbs table's ambiguous "Flag" row is split** (#23). One row
+  covering two constructions ("pass" and "sets a value") produced
+  false positives against an established, pervasive convention this
+  doc set already uses ("`[Command]` takes `[Flag]`") and against
+  "`[guide]` covers `[topic]`" (misread as the provides-not-covers
+  idiom rule, which governs a feature's own behavior, not a
+  document's content). Both are now named as explicit non-violations.
+- **`check-mechanics.py` gates the "exit N" shorthand** (#25).
+  style-standard.md already named the rule ("exit status N", not
+  "exit N"); a cold read was hand-finding it repeatedly at full agent
+  cost. Added as a `NAMED` entry, the same way "verb" -> "command"
+  already is.
+- **Removed internal history from the skill's own instruction files.**
+  `writing.md` tells a writer never to leave a page carrying "no
+  issue/PR numbers... dates... measured... attempt counts"; several of
+  the skill's own operating files (`style-standard.md`,
+  `product-vocabulary.md`, `gates.md`, `facts.md`, `reviews.md`,
+  `check-mechanics.py`, `check-ledger.py`, `check-sources.py`) were not
+  holding themselves to that rule, carrying dated measurements, issue
+  numbers, page names and incident narratives inline in files loaded
+  on every job. Cut down to the current rule; the evidence for each
+  one is in this changelog instead.
+
 ## [1.4.8] — 2026-09-21
 
 ### Changed

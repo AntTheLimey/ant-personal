@@ -115,8 +115,8 @@ first.
 
 The writer never reads the old page, not once and not for reference;
 read the ledger instead. Filter the excluded old page out of every
-glob search, not only avoid opening it directly: two writers in one
-run were exposed to it exactly that way.
+glob search too, not only avoid opening it directly: a search that
+returns it is exposure just the same.
 
 An entry is three fragment lines: a note under about 15 words, the
 source file:line, and a status:

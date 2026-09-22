@@ -3,14 +3,14 @@
 
     <skill>/check-mechanics.py <page.md> [<page.md> ...]
 
-Five checks. The first two are defects no cold reader caught in 18
-reps; the next two are the words and constructions style-standard.md
-and writing.md name, which a cold reader otherwise has to find; the
-last is a rule three writers loaded and none applied:
+Five checks. The first two are mechanical defects a cold read is bad
+at catching; the next two are the words and constructions
+style-standard.md and writing.md name, which a cold reader otherwise
+has to find by eye; the last is a precondition rule easy to load and
+still miss:
 
 - British spelling. pgEdge documentation is US English, set by the
-  public docs repository (behavior 34:2, color 43:1, initialize 17:0,
-  measured 2026-09-18); a docset that reads British is the defect.
+  public docs repository; a docset that reads British is the defect.
   The check is a word list, not a dictionary, so it catches the
   listed forms and nothing else. Headings, image alt text and table cells are checked. A step's
   indented prose is checked too, but an indented code block is not,
@@ -214,12 +214,10 @@ NAMED = [
     (r"we", "do not write \"we\""),
 ]
 
-# A precondition true of every page, stated anywhere on it. These are
-# the sentences pgEdge/pgedge-cli#520 removed from 21 pages after the
-# rule in writing.md, loaded on every job, produced no edit and no
-# report three times out of three (ant-personal#14). The login command
-# itself sits in inline code, so it is masked; what these match is the
-# prose around it.
+# A precondition true of every page, stated anywhere on it: the
+# writing.md rule a writer reliably loads and still doesn't apply. The
+# login command itself sits in inline code, so it is masked; what
+# these match is the prose around it.
 UNIVERSAL = "universal precondition, true of every page: delete it"
 PRECONDITION = [
     # The subject is "you": "the role must be logged in to the source"

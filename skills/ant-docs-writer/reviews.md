@@ -52,21 +52,13 @@ Fix what you find immediately. There is no report to hand off and
 nothing to reconcile against another review, since nothing else has
 read the page yet.
 
-This replaces the separate-agent version 1.4.8 shipped. Measured on
-2026-09-21 across a five-restyle sample, that agent found two real
-defects (a flattened field name, a register slip carrying a fact) at
-roughly a third of the cold read's cost — enough, at the time, to keep
-paying for it. A later 16-page batch changed the answer: the same
-agent, dispatched once and measured, cost 74,356 tokens and found
-nothing, while reading the diff yourself, done on the batch's other
-pages, is what caught that batch's one real regression (a wrong flag
-name). Both real defects found across both samples were a same-length
-wrong value swapped for a right one — not a size mismatch a cheap
-script could reliably flag, but exactly the kind of thing a careful
-read of the diff catches. Doing it yourself costs nothing beyond the
-diff you already produced; paying an agent to independently re-derive
-the same read has not, on this evidence, found anything the self-read
-would have missed.
+Do this yourself rather than dispatching an agent to independently
+re-read both versions: you already hold both in context from writing
+the reword, and the real defects this check exists to catch are a
+same-length wrong value swapped for a right one — not a size mismatch
+a cheap script could reliably flag, but exactly the kind of thing a
+careful read of the diff catches. See CHANGELOG.md for the evidence
+behind this call.
 
 ## Cold read
 

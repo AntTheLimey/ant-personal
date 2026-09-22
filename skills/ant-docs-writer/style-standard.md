@@ -95,8 +95,7 @@ pressure.
 
 - pgEdge documentation is US English: behavior, color, initialize,
   center, license, catalog. The standard is set by the public docs
-  repository, measured 2026-09-18 at behavior 34 to 2, color 43 to 1,
-  initialize 17 to 0, center 8 to 0.
+  repository.
 - A page written in British spelling is the defect, not the rule. Do
   not read the page you were handed, or its neighbors, as evidence
   that the standard is British.

@@ -2,13 +2,10 @@
 """Fail a fact ledger that carries the source page's phrasing.
 
 A ledger exists to strip the old page's prose and keep only its facts.
-The first one written for this experiment shared 143 five-word
-sequences with the page it extracted, so every rewrite built from it
-inherited the page's constructions — including three writers under an
-explicit instruction never to carry a phrasing over. They could not
-obey: nothing told them which phrases were inherited.
-
-This is the gate that would have caught it.
+A ledger that still shares a run of the source's own wording passes
+that phrasing on to every rewrite built from it, invisibly: nothing
+else tells a writer which of the ledger's own words were inherited
+rather than chosen.
 
     <skill>/check-ledger.py <source.md> <ledger.md> [--n 5]
         [--allow accepted.txt]

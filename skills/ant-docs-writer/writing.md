@@ -5,7 +5,7 @@ Loaded by every job.
 ## Sentences
 
 - A step is 20 words at most; descriptive prose is 25 words at most.
-- Count words the STE way: a backticked or quoted span, a number, a
+- Count words the STE way: a backticked/quoted span, a number, a
   number-with-unit, an abbreviation, a hyphenated word and a
   parenthetical each count as one word.
 - The caps apply per prose sentence: bullets, indented text and
@@ -13,38 +13,38 @@ Loaded by every job.
 - One instruction per sentence, unless two actions happen at the same
   time. "Remove and discard the old spec" is one action in two verbs;
   "Save the spec and run the restore" is two steps.
-- Put a condition first, then a comma, then the command.
+- Condition, comma, command — in that order.
 - Write in the active voice and the present tense.
 - Write an action as something done, not as a noun built from it:
   "configure the database", not "perform configuration of the
   database".
-- A passive verb that omits the actor is a defect whenever more than
-  one candidate could be the actor; name the actor. "The resource is
-  busy and should be retried" reads as though the resource is
-  retried; the operation is retried.
+- A passive verb omitting the actor is a defect whenever more than
+  one candidate could be the actor — name it. "The resource is busy
+  and should be retried" reads as the resource being retried; the
+  operation is.
 - Write in the singular: "the database", not "databases".
 - Do not use "it" unless the referent is in the same sentence; name
   the thing again.
 - Never omit a word to shorten a sentence, and never use a
-  contraction; omitting a word makes a sentence shorter and harder.
+  contraction: shorter that way is also harder.
 
 ## Reading signals
 
-Run `signals.py` on the draft before finishing, on a restyle,
-restructure, overhaul or new page, and report what it says. It strips
-code, tables and headings first and measures prose only.
+Run `signals.py` on the draft before finishing — restyle, restructure,
+overhaul, new page — and report what it says. It strips code, tables
+and headings first and measures prose only.
 
-- Reading ease has a floor of 58. Overhauled pages sit at 61-62
-  unaimed; the floor catches drift, not a page that is trying.
-- Grade (Flesch-Kincaid) has a ceiling of 8.0, close to a mean
-  sentence of 13 to 15 words. Treat it as a tripwire, not the thing
-  that makes a page readable: never a license to cut a clause
-  carrying a condition. Where a fact needs a long sentence, split the
-  sentence, not the fact.
-- Keep a causal connective ("because") rather than cutting it; do not
-  make the reader reconstruct why one sentence follows another.
-- The script's 20/25-word sentence-length count sets no exit status;
-  only the reading-ease floor and the grade ceiling fail a run.
+- Reading ease floor: 58. Overhauled pages sit at 61-62 unaimed; the
+  floor catches drift, not a page that's trying.
+- Grade (Flesch-Kincaid) ceiling: 8.0, ~13-15 word mean sentence. A
+  tripwire, not what makes a page readable — never cut a clause
+  carrying a condition to hit it; split the sentence, not the fact.
+- The 20/25-word sentence-length count sets no exit status;
+  informational only.
+
+Keep a causal connective ("because") rather than cutting it; do not
+make the reader reconstruct why one sentence follows another. Only
+the reading-ease floor and the grade ceiling fail a run.
 
 ## Punctuation
 
@@ -65,10 +65,10 @@ code, tables and headings first and measures prose only.
 
 ## Signposting
 
-- Delete a sentence that carries no information and only points at
-  information. Delete on sight: "this section covers", "it is worth
-  noting", "note that", "this page covers". State the product fact
-  instead; the page is never the subject of its own sentences.
+- Delete a sentence carrying no information, only pointing at some.
+  Delete on sight: "this section covers", "it is worth noting",
+  "note that", "this page covers". State the product fact instead;
+  the page is never the subject of its own sentences.
 - A structural lead-in introducing a list or table is not
   signposting: keep it to one clause naming what the list holds,
   ending in a colon.
@@ -87,8 +87,8 @@ code, tables and headings first and measures prose only.
 - Give information gradually; a sentence introducing three new nouns
   at once gets read twice.
 - Carry the thread between sentences by repeating the key noun as the
-  next sentence's subject, rather than reaching for a connective.
-  Four true sentences read as a list:
+  next sentence's subject, not a connective. Four true sentences read
+  as a list:
 
   > A restore rebuilds the named nodes from the repository. Everything
   > written since the backup is lost. The backup configuration is
@@ -105,10 +105,9 @@ code, tables and headings first and measures prose only.
 
 - Every page opens with a sentence; a gerund or noun-phrase fragment
   does not count, however long it runs.
-- The opening states what the page does, or what has gone wrong, and
-  defines the three or four terms the page leans on, one sentence
-  each, as facts about the product, never as an announcement about
-  the page.
+- The opening states what the page does, or what's gone wrong, and
+  defines the page's three or four leaned-on terms, one sentence
+  each, as product facts — never as an announcement about the page.
 - Say what the reader can do before what the product cannot; an
   opening built from things the product doesn't do gives nothing to
   act on.
@@ -122,36 +121,39 @@ code, tables and headings first and measures prose only.
   inside a note makes it a step, so convert it.
 - A limit, tolerance or expected result of a step goes in the step
   itself, right after the action, never in a separate note.
-- A step whose point is not obvious carries its own reason, in the
-  step, especially where skipping it is unrecoverable; a reader who
-  has already skipped it gets nothing from a reason parked elsewhere.
-- Numbered lists are for sequences only; steps that work in any order
-  are bullets. Number steps in true sequence, not repeated "1.". A run
-  of steps stays a numbered list, not a run of headings. The exception
-  is a lookup list (symptoms, error messages, states the reader scans
-  to find their case): never number it, and give each entry its own
-  `###` heading instead of a bullet.
+- A step whose point isn't obvious carries its own reason, in the
+  step — especially where skipping it is unrecoverable, since a
+  reader who's already skipped it gets nothing from a reason parked
+  elsewhere.
+- Numbered lists are for sequences only; order-independent steps are
+  bullets. Number steps in true sequence, not repeated "1.": a run of
+  steps stays a numbered list, not headings. Exception: a lookup list
+  (symptoms, error messages, states the reader scans for their case)
+  is never numbered — give each entry its own `###` heading, not a
+  bullet.
 - Indent everything belonging to a numbered step by four spaces.
-- An indented block under a bullet reads as a note, and the content
-  checklist (shape.md) counts it as one; a bullet needing a second
-  sentence keeps it in the same paragraph. A bullet needing more than
-  prose is usually a step in disguise and should become one.
+- An indented block under a bullet reads as a note, and shape.md's
+  checklist counts it as one; a bullet needing a second sentence
+  keeps it in the same paragraph. A bullet needing more than prose is
+  usually a step in disguise — make it one.
 - "Before You Start" (or "Prerequisites") holds only entries specific
-  to this page: a value the reader must have, with its producing
-  command or screen (a database ID and the backup ID it restores from
-  are entries); a task-specific failure condition; a reachable
-  irreversible action; and, on a console page, the starting screen and
-  the route to it.
+  to this page:
+  - A value the reader must have, with its producing command or
+    screen (a database ID and the backup ID it restores from are
+    entries).
+  - A task-specific failure condition.
+  - A reachable irreversible action.
+  - On a console page: the starting screen and the route to it.
 - An entry true of every page (an authenticated profile, a supported
-  shell, a network connection, an account) does not belong there. If
-  nothing page-specific survives, carry no Before You Start section;
-  an empty one costs attention and teaches the heading is skippable. A
+  shell, a network connection, an account) doesn't belong there.
+  Nothing page-specific survives → carry no section: an empty one
+  costs attention and teaches the heading is skippable. A
   page-specific precondition goes in at the point it was discovered,
   so a reader meeting the list has met every condition the page can
   predict.
-- A step whose command changes something says so in that same step,
-  not in an opening paragraph read earlier. Do not print a destructive
-  flag in a copyable command; show it running interactively, prompt
+- A step whose command changes something says so in that step, not
+  an opening paragraph read earlier. Don't print a destructive flag
+  in a copyable command — show it running interactively, prompt
   intact, and describe the skipping flag in the text. The scripted
   (flag-included) form belongs on the automation page, not the
   interactive procedure.
@@ -162,35 +164,34 @@ code, tables and headings first and measures prose only.
 
 ## Hazards
 
-- A hazard is written in the same voice as the rest of the page; do
-  not harden the register because the stakes rose. State the fact of
-  what silently goes wrong, the strongest hazard sentence a page can
-  carry, then stop; do not follow it with an imperative that repeats
+- A hazard is written in the same voice as the rest of the page —
+  don't harden the register because the stakes rose. State the fact
+  of what silently goes wrong, the strongest hazard sentence a page
+  can carry, then stop; don't follow it with an imperative repeating
   the same fact.
-- Ration hazard marking to one or two per page, only for outcomes that
-  are genuinely unrecoverable; a mistake the reader can undo, repeat
-  or retry needs no marking. A page with six marked hazards has none:
-  the reader learns the marking means nothing.
-- A step preventing an unrecoverable outcome states the consequence in
-  the step itself: what the reader loses and when they find out.
-- A marked hazard names, in the third person, the shortcut the reader
-  would take instead and its cost, naming the action and object in
-  full, and sits on its own line: use the repository's admonition
-  rendering, or a short line opening with what is lost.
+- Ration hazard marking to one or two per page, only for outcomes
+  that are genuinely unrecoverable; a mistake the reader can undo,
+  repeat or retry needs no marking. A page with six marked hazards
+  has none: the reader learns the marking means nothing.
+- A step preventing an unrecoverable outcome states the consequence
+  in the step itself: what the reader loses and when they find out.
+- A marked hazard names, third person, the shortcut the reader would
+  take instead and its cost — action and object in full — on its own
+  line: the repository's admonition rendering, or a short line
+  opening with what is lost.
 - Every irreversible action the reader can reach before its guard
   belongs in Before You Start, named individually; naming one and
   omitting others reads as permission for the rest.
-- On a restyle or restructure, hazard placement reaches only a hazard
+- Restyle, restructure: hazard placement reaches only a hazard
   already stated on the page. Moving a stated hazard into Before You
-  Start is the one ordering exception a restyle may make, named in the
-  hand-back. Neither job invents a new hazard with no existing
-  statement on the page; report a missing one as a gap in the
-  hand-back instead.
-- Ask what the reader will do instead of the written step, and address
-  that instinct directly, not only the step as written. Place a
-  warning where the reader's instinct fires, not only where the topic
-  lives; write it in both places if they differ. This overrides
-  "state a caveat once per section" below.
+  Start is the one ordering exception a restyle may make, named in
+  the hand-back. Neither job invents a new hazard with no existing
+  statement on the page; report a missing one as a gap instead.
+- Ask what the reader will do instead of the written step, and
+  address that instinct directly, not only the step as written. Place
+  a warning where the instinct fires, not only where the topic lives
+  — write it in both places if they differ. Overrides "state a
+  caveat once per section" below.
 
 ## Format
 
@@ -220,15 +221,22 @@ code, tables and headings first and measures prose only.
 
 ## Code blocks and output
 
-- Introduce every code block with a sentence, ending in a colon, that
-  names the command and says what it does. Four forms introduce a
-  fenced block: a bare "**Example:**"; a qualified "**Example
-  (AWS):**"; prose ending in a colon; or a "**Step N:**" heading
-  covering its own fences. Never add a label after a colon that
-  already introduces the block.
-- Describe command output in prose; paste a block only where prose
-  cannot teach the shape, and then only text captured from a real
-  call, never composed or tidied by hand.
+Introduce every code block with a sentence, ending in a colon, that
+names the command and says what it does. Four forms introduce a
+fenced block:
+
+| Form | Example |
+|---|---|
+| Bare label | **Example:** |
+| Qualified label | **Example (AWS):** |
+| Prose ending in a colon | "Run this to restart the service:" |
+| Step heading covering its own fences | **Step 3:** |
+
+Never add a label after a colon that already introduces the block.
+
+Describe command output in prose; paste a block only where prose
+cannot teach the shape, and then only text captured from a real call,
+never composed or tidied by hand.
 
 ## Headings
 
@@ -274,10 +282,10 @@ order is necessary and not sufficient on its own.
   tooltip) is kept at matching confidence on every parallel surface.
 - Scope every claim to the exact command and module actually checked;
   the same sentence written generally is often false for a sibling.
-- A renamed heading must be grepped for and updated everywhere it is
-  quoted, including wrapped across a line break. Check the rename did
-  not orphan a "This" with no antecedent in the sentence below the old
-  heading.
+- A renamed heading must be grepped for and updated everywhere
+  quoted, including wrapped across a line break. Check the rename
+  didn't orphan a "This" with no antecedent in the sentence below the
+  old heading.
 - State a caveat once per section; three restatements read as a lab
   notebook. The instinct-placement rule above overrides this where
   the two conflict.
@@ -323,18 +331,16 @@ order is necessary and not sufficient on its own.
   an IDE) are fine. A migration page may name the source service it
   migrates from, on that page only.
 - A changelog entry describes the product, never the work done.
-- On a fix, an overhaul and a new page: sort every sentence by "would
-  the reader act wrong without this fact". Delete it if no. If yes,
-  keep the fact and cut everything propping it up: make the product
-  the subject, never the documentation, and state what the reader
-  sees, not what causes it. Cut a "so" clause from a sentence that
-  explains itself, and stop after one sentence. Delete a sentence the
-  reader would have assumed anyway, one restating a reason the page
-  already gives, or one it already carries.
-- On a restyle or restructure, only a restatement (the same fact
-  stated elsewhere on the page) sorts to delete. A fact stated once
-  is kept, and listed in the hand-back as a deletion candidate, never
-  cut.
+- Fix, overhaul, new page: sort every sentence by "would the reader
+  act wrong without this fact" — delete if no. If yes, keep the fact
+  and cut what props it up: product as subject, never the
+  documentation; what the reader sees, not what causes it. Cut a
+  self-explaining "so" clause, and stop after one sentence. Delete a
+  sentence the reader would have assumed anyway, or one restating a
+  reason the page already gives or already carries.
+- Restyle, restructure: only a restatement (the same fact stated
+  elsewhere on the page) sorts to delete. A fact stated once is kept,
+  and listed in the hand-back as a deletion candidate, never cut.
 - An absence claim ("no command deletes a backup") sorts to delete
   unless a reader would genuinely reach for the missing thing, such as
   "This CLI has no command that deletes a backup" or "`backup create`

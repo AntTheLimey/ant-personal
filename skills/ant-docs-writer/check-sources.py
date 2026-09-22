@@ -5,14 +5,9 @@
 
 An entry marked `st: V` asserts the claim was verified against
 source. A documentation page is not a source. It is evidence that a
-page says something, which is what `st: U` is for.
-
-This gate was written after a ledger passed the phrase gate at n=5
-and n=4 with 24 of its 55 entries marked V on the strength of another
-docs page — five of them on the strength of the very page the ledger
-had been extracted from. The builder had been told in its own
-dispatch that a sibling page is the weakest authority there is. The
-mark is self-assigned, so nothing contradicted it.
+page says something, which is what `st: U` is for. The mark is
+self-assigned when a ledger is built, so nothing else checks it
+without this gate.
 
 Generated reference pages under `docs/reference/` are exempt: they
 are produced from the cobra command tree and cannot drift from the

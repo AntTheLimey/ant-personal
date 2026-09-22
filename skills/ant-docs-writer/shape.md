@@ -18,9 +18,9 @@ reviews in reviews.md are the last gate.
      A destructive command prints its connection flag in the step
      anyway, because there it answers which tenant the command runs
      against, not whether the reader is authenticated.
-2. Name what the reader would do instead of the written step, and
-   say what it costs. A step naming no command also fails this item,
-   because the reader invents one.
+2. Name what the reader would do instead of the written step, and its
+   cost. A step naming no command fails this item too — the reader
+   invents one.
 3. Every placeholder gets a sentence naming the command or screen
    that produces its value.
 4. The page must work for a reader who did not create the resource:

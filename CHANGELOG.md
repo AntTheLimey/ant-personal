@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.10] — 2026-09-22
+
+### Changed
+
+- **Cold read is batched and moved to a cheaper model.** Previously
+  one dispatch per page, reloading style-standard.md from scratch
+  each time; a doc-set run now gets one dispatch per batch of up to 6
+  pages, read once in navigation order, with findings tagged by page
+  path. Dispatches on Haiku by default — a bounded, mechanical
+  match-against-a-style-guide task with no repository context to
+  reason over — escalating to Sonnet only where Haiku's output is
+  unreliable. Neither lever is locked to any measured number yet;
+  both need a real restyle batch to validate.
+- **Second compression pass on the skill's markdown**, after 1.4.9's
+  first pass only moved wording around instead of cutting it (a "see
+  CHANGELOG.md" pointer sentence was itself called out as the same
+  kind of filler). This pass converts prose mappings to tables and
+  arrows and cuts words while preserving every rule and its
+  disambiguating example. Measured word count, `skills/ant-docs-writer/*.md`:
+
+  | File | Before | After |
+  |---|---|---|
+  | reviews.md | 1441 | 1147 |
+  | style-standard.md | 1209 | 1079 |
+  | gates.md | 973 | 845 |
+  | facts.md | 1084 | 1004 |
+  | product-vocabulary.md | 860 | 804 |
+  | writing.md | 3065 | 2990 |
+  | shape.md | 695 | 693 |
+
+  Total 10,645 → 9,880 words (-7%) across the markdown files;
+  `SKILL.md`, `agent-pages.md` and `in-app-copy.md` were already
+  tight enough that no cut was worth making. `writing.md`'s cut is
+  the smallest of the group: its density is mostly inherent — one
+  rule per line, each with a disambiguating example — not padding.
+
 ## [1.4.9] — 2026-09-22
 
 ### Changed

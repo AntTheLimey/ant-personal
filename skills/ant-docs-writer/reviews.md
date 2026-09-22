@@ -6,152 +6,148 @@ Loaded by every job.
 
 | Job | Reviews |
 |---|---|
-| fix | Correctness review of the changed claims only. No cold read. |
-| restyle | Meaning check (you, against the diff), then cold read. |
-| restructure | Meaning check (you, against the diff), then cold read. |
-| overhaul | Correctness review and cold read, in parallel. Screenshot check where a page states what a screen shows and an image is available. |
-| new page | Correctness review and cold read, in parallel. Screenshot check where a page states what a screen shows and an image is available. |
+| fix | Correctness review, changed claims only |
+| restyle | Meaning check (self) → cold read |
+| restructure | Meaning check (self) → cold read |
+| overhaul | Correctness review + cold read (parallel) + screenshot check* |
+| new page | Correctness review + cold read (parallel) + screenshot check* |
 
-Every review but one is performed by someone other than the writer,
-after the draft exists, since a writer cannot be their own cold
-reader. The one exception is the meaning check: you run it yourself,
-against your own diff, before anything else touches the page. Run
-every review a job gets, even on a small change, since each finds
-defects the other would not; a fix runs one review only, covering
-every claim it changed. On restyle and restructure, do the meaning
-check and fix what it found before dispatching the cold read, so the
-cold reader always reads settled text. On overhaul and new page,
-correctness review and cold read still run in parallel. Run the
-screenshot check wherever it applies.
+*Screenshot check gates on both: an on-screen claim in the draft, and
+an available image of that screen.
+
+Run every review a job gets, even on a small change — each catches
+what the other doesn't. Meaning check is the one review you perform
+yourself; every other review is done by someone other than the
+writer, since a writer can't be their own cold reader.
 
 ## Correctness review
 
-The reviewer checks every claim on the page against its source, on an
-overhaul and a new page. Add a fact-list entry the moment a claim goes
-on the page, so the reviewer verifies against a record built alongside
-the draft. On a fix, an overhaul and a new page, a claim with no
-source beside it does not go on the page.
+Overhaul, new page: the reviewer checks every claim against its
+source. Add a fact-list entry the moment a claim is drafted, so the
+reviewer works from a record built alongside the page, not a re-read.
+Fix, overhaul, new page: a claim with no source beside it doesn't go
+on the page.
 
 ## Meaning check
 
-On a restyle and a restructure, read the word-diff between the old
-page and the new page yourself — no separate agent, before the cold
-read is dispatched, before you call the page done. Check for:
+Restyle, restructure: read the old-vs-new diff yourself, before
+dispatching the cold read, before calling the page done. No agent —
+you already hold both versions in context from writing the reword.
 
-- Every fact added, dropped or changed.
-- Every condition, number, scope or hazard that was weakened, widened
-  or lost.
-- Whether any section moved from where it stood in the old page.
+Check for:
 
-On a restyle, every moved section is a defect unless the hand-back
-names it under the one allowed ordering exception (moving a stated
-hazard into Before You Start). On a restructure, a moved section is
-expected; check only that the move carried its facts.
+| Subject | Change |
+|---|---|
+| Fact | added, dropped, or changed |
+| Condition, number, scope, hazard | weakened, widened, or lost |
+| Section | moved from where it stood in the old page |
 
-Fix what you find immediately. There is no report to hand off and
-nothing to reconcile against another review, since nothing else has
-read the page yet.
+Restyle: a moved section is a defect, except the one allowed move (a
+stated hazard into Before You Start) — name it in the hand-back.
+Restructure: a moved section is expected; check only that it carried
+its facts.
 
-Do this yourself rather than dispatching an agent to independently
-re-read both versions: you already hold both in context from writing
-the reword, and the real defects this check exists to catch are a
-same-length wrong value swapped for a right one — not a size mismatch
-a cheap script could reliably flag, but exactly the kind of thing a
-careful read of the diff catches. See CHANGELOG.md for the evidence
-behind this call.
+Fix what you find immediately — nothing else has read the page yet,
+so there's nothing to reconcile against.
+
+The failure mode that matters: a same-length wrong value swapped for
+a right one (a flag name, a field name), not a size mismatch a script
+could flag. That's what a careful diff read catches and a size-based
+check would miss.
 
 ## Cold read
 
-Run it yourself before calling the page done, on every job that gets
-one. Do not defer it as a recommendation and do not wait to be asked;
-never skip it on a job that gets one. Where a job gets a cold read, it
-is the only check that catches an ordering defect, since every other
-check is applied by someone who knows the page's purpose. On a restyle
-and a restructure, dispatch it only once your own meaning check is
-done and fixed, so it always reads settled text.
+The only check applied by someone with no idea what the page is
+for — the only one that catches an ordering defect. Never skip it,
+never defer it, on every job that gets one.
 
-Give the cold-read agent the page and style-standard.md, handed over
-unchanged, and nothing else. The reviewer gets no repository context
-at all and reads as the customer. The page's links are not the cold
-reader's job: whether a linked page answers the question it points to
-is that page's own review, not this one's. Where a sentence sends the
-reader to a link for something they need to act, the reviewer reports
-it as an unanswered question and does not follow it.
+Restyle, restructure: dispatch only once your own meaning check is
+fixed, so it always reads settled text.
 
-Where a job is working a doc set (several pages in one restyle,
-restructure or overhaul run) and a prior page's cold read has already
-surfaced a cross-page pattern that is filed as its own tracked issue,
-carry that issue forward to every later dispatch in the run as a known
-finding: name it in one line the reviewer can match against what it
-would otherwise find. This does not exempt any page from its own cold
-read; it stops the same already-filed defect from being independently
-rediscovered, and the orchestrator from re-verifying it, on every page
-that repeats it.
+**Batch it.** A doc-set run (several pages restyled, restructured or
+overhauled together) gets one cold-read dispatch per batch of up to 6
+pages, not one per page: load style-standard.md once, hand over the
+batch in the order a customer would navigate it, and read it once, in
+order, as that reader. A run longer than 6 pages is further batches
+of up to 6, each a fresh "never seen this product" read carrying
+nothing from the batch before it. Report findings tagged by page
+path.
+
+**Model.** Dispatch on Haiku by default — a bounded, mechanical
+match-against-a-style-guide task, with no repository context to
+reason over besides the batch and the standard. Escalate to Sonnet
+only where Haiku's output is unreliable (garbled format, missed
+finding kinds it was explicitly asked for).
+
+Give the reviewer the batch's pages and style-standard.md, unchanged,
+and nothing else — no repository context. The page's own links are
+someone else's job: whether a linked page answers what it points to
+is that page's review, not this one's. Where a sentence sends the
+reader to a link to act on something, report it as an unanswered
+question and don't follow it.
+
+Where a prior batch's cold read surfaced a cross-page pattern already
+filed as its own tracked issue, carry it forward into every later
+batch's dispatch as a known finding, named in one line. This doesn't
+exempt any page from its own read; it stops the same filed defect
+being independently rediscovered, and re-verified, batch after batch.
 
 Dispatch prompt:
 
-> You have never seen this product. Read only the page at
-> `<path>` and the attached style standard. Do not follow any links
-> on the page; where a link is the only way to act on something the
-> page tells you, report it as an unanswered question instead.
-> [If the run has known findings:] The following are already filed as
-> cross-page issues and do not need rediscovering: `<known findings,
-> one per line, by their filed reference>`. Report an instance of one
-> only if this page's own fix should happen now; otherwise skip it.
-> Record any belief you infer rather than read as a guess. Report
-> where you got lost, what you could not type, where the page breaks
-> the attached standard, and what you would search the web for
-> instead.
+> You have never seen this product. Read only these pages, in this
+> order, and the attached style standard: `<path list>`. Do not
+> follow a link off any of them; where a link is the only way to act
+> on something a page tells you, report it as an unanswered question
+> instead. [If known findings exist:] These are already filed as
+> cross-page issues and don't need rediscovering: `<known findings,
+> one per line, by their filed reference>` — report an instance only
+> if this page's own fix should happen now. Record any belief you
+> infer rather than read as a guess. Per page, report where you got
+> lost, what you could not type, where it breaks the attached
+> standard, and what you would search the web for instead.
 
-Report format: one line on task completion, then one line per
-finding giving the quoted text, the kind, and the matching detail,
-with the fields separated by "|". No cap, no summary, no praise.
-Finding kinds:
+Report format: one line on completion, then one line per finding —
+`path | quoted text | kind | detail`. No cap, no summary, no praise.
 
 - guess
 - unanswered question
-- would do wrong
+- would do wrong — matters most, since no other review produces it
 - breaks the standard
-
-A would-do-wrong finding is the one that matters most, since no other
-review produces it.
 
 ## Screenshot check
 
-Gated on two conditions together: an on-screen claim in the draft, and
-an available image of that screen. The writer dispatches a separate
-reviewer with image access to compare each on-screen claim against the
-screenshot and report every mismatch. Settle a mismatch against the
-product: correct the prose where the product agrees with the image,
-and flag the image for recapture where it agrees with the prose.
+Gated on an on-screen claim plus an available image of that screen.
+Dispatch a separate reviewer with image access to compare each claim
+against the screenshot and report every mismatch. Settle against the
+product, not either source alone: correct the prose where the product
+agrees with the image; flag the image for recapture where it agrees
+with the prose.
 
 ## Applying findings
 
-A wrong fact is the only finding a review can compel. Even then the
-reviewer does not write the correction; the writer decides how the
-right fact reaches the reader. Everything else a review says is a
-suggestion: take what improves the page and refuse the rest, naming
-the reason in the report. "The reader cannot act differently on this"
-and "this belongs to the page I link to" are complete reasons to
-refuse a finding.
+A wrong fact is the only finding a review can compel — and even then
+the reviewer doesn't write the correction, the writer decides how the
+right fact reaches the reader. Everything else is a suggestion: take
+what improves the page, refuse the rest, name the reason. "The reader
+can't act differently on this" and "this belongs to the page I link
+to" are complete reasons to refuse.
 
-Refusing is normal and often right. A review reads a page closely,
-one finding at a time, which is the reading that makes every omission
-look like a gap. Taking all of them is how a page fills back up with
-the fluff the last pass removed.
+Refusing is normal and often right. A review reads closely, one
+finding at a time — the reading that makes every omission look like a
+gap. Taking all of them is how a page fills back up with the fluff
+the last pass removed.
 
-On an overhaul and a new page, apply each review's findings as soon
-as it returns; where both name the same sentence, apply the
-fact-bearing finding (correctness review) first. On a restyle and a
-restructure, your own meaning check is already fixed before the cold
-read is even dispatched, so there is nothing from it left to apply;
-the cold read is the only review the job produces, and you apply its
-findings when it returns. Run the gates once, after the job's review
-has returned and its findings are applied. A second review round
-happens only when a review found a wrong fact or a defect in the work
-itself; the cold read's findings (guess, unanswered question, would do
-wrong, breaks the standard) are never wrong-fact findings and so never
-compel one on their own.
+Overhaul, new page: apply each review's findings as it returns; where
+both name the same sentence, apply the fact-bearing one
+(correctness review) first. Restyle, restructure: your meaning check
+is already fixed before the cold read is dispatched, so cold read is
+the only review left to apply. Run the gates once, after the job's
+reviews are applied.
+
+A second review round happens only when a review found a wrong fact
+or a defect in the work itself. Cold-read findings (guess, unanswered
+question, would do wrong, breaks the standard) are never wrong-fact
+findings, so never compel one alone.
 
 Fix what a cold read found, then report what it found. A reported and
 unactioned finding is worse than none.

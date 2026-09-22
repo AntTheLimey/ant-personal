@@ -5,44 +5,43 @@ Loaded by every job.
 Treat every word choice below as a settled decision to apply, not a
 preference to reopen or debate.
 
-A rule that says a feature does not exist is different: it is a
-negative, and a negative goes stale the moment the feature ships, with
-nothing to fail and warn a writer. Before repeating one of those
-claims (the missing certificate authority, an unreleased feature) on a
-new page, check it against the current product rather than taking
-this file's word for it.
+A rule saying a feature doesn't exist is different: a negative goes
+stale the moment the feature ships, with nothing to fail and warn a
+writer. Before repeating one (the missing certificate authority, an
+unreleased feature) on a new page, check it against the current
+product rather than this file.
 
 ## Product and architecture boundaries
 
 - Where the interface still renders the retired name "pgEdge Cloud",
   write the current name on the page and raise the stale string as a
   defect.
-- Cloud and Enterprise are separate stories and never appear on one
-  page. Cloud is the console, API and managed service, with no
-  on-prem, air-gapped, K8s or VM material. Enterprise is where
-  self-managed deployment and a customer-facing Control Plane live.
+- Cloud and Enterprise are separate stories, never on one page. Cloud:
+  console, API, managed service — no on-prem, air-gapped, K8s or VM
+  material. Enterprise: self-managed deployment, with a
+  customer-facing Control Plane.
 - The Control Plane never appears in Managed copy at all.
-- A command is code, not a name: type it exactly as spelled,
-  lowercase, without "pgEdge". The same holds for a repository name,
-  package name or configuration key.
+- A command is code, not a name: exact spelling, lowercase, no
+  "pgEdge" — same for a repository name, package name or
+  configuration key.
 - Write "Managed", never "PAYG", unless the on-screen badge itself
   reads PAYG, in which case quote the badge.
 
 ## Backups
 
 - Describe a backup kind by its outcome, never its mechanism: a "hot"
-  backup is fastest to restore from. A "durable" backup is kept apart
+  backup is fastest to restore from; a "durable" backup is kept apart
   from the database's own storage and is slower to restore.
 - Never use "volume", "object storage", "base backup", "snapshot", or
   a backup engine's name. Never state what a durable backup survives.
 
 ## Security and networking
 
-- The platform publishes no certificate authority through the CLI or
-  the API. Connections use `sslmode=require`, which checks neither
-  the server's certificate nor its host. Never write a recipe that
-  depends on a platform-issued certificate authority; the stricter
-  libpq modes are the client's own to add.
+- The platform publishes no certificate authority via CLI or API.
+  Connections use `sslmode=require`, which checks neither the
+  server's certificate nor its host. Never write a recipe depending
+  on a platform-issued CA — stricter libpq modes are the client's own
+  to add.
 - Managed databases have a source-IP allowlist, scoped separately per
   database and per deployed service. A page whose reader connects
   from outside says which address needs a rule.

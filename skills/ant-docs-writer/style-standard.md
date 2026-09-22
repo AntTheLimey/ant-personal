@@ -8,66 +8,59 @@ pressure.
 
 ## Register
 
-- Write complete, plain human sentences. Take facts only from the
-  given inputs; never carry over their phrasing, cadence or sentence
-  shape.
-- Name a technical thing by its full name, never a shorthand the
-  reader has to guess: "exit status 1", not "exit 1".
-- Use no idiom. A plain word exists: "matter", not "bites".
-- Use no conversational hedge or intensifier: "just", "simply", "of
-  course", "actually". "Simply" tells a stuck reader they should not
-  be stuck.
-- Give a thing no intent, memory or body; name what actually happens.
-  "Nothing your application holds needs changing" names no referent
-  and fails; "the connection string does not change, so the
-  application needs no edit" says the same thing about things that
-  exist. A record, response or field may still "hold" a value.
-- Prefer the plain formal word where two differ only in register:
-  "needs" not "wants", "shows" not "surfaces".
-- Write "when", not "once", to introduce a clause about time: "when
-  the restore completes". "Once" keeps its counting sense, as in
-  "the secret is returned once".
+Write complete, plain human sentences. Take facts only from the given
+inputs; never carry over their phrasing, cadence or sentence shape.
+
+| Say | Not | Why |
+|---|---|---|
+| exit status 1 | exit 1 | full name, never a shorthand |
+| matter | bites | no idiom |
+| needs | wants | plain over conversational |
+| shows | surfaces | plain over conversational |
+| when the restore completes | once the restore completes | "once" keeps its counting sense ("returned once") |
+
+- No hedge or intensifier: "just", "simply", "of course", "actually".
+  "Simply" tells a stuck reader they shouldn't be stuck.
+- Give a thing no intent, memory or body; name what happens. "Nothing
+  your application holds needs changing" has no referent; "the
+  connection string doesn't change, so the application needs no edit"
+  does. A record, response or field may still "hold" a value.
 - Formal means precise and unmarked, not longer.
-- Register rules bind every sentence in a rewrite, including phrasing
-  inherited from a ledger or the old page. Only a fix's no-style-touch
-  rule exempts untouched text.
-- "You" is allowed and usually correct. Never write "we" or "the
-  user" for the reader.
+- Register binds every sentence, including phrasing inherited from a
+  ledger or the old page — except a fix's untouched text.
+- "You" is fine and usually right. Never "we" or "the user" for the
+  reader.
 
 ## Vocabulary consistency
 
-- Fix one noun for one concept for the whole page, decided before
-  writing. A quoted product string using a different noun is not a
-  violation.
+- One fixed noun per concept per page, decided before writing; a
+  quoted product string using a different noun isn't a violation.
 - A quoted product string (button label, error message, field name,
-  status value) is reproduced exactly and is exempt from every
-  wording and vocabulary rule in this skill. A dialog really named
-  `Taking Pre-Restore Snapshot` is quoted with its wording intact,
-  even though prose around it uses the settled word for that action.
-  Quote it, or paraphrase it outside the quotation marks; never edit
-  inside it.
-- A page-wide vocabulary sweep is its own pull request, never folded
-  into a fix. A page commissioned for rewriting treats vocabulary as
-  part of that one change.
+  status value) is reproduced exactly, exempt from every
+  wording/vocabulary rule: quote it, or paraphrase outside the
+  quotes, never edit inside it. A dialog literally named `Taking
+  Pre-Restore Snapshot` keeps that wording quoted even while
+  surrounding prose uses the settled term for the action.
+- A vocabulary sweep is its own pull request, never folded into a
+  fix; a page commissioned for rewriting treats vocabulary as part of
+  that change.
 - Product truth outranks the one-noun rule: where one noun would drop
-  a claim, keep the claim and use two nouns.
-- Use one fixed wording for one repeated action. Do not vary the
-  phrasing across steps describing the same action.
+  a claim, use two and keep the claim.
+- One fixed wording per repeated action; don't vary phrasing across
+  steps describing it.
 
 ## Verbs
 
 - Say "command", never "verb".
 - Choose a verb by its literal sense, not an idiomatic one that
-  contradicts the action: a trial "provides" a size, not "covers" it.
-  This governs a feature's own behavior, not what a document explains;
-  "the [guide] covers [topic]" is the fixed verb for a linked
-  document's content (see the object table) and is not a violation of
-  this rule.
+  contradicts it: a trial "provides" a size, not "covers" it — this
+  governs a feature's own behavior, not a document's content ("the
+  guide covers X" is the fixed verb below, not a violation).
 - Prefer the precise verb over the general one: "retains", not
   "keeps"; "navigates", not "moves".
 - A control named in prose takes its verb ("selecting Back"), never a
   bare label standing for the action.
-- Use one fixed verb per kind of object:
+- One fixed verb per kind of object:
 
   | Object | Verb |
   |---|---|
@@ -78,18 +71,14 @@ pressure.
   | Flag | pass |
   | Document (what it explains) | covers |
 
-  "Pass" governs the user's own action ("pass `--role` to
-  `rotate-password`"). It does not cover a command naming what it
-  accepts as an argument: "`[Command]` takes `[Flag]`" ("`cluster
-  create` takes a `--cloud-account-id`") describes the command's
-  interface, not a user action or a flag setting a value, and is not
-  a violation of this table. Where a flag itself is the grammatical
-  subject taking a value, use "sets": "`--format` sets `uri`", never
-  "`--format` takes `uri`".
+  "Pass" is the user's own action ("pass `--role` to
+  `rotate-password`"). It doesn't cover a command naming its own
+  argument — "`cluster create` takes a `--cloud-account-id`"
+  describes the interface, not a violation — nor a flag as subject,
+  which uses "sets": "`--format` sets `uri`", never "takes".
 
 - Write "run X until Y" for repeated reading. "Poll" is jargon for
-  every asynchronous procedure and is not a fixed verb for any one
-  object.
+  every asynchronous procedure, not a fixed verb for any object.
 
 ## Spelling
 
@@ -155,7 +144,6 @@ pressure.
 - Limit any one accumulation word (actually, critical, matters,
   exactly, rather than, at scale) to two uses per page.
 
-A word list catches "leverage" and "seamless". It does not catch a
-shape repeated until it has a rhythm, and shapes survive across model
-generations after the vocabulary tells have gone. Read a draft once
-looking only at structure.
+A word list catches "leverage" and "seamless", not a shape repeated
+until it has a rhythm — and shapes outlast the vocabulary tells
+across model generations. Read a draft once for structure alone.

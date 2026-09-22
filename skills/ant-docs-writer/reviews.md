@@ -73,11 +73,13 @@ of up to 6, each a fresh "never seen this product" read carrying
 nothing from the batch before it. Report findings tagged by page
 path.
 
-**Model.** Dispatch on Haiku by default — a bounded, mechanical
-match-against-a-style-guide task, with no repository context to
-reason over besides the batch and the standard. Escalate to Sonnet
-only where Haiku's output is unreliable (garbled format, missed
-finding kinds it was explicitly asked for).
+Dispatch on the writer's own model tier or better; do not downgrade
+to save cost. Most of what check-mechanics.py already catches
+mechanically (spelling, banned words, verb-table matches) never
+reaches cold read — what's left is the would-do-wrong finding, which
+takes real reasoning about what an unfamiliar reader would
+misunderstand, and is harder, not easier, once a dispatch covers
+several pages at once.
 
 Give the reviewer the batch's pages and style-standard.md, unchanged,
 and nothing else — no repository context. The page's own links are

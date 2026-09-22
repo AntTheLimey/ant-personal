@@ -73,13 +73,13 @@ of up to 6, each a fresh "never seen this product" read carrying
 nothing from the batch before it. Report findings tagged by page
 path.
 
-Dispatch on the writer's own model tier or better; do not downgrade
-to save cost. Most of what check-mechanics.py already catches
-mechanically (spelling, banned words, verb-table matches) never
-reaches cold read — what's left is the would-do-wrong finding, which
-takes real reasoning about what an unfamiliar reader would
-misunderstand, and is harder, not easier, once a dispatch covers
-several pages at once.
+Pin the dispatch to Sonnet. Use a higher model only where the user
+asks for one by name; never downgrade to save cost. Most of what
+check-mechanics.py already catches mechanically (spelling, banned
+words, verb-table matches) never reaches cold read — what's left is
+the would-do-wrong finding, which takes real reasoning about what an
+unfamiliar reader would misunderstand, and is harder, not easier,
+once a dispatch covers several pages at once.
 
 Give the reviewer the batch's pages and style-standard.md, unchanged,
 and nothing else — no repository context. The page's own links are
@@ -105,8 +105,8 @@ Dispatch prompt:
 > one per line, by their filed reference>` — report an instance only
 > if this page's own fix should happen now. Record any belief you
 > infer rather than read as a guess. Per page, report where you got
-> lost, what you could not type, where it breaks the attached
-> standard, and what you would search the web for instead.
+> lost, what you could not type, and what you would search the web
+> for instead.
 
 Report format: one line on completion, then one line per finding —
 `path | quoted text | kind | detail`. No cap, no summary, no praise.
@@ -114,7 +114,15 @@ Report format: one line on completion, then one line per finding —
 - guess
 - unanswered question
 - would do wrong — matters most, since no other review produces it
-- breaks the standard
+
+Style-standard.md compliance is not a cold-read finding kind: named
+words, register swaps and the verb table are check-mechanics.py's
+job, gated before cold read is ever dispatched. The residual judgment
+calls (vocabulary consistency, register rhythm) have produced a false
+positive against zero confirmed unique catches. Style-standard.md
+still goes to the reviewer — it sets the reader persona (competence,
+pressure, screen-fidelity expectations) that shapes what counts as a
+guess or a would-do-wrong.
 
 ## Screenshot check
 
@@ -148,8 +156,8 @@ reviews are applied.
 
 A second review round happens only when a review found a wrong fact
 or a defect in the work itself. Cold-read findings (guess, unanswered
-question, would do wrong, breaks the standard) are never wrong-fact
-findings, so never compel one alone.
+question, would do wrong) are never wrong-fact findings, so never
+compel one alone.
 
 Fix what a cold read found, then report what it found. A reported and
 unactioned finding is worse than none.

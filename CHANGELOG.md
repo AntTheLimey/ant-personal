@@ -21,8 +21,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   reaches it, since check-mechanics.py already catches that; what's
   left is the would-do-wrong finding, which takes real reasoning
   about what an unfamiliar reader would misunderstand, and batching
-  makes that harder, not easier. Stays on the writer's own model
-  tier.
+  makes that harder, not easier. Pinned to Sonnet; a higher model
+  only where the user names one, never a downgrade.
+- **Cold read drops "breaks the standard" as a finding kind.** Named
+  words, register swaps and the verb table are check-mechanics.py's
+  job, gated before cold read ever runs; the residual judgment calls
+  (vocabulary consistency, register rhythm) had produced a false
+  positive (the verb-table ambiguity fixed earlier this round) and
+  zero confirmed unique catches. Cold read now reports only guess,
+  unanswered question and would-do-wrong — the three kinds nothing
+  else in the pipeline produces, since every other review is done by
+  someone who already knows the page's purpose. Style-standard.md
+  still goes to the reviewer, to set the reader persona a guess or a
+  would-do-wrong is judged against.
 - **Second compression pass on the skill's markdown**, after 1.4.9's
   first pass only moved wording around instead of cutting it (a "see
   CHANGELOG.md" pointer sentence was itself called out as the same
@@ -32,7 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   | File | Before | After |
   |---|---|---|
-  | reviews.md | 1441 | 1165 |
+  | reviews.md | 1441 | 1230 |
   | style-standard.md | 1209 | 1079 |
   | gates.md | 973 | 845 |
   | facts.md | 1084 | 1004 |
@@ -40,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   | writing.md | 3065 | 2990 |
   | shape.md | 695 | 693 |
 
-  Total 10,645 → 9,898 words (-7%) across the markdown files;
+  Total 10,645 → 9,963 words (-6%) across the markdown files;
   `SKILL.md`, `agent-pages.md` and `in-app-copy.md` were already
   tight enough that no cut was worth making. `writing.md`'s cut is
   the smallest of the group: its density is mostly inherent — one

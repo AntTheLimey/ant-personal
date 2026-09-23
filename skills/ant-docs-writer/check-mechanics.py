@@ -3,9 +3,9 @@
 
     <skill>/check-mechanics.py [--baseline <old.md>] <page.md> [...]
 
-Five checks. The first two are mechanical defects a cold read is bad
+Six checks. The first two are mechanical defects a cold read is bad
 at catching; the next two are the words and constructions
-style-standard.md and writing.md name, which a cold reader otherwise
+the skill names, which a cold reader otherwise
 has to find by eye; the last is a precondition rule easy to load and
 still miss:
 
@@ -27,6 +27,8 @@ still miss:
   product and interface nouns, the signposting to delete on sight, and
   a shorthand standing in for a technical thing's full name. Matched
   across line breaks. Each finding names the replacement.
+- Punctuation and shape: an em-dash, a semicolon, a contraction, or a
+  sentence opening on And, But, So, Or or Yet.
 - Accumulation: more than two of "actually", "critical", "matters",
   "exactly", "rather than" or "at scale" on one page.
 - A precondition true of every page. Anywhere on the page: "you need
@@ -152,8 +154,8 @@ OPENER_RE = re.compile(
 
 # (pattern, replacement advice). Case-insensitive, whole words, and a
 # space in a pattern matches any run of whitespace, line breaks
-# included. Each entry is a rule stated in style-standard.md,
-# writing.md or product-vocabulary.md; a word only a careful reader
+# included. Each entry is a house-style rule this script is the only
+# statement of; a word only a careful reader
 # could judge is not here.
 NAMED = [
     (r"leverag(?:e|es|ed|ing)", "banned word"),
@@ -219,7 +221,7 @@ NAMED = [
 ]
 
 # A precondition true of every page, stated anywhere on it: the
-# writing.md rule a writer reliably loads and still doesn't apply. The
+# rule a writer reliably loads and still doesn't apply. The
 # login command itself sits in inline code, so it is masked; what
 # these match is the prose around it.
 UNIVERSAL = "universal precondition, true of every page: delete it"
@@ -240,7 +242,7 @@ PRECONDITION = [
 ]
 
 # Inside a Before You Start or Prerequisites section only: the four
-# entries writing.md names as never page-specific. Elsewhere on a page
+# entries that are never page-specific. Elsewhere on a page
 # "a network connection" may be the subject, so these do not run
 # page-wide.
 SECTION_HEADING_RE = re.compile(
@@ -268,6 +270,24 @@ def compile_rules(rules):
 
 NAMED_RE = compile_rules(NAMED + PRECONDITION)
 SECTION_RE = compile_rules(SECTION_ONLY)
+
+# Punctuation and sentence shape, matched as written rather than as
+# whole words, so each carries its own boundaries. The opener is
+# case-sensitive: a lowercase "and" wrapped onto a line start is
+# mid-sentence.
+PUNCT = [
+    (re.compile("\u2014"), 0,
+     "em-dash, use a comma, a period or parentheses"),
+    (re.compile(";"), 0, "semicolon, write two sentences"),
+    (re.compile(r"(?<![\w-])\w+(?:n['\u2019]t|['\u2019](?:re|ll|ve|d|m))"
+                r"(?![\w-])", re.I), 0, "contraction, write it out"),
+    (re.compile(r"(?<![\w-])(?:it|that|there|what|here|let|who|where)"
+                r"['\u2019]s(?![\w-])", re.I), 0,
+     "contraction, write it out"),
+    (re.compile(r"(?:^|(?<=[.!?])\s+)(And|But|So|Or|Yet)(?=[\s,])", re.M),
+     1, "sentence opens on a conjunction: delete \"And\", "
+        "\"But\" becomes \"However,\", \"So\" becomes \"As a result\""),
+]
 
 TICS = ["actually", "critical", "matters", "exactly", "rather than",
         "at scale"]
@@ -377,6 +397,9 @@ def named(lines, section_lines=()):
     for rx, advice in NAMED_RE:
         for m in rx.finditer(joined):
             spans.append((m.start(), m.end(), advice))
+    for rx, group, advice in PUNCT:
+        for m in rx.finditer(joined):
+            spans.append((m.start(group), m.end(group), advice))
     for rx, advice in SECTION_RE:
         for m in rx.finditer(joined):
             if where(m.start())[0] in section_lines:

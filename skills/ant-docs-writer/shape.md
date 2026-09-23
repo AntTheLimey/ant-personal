@@ -1,7 +1,5 @@
 # Shape
 
-Loaded by restructure, overhaul and new page.
-
 ## Content checklist
 
 Run all eight items before writing and again before opening a pull
@@ -78,6 +76,5 @@ where to go next.
 
 On a new page the shape is the whole risk: there is no prior structure
 to inherit and no reviewer comparing against one, so a badly indexed
-page ships looking finished. The source-of-truth questions in
-facts.md and the heading tree, written before a word of prose, are
-what guard it.
+page ships looking finished. The fact list and the heading tree,
+both written before a word of prose, are what guard it.

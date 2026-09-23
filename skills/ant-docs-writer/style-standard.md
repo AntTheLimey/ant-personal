@@ -1,7 +1,5 @@
 # Style standard
 
-Loaded by every job. Handed unchanged to a cold reader.
-
 The voice is formal technical documentation. The reader is at work,
 may not be a native English speaker, and may be reading under
 pressure.

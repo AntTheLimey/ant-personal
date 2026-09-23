@@ -1,7 +1,5 @@
 # Product vocabulary
 
-Loaded by every job.
-
 Treat every word choice below as a settled decision to apply, not a
 preference to reopen or debate.
 

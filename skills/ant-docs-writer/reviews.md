@@ -1,12 +1,9 @@
 # Reviews
 
-Loaded by every job.
-
 ## Which reviews run
 
 | Job | Reviews |
 |---|---|
-| fix | Correctness review, changed claims only |
 | restyle | Meaning check (self) → cold read |
 | restructure | Meaning check (self) → cold read |
 | overhaul | Correctness review + cold read (parallel) + screenshot check* |
@@ -22,11 +19,10 @@ writer, since a writer can't be their own cold reader.
 
 ## Correctness review
 
-Overhaul, new page: the reviewer checks every claim against its
+The reviewer checks every claim against its
 source. Add a fact-list entry the moment a claim is drafted, so the
 reviewer works from a record built alongside the page, not a re-read.
-Fix, overhaul, new page: a claim with no source beside it doesn't go
-on the page.
+A claim with no source beside it doesn't go on the page.
 
 ## Meaning check
 
@@ -128,10 +124,8 @@ guess or a would-do-wrong.
 
 Gated on an on-screen claim plus an available image of that screen.
 Dispatch a separate reviewer with image access to compare each claim
-against the screenshot and report every mismatch. Settle against the
-product, not either source alone: correct the prose where the product
-agrees with the image; flag the image for recapture where it agrees
-with the prose.
+against the screenshot and report every mismatch; settle each one per
+"Screenshots" in facts.md.
 
 ## Applying findings
 

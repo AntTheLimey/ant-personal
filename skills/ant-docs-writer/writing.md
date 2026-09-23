@@ -1,7 +1,5 @@
 # Writing
 
-Loaded by every job.
-
 ## Sentences
 
 - A step is 20 words at most; descriptive prose is 25 words at most.
@@ -289,9 +287,6 @@ order is necessary and not sufficient on its own.
 - State a caveat once per section; three restatements read as a lab
   notebook. The instinct-placement rule above overrides this where
   the two conflict.
-- On a fix, in a pull request that changes facts, do not touch a
-  sentence for style alone; voice and punctuation changes to existing
-  text go in their own pull request.
 
 ## No internal history
 

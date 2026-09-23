@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail a docs page on spelling, a quoted-string opener or a named word.
 
-    <skill>/check-mechanics.py <page.md> [<page.md> ...]
+    <skill>/check-mechanics.py [--baseline <old.md>] <page.md> [...]
 
 Five checks. The first two are mechanical defects a cold read is bad
 at catching; the next two are the words and constructions
@@ -43,10 +43,14 @@ quoted product string is the product's word, and stays.
 
 An unclosed fence is reported too, since nothing after it is checked.
 
+--baseline reports only the findings the old page lacks, matched by
+text, not line, so an edit that shifts lines still matches.
+
 Exit 0 when no page has a finding, 1 when one does, 2 when a page
 could not be read or no page was given.
 """
 
+import collections
 import pathlib
 import re
 import sys
@@ -475,6 +479,18 @@ def main(argv):
         print(__doc__)
         return 2
     sys.stdout.reconfigure(encoding="utf-8")
+    baseline = collections.Counter()
+    if argv[0] == "--baseline":
+        if len(argv) < 3:
+            print(__doc__)
+            return 2
+        try:
+            old = pathlib.Path(argv[1]).read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as err:
+            print(f"{argv[1]}: baseline not read: {err}", file=sys.stderr)
+            return 2
+        baseline.update(text for _, _, text in check(old))
+        argv = argv[2:]
     total, unread = 0, 0
     for arg in argv:
         p = pathlib.Path(arg)
@@ -485,6 +501,14 @@ def main(argv):
             print(f"{p}: not checked: {err}", file=sys.stderr)
             continue
         findings = check(text)
+        if baseline:
+            seen = collections.Counter()
+            kept = []
+            for f in findings:
+                seen[f[2]] += 1
+                if seen[f[2]] > baseline[f[2]]:
+                    kept.append(f)
+            findings = kept
         total += len(findings)
         for n, col, text in findings:
             print(f"{p}:{n}:{col}: {text}")

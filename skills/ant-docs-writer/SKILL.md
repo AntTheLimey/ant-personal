@@ -62,20 +62,39 @@ what it adds over the one below.
 
 ## Load list per job
 
-Every job loads `style-standard.md`, `writing.md`, `gates.md`,
-`product-vocabulary.md` and `reviews.md`.
+Every job loads `style-standard.md`, `writing.md` and
+`product-vocabulary.md`.
 
 | Job | Also loads |
 |---|---|
-| Fix | `facts.md` |
-| Restyle | (nothing more) |
-| Restructure | `shape.md` |
-| Overhaul | `shape.md`, `facts.md` |
-| New page | `shape.md`, `facts.md` |
+| Fix | (nothing more: "Doing a fix" below is the whole job) |
+| Restyle | `gates.md`, `reviews.md` |
+| Restructure | `gates.md`, `reviews.md`, `shape.md` |
+| Overhaul | `gates.md`, `reviews.md`, `shape.md`, `facts.md`, `ledger.md` |
+| New page | `gates.md`, `reviews.md`, `shape.md`, `facts.md` |
 
 Two files are surface add-ons, loaded only when the page itself is
 that surface: `in-app-copy.md` for in-app copy, `agent-pages.md` for a
 page an agent reads.
+
+## Doing a fix
+
+- Take each changed claim from source: the generated command
+  reference, the product's own code, a vendored spec or a probe log.
+  A sibling docs page settles nothing.
+- A claim with no source stays out; write what is true in its place.
+- Touch no sentence for style alone. A finding in a sentence you did
+  not change is not yours.
+- Run the gate against the old page, which reports only what the
+  change introduced, and fix every finding it reports:
+
+      old=$(mktemp); git show main:<page.md> > "$old"
+      <skill>/check-mechanics.py --baseline "$old" <page.md>
+
+  `<skill>` is this skill's own directory.
+
+- Someone other than the writer checks each changed claim against its
+  source. Only a wrong fact compels a change.
 
 ## What ships with the draft
 
@@ -85,7 +104,7 @@ changed in response.
 
 | Job | Also hand back |
 |---|---|
-| Fix | Each changed claim's fact-list-entry fields, directly in the hand-back. |
+| Fix | One row per changed claim: the claim, its source file:line, its heading. |
 | Overhaul, new page | The fact list; the allow file, from the point a shared sequence first needed one. |
 | Restructure, overhaul | The short heading tree. |
 | New page | The full heading tree. |

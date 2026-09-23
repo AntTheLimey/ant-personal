@@ -1,7 +1,5 @@
 # Style standard
 
-Loaded by every job. Handed unchanged to a cold reader.
-
 The voice is formal technical documentation. The reader is at work,
 may not be a native English speaker, and may be reading under
 pressure.
@@ -92,7 +90,7 @@ inputs; never carry over their phrasing, cadence or sentence shape.
   word in link text is fixed by retitling the target page and every
   link to it in the same change. Never change the link text alone.
   When the target page is outside the change, this is the one finding
-  any job reports and leaves; gates.md names it.
+  any job reports and leaves.
 - A quoted product string keeps the product's spelling.
 
 ## Product names

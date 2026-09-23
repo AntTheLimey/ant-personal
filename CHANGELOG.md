@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.11] — 2026-09-23
+
+### Changed
+
+- **A fix loads three files, not seven.** "Doing a fix" in SKILL.md
+  now carries the whole job, so a fix no longer loads gates.md,
+  reviews.md or facts.md: 34,143 bytes loaded, down from 51,492
+  (#31, #32).
+- **check-mechanics.py takes `--baseline <old.md>`** and reports only
+  the findings the old page lacks, matched by text so shifted lines
+  still match. A fix runs it against `main` instead of cross-checking
+  each finding against its own diff by hand (#30).
+- **"Ask first" is one sentence:** take the answers from the brief,
+  and ask only when the brief is silent and someone can answer (#33).
+- **The ledger moves to ledger.md**, loaded by an overhaul only.
+- The "Loaded by" line heading each file is gone; the load list in
+  SKILL.md is the one place that says it. The screenshot rule is
+  stated once, in facts.md.
+
 ## [1.4.10] — 2026-09-22
 
 ### Changed

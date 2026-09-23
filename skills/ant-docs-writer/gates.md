@@ -1,21 +1,16 @@
 # Gates
 
-Loaded by every job.
-
 | Gate | Runs on |
 |---|---|
 | check-sources.py | overhaul only |
 | check-ledger.py (phrase gate) | overhaul, new page |
-| check-mechanics.py | every job |
+| check-mechanics.py | restyle, restructure, overhaul, new page |
 | signals.py | restyle, restructure, overhaul, new page |
 
 Run every gate that applies before calling a page done, and report
 its numbers. A gate that exits non-zero, or reads FAIL, hasn't
 passed: fix what it names, rerun it, report only the numbers from the
-run that passed. Fix is the one job that can end on a failing gate —
-check-mechanics.py's fix carve-out leaves untouched sentences alone —
-so there, report the failing run's findings and which sentences they
-sit in; every other job, a failing gate means the page isn't done.
+run that passed.
 
 Invoke each script by its path from `<skill>/`: the working directory
 is the documentation repository, not the skill directory. Find the
@@ -72,7 +67,7 @@ vocabulary on a sibling page may stay shared.
 
     <skill>/check-mechanics.py <page.md> [<page.md> ...]
 
-Runs on the draft every job. Catches:
+Catches:
 
 - British spelling (word list; style-standard.md, "Spelling").
 - A sentence opening on a quoted string that's itself a complete
@@ -95,13 +90,11 @@ told apart by column, not a flat four-space rule: code is whatever
 sits four columns past the list item's own content, so a bare
 four-space indent outside any list is still code.
 
-Fix: a finding in an unchanged sentence is listed in the hand-back
-and left; a finding in a changed sentence must be fixed before the
-page is done. Every other job fixes every finding, with one
-exception: a spelling finding in link text whose target is outside
-the change — fixing it means retitling the target and every link to
-it together, so when the target can't be touched, list it in the
-hand-back, leave it, and the gate stays red on it.
+Fix every finding, with one exception: a spelling finding in link text
+whose target is outside the change — fixing it means retitling the
+target and every link to it together, so when the target can't be
+touched, list it in the hand-back, leave it, and the gate stays red on
+it.
 
 ## signals.py
 

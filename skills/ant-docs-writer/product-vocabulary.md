@@ -9,6 +9,16 @@ writer. Before repeating one (the missing certificate authority, an
 unreleased feature) on a new page, check it against the current
 product rather than this file.
 
+## Product names
+
+- The product is "pgEdge Starfleet". Its editions are pgEdge Starfleet
+  Managed and pgEdge Starfleet BYOC, shortened to Managed and BYOC
+  after first use, and only inside pgEdge Starfleet documentation. A
+  heading carrying the full edition name counts as its first use.
+- Product names take no article, except "the Control Plane".
+- A quoted product string keeps the product's own wording and
+  spelling.
+
 ## Product and architecture boundaries
 
 - Where the interface still renders the retired name "pgEdge Cloud",

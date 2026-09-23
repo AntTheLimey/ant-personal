@@ -13,7 +13,7 @@ file states a divergence.
 - The one-instruction-per-sentence rule is stricter, not looser, than
   for a human page. An agent executes only the first half of a
   compound instruction, or runs both as one call.
-- The 20/25-word caps ("Sentences" in writing.md) are targets, not
+- The 20/25-word caps (in SKILL.md) are targets, not
   limits. A longer sentence that removes ambiguity beats two shorter
   ones that leave it.
 - Every distinction the page depends on is stated on the page itself,

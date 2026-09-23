@@ -9,7 +9,7 @@ automated review, and executive document review simulation.
 | Skill | Description |
 |-------|-------------|
 | **ant-voice-writer** | Write in Ant's voice across professional, creative, academic, and personal contexts. Covers JIRA stories, framing docs, marketing copy, fiction, poetry, worldbuilding, and analytical essays. Not used for product documentation. |
-| **ant-docs-writer** | One documentation style for every page a customer or an agent reads, across pgedge-cli and product-ui. A content checklist that runs before any prose rule, plus prose rules derived from ASD-STE100. |
+| **ant-docs-writer** | One documentation style for every page a customer or an agent reads, across pgedge-cli and product-ui. A short brief, two gate scripts that enforce the house style, and one source review. |
 | **blog-creator** | End-to-end blog creation workflow: topic exploration, vault research, voice-matched drafting, automated review, user feedback for voice skill improvement, and final polish. |
 | **executive-review** | Simulate C-suite executive reviews of product documents, individually or as a structured committee debate that converges on consensus. |
 

@@ -21,7 +21,7 @@ there is an existing page, ask: restyle or overhaul.
 | Job | Scope |
 |---|---|
 | Fix | Changes only the facts it was asked to change. No style edits. |
-| Restyle | Rewords the page. Facts and section order stay, except that a hazard the page already states may move into Before You Start. |
+| Restyle | Rewords the page. Facts and section order stay, except that a hazard the page already states may move into Before You Start. Deletes only a restatement, and lists any other deletion it would make in the hand-back. |
 | Overhaul | Re-establishes every fact from source, and decides the order afresh. |
 | New page | Takes its facts from source, and its shape from them. |
 
@@ -95,6 +95,7 @@ there is an existing page, ask: restyle or overhaul.
   introduces every list, table and code block.
 - A troubleshooting entry gets its own `###` heading named for the
   symptom, then says what the reader sees, the cause and what to do.
+  Where the symptom is a command failing, it names the exit status.
 - Wrap Markdown at 79 columns, never splitting a link or a table row.
   Leave a blank line before a list. Indent a step's content by four
   spaces.
@@ -125,7 +126,8 @@ the one finding reported and left.
 ## Review
 
 - Fix, overhaul, new page: someone other than the writer checks every
-  changed claim against its source. On an overhaul, that reviewer also
+  changed claim against its source, with `product-vocabulary.md` to
+  hand. On an overhaul, that reviewer also
   lists each fact on the old page that the new page lacks. On a new
   page, the reviewer lists any flag or behavior of the documented
   commands that a reader needs and the page omits.

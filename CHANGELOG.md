@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.5.0] — 2026-09-23
+
+### Changed
+
+- **The skill is a brief plus gates.** SKILL.md now carries the whole
+  job in about 140 lines. Every job loads 12,204 bytes, down from
+  34,143 for a fix and about 57,000 for an overhaul.
+- **check-mechanics.py catches an em-dash, a semicolon, a contraction
+  and a sentence opening on And, But, So, Or or Yet.** Every rule the
+  script enforces is gone from the prose, because the finding names
+  the fix.
+- **Four jobs, not five.** Restructure is gone: a restyle keeps the
+  order, and an overhaul decides it afresh.
+- **One review.** A fix, overhaul or new page gets one check against
+  source by someone other than the writer. That reviewer also lists
+  what an overhaul lost from the old page, or what a new page omits.
+  A restyle gets the writer's own diff read.
+
+### Removed
+
+- The ledger, check-ledger.py and check-sources.py. An overhaul
+  gathers its facts from source, writes without the old page open,
+  and checks coverage against the old page afterward.
+- The cold read, the content checklist file, and style-standard.md,
+  writing.md, facts.md, gates.md, reviews.md and shape.md. The rules
+  no script checks are in SKILL.md; product naming moved to
+  product-vocabulary.md.
+
 ## [1.4.11] — 2026-09-23
 
 ### Changed

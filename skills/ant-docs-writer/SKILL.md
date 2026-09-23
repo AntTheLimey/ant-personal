@@ -81,7 +81,8 @@ page an agent reads.
 
 - Take each changed claim from source: the generated command
   reference, the product's own code, a vendored spec or a probe log.
-  A sibling docs page settles nothing.
+  Where two disagree, a measurement beats a spec. A sibling docs page
+  settles nothing.
 - A claim with no source stays out; write what is true in its place.
 - Touch no sentence for style alone. A finding in a sentence you did
   not change is not yours.

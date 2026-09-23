@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **A fix loads three files, not seven.** "Doing a fix" in SKILL.md
   now carries the whole job, so a fix no longer loads gates.md,
-  reviews.md or facts.md: 34,112 bytes loaded, down from 51,492
+  reviews.md or facts.md: 34,143 bytes loaded, down from 51,492
   (#31, #32).
 - **check-mechanics.py takes `--baseline <old.md>`** and reports only
   the findings the old page lacks, matched by text so shifted lines
